@@ -42,11 +42,7 @@
         </dependency>
         <dependency>
             <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-app</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-infrastruction</artifactId>
+            <artifactId>s-pay-mall-ddd-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.bugstack</groupId>

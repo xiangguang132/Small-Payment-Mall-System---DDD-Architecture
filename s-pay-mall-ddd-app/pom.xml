@@ -99,15 +99,11 @@
         <!-- 工程模块 -->
         <dependency>
             <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-api</artifactId>
+            <artifactId>s-pay-mall-ddd-trigger</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-types</artifactId>
+            <artifactId>s-pay-mall-ddd-infrastruction</artifactId>
         </dependency>
     </dependencies>
 
