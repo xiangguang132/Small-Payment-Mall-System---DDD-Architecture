@@ -4,7 +4,6 @@ import cn.bugstack.service.ILoginService;
 import cn.bugstack.types.sdk.weixin.MessageTextEntity;
 import cn.bugstack.types.sdk.weixin.SignatureUtil;
 import cn.bugstack.types.sdk.weixin.XmlUtil;
-import com.google.common.cache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +19,6 @@ public class WeixinPortalController {
 
     @Value("${weixin.config.originalid}")
     private String originalid;
-    @Resource
-    private Cache<String, String> openidToken;
     @Resource
     private ILoginService loginService;
 

@@ -103,7 +103,7 @@
         </dependency>
         <dependency>
             <groupId>cn.bugstack</groupId>
-            <artifactId>s-pay-mall-ddd-infrastruction</artifactId>
+            <artifactId>s-pay-mall-ddd-infrastructure</artifactId>
         </dependency>
     </dependencies>
 

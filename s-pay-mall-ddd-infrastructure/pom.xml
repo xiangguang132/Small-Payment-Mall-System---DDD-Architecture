@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>s-pay-mall-ddd-infrastruction</artifactId>
+    <artifactId>s-pay-mall-ddd-infrastructure</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
