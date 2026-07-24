@@ -1,6 +1,6 @@
 package cn.bugstack.trigger.http;
 
-import cn.bugstack.service.ILoginService;
+import cn.bugstack.domain.auth.service.ILoginService;
 import cn.bugstack.types.sdk.weixin.MessageTextEntity;
 import cn.bugstack.types.sdk.weixin.SignatureUtil;
 import cn.bugstack.types.sdk.weixin.XmlUtil;
