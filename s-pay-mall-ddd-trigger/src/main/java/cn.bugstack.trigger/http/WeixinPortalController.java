@@ -71,7 +71,8 @@ public class WeixinPortalController {
             }
 
             log.info("接收微信公众号信息请求{}完成 {}", openid, requestBody);
-            return buildMessageTextEntity(openid, "测试本案例，需要请扫码登录！");
+//            return buildMessageTextEntity(openid, "测试本案例，需要请扫码登录！");
+            return buildMessageTextEntity(openid, message.getContent().toString());
         } catch (Exception e) {
             log.error("接收微信公众号信息请求{}失败 {}", openid, requestBody, e);
             return "";
