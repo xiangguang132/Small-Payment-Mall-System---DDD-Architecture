@@ -25,7 +25,6 @@ public class LoginPort implements ILoginPort {
     private String appSecret;
     @Value("${weixin.config.template_id}")
     private String template_id;
-
     @Resource
     private Cache<String, String> weixinAccessToken;
     @Resource
@@ -33,26 +32,17 @@ public class LoginPort implements ILoginPort {
 
     @Override
     public String createQrCodeTicket() throws IOException {
-        // 使用appid向weixinAccessToken获取accessToken
-        // 其中 weixinAccessToken 是Cache缓存，是缓存了accessToken的缓存容器
+        // 1. 获取 accessToken 【实际业务场景，按需处理下异常】
         String accessToken = weixinAccessToken.getIfPresent(appid);
-        // 如果缓存里没有这个 accessToken
-        // 需要重新从 weixinApiService 获取
-        if (accessToken == null ) {
-            // 使用getToken()方法获取，需要传入的参数有grant_type appid secret
+        if (null == accessToken){
             Call<WeixinTokenResponseDTO> call = weixinApiService.getToken("client_credential", appid, appSecret);
-            // 然后从缓存中excute提取出请求体到res dto里
             WeixinTokenResponseDTO weixinTokenResponseDTO = call.execute().body();
-            // 断言判断
-            // 如果为true -> 继续执行
-            // 如果为false -> 抛出异常
             assert weixinTokenResponseDTO != null;
-            // 获取accesstoken
             accessToken = weixinTokenResponseDTO.getAccess_token();
             weixinAccessToken.put(appid, accessToken);
-
         }
-        // 生成ticket
+
+        // 2. 生成 ticket
         WeixinQrCodeRequestDTO request = WeixinQrCodeRequestDTO.builder()
                 .expire_seconds(2592000) // 过期时间单位为秒 2592000 = 30天
                 .action_name(WeixinQrCodeRequestDTO.ActionNameTypeVO.QR_SCENE.getCode())
@@ -64,9 +54,7 @@ public class LoginPort implements ILoginPort {
                         .build())
                 .build();
 
-        // 使用weixinApiService构建二维码缓存盒子
         Call<WeixinQrCodeResponseDTO> qrCodeCall = weixinApiService.createQrCode(accessToken, request);
-        // 提取到dto里
         WeixinQrCodeResponseDTO weixinQrCodeResponseDTO = qrCodeCall.execute().body();
         assert weixinQrCodeResponseDTO != null;
         return weixinQrCodeResponseDTO.getTicket();
@@ -76,7 +64,7 @@ public class LoginPort implements ILoginPort {
     public void sendLoginTempleteMessage(String openid) throws IOException {
         // 1. 获取 accessToken 【实际业务场景，按需处理下异常】
         String accessToken = weixinAccessToken.getIfPresent(appid);
-        if (accessToken == null) {
+        if (null == accessToken){
             Call<WeixinTokenResponseDTO> call = weixinApiService.getToken("client_credential", appid, appSecret);
             WeixinTokenResponseDTO weixinTokenResponseDTO = call.execute().body();
             assert weixinTokenResponseDTO != null;
