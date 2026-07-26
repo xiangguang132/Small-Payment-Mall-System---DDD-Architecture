@@ -55,7 +55,7 @@
     </select>
 
     <select id="queryTimeoutCloseOrderList" resultType="java.lang.String">
-        SELECT order_id as orderId FROM openai_order
+        SELECT order_id as orderId FROM pay_order
         WHERE status = 'PAY_WAIT' AND NOW() >= order_time + INTERVAL 30 MINUTE
         ORDER BY id ASC
         LIMIT 50

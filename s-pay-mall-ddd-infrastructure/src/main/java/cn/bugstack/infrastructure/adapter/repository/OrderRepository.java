@@ -95,7 +95,7 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public void changeOrderPaySuccess(String orderId) {
         PayOrder order = new PayOrder();
-        order.setUserId(orderId);
+        order.setOrderId(orderId);
         order.setStatus(OrderStatusVO.PAY_SUCCESS.getCode());
         orderDao.changeOrderPaySuccess(order);
 

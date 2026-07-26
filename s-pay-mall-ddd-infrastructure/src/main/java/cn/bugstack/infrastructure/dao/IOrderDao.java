@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.dao;
 
 import cn.bugstack.infrastructure.dao.po.PayOrder;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,6 +21,6 @@ public interface IOrderDao {
 
     List<String> queryTimeoutCloseOrderList();
 
-    boolean changeOrderClose(String orderId);
+    boolean changeOrderClose(@Param("orderId") String orderId);
 
 }
