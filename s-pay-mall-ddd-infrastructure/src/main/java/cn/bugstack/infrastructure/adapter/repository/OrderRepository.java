@@ -12,6 +12,7 @@ import cn.bugstack.infrastructure.dao.po.PayOrder;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class OrderRepository implements IOrderRepository {
@@ -75,6 +76,31 @@ public class OrderRepository implements IOrderRepository {
         order.setPayUrl(payOrderEntity.getPayUrl());
         order.setStatus(payOrderEntity.getOrderStatus().getCode());
         orderDao.updateOrderPayInfo(order);
+    }
+
+    @Override
+    public void changeOrderPaySuccess(String orderId) {
+        PayOrder order = new PayOrder();
+        order.setUserId(orderId);
+        order.setStatus(OrderStatusVO.PAY_SUCCESS.getCode());
+        orderDao.changeOrderPaySuccess(order);
+
+        // todo 发送
+    }
+
+    @Override
+    public List<String> queryNoPayNotifyOrderList() {
+        return List.of();
+    }
+
+    @Override
+    public List<String> queryTimeOutCloseOrderList() {
+        return List.of();
+    }
+
+    @Override
+    public boolean changeOrderPayClose() {
+        return false;
     }
 
 }

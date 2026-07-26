@@ -15,9 +15,15 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.List;
+
+/**
+ * 该部分并不专注于实现业务，而是将有操作数据库或者http外部数据的
+ * 进行下沉
+ * 下沉到 Repository 端
+ */
 
 @Slf4j
-
 @Service
 public class OrderService extends AbstractOrderService{
 
@@ -60,5 +66,25 @@ public class OrderService extends AbstractOrderService{
         orderRepository.updateOrderPayInfo(payOrderEntity);
 
         return payOrderEntity;
+    }
+
+    @Override
+    public void changeOrderPaySuccess(String orderId) {
+        orderRepository.changeOrderPaySuccess(orderId);
+    }
+
+    @Override
+    public List<String> queryNoPayNotifyOrderList() {
+        return orderRepository.queryNoPayNotifyOrderList();
+    }
+
+    @Override
+    public List<String> queryTimeOutCloseOrderList() {
+        return orderRepository.queryTimeOutCloseOrderList();
+    }
+
+    @Override
+    public boolean changeOrderPayClose(String orderId) {
+        return orderRepository.changeOrderPayClose();
     }
 }
