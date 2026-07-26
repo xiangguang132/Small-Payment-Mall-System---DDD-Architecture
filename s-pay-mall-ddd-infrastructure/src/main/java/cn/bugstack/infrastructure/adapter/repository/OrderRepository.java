@@ -1,6 +1,7 @@
 package cn.bugstack.infrastructure.adapter.repository;
 
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
+import cn.bugstack.domain.order.event.PaySuccessMessageEvent;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
@@ -9,6 +10,9 @@ import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
 import cn.bugstack.infrastructure.dao.po.PayOrder;
+import cn.bugstack.types.event.BaseEvent;
+import com.alibaba.fastjson2.JSON;
+import com.google.common.eventbus.EventBus;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -25,6 +29,10 @@ public class OrderRepository implements IOrderRepository {
 
     @Resource
     private IOrderDao orderDao;
+    @Resource
+    private EventBus eventBus;
+    @Resource
+    private PaySuccessMessageEvent paySuccessMessageEvent;
 
     @Override
     public void doSaveOrder(CreateOrderAggregate orderAggregate) {
@@ -43,7 +51,7 @@ public class OrderRepository implements IOrderRepository {
 
         orderDao.insert(order);
 
-        // 存入缓存；缓存key聚合到对象中提供
+        // todo 存入缓存；缓存key聚合到对象中提供
 //        redisService.setValue(PayOrder.cacheKey(userId, orderEntity.getOrderId()), order);
 
     }
@@ -92,6 +100,10 @@ public class OrderRepository implements IOrderRepository {
         orderDao.changeOrderPaySuccess(order);
 
         // todo 发送 mq 消息
+        BaseEvent.EventMessage<PaySuccessMessageEvent.PaySuccessMessage> eventMessage = paySuccessMessageEvent.buildEventMessage(PaySuccessMessageEvent.PaySuccessMessage.builder().tradeNo(orderId).build());
+        PaySuccessMessageEvent.PaySuccessMessage paySuccessMessage = eventMessage.getData();
+
+        eventBus.post(JSON.toJSONString(paySuccessMessage));
     }
 
     @Override

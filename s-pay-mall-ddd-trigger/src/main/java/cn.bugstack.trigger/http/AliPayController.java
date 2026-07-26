@@ -5,14 +5,14 @@ import cn.bugstack.api.dto.CreatePayRequestDTO;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
-import cn.bugstack.domain.order.model.service.IOrderService;
-import cn.bugstack.types.common.Constants;
+import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -49,5 +49,10 @@ public class AliPayController implements IPayService {
                     .info(ResponseCode.UN_ERROR.getCode())
                     .build();
         }
+    }
+
+    @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
+    public String payNotify(HttpServletRequest request) {
+
     }
 }
