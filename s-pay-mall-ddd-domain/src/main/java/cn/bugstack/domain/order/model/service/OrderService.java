@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 该部分并不专注于实现业务，而是将有操作数据库或者http外部数据的
  * 进行下沉
- * 下沉到 Repository 端
+ * 下沉到 Repository 接口层
  */
 
 @Slf4j
@@ -85,6 +85,6 @@ public class OrderService extends AbstractOrderService{
 
     @Override
     public boolean changeOrderPayClose(String orderId) {
-        return orderRepository.changeOrderPayClose();
+        return orderRepository.changeOrderPayClose(orderId);
     }
 }

@@ -14,6 +14,12 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 该部分着重于实现业务，但是不调用数据库
+ * 将修改数据的操作进行下沉
+ * 下沉到数据库 dao层
+ */
+
 @Repository
 public class OrderRepository implements IOrderRepository {
 
@@ -85,22 +91,22 @@ public class OrderRepository implements IOrderRepository {
         order.setStatus(OrderStatusVO.PAY_SUCCESS.getCode());
         orderDao.changeOrderPaySuccess(order);
 
-        // todo 发送
+        // todo 发送 mq 消息
     }
 
     @Override
     public List<String> queryNoPayNotifyOrderList() {
-        return List.of();
+        return orderDao.queryNoPayNotifyOrder();
     }
 
     @Override
     public List<String> queryTimeOutCloseOrderList() {
-        return List.of();
+        return orderDao.queryTimeoutCloseOrderList();
     }
 
     @Override
-    public boolean changeOrderPayClose() {
-        return false;
+    public boolean changeOrderPayClose(String orderId) {
+        return orderDao.changeOrderClose(orderId);
     }
 
 }

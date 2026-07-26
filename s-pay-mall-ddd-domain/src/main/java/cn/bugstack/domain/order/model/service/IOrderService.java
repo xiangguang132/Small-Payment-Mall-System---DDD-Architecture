@@ -8,6 +8,8 @@ import java.util.List;
 /**
  * 订单
  * 该部分定义订单相关业务接口
+ * 将实现下沉交给 OrderService
+ * 下沉到 OrderService 实现层
  */
 public interface IOrderService {
 

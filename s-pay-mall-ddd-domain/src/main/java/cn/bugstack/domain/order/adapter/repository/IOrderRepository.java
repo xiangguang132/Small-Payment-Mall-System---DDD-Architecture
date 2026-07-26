@@ -47,5 +47,5 @@ public interface IOrderRepository {
      * 修改状态为关单状态
      * @return
      */
-    boolean changeOrderPayClose();
+    boolean changeOrderPayClose(String orderId);
 }
