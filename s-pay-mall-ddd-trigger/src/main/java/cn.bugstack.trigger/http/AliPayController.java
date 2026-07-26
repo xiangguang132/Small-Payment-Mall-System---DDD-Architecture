@@ -51,8 +51,8 @@ public class AliPayController implements IPayService {
         }
     }
 
-    @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
-    public String payNotify(HttpServletRequest request) {
-
-    }
+//    @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
+//    public String payNotify(HttpServletRequest request) {
+//
+//    }
 }

@@ -61,6 +61,4 @@
         LIMIT 50
     </select>
 
-
-
 </mapper>
