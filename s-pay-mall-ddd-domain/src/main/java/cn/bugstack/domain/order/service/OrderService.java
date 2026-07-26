@@ -60,7 +60,7 @@ public class OrderService extends AbstractOrderService{
 
         PayOrderEntity payOrderEntity = new PayOrderEntity();
         payOrderEntity.setOrderId(orderId);
-        payOrderEntity.setUserId(userId);
+        payOrderEntity.setPayUrl(form);
         payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
 
         orderRepository.updateOrderPayInfo(payOrderEntity);
