@@ -9,4 +9,10 @@ public interface IOrderRepository {
     void doSaveOrder(CreateOrderAggregate orderAggregate);
 
     OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity);
+
+    /**
+     * 更新订单支付信息
+     * @param payOrderEntity
+     */
+    void updateOrderPayInfo(PayOrderEntity payOrderEntity);
 }

@@ -41,6 +41,7 @@ public class OrderRepository implements IOrderRepository {
 
     }
 
+    @Override
     public OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity) {
         // 1. 封装参数
         PayOrder orderReq = new  PayOrder();
@@ -66,5 +67,14 @@ public class OrderRepository implements IOrderRepository {
 
     }
 
+    @Override
+    public void updateOrderPayInfo(PayOrderEntity payOrderEntity) {
+        PayOrder order = new PayOrder();
+        order.setUserId(payOrderEntity.getUserId());
+        order.setOrderId(payOrderEntity.getOrderId());
+        order.setPayUrl(payOrderEntity.getPayUrl());
+        order.setStatus(payOrderEntity.getOrderStatus().getCode());
+        orderDao.updateOrderPayInfo(order);
+    }
 
 }
