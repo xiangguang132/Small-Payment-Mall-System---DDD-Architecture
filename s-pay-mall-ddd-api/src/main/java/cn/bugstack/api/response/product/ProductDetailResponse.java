@@ -1,18 +1,12 @@
-package cn.bugstack.domain.product.model.entity;
+package cn.bugstack.api.response.product;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProductEntity {
+public class ProductDetailResponse {
 
     private Long id;
     private String name;
@@ -21,7 +15,6 @@ public class ProductEntity {
     private Long categoryId;
     private Integer status;
     private BigDecimal price;
-    private Integer isDel;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

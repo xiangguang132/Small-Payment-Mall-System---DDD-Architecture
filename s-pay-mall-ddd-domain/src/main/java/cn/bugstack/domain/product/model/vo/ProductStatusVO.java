@@ -1,4 +1,27 @@
 package cn.bugstack.domain.product.model.vo;
 
-public class ProductStatusVO {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum ProductStatusVO {
+
+    OFFLINE(0, "下架"),
+    ONLINE(1, "上架");
+
+    private final Integer code;
+    private final String desc;
+
+    public static ProductStatusVO valueOf(Integer code) {
+        if (code == null) {
+            return OFFLINE;
+        }
+        for (ProductStatusVO value : values()) {
+            if (value.code.equals(code)) {
+                return value;
+            }
+        }
+        return OFFLINE;
+    }
 }

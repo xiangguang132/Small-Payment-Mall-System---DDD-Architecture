@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bugstack.infrastructure.dao.IProductDao">
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.Product"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into product
+        (name, description, sku, category_id, status, price, is_del, create_time, update_time)
+        values
+        (#{name}, #{description}, #{sku}, #{categoryId}, #{status}, #{price}, #{isDel}, now(), now())
+    </insert>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update product
+        set is_del = 1,
+        update_time = now()
+        where id = #{id}
+        and is_del = 0
+    </update>
+
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Product">
+        select id, name, description, sku, category_id, status, price, is_del, create_time, update_time
+        from product
+        where id = #{id}
+        and is_del = 0
+    </select>
+
+</mapper>
