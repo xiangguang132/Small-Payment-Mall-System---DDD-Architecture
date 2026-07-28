@@ -19,7 +19,7 @@ public class SignatureUtil {
      * 4. 加密字符串与 signature 对比
      */
     // todo check
-    public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
+    public static boolean check(String token, String signature, String timestamp, String nonce) {
         String[] arr = new String[]{token, timestamp, nonce};
         Arrays.sort(arr);
         StringBuilder content = new StringBuilder();
