@@ -37,23 +37,6 @@ public class ProductController {
     }
 
     /**
-     * 依据id修改商品详情
-     * @param request
-     * @return
-     */
-    @PostMapping("update")
-    public Response<ProductDetailResponse> update(@RequestBody ProductUpdateRequest request) {
-        ProductAggregate product = ProductAssembler.toAggregate(request);
-        ProductAggregate updated = productService.updateProduct(product);
-        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
-        return Response.<ProductDetailResponse>builder()
-                .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
-                .data(response)
-                .build();
-    }
-
-    /**
      * 依据id获取商品详情
      * @param id
      * @return
@@ -65,6 +48,18 @@ public class ProductController {
         }
         ProductAggregate product = productService.queryProductById(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(product);
+        return Response.<ProductDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("update")
+    public Response<ProductDetailResponse> update(@RequestBody ProductUpdateRequest request) {
+        ProductAggregate product = ProductAssembler.toAggregate(request);
+        ProductAggregate updated = productService.updateProduct(product);
+        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
         return Response.<ProductDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

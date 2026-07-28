@@ -19,6 +19,7 @@
             category_id = #{categoryId},
             status = #{status},
             price = #{price},
+            create_time = #{createTime},
             update_time = now()
         where id = #{id}
           and is_del = 0

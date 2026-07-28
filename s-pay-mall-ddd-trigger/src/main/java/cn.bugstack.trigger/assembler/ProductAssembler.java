@@ -28,6 +28,9 @@ public class ProductAssembler {
         if (request == null) {
             throw new IllegalArgumentException("商品信息不能为空");
         }
+        if (request.getId() == null) {
+            throw new IllegalArgumentException("商品id不能为空");
+        }
         return ProductAggregate.builder()
                 .id(request.getId())
                 .name(trim(request.getName()))
