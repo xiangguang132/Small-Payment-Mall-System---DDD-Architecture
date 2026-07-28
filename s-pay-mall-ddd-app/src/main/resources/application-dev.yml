@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  tomcat:
+    max-connections: 20
+    threads:
+      max: 20
+      min-spare: 10
+    accept-count: 10
+
+# 日志
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
+
+spring:
+  datasource:
+    username: root
+    password: mysql
+    url: jdbc:mysql://127.0.0.1:3306/s-pay-mall?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat
+
+
+# 微信公众号对接
+weixin:
+  config:
+    originalid: gh_85b4345936d4
+    token: a2b3
+    app-id: wxd039344beebf31d5
+    app-secret: a2bdbe30ce9dd00f50b888fb9220f119
+    template_id: VSdVBLHNNyelMXppaJss5MqCw7dkbCuZU8J7htcD1ww
+
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+
+# 支付宝支付 - 沙箱 https://opendocs.alipay.com/common/02kkv7
+alipay:
+  enabled: true
+  app_id: 9021000165677275
+  merchant_private_key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCm3tZoED7Skt0lYaylXeaLAKxAEi9gEk+rkuUf9ld6vCfGAP+xDuFx2Fqjg7oyeUWHjM9taa+CAwZeqwUxXkDAMcdCMdaHxPs3TH8iJZjZQI+dExAghxiSz6qRmYVr/LRtS9dsOD689stxGQzGs5G3LBRVwayOCH6GDNT/N0jA6bSCVEWLt9fUqzFaBPUZ+ic/1BSzMG9W9289MGQ02PgUviV9qkCd7Tu0nnUup47mfhbcI6j4ee/jsglYAWnXOOemplfdoXTT1tJ89r1aWONVmJz9CX+pI2r63CyvHpiMDV+3Ig4SfTj4oPXokOPtnpdaRb+/F2GFj4XcvVGrCBQHAgMBAAECggEAdWxXidDstDb+gUCTQaarBWOK0mc5iSw5fe2XZ/9sHYTrpAyt4MUs5XSui2O1kbD+uVzf1glJpH5GbDWCKPQ/Mj+VDMKPSOjXMlmVGM1GGpKwvIJeldUa+KxDRcO3PH8N4987jv6hP02XaVWMRQK1ZiURhisMJsJZbjD3bURU4NIu1/CxPQXJmOikmAHJIoEZJChOUSSBJS+k2NOmXM5brKv0ZLTdxwq09f8lzl7dLn4Ock1NIzQCJ6Ww7CFgD1JlYAhsY1u9JGDdz4dfS4lGxL5QeWYP3H+7IWDlkRD648OpCB7QYeg7DMfl9czWdbWZ2eYMnevTuig4EC4grT9JkQKBgQDpYcaJtwUVUTpZuI1X9fwRah1ev/nTKr+SgXFDc47DWZgYdhphxKUq+RMWWFPMR5fJcuwoUrZbp4mmx2MlAX1nUSFDy3ZTLjmuptF17XbSKir03oHyhs27PxNHffDx/WqZ3rWu3/sf9aCK9T/YcQug4xJkMuj5IOu1fN/3OK8tWQKBgQC3CugtQKI5px3KHw2dZPM+94/UBf5hoe+b5NmHJeey9n3vfnh7JV+OvoISznaOmAU+mq8detpqDdnx4Oygi9hDYtw5Bp2uXdrPx5KuV9ue3H8vlZS3kbP/AhbZg0aqAulg3dj8xyKssAHoKxKr2WkJqgKnq4Jb5zrTJ0JRRjBAXwKBgBvygXvsVsd+uqYT25k088KCGpJGGvyWmepJZe7V37q09+m1+uLKUZ0bxpVebmqACEUvZehOP1gqb+lw5wZ/byz4IiukKb88QdwQTfT5QslYE1zPaHBKhEhv/TcKddgEqMdUTB1s5P2mxFrfk42vu9zAVGt7TTrIHnHVSlyohRHBAoGACZ2+EtqJa0P3Ua4N9g3epZk16iqicZijUOpV7z6zjHhcp19ajwWonoQtqzVDjzw3UlGoD4FrxhSSNZ3ecJTIOMoRzcEmOYneu/m9IAGnnRHycJqIJJi3/xaqAqVd6gKbJiahhq4jiTT59KuGoJacaRCQcSSWhaOBOKSgXEq2sDsCgYEAlggLuy16wyT85cZF3h1UjdM504c0WIEUmITe0vCyq5JT5MjNgEd3hQkkjL5UwFYEVhPsUS0G8LHYXC7rdbuVfF8PNPZt2b3RyXolWgWmV4Azf7jzoiJ/1Uivw6bhfjrnEB/YMQ8hnESSz1FuUf7+zUAh+nCyN8clLxV93wZdIEY=
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpo/3Nfv9rVTy8YrMydSSOA2lyDGKGdLLE0u1ciuSOm5FynDyVnzsKzoiH2ECruUiaZ/ek80T4Pj0ELhyp5b7Ap3XqXp3N6j6WDfhgmel4UJDElmpD96VJ1+XkPmv4I60mMpd1DmDQJZn5Gxs9PkIpN9RhjjpbajGfHtdG2AG4hWq7e3/HbNDHc5MLRMUmUgKmbmDemXdbX4+cEDUNl7gYdNrlGz3KvjavnqbR7M5W8HsxDlKT1uBQPN1dWv7s4rlk7G9inDdnJDBH6z31pOB4AhpsZxAdnmEmo/1ef1uYMBpTLLGemPXDf/mSf7u3ygzAkxK9OV+ccHjqZ7nHcwJQIDAQAB
+  notify_url: http://xfg-studio.natapp1.cc/api/v1/alipay/pay_notify
+  return_url: http://xguang.nat100.top/pay-success.html
+  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
