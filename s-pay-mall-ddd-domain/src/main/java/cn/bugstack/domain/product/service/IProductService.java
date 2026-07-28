@@ -6,7 +6,11 @@ public interface IProductService {
 
     Long addNewProduct(ProductAggregate product);
 
+    ProductAggregate updateProduct(ProductAggregate product);
+
     void deleteProductById(Long id);
 
     ProductAggregate queryProductById(Long id);
+
+
 }

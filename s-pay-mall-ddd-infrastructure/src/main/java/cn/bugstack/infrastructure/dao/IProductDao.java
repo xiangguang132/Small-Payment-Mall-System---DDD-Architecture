@@ -9,6 +9,8 @@ public interface IProductDao {
 
     void insert(Product product);
 
+    int update(Product product);
+
     void deleteById(@Param("id") Long id);
 
     Product queryById(@Param("id") Long id);

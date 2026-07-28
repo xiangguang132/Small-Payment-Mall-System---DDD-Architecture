@@ -7,6 +7,8 @@ public interface IProductRepository {
 
     Long save(ProductAggregate productAggregate);
 
+    int update(ProductAggregate productAggregate);
+
     void deleteById(Long id);
 
     ProductAggregate queryById(Long id);
