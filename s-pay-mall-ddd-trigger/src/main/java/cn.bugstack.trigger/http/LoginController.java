@@ -35,10 +35,10 @@ public class LoginController {
 
         } catch (Exception e) {
             log.info("生成微信扫码登录 ticket 失败", e);
-            return Response.<String>builder()
-                    .code(Constants.ResponseCode.UN_ERROR.getCode())
-                    .info(Constants.ResponseCode.UN_ERROR.getInfo())
-                    .build();
+                return Response.<String>builder()
+                        .code(Constants.ResponseCode.UN_ERROR.getCode())
+                        .info(Constants.ResponseCode.UN_ERROR.getInfo())
+                        .build();
         }
     }
 
