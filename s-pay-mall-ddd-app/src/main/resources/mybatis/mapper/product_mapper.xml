@@ -26,4 +26,17 @@
         and is_del = 0
     </select>
 
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Product">
+        update product
+        set name = #{name},
+        description = #{description},
+        sku = #{sku},
+        category_id = #{categoryId},
+        status = #{status},
+        price = #{price},
+        update_time = now()
+        where id = #{id}
+        and is_del = 0
+    </update>
+
 </mapper>

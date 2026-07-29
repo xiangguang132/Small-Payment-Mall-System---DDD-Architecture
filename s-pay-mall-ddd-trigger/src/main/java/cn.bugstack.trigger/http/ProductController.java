@@ -10,6 +10,7 @@ import cn.bugstack.types.enums.ResponseCode;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin("*")
@@ -67,6 +68,51 @@ public class ProductController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(true)
+                .build();
+    }
+
+    /**
+     * 依据id更新单个商品
+     */
+    @PutMapping("{id}")
+    public Response<ProductDetailResponse> update(@PathVariable Long id, @RequestBody ProductAddRequest request) {
+        ProductAggregate current = productService.queryProductById(id);
+        if (current == null) {
+            throw new IllegalArgumentException("商品不存在");
+        }
+        ProductAggregate updated = ProductAggregate.builder()
+                .id(current.getId())
+                .name(request.getName() != null ? request.getName().trim() : current.getName())
+                .description(request.getDescription() != null ? request.getDescription().trim() : current.getDescription())
+                .sku(request.getSku() != null ? request.getSku().trim() : current.getSku())
+                .categoryId(request.getCategoryId() != null ? request.getCategoryId() : current.getCategoryId())
+                .status(request.getStatus() != null ? request.getStatus() : current.getStatus())
+                .price(request.getPrice() != null ? request.getPrice() : current.getPrice())
+                .isDel(current.getIsDel())
+                .createTime(current.getCreateTime())
+                .updateTime(LocalDateTime.now())
+                .build();
+        productService.updateProductById(updated);
+
+        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
+        return Response.<ProductDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
+                .build();
+    }
+
+    /**
+     * 商品上下架
+     */
+    @PutMapping("status/{id}")
+    public Response<ProductDetailResponse> onSale(@PathVariable Long id) {
+        ProductAggregate updated = productService.onSale(id);
+        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
+        return Response.<ProductDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
                 .build();
     }
 }
