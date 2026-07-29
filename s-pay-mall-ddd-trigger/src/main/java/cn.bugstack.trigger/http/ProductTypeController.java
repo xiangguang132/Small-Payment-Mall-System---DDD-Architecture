@@ -2,8 +2,11 @@ package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.producttype.ProductTypeAddRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.product.ProductDetailResponse;
+import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
-import cn.bugstack.domain.producttype.service.ProductTypeService;
+import cn.bugstack.domain.producttype.service.IProductTypeService;
+import cn.bugstack.trigger.assembler.ProductAssembler;
 import cn.bugstack.trigger.assembler.ProductTypeAssembler;
 import cn.bugstack.types.enums.ResponseCode;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +19,13 @@ import javax.annotation.Resource;
 public class ProductTypeController {
 
     @Resource
-    private ProductTypeService productTypeService;
+    private IProductTypeService productTypeService;
 
+    /**
+     * 添加商品分类
+     * @param request
+     * @return
+     */
     @PostMapping("add")
     public Response<Long> add(@RequestBody ProductTypeAddRequest request){
         ProductTypeAggregate productType = ProductTypeAssembler.toAggregate(request);
@@ -29,6 +37,11 @@ public class ProductTypeController {
                 .build();
     }
 
+    /**
+     * 依据id删除商品分类
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     public Response<Boolean> delete(@PathVariable Long id){
         if (id == null) {
@@ -41,4 +54,24 @@ public class ProductTypeController {
                 .data(true)
                 .build();
     }
+
+    /**
+     * 依据id获取添加商品分类详情
+     * @param id
+     * @return
+     */
+    @GetMapping("{id}")
+    public Response<ProductTypeDetailResponse> detail(@PathVariable Long id){
+        if (id == null) {
+            throw new IllegalArgumentException("商品分类id不能为空");
+        }
+        ProductTypeAggregate productType = productTypeService.queryProductTypeById(id);
+        ProductTypeDetailResponse response = ProductTypeAssembler.toDetailResponse(productType);
+        return Response.<ProductTypeDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
+                .build();
+    }
+
 }

@@ -18,4 +18,21 @@
         and is_del = 0
     </update>
 
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.ProductType">
+        select
+        id,
+        parent_id,
+        name,
+        description,
+        type_code,
+        sort,
+        status,
+        is_del,
+        create_time,
+        update_time
+        from product_type
+        where id = #{id}
+        and is_del = 0
+    </select>
+
 </mapper>

@@ -10,4 +10,6 @@ public interface IProductTypeDao {
     void insert(ProductType productType);
 
     void deleteById(@Param("id") Long id);
+
+    ProductType queryById(Long id);
 }

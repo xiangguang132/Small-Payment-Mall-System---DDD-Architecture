@@ -42,4 +42,29 @@ public class ProductTypeRepository implements IProductTypeRepository {
         }
         productTypeDao.deleteById(id);
     }
+
+    @Override
+    public ProductTypeAggregate queryById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("商品分类id不能为空");
+        }
+        ProductType productType = productTypeDao.queryById(id);
+        if  (productType == null) {
+            return null;
+        }
+
+        return ProductTypeAggregate.builder()
+                .id(productType.getId())
+                .parentId(productType.getParentId())
+                .name(productType.getName())
+                .description(productType.getDescription())
+                .typeCode(productType.getTypeCode())
+                .sort(productType.getSort())
+                .status(productType.getStatus())
+                .isDel(productType.getIsDel())
+                .createTime(productType.getCreateTime())
+                .updateTime(productType.getUpdateTime())
+                .build();
+
+    }
 }

@@ -7,4 +7,6 @@ public interface IProductTypeRepository {
     Long save(ProductTypeAggregate productType);
 
     void deleteById(Long id);
+
+    ProductTypeAggregate queryById(Long id);
 }
