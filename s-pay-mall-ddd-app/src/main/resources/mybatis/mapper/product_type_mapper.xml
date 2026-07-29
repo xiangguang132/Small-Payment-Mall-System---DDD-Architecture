@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.bugstack.infrastructure.dao.IOrderDao">
+<mapper namespace="cn.bugstack.infrastructure.dao.IProductTypeDao">
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductType"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into product_type
+        (parent_id, name, description, type_code, sort, status, is_del, create_time, update_time)
+        values
+        (#{parentId}, #{name}, #{description}, #{typeCode}, #{sort}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update product_type
+        set is_del = 1,
+        update_time = now()
+        where id = #{id}
+        and is_del = 0
+    </update>
 
 </mapper>

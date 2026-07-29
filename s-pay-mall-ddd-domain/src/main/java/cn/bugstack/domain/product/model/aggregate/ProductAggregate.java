@@ -19,6 +19,8 @@ public class ProductAggregate {
     private String description;
     private String sku;
     private Long categoryId;
+    private String categoryName;
+    private String categoryDescription;
     private Integer status;
     private BigDecimal price;
     @Builder.Default

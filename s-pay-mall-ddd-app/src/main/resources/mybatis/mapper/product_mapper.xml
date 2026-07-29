@@ -20,10 +20,24 @@
     </update>
 
     <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Product">
-        select id, name, description, sku, category_id, status, price, is_del, create_time, update_time
-        from product
-        where id = #{id}
-        and is_del = 0
+        select
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.category_id,
+        pt.name as category_name,
+        pt.description as category_description,
+        pt.type_code as category_code,
+        p.status,
+        p.price,
+        p.is_del,
+        p.create_time,
+        p.update_time
+        from product p
+        left join product_type pt on p.category_id = pt.id
+        where p.id = #{id}
+        and p.is_del = 0
     </select>
 
     <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Product">

@@ -78,13 +78,14 @@
                 .then(data => {
                     if (Number(data.code) === 200) {
                         console.info("login success");
-                        // 停止轮询
-                        clearInterval(intervalId);
-                        // 保存登录 token 到本地存储和 cookie，方便后续接口读取
-                        localStorage.setItem('loginToken', data.data);
-                        setCookie('loginToken', data.data, 1);
-                        // 在这里可以重定向到登录后的页面
-                        window.location.href = 'index.html'; // 假设登录成功后跳转到首页
+                    // 停止轮询
+                    clearInterval(intervalId);
+                    // 保存登录 token 到本地存储和 cookie，方便后续接口读取
+                    localStorage.setItem('loginToken', data.data);
+                    setCookie('loginToken', data.data, 1);
+                    console.log('login token:', data.data);
+                    // 在这里可以重定向到登录后的页面
+                    window.location.href = 'index.html'; // 假设登录成功后跳转到首页
                     } else {
                         console.info("login wait");
                     }

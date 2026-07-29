@@ -94,7 +94,8 @@ public class ProductController {
                 .build();
         productService.updateProductById(updated);
 
-        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
+        ProductAggregate refreshed = productService.queryProductById(id);
+        ProductDetailResponse response = ProductAssembler.toDetailResponse(refreshed);
         return Response.<ProductDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

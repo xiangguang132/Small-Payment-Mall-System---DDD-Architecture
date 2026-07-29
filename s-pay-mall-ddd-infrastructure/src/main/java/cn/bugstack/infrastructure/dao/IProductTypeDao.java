@@ -1,4 +1,13 @@
 package cn.bugstack.infrastructure.dao;
 
-public class IProductTypeDao {
+import cn.bugstack.infrastructure.dao.po.ProductType;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
+public interface IProductTypeDao {
+
+    void insert(ProductType productType);
+
+    void deleteById(@Param("id") Long id);
 }

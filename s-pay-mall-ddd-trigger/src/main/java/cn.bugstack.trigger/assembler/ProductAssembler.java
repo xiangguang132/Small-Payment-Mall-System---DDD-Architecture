@@ -37,6 +37,8 @@ public class ProductAssembler {
         response.setDescription(product.getDescription());
         response.setSku(product.getSku());
         response.setCategoryId(product.getCategoryId());
+        response.setCategoryName(product.getCategoryName());
+        response.setCategoryDescription(product.getCategoryDescription());
         response.setStatus(product.getStatus());
         response.setPrice(product.getPrice());
         response.setCreateTime(product.getCreateTime());

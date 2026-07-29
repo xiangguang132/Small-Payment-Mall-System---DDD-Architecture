@@ -66,6 +66,8 @@ public class ProductService implements IProductService {
                 .description(current.getDescription())
                 .sku(current.getSku())
                 .categoryId(current.getCategoryId())
+                .categoryName(current.getCategoryName())
+                .categoryDescription(current.getCategoryDescription())
                 .status(nextStatus)
                 .price(current.getPrice())
                 .isDel(current.getIsDel())

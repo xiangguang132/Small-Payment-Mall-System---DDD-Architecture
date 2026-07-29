@@ -136,6 +136,7 @@ function getCookie(name) {
 function renderAuthStatus() {
     const statusEl = document.getElementById('authStatus');
     const token = getLoginToken();
+    console.log('index token:', token);
     statusEl.textContent = token ? '当前状态：已登录，可以直接下单测试 JWT 鉴权。' : '当前状态：未登录，点击下单会直接触发后端 401。';
 }
 

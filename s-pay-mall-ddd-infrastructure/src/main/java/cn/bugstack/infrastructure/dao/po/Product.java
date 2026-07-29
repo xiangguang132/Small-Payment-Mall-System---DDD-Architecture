@@ -28,6 +28,12 @@ public class Product {
     /** 分类ID (对应 bigint) */
     private Long categoryId;
 
+    /** 分类名称 */
+    private String categoryName;
+
+    /** 分类描述 */
+    private String categoryDescription;
+
     /** 状态 0下架 1上架 (对应 tinyint) */
     private Integer status;
 
