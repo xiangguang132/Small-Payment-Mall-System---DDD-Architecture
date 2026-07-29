@@ -1,5 +1,6 @@
 package cn.bugstack.infrastructure.repository;
 
+import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
@@ -11,6 +12,8 @@ import javax.annotation.Resource;
 @Repository
 public class ProductTypeRepository implements IProductTypeRepository {
 
+    @Resource
+    private IProductRepository productRepository;
     @Resource
     private IProductTypeDao productTypeDao;
 
@@ -65,6 +68,13 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
+    }
 
+    @Override
+    public long countProductByCategoryId(Long categoryId) {
+        if (categoryId == null) {
+            throw new IllegalArgumentException("商品分类id不能为空");
+        }
+        return productRepository.countByCategoryId(categoryId);
     }
 }

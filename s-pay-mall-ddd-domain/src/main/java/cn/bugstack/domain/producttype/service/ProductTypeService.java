@@ -25,6 +25,18 @@ public class ProductTypeService implements IProductTypeService {
         if (id == null) {
             throw new IllegalArgumentException("商品分类id不能为空");
         }
+        ProductTypeAggregate productTypeAggregate = productTypeRepository.queryById(id);
+        if (productTypeAggregate == null) {
+            throw new IllegalArgumentException("商品分类不存在");
+        }
+
+        if (productTypeAggregate.getStatus() != null && productTypeAggregate.getStatus() == 1) {
+            long productCount = productTypeRepository.countProductByCategoryId(id);
+            if (productCount > 0) {
+                throw new IllegalArgumentException("启用中的商品分类已被商品使用，不能删除");
+            }
+        }
+
         productTypeRepository.deleteById(id);
     }
 

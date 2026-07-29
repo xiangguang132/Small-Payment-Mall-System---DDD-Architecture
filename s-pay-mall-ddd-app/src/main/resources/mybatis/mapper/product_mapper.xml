@@ -53,4 +53,11 @@
         and is_del = 0
     </update>
 
+    <select id="countByCategoryId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select count(1)
+        from product
+        where category_id = #{categoryId}
+        and is_del = 0
+    </select>
+
 </mapper>

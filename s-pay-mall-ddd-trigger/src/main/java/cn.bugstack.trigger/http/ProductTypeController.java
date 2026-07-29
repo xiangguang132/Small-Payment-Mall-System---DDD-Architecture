@@ -44,9 +44,6 @@ public class ProductTypeController {
      */
     @DeleteMapping("{id}")
     public Response<Boolean> delete(@PathVariable Long id){
-        if (id == null) {
-            throw new IllegalArgumentException("商品分类id不能为空");
-        }
         productTypeService.deleteProductTypeById(id);
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
@@ -62,9 +59,6 @@ public class ProductTypeController {
      */
     @GetMapping("{id}")
     public Response<ProductTypeDetailResponse> detail(@PathVariable Long id){
-        if (id == null) {
-            throw new IllegalArgumentException("商品分类id不能为空");
-        }
         ProductTypeAggregate productType = productTypeService.queryProductTypeById(id);
         ProductTypeDetailResponse response = ProductTypeAssembler.toDetailResponse(productType);
         return Response.<ProductTypeDetailResponse>builder()

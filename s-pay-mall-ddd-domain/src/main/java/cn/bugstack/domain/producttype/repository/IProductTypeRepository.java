@@ -9,4 +9,6 @@ public interface IProductTypeRepository {
     void deleteById(Long id);
 
     ProductTypeAggregate queryById(Long id);
+
+    long countProductByCategoryId(Long categoryId);
 }

@@ -14,4 +14,6 @@ public interface IProductDao {
     Product queryById(@Param("id") Long id);
 
     void update(Product product);
+
+    long countByCategoryId(@Param("categoryId") Long categoryId);
 }

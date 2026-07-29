@@ -11,4 +11,6 @@ public interface IProductRepository {
     ProductAggregate queryById(Long id);
 
     void updateById(ProductAggregate updated);
+
+    long countByCategoryId(Long categoryId);
 }

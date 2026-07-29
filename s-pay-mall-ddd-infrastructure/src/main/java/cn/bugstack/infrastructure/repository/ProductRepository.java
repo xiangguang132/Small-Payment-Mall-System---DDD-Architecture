@@ -93,4 +93,12 @@ public class ProductRepository implements IProductRepository {
                 .build();
         productDao.update(product);
     }
+
+    @Override
+    public long countByCategoryId(Long categoryId) {
+        if   (categoryId == null) {
+            throw new IllegalArgumentException("分类id不能为空");
+        }
+        return productDao.countByCategoryId(categoryId);
+    }
 }
