@@ -8,9 +8,5 @@ public interface IProductService {
 
     void deleteProductById(Long id);
 
-    ProductAggregate updateProduct(ProductAggregate product);
-
     ProductAggregate queryProductById(Long id);
-
-
 }

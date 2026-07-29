@@ -45,29 +45,6 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void update(ProductAggregate productAggregate) {
-        if (productAggregate == null) {
-            throw new IllegalArgumentException("商品信息不能为空");
-        }
-        if (productAggregate.getId() == null) {
-            throw new IllegalArgumentException("商品id不能为空");
-        }
-        Product product = Product.builder()
-                .id(productAggregate.getId())
-                .name(productAggregate.getName())
-                .description(productAggregate.getDescription())
-                .sku(productAggregate.getSku())
-                .categoryId(productAggregate.getCategoryId())
-                .status(productAggregate.getStatus())
-                .price(productAggregate.getPrice())
-                .isDel(productAggregate.getIsDel())
-                .createTime(productAggregate.getCreateTime())
-                .updateTime(productAggregate.getUpdateTime())
-                .build();
-        productDao.update(product);
-    }
-
-    @Override
     public ProductAggregate queryById(Long id) {
         if  (id == null) {
             throw new IllegalArgumentException("商品id不能为空");

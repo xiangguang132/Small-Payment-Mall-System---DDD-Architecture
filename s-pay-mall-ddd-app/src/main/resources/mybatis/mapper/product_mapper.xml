@@ -11,20 +11,6 @@
         (#{name}, #{description}, #{sku}, #{categoryId}, #{status}, #{price}, #{isDel}, now(), now())
     </insert>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Product">
-        update product
-        set name = #{name},
-            description = #{description},
-            sku = #{sku},
-            category_id = #{categoryId},
-            status = #{status},
-            price = #{price},
-            create_time = #{createTime},
-            update_time = now()
-        where id = #{id}
-          and is_del = 0
-    </update>
-
     <update id="deleteById" parameterType="java.lang.Long">
         update product
         set is_del = 1,

@@ -1,7 +1,6 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.product.ProductAddRequest;
-import cn.bugstack.api.request.product.ProductUpdateRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
@@ -48,18 +47,6 @@ public class ProductController {
         }
         ProductAggregate product = productService.queryProductById(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(product);
-        return Response.<ProductDetailResponse>builder()
-                .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
-                .data(response)
-                .build();
-    }
-
-    @PutMapping("update")
-    public Response<ProductDetailResponse> update(@RequestBody ProductUpdateRequest request) {
-        ProductAggregate product = ProductAssembler.toAggregate(request);
-        ProductAggregate updated = productService.updateProduct(product);
-        ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
         return Response.<ProductDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

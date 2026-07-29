@@ -9,6 +9,4 @@ public interface IProductRepository {
     void deleteById(Long id);
 
     ProductAggregate queryById(Long id);
-
-    void update(ProductAggregate productAggregate);
 }

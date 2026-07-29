@@ -5,7 +5,6 @@ import cn.bugstack.domain.product.repository.IProductRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 
 @Service
 public class ProductService implements IProductService {
@@ -27,36 +26,6 @@ public class ProductService implements IProductService {
             throw new IllegalArgumentException("商品id不能为空");
         }
         productRepository.deleteById(id);
-    }
-
-    @Override
-    public ProductAggregate updateProduct(ProductAggregate product) {
-        if (product == null) {
-            throw new IllegalArgumentException("商品信息不能为空");
-        }
-        if (product.getId() == null) {
-            throw new IllegalArgumentException("商品id不能为空");
-        }
-
-        ProductAggregate current = productRepository.queryById(product.getId());
-        if (current == null) {
-            throw new IllegalArgumentException("商品不存在");
-        }
-
-        ProductAggregate updated = ProductAggregate.builder()
-                .id(current.getId())
-                .name(product.getName())
-                .description(product.getDescription())
-                .sku(product.getSku())
-                .categoryId(product.getCategoryId())
-                .status(product.getStatus())
-                .price(product.getPrice())
-                .isDel(current.getIsDel())
-                .createTime(current.getCreateTime())
-                .updateTime(LocalDateTime.now())
-                .build();
-        productRepository.update(updated);
-        return updated;
     }
 
     @Override
