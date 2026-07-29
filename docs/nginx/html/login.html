@@ -52,10 +52,10 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // 获取二维码 ticket
-        fetch('http://localhost:8080/api/v1/login/weixin_qrcode_ticket')
+        fetch('/api/v1/login/weixin_qrcode_ticket')
             .then(response => response.json())
             .then(data => {
-                if (data.code === "0000") {
+                if (Number(data.code) === 200) {
                     const ticket = data.data;
                     const qrCodeImg = document.getElementById('qr-code-img');
                     qrCodeImg.src = `https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${ticket}`;
@@ -73,15 +73,16 @@
             });
 
         function checkLoginStatus(ticket, intervalId) {
-            fetch(`http://localhost:8080/api/v1/login/check_login?ticket=${ticket}`)
+            fetch(`/api/v1/login/check_login?ticket=${ticket}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.code === "0000") {
+                    if (Number(data.code) === 200) {
                         console.info("login success");
                         // 停止轮询
                         clearInterval(intervalId);
-                        // 保存登录 token 到 cookie，设置有效期为30天
-                        setCookie('loginToken', data.data, 30);
+                        // 保存登录 token 到本地存储和 cookie，方便后续接口读取
+                        localStorage.setItem('loginToken', data.data);
+                        setCookie('loginToken', data.data, 1);
                         // 在这里可以重定向到登录后的页面
                         window.location.href = 'index.html'; // 假设登录成功后跳转到首页
                     } else {
@@ -97,8 +98,9 @@
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
         }
+
     });
 </script>
 </body>

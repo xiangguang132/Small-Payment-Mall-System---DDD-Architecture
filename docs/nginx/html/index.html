@@ -57,6 +57,31 @@
         display: block; /* 使span表现得像块级元素 */
         margin: 10px 0; /* 添加上下外边距 */
     }
+    .auth-bar {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 12px 0 6px;
+    }
+    .secondary-button {
+        display: block;
+        padding: 10px 14px;
+        font-size: 14px;
+        color: #333;
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+    .secondary-button:hover {
+        background-color: #dde2e6;
+    }
+    .status-line {
+        margin: 10px 0 0;
+        font-size: 13px;
+        color: #555;
+    }
 </style>
 </head>
 <body>
@@ -67,56 +92,97 @@
         <img width="350" src="images/sku-keyboard-001.png"/>
         <p>价格：¥1.68</p>
     </div>
+    <div class="auth-bar">
+        <button id="logoutButton" class="secondary-button">退出登录</button>
+    </div>
     <button id="orderButton" class="order-button">立即下单「沙箱支付」</button>
+    <p id="authStatus" class="status-line"></p>
     <span class="account-info">测试账号：kvhmoj3832@sandbox.com 密码：111111 支付：111111</span>
 </div>
 
 <script>
-function getCookie(name) {
-    let cookieArr = document.cookie.split(";");
-    for(let i = 0; i < cookieArr.length; i++) {
-        let cookiePair = cookieArr[i].split("=");
-        if(name == cookiePair[0].trim()) {
-            return decodeURIComponent(cookiePair[1]);
-        }
-    }
-    return null;
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
 }
 
-document.getElementById('orderButton').addEventListener('click', function() {
-    var userId = getCookie("loginToken");
-    if (!userId) {
-        window.location.href = "login.html"; // 跳转到登录页
-        return;
+function removeCookie(name) {
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+}
+
+function getLoginToken() {
+    const localToken = localStorage.getItem("loginToken") || "";
+    if (localToken) {
+        return localToken;
     }
 
+    const cookieToken = getCookie("loginToken");
+    return cookieToken || "";
+}
+
+function getCookie(name) {
+    let cookieArr = document.cookie.split(";");
+    for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1] || "");
+        }
+    }
+    return "";
+}
+
+function renderAuthStatus() {
+    const statusEl = document.getElementById('authStatus');
+    const token = getLoginToken();
+    statusEl.textContent = token ? '当前状态：已登录，可以直接下单测试 JWT 鉴权。' : '当前状态：未登录，点击下单会直接触发后端 401。';
+}
+
+document.getElementById('logoutButton').addEventListener('click', function() {
+    localStorage.removeItem('loginToken');
+    removeCookie('loginToken');
+    renderAuthStatus();
+    console.info('logout success');
+});
+
+document.getElementById('orderButton').addEventListener('click', function() {
+    var loginToken = getLoginToken();
+    console.log("loginToken ready:", loginToken);
+
     var productId = "100010090091";
-    var url = 'http://127.0.0.1:8080/api/v1/alipay/create_pay_order';
+    var url = '/api/v1/alipay/create_pay_order';
 
     var requestBody = {
-        userId: userId,
         productId: productId
     };
 
+    var headers = {
+        'Content-Type': 'application/json'
+    };
+    if (loginToken) {
+        headers['Authorization'] = 'Bearer ' + loginToken;
+    }
+
     fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(requestBody) // 将请求体转换为JSON字符串
     })
     .then(response => response.json()) // 解析JSON格式的响应
     .then(json => {
-        if (json.code === "0000") { // 假设成功的code是"0000"
+        if (Number(json.code) === 200) {
             var formHtml = json.data; // 获取data字段中的HTML表单字符串
             document.body.innerHTML += formHtml; // 将表单添加到页面上
             document.forms[0].submit(); // 自动提交表单
         } else {
-            console.error('Error:', json.info); // 输出错误信息
+            console.error('Error:', json.info, json); // 输出错误信息和完整响应
         }
     })
     .catch(error => console.error('Error:', error));
 });
+
+renderAuthStatus();
 </script>
 </body>
 </html>
