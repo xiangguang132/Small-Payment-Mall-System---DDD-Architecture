@@ -55,3 +55,8 @@ alipay:
   notify_url: http://xfg-studio.natapp1.cc/api/v1/alipay/pay_notify
   return_url: http://xguang.nat100.top/pay-success.html
   gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+
+jwt:
+  secret: 12345
+  issuer: s-pay-mall
+  expire-seconds: 604800
