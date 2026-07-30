@@ -29,7 +29,9 @@ public class ProductTypeController {
      */
     @PostMapping("add")
     public Response<Long> add(@Valid @RequestBody ProductTypeAddRequest request){
+        // 把外部传入的数据，转换成领域模型里的“商品类型聚合根对象”
         ProductTypeAggregate productType = ProductTypeAssembler.toAggregate(request);
+        // 把 productType 这个商品类型对象交给服务层去新增，新增成功后返回一个 ID，保存到 id 里
         Long id = productTypeService.addNewProductType(productType);
         return Response.<Long>builder()
                 .code(ResponseCode.SUCCESS.getCode())

@@ -1,5 +1,6 @@
 package cn.bugstack.domain.warehouse.model.vo;
 
+import cn.bugstack.domain.common.util.EnumCodeUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,14 +15,6 @@ public enum WarehouseTypeVO {
     private final String desc;
 
     public static boolean isValid(Integer code) {
-        if (code == null) {
-            return false;
-        }
-        for (WarehouseTypeVO value : values()) {
-            if (value.code.equals(code)) {
-                return true;
-            }
-        }
-        return false;
+        return EnumCodeUtils.isValid(code, values(), WarehouseTypeVO::getCode);
     }
 }

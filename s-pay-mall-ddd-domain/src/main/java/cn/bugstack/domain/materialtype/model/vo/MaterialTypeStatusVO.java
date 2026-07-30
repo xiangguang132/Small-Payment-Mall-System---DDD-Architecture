@@ -1,4 +1,4 @@
-package cn.bugstack.domain.warehouse.model.vo;
+package cn.bugstack.domain.materialtype.model.vo;
 
 import cn.bugstack.domain.common.util.EnumCodeUtils;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum WarehouseStatusVO {
+public enum MaterialTypeStatusVO {
 
     OFFLINE(0, "禁用"),
     ONLINE(1, "启用");
@@ -15,6 +15,6 @@ public enum WarehouseStatusVO {
     private final String desc;
 
     public static boolean isValid(Integer code) {
-        return EnumCodeUtils.isValid(code, values(), WarehouseStatusVO::getCode);
+        return EnumCodeUtils.isValid(code, values(), MaterialTypeStatusVO::getCode);
     }
 }

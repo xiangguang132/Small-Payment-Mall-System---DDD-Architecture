@@ -1,5 +1,6 @@
 package cn.bugstack.domain.product.model.vo;
 
+import cn.bugstack.domain.common.util.EnumCodeUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -26,14 +27,6 @@ public enum ProductStatusVO {
     }
 
     public static boolean isValid(Integer code) {
-        if (code == null) {
-            return false;
-        }
-        for (ProductStatusVO value : values()) {
-            if (value.code.equals(code)) {
-                return true;
-            }
-        }
-        return false;
+        return EnumCodeUtils.isValid(code, values(), ProductStatusVO::getCode);
     }
 }
