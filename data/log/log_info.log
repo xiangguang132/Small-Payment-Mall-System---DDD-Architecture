@@ -169,3 +169,16 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 26-07-30.10:40:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
 26-07-30.10:50:00.012 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
 26-07-30.11:00:00.017 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.11:10:00.015 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.11:20:00.012 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.11:30:14.391 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.11:30:34.772 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m44s386ms258µs200ns).
+26-07-30.11:42:59.143 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.11:43:25.010 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m50s144ms991µs100ns).
+26-07-30.11:50:00.007 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.12:00:00.022 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.13:31:10.743 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.13:31:18.061 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h30m22s732ms727µs300ns).
+26-07-30.13:38:38.610 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m20s458ms229µs200ns).
+26-07-30.13:40:00.013 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-30.13:50:00.004 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
