@@ -9,4 +9,6 @@ public interface IProductTypeService {
     void deleteProductTypeById(Long id);
 
     ProductTypeAggregate queryProductTypeById(Long id);
+
+    ProductTypeAggregate onSale(Long id);
 }

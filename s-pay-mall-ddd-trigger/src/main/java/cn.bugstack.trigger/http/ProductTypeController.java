@@ -68,4 +68,18 @@ public class ProductTypeController {
                 .build();
     }
 
+    /**
+     * 依据id修改商品分类状态
+     */
+    @PutMapping("status/{id}")
+    public Response<ProductTypeDetailResponse> onSale(@PathVariable Long id) {
+        ProductTypeAggregate updated = productTypeService.onSale(id);
+        ProductTypeDetailResponse response = ProductTypeAssembler.toDetailResponse(updated);
+        return Response.<ProductTypeDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
+                .build();
+    }
+
 }

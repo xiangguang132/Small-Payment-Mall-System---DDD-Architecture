@@ -2,6 +2,8 @@ package cn.bugstack.domain.product.service;
 
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
+import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
+import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,12 +14,15 @@ public class ProductService implements IProductService {
 
     @Resource
     private IProductRepository productRepository;
+    @Resource
+    private IProductTypeRepository productTypeRepository;
 
     @Override
     public Long addNewProduct(ProductAggregate product) {
         if (product == null) {
             throw new IllegalArgumentException("商品信息不能为空");
         }
+        validateCategoryEnabled(product.getCategoryId());
         return productRepository.save(product);
     }
 
@@ -45,6 +50,7 @@ public class ProductService implements IProductService {
         if (updated.getId() == null) {
             throw new IllegalArgumentException("商品id不能为空");
         }
+        validateCategoryEnabled(updated.getCategoryId());
         productRepository.updateById(updated);
     }
 
@@ -77,5 +83,20 @@ public class ProductService implements IProductService {
 
         productRepository.updateById(updated);
         return updated;
+    }
+
+    private void validateCategoryEnabled(Long categoryId) {
+        if (categoryId == null) {
+            throw new IllegalArgumentException("商品分类id不能为空");
+        }
+
+        ProductTypeAggregate productType = productTypeRepository.queryById(categoryId);
+        if (productType == null) {
+            throw new IllegalArgumentException("商品分类不存在");
+        }
+
+        if (productType.getStatus() == null || productType.getStatus() != 1) {
+            throw new IllegalArgumentException("商品分类未启用，不能使用");
+        }
     }
 }

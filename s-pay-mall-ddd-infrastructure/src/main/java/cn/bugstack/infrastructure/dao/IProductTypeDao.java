@@ -12,4 +12,6 @@ public interface IProductTypeDao {
     void deleteById(@Param("id") Long id);
 
     ProductType queryById(Long id);
+
+    void update(ProductType productType);
 }

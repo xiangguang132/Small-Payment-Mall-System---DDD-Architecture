@@ -5,6 +5,7 @@ import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @Service
 public class ProductTypeService implements IProductTypeService {
@@ -46,5 +47,34 @@ public class ProductTypeService implements IProductTypeService {
             throw new IllegalArgumentException("商品分类id不能为空");
         }
         return productTypeRepository.queryById(id);
+    }
+
+    @Override
+    public ProductTypeAggregate onSale(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("商品分类id不能为空");
+        }
+
+        ProductTypeAggregate current = productTypeRepository.queryById(id);
+        if (current == null) {
+            throw new IllegalArgumentException("商品分类不存在");
+        }
+
+        Integer nextStatus = (current.getStatus() != null && current.getStatus() == 1) ? 0 : 1;
+        ProductTypeAggregate updated = ProductTypeAggregate.builder()
+                .id(current.getId())
+                .parentId(current.getParentId())
+                .name(current.getName())
+                .description(current.getDescription())
+                .typeCode(current.getTypeCode())
+                .sort(current.getSort())
+                .status(nextStatus)
+                .isDel(current.getIsDel())
+                .createTime(current.getCreateTime())
+                .updateTime(LocalDateTime.now())
+                .build();
+
+        productTypeRepository.updateById(updated);
+        return updated;
     }
 }

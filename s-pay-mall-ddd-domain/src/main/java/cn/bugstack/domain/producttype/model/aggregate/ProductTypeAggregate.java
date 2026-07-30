@@ -40,4 +40,8 @@ public class ProductTypeAggregate {
                 .updateTime(now)
                 .build();
     }
+
+    public void changeStatus(Integer status) {
+        this.status = status;
+    }
 }

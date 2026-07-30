@@ -71,6 +71,27 @@ public class ProductTypeRepository implements IProductTypeRepository {
     }
 
     @Override
+    public void updateById(ProductTypeAggregate productTypeAggregate) {
+        if (productTypeAggregate == null) {
+            throw new IllegalArgumentException("商品类型不能为空");
+        }
+        ProductType productType = ProductType.builder()
+                .id(productTypeAggregate.getId())
+                .parentId(productTypeAggregate.getParentId() == null ? 0L : productTypeAggregate.getParentId())
+                .name(productTypeAggregate.getName())
+                .description(productTypeAggregate.getDescription())
+                .typeCode(productTypeAggregate.getTypeCode())
+                .sort(productTypeAggregate.getSort() == null ? 0 : productTypeAggregate.getSort())
+                .status(productTypeAggregate.getStatus())
+                .isDel(productTypeAggregate.getIsDel())
+                .createTime(productTypeAggregate.getCreateTime())
+                .updateTime(productTypeAggregate.getUpdateTime())
+                .build();
+
+        productTypeDao.update(productType);
+    }
+
+    @Override
     public long countProductByCategoryId(Long categoryId) {
         if (categoryId == null) {
             throw new IllegalArgumentException("商品分类id不能为空");
