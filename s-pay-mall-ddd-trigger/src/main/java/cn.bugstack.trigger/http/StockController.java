@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin("*")
 @Validated
-@RequestMapping("/api/v1/stock")
+@RequestMapping("/api/v1/warehouse-stock")
 public class StockController {
 
     @Resource

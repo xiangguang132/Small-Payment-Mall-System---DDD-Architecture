@@ -35,6 +35,23 @@
         and is_del = 0
     </select>
 
+    <select id="queryByTypeCode" parameterType="java.lang.String" resultType="cn.bugstack.infrastructure.dao.po.ProductType">
+        select
+        id,
+        parent_id,
+        name,
+        description,
+        type_code,
+        sort,
+        status,
+        is_del,
+        create_time,
+        update_time
+        from product_type
+        where type_code = #{typeCode}
+        and is_del = 0
+    </select>
+
     <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.ProductType">
         update product_type
         set parent_id = #{parentId},

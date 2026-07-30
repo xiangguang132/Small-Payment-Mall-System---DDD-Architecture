@@ -1,6 +1,7 @@
 package cn.bugstack.trigger.assembler;
 
 import cn.bugstack.api.request.producttype.ProductTypeAddRequest;
+import cn.bugstack.api.request.producttype.ProductTypeUpdateRequest;
 import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 
@@ -21,6 +22,27 @@ public class ProductTypeAssembler {
                 request.getSort(),
                 request.getStatus()
         );
+    }
+
+    public static ProductTypeAggregate toUpdatedAggregate(ProductTypeAggregate current, ProductTypeUpdateRequest request) {
+        if (current == null) {
+            throw new IllegalArgumentException("商品分类不存在");
+        }
+        if (request == null) {
+            throw new IllegalArgumentException("品类信息不能为空");
+        }
+        return ProductTypeAggregate.builder()
+                .id(current.getId())
+                .parentId(request.getParentId() != null ? request.getParentId() : current.getParentId())
+                .name(request.getName() != null ? trim(request.getName()) : current.getName())
+                .description(request.getDescription() != null ? trim(request.getDescription()) : current.getDescription())
+                .typeCode(request.getTypeCode() != null ? trim(request.getTypeCode()) : current.getTypeCode())
+                .sort(request.getSort() != null ? request.getSort() : current.getSort())
+                .status(request.getStatus() != null ? request.getStatus() : current.getStatus())
+                .isDel(current.getIsDel())
+                .createTime(current.getCreateTime())
+                .updateTime(current.getUpdateTime())
+                .build();
     }
 
     public static ProductTypeDetailResponse toDetailResponse(ProductTypeAggregate productType) {

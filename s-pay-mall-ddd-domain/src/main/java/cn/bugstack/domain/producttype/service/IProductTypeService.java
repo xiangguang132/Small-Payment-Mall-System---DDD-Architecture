@@ -11,4 +11,6 @@ public interface IProductTypeService {
     ProductTypeAggregate queryProductTypeById(Long id);
 
     ProductTypeAggregate onSale(Long id);
+
+    void updateProductTypeById(ProductTypeAggregate updated);
 }

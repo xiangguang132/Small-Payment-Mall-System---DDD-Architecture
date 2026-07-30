@@ -10,6 +10,8 @@ public interface IProductTypeRepository {
 
     ProductTypeAggregate queryById(Long id);
 
+    ProductTypeAggregate queryByTypeCode(String typeCode);
+
     void updateById(ProductTypeAggregate productType);
 
     long countProductByCategoryId(Long categoryId);

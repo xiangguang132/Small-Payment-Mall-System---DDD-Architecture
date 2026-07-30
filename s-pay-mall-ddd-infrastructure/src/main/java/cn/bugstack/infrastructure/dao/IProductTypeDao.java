@@ -13,6 +13,8 @@ public interface IProductTypeDao {
 
     ProductType queryById(Long id);
 
+    ProductType queryByTypeCode(@Param("typeCode") String typeCode);
+
     void update(ProductType productType);
 
     long countByParentId(@Param("parentId") Long parentId);
