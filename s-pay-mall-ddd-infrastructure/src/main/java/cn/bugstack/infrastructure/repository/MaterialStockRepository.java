@@ -1,0 +1,66 @@
+package cn.bugstack.infrastructure.repository;
+
+import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
+import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
+import cn.bugstack.infrastructure.dao.IMaterialStockDao;
+import cn.bugstack.infrastructure.dao.po.MaterialStock;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Repository
+public class MaterialStockRepository implements IMaterialStockRepository {
+
+    @Resource
+    private IMaterialStockDao  materialStockDao;
+
+    @Override
+    public void inbound(Long materialId, String storageAddress, BigDecimal inboundQty) {
+        MaterialStock current = materialStockDao.queryByMaterialIdAndStorageAddress(materialId, storageAddress);
+        if (current == null) {
+            MaterialStock stock = new MaterialStock();
+            stock.setMaterialId(materialId);
+            stock.setStorageAddress(storageAddress);
+            stock.setAvailableQty(inboundQty);
+            stock.setLockedQty(BigDecimal.ZERO);
+            stock.setTotalQty(inboundQty);
+            stock.setIsDel(0);
+            stock.setCreateTime(LocalDateTime.now());
+            stock.setUpdateTime(LocalDateTime.now());
+            materialStockDao.insert(stock);
+            return;
+        }
+
+        BigDecimal totalQty = current.getTotalQty() == null ? BigDecimal.ZERO : current.getTotalQty();
+        BigDecimal lockedQty = current.getLockedQty() == null ? BigDecimal.ZERO : current.getLockedQty();
+        BigDecimal nextTotalQty = totalQty.add(inboundQty);
+        current.setTotalQty(nextTotalQty);
+        current.setAvailableQty(nextTotalQty.subtract(lockedQty));
+        current.setUpdateTime(LocalDateTime.now());
+        materialStockDao.update(current);
+    }
+
+    @Override
+    public void updateById(MaterialStockAggregate stock) {
+        if (stock == null || stock.getId() == null) {
+            throw new IllegalArgumentException("库存信息或库存id不能为空");
+        }
+        materialStockDao.update(toPo(stock));
+    }
+
+    private MaterialStock toPo(MaterialStockAggregate stock) {
+        MaterialStock po = new MaterialStock();
+        po.setId(stock.getId());
+        po.setMaterialId(stock.getMaterialId());
+        po.setStorageAddress(stock.getStorageAddress());
+        po.setAvailableQty(stock.getAvailableQty());
+        po.setLockedQty(stock.getLockedQty());
+        po.setTotalQty(stock.getTotalQty());
+        po.setIsDel(stock.getIsDel());
+        po.setCreateTime(stock.getCreateTime());
+        po.setUpdateTime(stock.getUpdateTime());
+        return po;
+    }
+}
