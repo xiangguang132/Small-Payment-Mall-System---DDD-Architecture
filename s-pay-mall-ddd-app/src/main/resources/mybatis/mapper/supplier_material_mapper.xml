@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.ISupplierMaterialDao">
+
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.SupplierMaterial">
+        select
+        id,
+        supplier_id,
+        material_id,
+        supply_price,
+        lead_time_days,
+        status,
+        is_del,
+        create_time,
+        update_time
+        from supplier_material
+        where id = #{id}
+          and is_del = 0
+    </select>
+
+</mapper>
