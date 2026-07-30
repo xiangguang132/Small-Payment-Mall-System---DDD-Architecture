@@ -1,0 +1,93 @@
+package cn.bugstack.infrastructure.repository;
+
+import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
+import cn.bugstack.domain.warehouse.repository.IWarehouseRepository;
+import cn.bugstack.infrastructure.dao.IWarehouseDao;
+import cn.bugstack.infrastructure.dao.po.Warehouse;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
+
+@Repository
+public class WarehouseRepository implements IWarehouseRepository {
+
+    @Resource
+    private IWarehouseDao warehouseDao;
+
+    @Override
+    public Long save(WarehouseAggregate warehouseAggregate) {
+        if (warehouseAggregate == null) {
+            throw new IllegalArgumentException("仓库信息不能为空");
+        }
+        Warehouse warehouse = Warehouse.builder()
+                .warehouseCode(warehouseAggregate.getWarehouseCode())
+                .name(warehouseAggregate.getName())
+                .type(warehouseAggregate.getType())
+                .address(warehouseAggregate.getAddress())
+                .contactName(warehouseAggregate.getContactName())
+                .contactPhone(warehouseAggregate.getContactPhone())
+                .status(warehouseAggregate.getStatus())
+                .isDel(warehouseAggregate.getIsDel())
+                .createTime(warehouseAggregate.getCreateTime())
+                .updateTime(warehouseAggregate.getUpdateTime())
+                .build();
+        warehouseDao.insert(warehouse);
+        return warehouse.getId();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("仓库id不能为空");
+        }
+        warehouseDao.deleteById(id);
+    }
+
+    @Override
+    public WarehouseAggregate queryById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("仓库id不能为空");
+        }
+        Warehouse warehouse = warehouseDao.queryById(id);
+        if (warehouse == null) {
+            return null;
+        }
+        return WarehouseAggregate.builder()
+                .id(warehouse.getId())
+                .warehouseCode(warehouse.getWarehouseCode())
+                .name(warehouse.getName())
+                .type(warehouse.getType())
+                .address(warehouse.getAddress())
+                .contactName(warehouse.getContactName())
+                .contactPhone(warehouse.getContactPhone())
+                .status(warehouse.getStatus())
+                .isDel(warehouse.getIsDel())
+                .createTime(warehouse.getCreateTime())
+                .updateTime(warehouse.getUpdateTime())
+                .build();
+    }
+
+    @Override
+    public void updateById(WarehouseAggregate warehouseAggregate) {
+        if (warehouseAggregate == null) {
+            throw new IllegalArgumentException("仓库信息不能为空");
+        }
+        if (warehouseAggregate.getId() == null) {
+            throw new IllegalArgumentException("仓库id不能为空");
+        }
+        Warehouse warehouse = Warehouse.builder()
+                .id(warehouseAggregate.getId())
+                .warehouseCode(warehouseAggregate.getWarehouseCode())
+                .name(warehouseAggregate.getName())
+                .type(warehouseAggregate.getType())
+                .address(warehouseAggregate.getAddress())
+                .contactName(warehouseAggregate.getContactName())
+                .contactPhone(warehouseAggregate.getContactPhone())
+                .status(warehouseAggregate.getStatus())
+                .isDel(warehouseAggregate.getIsDel())
+                .createTime(warehouseAggregate.getCreateTime())
+                .updateTime(warehouseAggregate.getUpdateTime())
+                .build();
+        warehouseDao.update(warehouse);
+    }
+}

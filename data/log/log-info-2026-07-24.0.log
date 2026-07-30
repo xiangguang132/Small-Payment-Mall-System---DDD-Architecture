@@ -1,0 +1,413 @@
+26-07-24.09:16:13.596 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 25888 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.09:16:13.599 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.09:16:14.365 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.09:16:14.368 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.09:16:14.401 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+26-07-24.09:16:14.486 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.09:16:15.142 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.09:16:15.153 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.09:16:15.153 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.09:16:15.153 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.09:16:15.290 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.09:16:15.290 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1648 ms
+26-07-24.09:16:15.447 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'weixinPortalController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.domain.auth.service.ILoginService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.09:16:15.449 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.09:16:15.461 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.09:16:15.484 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.domain.auth.service.ILoginService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.domain.auth.service.ILoginService' in your configuration.
+
+26-07-24.09:34:39.861 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 29064 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.09:34:39.863 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.09:34:40.572 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.09:34:40.574 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.09:34:40.610 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+26-07-24.09:34:40.696 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.09:34:41.323 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.09:34:41.332 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.09:34:41.332 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.09:34:41.332 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.09:34:41.447 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.09:34:41.448 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1550 ms
+26-07-24.09:34:41.591 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.domain.auth.service.ILoginService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.09:34:41.594 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.09:34:41.605 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.09:34:41.619 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.domain.auth.service.ILoginService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.domain.auth.service.ILoginService' in your configuration.
+
+26-07-24.10:33:35.504 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 39280 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.10:33:35.506 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.10:33:36.326 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.10:33:36.328 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.10:33:36.366 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+26-07-24.10:33:36.460 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.10:33:37.131 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.10:33:37.141 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.10:33:37.142 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.10:33:37.142 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.10:33:37.264 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.10:33:37.264 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1725 ms
+26-07-24.10:33:37.412 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.domain.auth.service.ILoginService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.10:33:37.413 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.10:33:37.426 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.10:33:37.444 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.domain.auth.service.ILoginService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.domain.auth.service.ILoginService' in your configuration.
+
+26-07-24.10:37:39.650 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 45228 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.10:37:39.652 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.10:37:40.415 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.10:37:40.417 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.10:37:40.452 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+26-07-24.10:37:40.537 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.10:37:41.176 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.10:37:41.184 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.10:37:41.184 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.10:37:41.184 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.10:37:41.296 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.10:37:41.296 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1603 ms
+26-07-24.10:37:41.467 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'weixinLoginService': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginPort': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.10:37:41.469 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.10:37:41.480 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.10:37:41.495 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' in your configuration.
+
+26-07-24.10:38:00.305 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 40260 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.10:38:00.308 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.10:38:00.931 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.10:38:00.932 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.10:38:00.964 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+26-07-24.10:38:01.034 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.10:38:01.632 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.10:38:01.640 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.10:38:01.640 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.10:38:01.640 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.10:38:01.772 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.10:38:01.773 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1434 ms
+26-07-24.10:38:01.954 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'weixinLoginService': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginPort': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.10:38:01.957 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.10:38:01.970 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.10:38:01.987 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' in your configuration.
+
+26-07-24.10:38:17.889 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 30084 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.10:38:17.891 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.10:38:18.560 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.10:38:18.563 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.10:38:18.596 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+26-07-24.10:38:18.673 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.10:38:19.286 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.10:38:19.291 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.10:38:19.292 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.10:38:19.292 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.10:38:19.400 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.10:38:19.400 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1479 ms
+26-07-24.10:38:19.542 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'weixinLoginService': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginPort': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+26-07-24.10:38:19.545 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-07-24.10:38:19.556 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-07-24.10:38:19.570 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bugstack.infrastructure.gateway.IWeixinApiService' in your configuration.
+
+26-07-24.14:25:52.607 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 18156 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.14:25:52.611 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.14:25:53.632 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.14:25:53.634 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.14:25:53.672 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+26-07-24.14:25:53.769 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.14:25:54.704 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.14:25:54.713 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.14:25:54.714 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.14:25:54.714 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.14:25:54.870 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.14:25:54.870 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2213 ms
+26-07-24.14:25:55.921 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-24.14:25:56.611 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-24.14:25:56.699 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-24.14:25:57.078 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-24.14:25:57.104 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-24.14:25:57.114 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-24.14:25:57.131 [main            ] INFO  Application            - Started Application in 5.074 seconds (JVM running for 5.512)
+26-07-24.14:27:34.886 [http-nio-8080-exec-1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-24.14:27:34.886 [http-nio-8080-exec-1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-24.14:27:34.889 [http-nio-8080-exec-1] INFO  DispatcherServlet      - Completed initialization in 3 ms
+26-07-24.14:27:49.593 [http-nio-8080-exec-4] INFO  LoginController        - weixin_qrcode_ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA
+26-07-24.14:27:53.003 [http-nio-8080-exec-5] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:null
+26-07-24.14:27:55.795 [http-nio-8080-exec-6] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:null
+26-07-24.14:27:58.788 [http-nio-8080-exec-7] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:null
+26-07-24.14:28:01.678 [http-nio-8080-exec-9] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:null
+26-07-24.14:28:04.806 [http-nio-8080-exec-10] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:null
+26-07-24.14:28:06.282 [http-nio-8080-exec-1] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874486</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[SCAN]]></Event>
+<EventKey><![CDATA[100601]]></EventKey>
+<Ticket><![CDATA[gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA]]></Ticket>
+</xml>
+26-07-24.14:28:07.777 [http-nio-8080-exec-2] INFO  LoginController        - 扫描检测登录结果 ticket:gQH67zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyc3pSMFlnNVpjRHQxSEJpYXhHMXYAAgTlBWNqAwQAjScA openidToken:oxf0n3aZpX_OA8c_g8Wag2qsyf1U
+26-07-24.14:28:07.778 [http-nio-8080-exec-3] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874487</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4618469197566541827</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-07-24.14:28:07.781 [http-nio-8080-exec-3] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874487</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4618469197566541827</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-07-24.14:28:11.255 [http-nio-8080-exec-4] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874490</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[您好]]></Content>
+<MsgId>25553259108479365</MsgId>
+</xml>
+26-07-24.14:28:11.258 [http-nio-8080-exec-4] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874490</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[您好]]></Content>
+<MsgId>25553259108479365</MsgId>
+</xml>
+26-07-24.14:29:40.152 [http-nio-8080-exec-6] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874579</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[你好]]></Content>
+<MsgId>25553255895470559</MsgId>
+</xml>
+26-07-24.14:29:40.155 [http-nio-8080-exec-6] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874579</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[你好]]></Content>
+<MsgId>25553255895470559</MsgId>
+</xml>
+26-07-24.14:32:13.768 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 28948 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-24.14:32:13.771 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-24.14:32:14.401 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-24.14:32:14.403 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-24.14:32:14.436 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+26-07-24.14:32:14.519 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[cn.bugstack]' package. Please check your configuration.
+26-07-24.14:32:15.167 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-24.14:32:15.176 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-24.14:32:15.176 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-24.14:32:15.176 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-24.14:32:15.294 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-24.14:32:15.294 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1493 ms
+26-07-24.14:32:15.937 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-24.14:32:16.444 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-24.14:32:16.523 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-24.14:32:16.772 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-24.14:32:16.793 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-24.14:32:16.801 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-24.14:32:16.810 [main            ] INFO  Application            - Started Application in 3.436 seconds (JVM running for 3.776)
+26-07-24.14:32:28.018 [http-nio-8080-exec-1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-24.14:32:28.018 [http-nio-8080-exec-1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-24.14:32:28.019 [http-nio-8080-exec-1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-07-24.14:32:28.880 [http-nio-8080-exec-1] INFO  LoginController        - weixin_qrcode_ticket:gQFc8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyVDQ1cVl4NVpjRHQxSFpqYTFHMVkAAgT9BmNqAwQAjScA
+26-07-24.14:32:31.262 [http-nio-8080-exec-2] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874751</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[SCAN]]></Event>
+<EventKey><![CDATA[100601]]></EventKey>
+<Ticket><![CDATA[gQFc8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyVDQ1cVl4NVpjRHQxSFpqYTFHMVkAAgT9BmNqAwQAjScA]]></Ticket>
+</xml>
+26-07-24.14:32:32.994 [http-nio-8080-exec-5] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874752</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4618473645240057856</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-07-24.14:32:32.994 [http-nio-8080-exec-3] INFO  LoginController        - 扫描检测登录结果 ticket:gQFc8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyVDQ1cVl4NVpjRHQxSFpqYTFHMVkAAgT9BmNqAwQAjScA openidToken:oxf0n3aZpX_OA8c_g8Wag2qsyf1U
+26-07-24.14:32:32.997 [http-nio-8080-exec-5] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874752</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4618473645240057856</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-07-24.14:32:33.011 [http-nio-8080-exec-5] ERROR WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U失败 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874752</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4618473645240057856</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+java.lang.NullPointerException: null
+	at cn.bugstack.trigger.http.WeixinPortalController.post(WeixinPortalController.java:75)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-07-24.14:32:35.367 [http-nio-8080-exec-4] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874754</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[您好]]></Content>
+<MsgId>25553261565243392</MsgId>
+</xml>
+26-07-24.14:32:35.372 [http-nio-8080-exec-4] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874754</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[您好]]></Content>
+<MsgId>25553261565243392</MsgId>
+</xml>
+26-07-24.14:32:39.331 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874758</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[你好]]></Content>
+<MsgId>25553263176123429</MsgId>
+</xml>
+26-07-24.14:32:39.333 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1784874758</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[你好]]></Content>
+<MsgId>25553263176123429</MsgId>
+</xml>
