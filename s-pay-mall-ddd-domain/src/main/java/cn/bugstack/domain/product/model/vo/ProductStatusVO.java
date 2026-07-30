@@ -24,4 +24,16 @@ public enum ProductStatusVO {
         }
         return OFFLINE;
     }
+
+    public static boolean isValid(Integer code) {
+        if (code == null) {
+            return false;
+        }
+        for (ProductStatusVO value : values()) {
+            if (value.code.equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

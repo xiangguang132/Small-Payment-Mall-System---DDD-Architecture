@@ -7,13 +7,16 @@ import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.trigger.assembler.ProductAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin("*")
+@Validated
 @RequestMapping("/api/v1/product")
 public class ProductController {
 
@@ -26,7 +29,7 @@ public class ProductController {
      * @return
      */
     @PostMapping("add")
-    public Response<Long> add(@RequestBody ProductAddRequest request) {
+    public Response<Long> add(@Valid @RequestBody ProductAddRequest request) {
         ProductAggregate product = ProductAssembler.toAggregate(request);
         Long id = productService.addNewProduct(product);
         return Response.<Long>builder()

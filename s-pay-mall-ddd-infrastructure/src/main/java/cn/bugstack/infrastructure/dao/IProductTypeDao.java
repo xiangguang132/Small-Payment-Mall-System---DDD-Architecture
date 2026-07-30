@@ -14,4 +14,6 @@ public interface IProductTypeDao {
     ProductType queryById(Long id);
 
     void update(ProductType productType);
+
+    long countByParentId(@Param("parentId") Long parentId);
 }

@@ -98,4 +98,12 @@ public class ProductTypeRepository implements IProductTypeRepository {
         }
         return productRepository.countByCategoryId(categoryId);
     }
+
+    @Override
+    public long countByParentId(Long parentId) {
+        if (parentId == null) {
+            throw new IllegalArgumentException("父分类id不能为空");
+        }
+        return productTypeDao.countByParentId(parentId);
+    }
 }

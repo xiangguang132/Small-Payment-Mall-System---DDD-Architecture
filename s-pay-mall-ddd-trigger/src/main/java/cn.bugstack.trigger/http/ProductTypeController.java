@@ -2,19 +2,20 @@ package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.producttype.ProductTypeAddRequest;
 import cn.bugstack.api.response.Response;
-import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.service.IProductTypeService;
-import cn.bugstack.trigger.assembler.ProductAssembler;
 import cn.bugstack.trigger.assembler.ProductTypeAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
+@Validated
 @RequestMapping("/api/v1/product-type")
 public class ProductTypeController {
 
@@ -27,7 +28,7 @@ public class ProductTypeController {
      * @return
      */
     @PostMapping("add")
-    public Response<Long> add(@RequestBody ProductTypeAddRequest request){
+    public Response<Long> add(@Valid @RequestBody ProductTypeAddRequest request){
         ProductTypeAggregate productType = ProductTypeAssembler.toAggregate(request);
         Long id = productTypeService.addNewProductType(productType);
         return Response.<Long>builder()

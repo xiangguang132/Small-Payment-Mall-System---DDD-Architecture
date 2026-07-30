@@ -1,6 +1,7 @@
 package cn.bugstack.domain.product.service;
 
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
+import cn.bugstack.domain.product.model.vo.ProductStatusVO;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
@@ -22,6 +23,7 @@ public class ProductService implements IProductService {
         if (product == null) {
             throw new IllegalArgumentException("商品信息不能为空");
         }
+        validateStatus(product.getStatus());
         validateCategoryEnabled(product.getCategoryId());
         return productRepository.save(product);
     }
@@ -30,6 +32,10 @@ public class ProductService implements IProductService {
     public void deleteProductById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("商品id不能为空");
+        }
+        ProductAggregate current = productRepository.queryById(id);
+        if (current == null) {
+            throw new IllegalArgumentException("商品不存在");
         }
         productRepository.deleteById(id);
     }
@@ -50,6 +56,7 @@ public class ProductService implements IProductService {
         if (updated.getId() == null) {
             throw new IllegalArgumentException("商品id不能为空");
         }
+        validateStatus(updated.getStatus());
         validateCategoryEnabled(updated.getCategoryId());
         productRepository.updateById(updated);
     }
@@ -97,6 +104,12 @@ public class ProductService implements IProductService {
 
         if (productType.getStatus() == null || productType.getStatus() != 1) {
             throw new IllegalArgumentException("商品分类未启用，不能使用");
+        }
+    }
+
+    private void validateStatus(Integer status) {
+        if (!ProductStatusVO.isValid(status)) {
+            throw new IllegalArgumentException("商品状态值非法");
         }
     }
 }

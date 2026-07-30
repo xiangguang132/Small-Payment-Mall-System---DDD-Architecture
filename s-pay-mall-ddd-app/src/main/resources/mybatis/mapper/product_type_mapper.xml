@@ -48,4 +48,11 @@
         and is_del = 0
     </update>
 
+    <select id="countByParentId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select count(1)
+        from product_type
+        where parent_id = #{parentId}
+        and is_del = 0
+    </select>
+
 </mapper>

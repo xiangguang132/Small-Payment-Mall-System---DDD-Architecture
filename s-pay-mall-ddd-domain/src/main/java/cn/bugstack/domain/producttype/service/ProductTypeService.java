@@ -1,6 +1,7 @@
 package cn.bugstack.domain.producttype.service;
 
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
+import cn.bugstack.domain.producttype.model.vo.ProductTypeStatusVO;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ProductTypeService implements IProductTypeService {
         if (productType == null) {
             throw new IllegalArgumentException("品类信息不能为空");
         }
+        validateStatus(productType.getStatus());
         return productTypeRepository.save(productType);
     }
 
@@ -31,11 +33,14 @@ public class ProductTypeService implements IProductTypeService {
             throw new IllegalArgumentException("商品分类不存在");
         }
 
-        if (productTypeAggregate.getStatus() != null && productTypeAggregate.getStatus() == 1) {
-            long productCount = productTypeRepository.countProductByCategoryId(id);
-            if (productCount > 0) {
-                throw new IllegalArgumentException("启用中的商品分类已被商品使用，不能删除");
-            }
+        long productCount = productTypeRepository.countProductByCategoryId(id);
+        if (productCount > 0) {
+            throw new IllegalArgumentException("商品分类已被商品使用，不能删除");
+        }
+
+        long childCount = productTypeRepository.countByParentId(id);
+        if (childCount > 0) {
+            throw new IllegalArgumentException("商品分类存在子分类，不能删除");
         }
 
         productTypeRepository.deleteById(id);
@@ -76,5 +81,11 @@ public class ProductTypeService implements IProductTypeService {
 
         productTypeRepository.updateById(updated);
         return updated;
+    }
+
+    private void validateStatus(Integer status) {
+        if (!ProductTypeStatusVO.isValid(status)) {
+            throw new IllegalArgumentException("商品分类状态值非法");
+        }
     }
 }
