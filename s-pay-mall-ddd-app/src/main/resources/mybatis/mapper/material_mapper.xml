@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IMaterialDao">
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.Material"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into material
+        (material_code, name, type_id, unit, description, status, is_del, create_time, update_time)
+        values
+        (#{materialCode}, #{name}, #{typeId}, #{unit}, #{description}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update material
+        set is_del = 1,
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Material">
+        select
+        m.id,
+        m.material_code,
+        m.name,
+        m.type_id,
+        mt.name as type_name,
+        mt.description as type_description,
+        mt.type_code as type_code,
+        m.unit,
+        m.description,
+        m.status,
+        m.is_del,
+        m.create_time,
+        m.update_time
+        from material m
+        left join material_type mt on m.type_id = mt.id
+        where m.id = #{id}
+          and m.is_del = 0
+    </select>
+
+    <select id="queryByMaterialCode" parameterType="java.lang.String" resultType="cn.bugstack.infrastructure.dao.po.Material">
+        select
+        m.id,
+        m.material_code,
+        m.name,
+        m.type_id,
+        mt.name as type_name,
+        mt.description as type_description,
+        mt.type_code as type_code,
+        m.unit,
+        m.description,
+        m.status,
+        m.is_del,
+        m.create_time,
+        m.update_time
+        from material m
+        left join material_type mt on m.type_id = mt.id
+        where m.material_code = #{materialCode}
+          and m.is_del = 0
+    </select>
+
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Material">
+        update material
+        set material_code = #{materialCode},
+            name = #{name},
+            type_id = #{typeId},
+            unit = #{unit},
+            description = #{description},
+            status = #{status},
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+    <select id="countByTypeId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select count(1)
+        from material
+        where type_id = #{typeId}
+          and is_del = 0
+    </select>
+
+</mapper>
