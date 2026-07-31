@@ -4,6 +4,7 @@ import cn.bugstack.api.request.materialstock.MaterialStockInboundRequest;
 import cn.bugstack.api.request.materialstock.MaterialStockQuantityRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.materialstock.MaterialStockDetailResponse;
+import cn.bugstack.api.response.materialstock.MaterialStockManualOutboundResponse;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.service.IMaterialStockService;
 import cn.bugstack.trigger.assembler.MaterialStockAssembler;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @CrossOrigin("*")
@@ -25,7 +26,7 @@ public class MaterialStockController {
     private IMaterialStockService materialStockService;
 
     @GetMapping("{id}")
-    public Response<MaterialStockDetailResponse> detail(@PathVariable @NotBlank Long id) {
+    public Response<MaterialStockDetailResponse> detail(@PathVariable @NotNull Long id) {
         log.info("查询原料库存详情开始 id:{}", id);
         if (id == null) {
             throw new IllegalArgumentException("原料库存的id不能为空");
@@ -41,7 +42,7 @@ public class MaterialStockController {
     }
 
     /**
-     * 原料入库
+     * || 统一的 || 原料入库
      * @param request
      * @return
      */
@@ -60,6 +61,20 @@ public class MaterialStockController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(true)
+                .build();
+    }
+
+    @PostMapping("outbound/{id}")
+    public Response<MaterialStockManualOutboundResponse> outbound(@PathVariable("id") @NotNull Long id,
+                                                          @Valid @RequestBody MaterialStockQuantityRequest request) {
+        log.info("人工原料出库开始 id:{} request:{}", id, request);
+        MaterialStockAggregate updated = materialStockService.manualOutbound(id, request.getQuantity(), request.getReason());
+        MaterialStockManualOutboundResponse response = MaterialStockAssembler.toManualOutboundResponse(updated);
+        log.info("人工原料出库完成 id:{} availableQty:{} totalQty:{}", id, response.getAvailableQty(), response.getTotalQty());
+        return Response.<MaterialStockManualOutboundResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
                 .build();
     }
 
