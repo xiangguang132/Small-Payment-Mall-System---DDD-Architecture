@@ -16,5 +16,7 @@ public interface IMaterialStockService {
 
     MaterialStockAggregate manualOutbound(Long id, Integer quantity, String reason);
 
+    MaterialStockAggregate autoOutbound(Long id, Integer quantity, String reason);
+
     void release(Long id, Integer quantity);
 }

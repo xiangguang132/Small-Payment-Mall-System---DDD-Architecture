@@ -85,6 +85,21 @@ public class MaterialStockService implements IMaterialStockService {
     }
 
     @Override
+    public MaterialStockAggregate autoOutbound(Long id, Integer quantity, String reason) {
+        validatePositiveQuantity(quantity, "流水线出库数量必须大于0");
+        MaterialStockAggregate stock = getExistingStockById(id);
+        BigDecimal outboundQty = BigDecimal.valueOf(quantity);
+        BigDecimal locked = valueOf(stock.getLockedQty());
+        if (locked.compareTo(outboundQty) < 0) {
+            throw new IllegalArgumentException("锁定库存不足，不能进行流水线出库");
+        }
+        stock.setLockedQty(locked.subtract(outboundQty));
+        stock.setTotalQty(valueOf(stock.getTotalQty()).subtract(outboundQty));
+        saveUpdated(stock);
+        return stock;
+    }
+
+    @Override
     public void lock(Long id, Integer quantity) {
         validatePositiveQuantity(quantity, "锁定数量必须大于0");
         MaterialStockAggregate stock = getExistingStockById(id);

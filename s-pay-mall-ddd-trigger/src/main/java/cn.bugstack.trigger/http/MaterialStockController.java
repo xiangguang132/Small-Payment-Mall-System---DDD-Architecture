@@ -152,8 +152,24 @@ public class MaterialStockController {
                 .build();
     }
 
-    @PostMapping("auto-outbound")
-    public Response<MaterialStockManualOutboundResponse> autoOutBound(@Valid @RequestBody MaterialStockInboundRequest request) {
-
+    /**
+     * 流水线-出库
+     * 需要 锁库
+     * @param id
+     * @param request
+     * @return
+     */
+    @PostMapping("auto-outbound/{id}")
+    public Response<MaterialStockManualOutboundResponse> autoOutBound(@PathVariable("id") @NotNull Long id,
+                                                                      @Valid @RequestBody MaterialStockQuantityRequest request) {
+        log.info("流水线原料出库开始 id:{} request:{}", id, request);
+        MaterialStockAggregate updated = materialStockService.autoOutbound(id, request.getQuantity(), request.getReason());
+        MaterialStockManualOutboundResponse response = MaterialStockAssembler.toManualOutboundResponse(updated);
+        log.info("流水线原料出库完成 id:{} lockedQty:{} totalQty:{}", id, response.getLockedQty(), response.getTotalQty());
+        return Response.<MaterialStockManualOutboundResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库-流水线出库成功")
+                .data(response)
+                .build();
     }
 }
