@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bugstack.infrastructure.dao.IMaterialStockAllocationItemDao">
+
+    <resultMap id="allocationItemMap" type="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem">
+        <id column="id" property="id"/>
+        <result column="allocation_id" property="allocationId"/>
+        <result column="stock_id" property="stockId"/>
+        <result column="material_id" property="materialId"/>
+        <result column="storage_address" property="storageAddress"/>
+        <result column="allocate_qty" property="allocateQty"/>
+        <result column="locked_qty" property="lockedQty"/>
+        <result column="outbound_qty" property="outboundQty"/>
+        <result column="released_qty" property="releasedQty"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="is_del" property="isDel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into material_stock_allocation_item
+        (allocation_id, stock_id, material_id, storage_address, allocate_qty, locked_qty, outbound_qty, released_qty, sort_no, status, is_del, create_time, update_time)
+        values
+        (#{allocationId}, #{stockId}, #{materialId}, #{storageAddress}, #{allocateQty}, #{lockedQty}, #{outboundQty}, #{releasedQty}, #{sortNo}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="queryById" resultMap="allocationItemMap">
+        select id, allocation_id, stock_id, material_id, storage_address, allocate_qty, locked_qty, outbound_qty, released_qty, sort_no, status, is_del, create_time, update_time
+        from material_stock_allocation_item
+        where id = #{id}
+          and is_del = 0
+    </select>
+
+    <select id="queryByAllocationId" resultMap="allocationItemMap">
+        select id, allocation_id, stock_id, material_id, storage_address, allocate_qty, locked_qty, outbound_qty, released_qty, sort_no, status, is_del, create_time, update_time
+        from material_stock_allocation_item
+        where allocation_id = #{allocationId}
+          and is_del = 0
+        order by sort_no asc, id asc
+    </select>
+
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem">
+        update material_stock_allocation_item
+        set locked_qty = #{lockedQty},
+            outbound_qty = #{outboundQty},
+            released_qty = #{releasedQty},
+            sort_no = #{sortNo},
+            status = #{status},
+            update_time = #{updateTime}
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+</mapper>

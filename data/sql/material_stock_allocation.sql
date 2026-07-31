@@ -1,0 +1,43 @@
+CREATE TABLE `material_stock_allocation` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `allocation_no` VARCHAR(64) NOT NULL COMMENT '分配单号',
+  `material_id` BIGINT NOT NULL COMMENT '原料ID',
+  `request_stock_id` BIGINT DEFAULT NULL COMMENT '请求入口库存ID/首选库位库存ID',
+  `request_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本次请求总数量',
+  `locked_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本次已锁定总数量',
+  `outbound_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本次已出库总数量',
+  `released_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本次已释放总数量',
+  `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0待锁库 1已锁库 2已出库 3已释放 4已取消',
+  `reason` VARCHAR(255) DEFAULT NULL COMMENT '业务原因/备注',
+  `is_del` TINYINT NOT NULL DEFAULT 0 COMMENT '是否删除 0否 1是',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_allocation_no` (`allocation_no`),
+  KEY `idx_material_id` (`material_id`),
+  KEY `idx_request_stock_id` (`request_stock_id`),
+  KEY `idx_status_is_del` (`status`, `is_del`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='原料库存跨库位分配主单表';
+
+CREATE TABLE `material_stock_allocation_item` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `allocation_id` BIGINT NOT NULL COMMENT '分配主单ID',
+  `stock_id` BIGINT NOT NULL COMMENT '原料库存ID material_stock.id',
+  `material_id` BIGINT NOT NULL COMMENT '原料ID',
+  `storage_address` VARCHAR(255) DEFAULT NULL COMMENT '分配时库位快照',
+  `allocate_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本明细分配数量',
+  `locked_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本明细锁定数量',
+  `outbound_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本明细已出库数量',
+  `released_qty` DECIMAL(18,2) NOT NULL DEFAULT 0 COMMENT '本明细已释放数量',
+  `sort_no` INT NOT NULL DEFAULT 0 COMMENT '分配顺序 当前库位优先 其余顺序补足',
+  `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0待处理 1已锁库 2已出库 3已释放 4已取消',
+  `is_del` TINYINT NOT NULL DEFAULT 0 COMMENT '是否删除 0否 1是',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_allocation_stock` (`allocation_id`, `stock_id`),
+  KEY `idx_allocation_id` (`allocation_id`),
+  KEY `idx_stock_id` (`stock_id`),
+  KEY `idx_material_id` (`material_id`),
+  KEY `idx_status_is_del` (`status`, `is_del`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='原料库存跨库位分配明细表';
