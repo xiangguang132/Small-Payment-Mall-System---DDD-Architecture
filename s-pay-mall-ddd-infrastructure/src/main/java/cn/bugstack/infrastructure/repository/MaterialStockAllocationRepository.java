@@ -71,6 +71,23 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
         return toAggregateWithItems(allocation);
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateLockResult(MaterialStockAllocationAggregate aggregate) {
+        if (aggregate == null || aggregate.getId() == null) {
+            throw new IllegalArgumentException("原料库存分配单信息或ID不能为空");
+        }
+
+        materialStockAllocationDao.update(toAllocationPo(aggregate));
+
+        if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
+            return;
+        }
+        for (MaterialStockAllocationItemVO itemVO : aggregate.getItems()) {
+            materialStockAllocationItemDao.update(toItemPo(itemVO));
+        }
+    }
+
     private MaterialStockAllocationAggregate toAggregateWithItems(MaterialStockAllocation allocation) {
         List<MaterialStockAllocationItem> items = materialStockAllocationItemDao.queryByAllocationId(allocation.getId());
         return toAggregate(allocation, items);
@@ -156,5 +173,42 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
                 .createTime(item.getCreateTime())
                 .updateTime(item.getUpdateTime())
                 .build();
+    }
+
+    private MaterialStockAllocation toAllocationPo(MaterialStockAllocationAggregate aggregate) {
+        MaterialStockAllocation allocation = new MaterialStockAllocation();
+        allocation.setId(aggregate.getId());
+        allocation.setAllocationNo(aggregate.getAllocationNo());
+        allocation.setMaterialId(aggregate.getMaterialId());
+        allocation.setRequestStockId(aggregate.getRequestStockId());
+        allocation.setRequestQty(aggregate.getRequestQty());
+        allocation.setLockedQty(aggregate.getLockedQty());
+        allocation.setOutboundQty(aggregate.getOutboundQty());
+        allocation.setReleasedQty(aggregate.getReleasedQty());
+        allocation.setStatus(aggregate.getStatus());
+        allocation.setReason(aggregate.getReason());
+        allocation.setIsDel(aggregate.getIsDel());
+        allocation.setCreateTime(aggregate.getCreateTime());
+        allocation.setUpdateTime(aggregate.getUpdateTime());
+        return allocation;
+    }
+
+    private MaterialStockAllocationItem toItemPo(MaterialStockAllocationItemVO itemVO) {
+        MaterialStockAllocationItem item = new MaterialStockAllocationItem();
+        item.setId(itemVO.getId());
+        item.setAllocationId(itemVO.getAllocationId());
+        item.setStockId(itemVO.getStockId());
+        item.setMaterialId(itemVO.getMaterialId());
+        item.setStorageAddress(itemVO.getStorageAddress());
+        item.setAllocateQty(itemVO.getAllocateQty());
+        item.setLockedQty(itemVO.getLockedQty());
+        item.setOutboundQty(itemVO.getOutboundQty());
+        item.setReleasedQty(itemVO.getReleasedQty());
+        item.setSortNo(itemVO.getSortNo());
+        item.setStatus(itemVO.getStatus());
+        item.setIsDel(itemVO.getIsDel());
+        item.setCreateTime(itemVO.getCreateTime());
+        item.setUpdateTime(itemVO.getUpdateTime());
+        return item;
     }
 }

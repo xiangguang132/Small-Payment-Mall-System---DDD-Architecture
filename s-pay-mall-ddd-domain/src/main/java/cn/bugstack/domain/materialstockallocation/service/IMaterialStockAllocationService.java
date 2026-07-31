@@ -9,4 +9,8 @@ public interface IMaterialStockAllocationService {
     MaterialStockAllocationAggregate queryByAllocationNo(String allocationNo);
 
     MaterialStockAllocationAggregate queryById(Long id);
+
+    void lock(String allocationNo);
+
+    void release(String allocationNo);
 }

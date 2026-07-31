@@ -70,10 +70,10 @@ public class MaterialStockAllocationController {
      */
     @GetMapping("id/{id}")
     public Response<MaterialStockAllocationDetailResponse> detailById(@PathVariable("id") @NotNull Long id) {
-        log.info("按ID查询原料库存分配单详情开始 id:{}", id);
+        log.info("原料库存分配单-按ID查询原料库存分配单详情开始 id:{}", id);
         MaterialStockAllocationAggregate materialStockAllocationAggregate = materialStockAllocationService.queryById(id);
         MaterialStockAllocationDetailResponse response = MaterialStockAllocationAssembler.toDetailResponse(materialStockAllocationAggregate);
-        log.info("按ID查询原料库存分配单详情完成 id:{}", id);
+        log.info("原料库存分配单-按ID查询原料库存分配单详情完成 id:{}", id);
         return Response.<MaterialStockAllocationDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info("原料库存分配单-按ID查询详情完成")
@@ -86,8 +86,15 @@ public class MaterialStockAllocationController {
      */
     @PostMapping("lock/{allocationNo}")
     public Response<Boolean> lock(@PathVariable("allocationNo") @NotBlank String allocationNo) {
-        log.info("锁定原料库存分配单开始 allocationNo:{}", allocationNo);
-        throw new UnsupportedOperationException("待实现：锁定原料库存分配单");
+        log.info("原料库存分配单-锁定原料库存分配单开始 allocationNo:{}", allocationNo);
+        materialStockAllocationService.lock(allocationNo);
+        log.info("原料库存分配单-锁定原料库存分配单完成 allocationNo:{}", allocationNo);
+
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-锁定成功")
+                .data(true)
+                .build();
     }
 
     /**
@@ -96,7 +103,14 @@ public class MaterialStockAllocationController {
     @PostMapping("release/{allocationNo}")
     public Response<Boolean> release(@PathVariable("allocationNo") @NotBlank String allocationNo) {
         log.info("释放原料库存分配单开始 allocationNo:{}", allocationNo);
-        throw new UnsupportedOperationException("待实现：释放原料库存分配单");
+        materialStockAllocationService.release(allocationNo);
+        log.info("原料库存分配单-释放原料库存分配单完成 allocationNo:{}", allocationNo);
+
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-释放成功")
+                .data(true)
+                .build();
     }
 
     /**

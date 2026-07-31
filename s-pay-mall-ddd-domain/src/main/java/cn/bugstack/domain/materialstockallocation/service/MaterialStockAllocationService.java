@@ -6,6 +6,7 @@ import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockA
 import cn.bugstack.domain.materialstockallocation.model.vo.MaterialStockAllocationItemVO;
 import cn.bugstack.domain.materialstockallocation.repository.IMaterialStockAllocationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -85,6 +86,113 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             throw new IllegalArgumentException("原料库存分配单不存在");
         }
         return aggregate;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void lock(String allocationNo) {
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("分配订单号不存在，无法锁定");
+        }
+        MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
+        if (aggregate == null) {
+            throw new IllegalArgumentException("分配订单为空，无法锁定");
+        }
+        if (aggregate.getStatus() == null || aggregate.getStatus() != 0) {
+            throw new IllegalArgumentException("分配单不是待锁定状态");
+        }
+        if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
+            throw new IllegalArgumentException("分配单明细为空，无法锁定");
+        }
+        BigDecimal totalLockedQty = BigDecimal.ZERO;
+        for (MaterialStockAllocationItemVO item : aggregate.getItems()) {
+            BigDecimal lockQty = valueOf(item.getAllocateQty());
+            if (lockQty.compareTo(BigDecimal.ZERO) <= 0) {
+                throw new IllegalArgumentException("分配明细锁定数量必须大于0");
+            }
+            MaterialStockAggregate stock =  materialStockRepository.queryById(item.getStockId());
+            if (stock == null) {
+                throw new IllegalArgumentException("原料库存不存在");
+            }
+            BigDecimal availableQty = stock.getAvailableQty() == null ? BigDecimal.ZERO : stock.getAvailableQty();
+            BigDecimal lockedQty = stock.getLockedQty() == null ? BigDecimal.ZERO : stock.getLockedQty();
+
+            if (availableQty.compareTo(lockQty) < 0) {
+                throw new IllegalArgumentException("原料可用库存不足，不能锁定");
+            }
+
+            stock.setAvailableQty(availableQty.subtract(lockQty));
+            stock.setLockedQty(lockedQty.add(lockQty));
+            stock.setUpdateTime(LocalDateTime.now());
+            materialStockRepository.updateById(stock);
+
+            item.setLockedQty(lockQty);
+            item.setStatus(1);
+            item.setUpdateTime(LocalDateTime.now());
+
+            totalLockedQty = totalLockedQty.add(lockQty);
+        }
+
+        aggregate.setLockedQty(totalLockedQty);
+        aggregate.setStatus(1);
+        aggregate.setUpdateTime(LocalDateTime.now());
+
+        materialStockAllocationRepository.updateLockResult(aggregate);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void release(String allocationNo) {
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("分配订单号不存在，无法释放");
+        }
+        MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
+        if (aggregate == null) {
+            throw new IllegalArgumentException("分配订单为空，无法释放");
+        }
+        if (aggregate.getStatus() == null || aggregate.getStatus() != 1) {
+            throw new IllegalArgumentException("分配单不是锁定状态");
+        }
+        if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
+            throw new IllegalArgumentException("分配单明细为空，无法释放");
+        }
+
+        BigDecimal totalReleasedQty = BigDecimal.ZERO;
+        for (MaterialStockAllocationItemVO item : aggregate.getItems()) {
+            BigDecimal releaseQty = valueOf(item.getLockedQty());
+            if (releaseQty.compareTo(BigDecimal.ZERO) <= 0) {
+                throw new IllegalArgumentException("分配明细释放数量必须大于0");
+            }
+            MaterialStockAggregate stock =  materialStockRepository.queryById(item.getStockId());
+            if (stock == null) {
+                throw new IllegalArgumentException("原料库存不存在");
+            }
+            BigDecimal availableQty = stock.getAvailableQty() == null ? BigDecimal.ZERO : stock.getAvailableQty();
+            BigDecimal lockedQty = stock.getLockedQty() == null ? BigDecimal.ZERO : stock.getLockedQty();
+
+            if (releaseQty.compareTo(lockedQty) <= 0) {
+                throw new IllegalArgumentException("原料锁定库存不足，不能释放");
+            }
+
+            stock.setAvailableQty(availableQty.add(releaseQty));
+            stock.setLockedQty(lockedQty.subtract(releaseQty));
+            stock.setUpdateTime(LocalDateTime.now());
+            materialStockRepository.updateById(stock);
+
+            item.setLockedQty(BigDecimal.ZERO);
+            item.setReleasedQty(releaseQty);
+            item.setStatus(2);
+            item.setUpdateTime(LocalDateTime.now());
+
+            totalReleasedQty = totalReleasedQty.add(releaseQty);
+        }
+
+        aggregate.setLockedQty(BigDecimal.ZERO);
+        aggregate.setReleasedQty(totalReleasedQty);
+        aggregate.setStatus(2);
+        aggregate.setUpdateTime(LocalDateTime.now());
+
+        materialStockAllocationRepository.updateLockResult(aggregate);
     }
 
     private void validateCreateParams(Long requestStockId, Integer quantity) {

@@ -18,4 +18,6 @@ public interface IMaterialStockAllocationRepository {
     MaterialStockAllocationAggregate queryByAllocationNo(String allocationNo);
 
     MaterialStockAllocationAggregate queryById(Long id);
+
+    void updateLockResult(MaterialStockAllocationAggregate aggregate);
 }
