@@ -25,8 +25,9 @@ public class LoginController {
     @RequestMapping(value = "weixin_qrcode_ticket", method = RequestMethod.GET)
     public Response<String> weixinQrCodeTicket() {
         try {
+            log.info("生成微信扫码登录 ticket 开始");
             String qrCodeTicket = loginService.createQrCodeTicket();
-            log.info("weixin_qrcode_ticket:{}", qrCodeTicket);
+            log.info("生成微信扫码登录 ticket 完成 ticket:{}", qrCodeTicket);
             return Response.<String>builder()
                     .code(Constants.ResponseCode.SUCCESS.getCode())
                     .info(Constants.ResponseCode.SUCCESS.getInfo())
@@ -34,7 +35,7 @@ public class LoginController {
                     .build();
 
         } catch (Exception e) {
-            log.info("生成微信扫码登录 ticket 失败", e);
+            log.error("生成微信扫码登录 ticket 失败", e);
                 return Response.<String>builder()
                         .code(Constants.ResponseCode.UN_ERROR.getCode())
                         .info(Constants.ResponseCode.UN_ERROR.getInfo())
@@ -49,22 +50,24 @@ public class LoginController {
     @RequestMapping(value = "check_login", method = RequestMethod.GET)
     public Response<String> checkLogin(@RequestParam String ticket) {
         try {
+            log.info("扫描检测登录结果开始 ticket:{}", ticket);
             String token = loginService.checkLogin(ticket);
-            log.info("扫描检测登录结果 ticket:{} token:{}", ticket, token);
             if (StringUtils.isNotBlank(token)) {
+                log.info("扫描检测登录结果完成 ticket:{} token:{}", ticket, token);
                 return Response.<String>builder()
                         .code(Constants.ResponseCode.SUCCESS.getCode())
                         .info(Constants.ResponseCode.SUCCESS.getInfo())
                         .data(token)
                         .build();
             } else {
+                log.info("扫描检测登录结果未登录 ticket:{}", ticket);
                 return Response.<String>builder()
                         .code(Constants.ResponseCode.NO_LOGIN.getCode())
                         .info(Constants.ResponseCode.NO_LOGIN.getInfo())
                         .build();
             }
         } catch (Exception e) {
-            log.info("扫描检测登录结果失败 ticket:{}", ticket);
+            log.error("扫描检测登录结果失败 ticket:{}", ticket, e);
             return Response.<String>builder()
                     .code(Constants.ResponseCode.UN_ERROR.getCode())
                     .info(Constants.ResponseCode.UN_ERROR.getInfo())

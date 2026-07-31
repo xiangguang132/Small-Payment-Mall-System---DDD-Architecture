@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bugstack.infrastructure.dao.IMaterialStockDao">
+
+    <resultMap id="stockMap" type="cn.bugstack.infrastructure.dao.po.MaterialStock">
+        <id column="id" property="id"/>
+        <result column="material_id" property="materialId"/>
+        <result column="storage_address" property="storageAddress"/>
+        <result column="available_qty" property="availableQty"/>
+        <result column="locked_qty" property="lockedQty"/>
+        <result column="total_qty" property="totalQty"/>
+        <result column="is_del" property="isDel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStock"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into material_stock
+        (material_id, storage_address, available_qty, locked_qty, total_qty, is_del, create_time, update_time)
+        values
+        (#{materialId}, #{storageAddress}, #{availableQty}, #{lockedQty}, #{totalQty}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="queryByMaterialIdAndStorageAddress" resultMap="stockMap">
+        select id, material_id, storage_address, available_qty, locked_qty, total_qty, is_del, create_time, update_time
+        from material_stock
+        where material_id = #{materialId}
+          and storage_address = #{storageAddress}
+          and is_del = 0
+        limit 1
+    </select>
+
+    <select id="queryById" resultMap="stockMap">
+        select id, material_id, storage_address, available_qty, locked_qty, total_qty, is_del, create_time, update_time
+        from material_stock
+        where id = #{id}
+          and is_del = 0
+    </select>
+
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStock">
+        update material_stock
+        set available_qty = #{availableQty},
+            locked_qty = #{lockedQty},
+            total_qty = #{totalQty},
+            update_time = #{updateTime}
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+</mapper>

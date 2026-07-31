@@ -7,6 +7,7 @@ import cn.bugstack.domain.warehousestock.model.aggregate.StockAggregate;
 import cn.bugstack.domain.warehousestock.service.IStockService;
 import cn.bugstack.trigger.assembler.StockAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/warehouse-stock")
+@Slf4j
 public class StockController {
 
     @Resource
@@ -27,8 +29,10 @@ public class StockController {
      */
     @GetMapping("{id}")
     public Response<StockDetailResponse> detail(@PathVariable("id") Long id){
+        log.info("查询仓库库存详情开始 id:{}", id);
         StockAggregate stock = stockService.queryStockById(id);
         StockDetailResponse stockDetailResponse = StockAssembler.toDetailResponse(stock);
+        log.info("查询仓库库存详情完成 id:{}", id);
         return Response.<StockDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -42,8 +46,10 @@ public class StockController {
     @GetMapping("query")
     public Response<StockDetailResponse> queryByWarehouseAndProduct(@RequestParam("warehouseId") Long warehouseId,
                                                                     @RequestParam("productId") Long productId) {
+        log.info("按仓库商品查询库存开始 warehouseId:{} productId:{}", warehouseId, productId);
         StockAggregate stock = stockService.queryStockByWarehouseIdAndProductId(warehouseId, productId);
         StockDetailResponse stockDetailResponse = StockAssembler.toDetailResponse(stock);
+        log.info("按仓库商品查询库存完成 warehouseId:{} productId:{}", warehouseId, productId);
         return Response.<StockDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -56,7 +62,9 @@ public class StockController {
      */
     @PostMapping("add")
     public Response<Long> add(@Valid @RequestBody StockAdjustRequest request) {
+        log.info("新增仓库库存开始 request:{}", request);
         Long id = stockService.addStock(request.getWarehouseId(), request.getProductId());
+        log.info("新增仓库库存完成 id:{}", id);
         return Response.<Long>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -69,7 +77,9 @@ public class StockController {
      */
     @PostMapping("adjust")
     public Response<Boolean> adjust(@Valid @RequestBody StockAdjustRequest request) {
+        log.info("调整仓库库存开始 request:{}", request);
         stockService.adjustStock(request.getWarehouseId(), request.getProductId(), request.getQuantity(), request.getReason());
+        log.info("调整仓库库存完成 warehouseId:{} productId:{}", request.getWarehouseId(), request.getProductId());
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -82,7 +92,9 @@ public class StockController {
      */
     @PostMapping("inbound")
     public Response<Boolean> inbound(@Valid @RequestBody StockAdjustRequest request) {
+        log.info("仓库库存入库开始 request:{}", request);
         stockService.inbound(request.getWarehouseId(), request.getProductId(), request.getQuantity());
+        log.info("仓库库存入库完成 warehouseId:{} productId:{}", request.getWarehouseId(), request.getProductId());
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -95,7 +107,9 @@ public class StockController {
      */
     @PostMapping("outbound")
     public Response<Boolean> outbound(@Valid @RequestBody StockAdjustRequest request) {
+        log.info("仓库库存出库开始 request:{}", request);
         stockService.outbound(request.getWarehouseId(), request.getProductId(), request.getQuantity());
+        log.info("仓库库存出库完成 warehouseId:{} productId:{}", request.getWarehouseId(), request.getProductId());
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

@@ -7,6 +7,7 @@ import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import cn.bugstack.trigger.assembler.WarehouseAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/warehouse")
+@Slf4j
 public class WarehouseController {
 
     @Resource
@@ -24,8 +26,10 @@ public class WarehouseController {
 
     @PostMapping("add")
     public Response<Long> add(@Valid @RequestBody WarehouseAddRequest request) {
+        log.info("新增仓库开始 request:{}", request);
         WarehouseAggregate warehouse = WarehouseAssembler.toAggregate(request);
         Long id = warehouseService.addWarehouse(warehouse);
+        log.info("新增仓库完成 id:{}", id);
         return Response.<Long>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -35,8 +39,10 @@ public class WarehouseController {
 
     @GetMapping("{id}")
     public Response<WarehouseDetailResponse> detail(@PathVariable Long id) {
+        log.info("查询仓库详情开始 id:{}", id);
         WarehouseAggregate warehouse = warehouseService.queryWarehouseById(id);
         WarehouseDetailResponse response = WarehouseAssembler.toDetailResponse(warehouse);
+        log.info("查询仓库详情完成 id:{}", id);
         return Response.<WarehouseDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -46,6 +52,7 @@ public class WarehouseController {
 
     @PutMapping("{id}")
     public Response<WarehouseDetailResponse> update(@PathVariable Long id, @Valid @RequestBody WarehouseAddRequest request) {
+        log.info("更新仓库开始 id:{} request:{}", id, request);
         WarehouseAggregate current = warehouseService.queryWarehouseById(id);
         if (current == null) {
             throw new IllegalArgumentException("仓库不存在");
@@ -66,6 +73,7 @@ public class WarehouseController {
 
         WarehouseAggregate refreshed = warehouseService.queryWarehouseById(id);
         WarehouseDetailResponse response = WarehouseAssembler.toDetailResponse(refreshed);
+        log.info("更新仓库完成 id:{}", id);
         return Response.<WarehouseDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -75,7 +83,9 @@ public class WarehouseController {
 
     @DeleteMapping("{id}")
     public Response<Boolean> delete(@PathVariable Long id) {
+        log.info("删除仓库开始 id:{}", id);
         warehouseService.deleteWarehouseById(id);
+        log.info("删除仓库完成 id:{}", id);
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

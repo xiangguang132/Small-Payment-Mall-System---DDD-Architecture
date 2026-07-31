@@ -32,6 +32,7 @@ public class AliPayController implements IPayService {
 
     @RequestMapping(value = "create_pay_order", method = RequestMethod.POST)
     public Response<String> createPayOrder(@RequestBody CreatePayRequestDTO createPayRequestDTO) {
+        log.info("创建支付单接口开始 request:{}", createPayRequestDTO);
         HttpServletRequest request = null;
         String openid = null;
         try {
@@ -67,7 +68,7 @@ public class AliPayController implements IPayService {
     @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
     public String payNotify(HttpServletRequest request) {
         try {
-            log.info("支付回调，消息接收 {}", request.getParameter("trade_status"));
+            log.info("支付回调接口开始 tradeStatus:{}", request.getParameter("trade_status"));
             if (request.getParameter("trade_status").equals("TRADE_SUCCESS")) {
                 Map<String, String> params = new HashMap<>();
                 Map<String, String[]>  requestParams = request.getParameterMap();
@@ -98,6 +99,7 @@ public class AliPayController implements IPayService {
                     orderService.changeOrderPaySuccess(out_trade_no);
                 }
             }
+            log.info("支付回调接口完成 tradeStatus:{}", request.getParameter("trade_status"));
             return "success";
         } catch (Exception e) {
             log.error("支付回调，处理失败", e);
