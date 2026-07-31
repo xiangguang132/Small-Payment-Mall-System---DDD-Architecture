@@ -15,4 +15,6 @@ public interface IMaterialStockService {
     void lock(Long id, Integer quantity);
 
     MaterialStockAggregate manualOutbound(Long id, Integer quantity, String reason);
+
+    void release(Long id, Integer quantity);
 }

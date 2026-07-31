@@ -38,7 +38,7 @@ public class MaterialStockController {
         log.info("查询原料库存详情完成 id:{}", id);
         return Response.<MaterialStockDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .info("原料库-查单条成功")
                 .data(response)
                 .build();
     }
@@ -61,7 +61,7 @@ public class MaterialStockController {
 
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .info("原料库-统一入库成功")
                 .data(true)
                 .build();
     }
@@ -82,11 +82,18 @@ public class MaterialStockController {
         log.info("人工原料出库完成 id:{} availableQty:{} totalQty:{}", id, response.getAvailableQty(), response.getTotalQty());
         return Response.<MaterialStockManualOutboundResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .info("原料库-人工出库成功")
                 .data(response)
                 .build();
     }
 
+    /**
+     * 人工类型出库
+     * 不需要 锁库
+     * @param id
+     * @param request
+     * @return
+     */
     @PostMapping("adjust/{id}")
     public Response<MaterialStockDetailResponse>  adjust(@PathVariable("id") @NotNull Long id,
                                                          @Valid @RequestBody MaterialStockInboundRequest request) {
@@ -102,7 +109,7 @@ public class MaterialStockController {
         log.info("人工原料调库完成 id:{} availableQty:{} totalQty:{}", id, response.getAvailableQty(), response.getTotalQty());
         return Response.<MaterialStockDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .info("原料库-人工调库成功")
                 .data(response)
                 .build();
     }
@@ -122,9 +129,31 @@ public class MaterialStockController {
         log.info("锁定原料库存完成 id:{}", id);
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .info("原料库-锁库成功")
                 .data(true)
                 .build();
     }
 
+    /**
+     * 流水线-放库
+     * 需要 锁库
+     * @param id
+     * @param request
+     * @return
+     */
+    @PostMapping("release/{id}")
+    public Response<Boolean> release(@PathVariable("id") Long id,
+                                     @Valid @RequestBody MaterialStockQuantityRequest request) {
+        materialStockService.release(id, request.getQuantity());
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库-放库成功")
+                .data(true)
+                .build();
+    }
+
+    @PostMapping("auto-outbound")
+    public Response<MaterialStockManualOutboundResponse> autoOutBound(@Valid @RequestBody MaterialStockInboundRequest request) {
+
+    }
 }

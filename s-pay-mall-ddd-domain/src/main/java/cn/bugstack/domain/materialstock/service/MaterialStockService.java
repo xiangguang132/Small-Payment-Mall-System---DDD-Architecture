@@ -99,6 +99,20 @@ public class MaterialStockService implements IMaterialStockService {
         saveUpdated(stock);
     }
 
+    @Override
+    public void release(Long id, Integer quantity) {
+        validatePositiveQuantity(quantity, "释放数量必须大于0");
+        MaterialStockAggregate stock = getExistingStockById(id);
+        BigDecimal locked = valueOf(stock.getLockedQty());
+        BigDecimal release = BigDecimal.valueOf(quantity);
+        if (locked.compareTo(release) < 0) {
+            throw new IllegalArgumentException("锁定库存不足，不能释放");
+        }
+        stock.setLockedQty(locked.subtract(release));
+        stock.setAvailableQty(valueOf(stock.getAvailableQty()).add(release));
+        saveUpdated(stock);
+    }
+
     private void validatePositiveQuantity(Integer quantity, String message) {
         if (quantity == null || quantity <= 0) {
             throw new IllegalArgumentException(message);
