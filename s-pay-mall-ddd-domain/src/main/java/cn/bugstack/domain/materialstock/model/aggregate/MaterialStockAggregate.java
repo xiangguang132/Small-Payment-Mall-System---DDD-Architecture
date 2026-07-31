@@ -30,4 +30,5 @@ public class MaterialStockAggregate {
                 .isDel(0)
                 .build();
     }
+
 }

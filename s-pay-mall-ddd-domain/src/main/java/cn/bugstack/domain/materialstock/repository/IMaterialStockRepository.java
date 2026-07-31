@@ -6,7 +6,10 @@ import java.math.BigDecimal;
 
 public interface IMaterialStockRepository {
 
-    void inbound(Long materialId, String trim, BigDecimal inboundQty);
+    MaterialStockAggregate queryById(Long id);
+
+    void inbound(Long materialId, String storageAddress, BigDecimal inboundQty);
 
     void updateById(MaterialStockAggregate stock);
+
 }

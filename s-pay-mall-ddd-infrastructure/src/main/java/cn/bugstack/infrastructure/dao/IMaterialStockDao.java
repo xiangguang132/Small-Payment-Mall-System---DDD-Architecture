@@ -7,10 +7,13 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface IMaterialStockDao {
 
+    MaterialStock queryById(@Param("id") Long id);
+
     void insert(MaterialStock stock);
 
     MaterialStock queryByMaterialIdAndStorageAddress(@Param("materialId") Long materialId,
                                                      @Param("storageAddress") String storageAddress);
 
     void update(MaterialStock stock);
+
 }

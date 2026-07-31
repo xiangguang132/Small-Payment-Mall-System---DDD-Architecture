@@ -17,6 +17,14 @@ public class MaterialStockRepository implements IMaterialStockRepository {
     private IMaterialStockDao  materialStockDao;
 
     @Override
+    public MaterialStockAggregate queryById(Long id) {
+        if (id == null) return null;
+        MaterialStock materialStock = materialStockDao.queryById(id);
+        if (materialStock == null) return null;
+        return toAggregate(materialStock);
+    }
+
+    @Override
     public void inbound(Long materialId, String storageAddress, BigDecimal inboundQty) {
         MaterialStock current = materialStockDao.queryByMaterialIdAndStorageAddress(materialId, storageAddress);
         if (current == null) {
@@ -62,5 +70,22 @@ public class MaterialStockRepository implements IMaterialStockRepository {
         po.setCreateTime(stock.getCreateTime());
         po.setUpdateTime(stock.getUpdateTime());
         return po;
+    }
+
+    private MaterialStockAggregate toAggregate(MaterialStock stock) {
+        if (stock == null) {
+            return null;
+        }
+        return MaterialStockAggregate.builder()
+                .id(stock.getId())
+                .materialId(stock.getMaterialId())
+                .storageAddress(stock.getStorageAddress())
+                .availableQty(stock.getAvailableQty())
+                .lockedQty(stock.getLockedQty())
+                .totalQty(stock.getTotalQty())
+                .isDel(stock.getIsDel())
+                .createTime(stock.getCreateTime())
+                .updateTime(stock.getUpdateTime())
+                .build();
     }
 }

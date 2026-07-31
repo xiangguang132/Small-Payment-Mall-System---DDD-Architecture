@@ -15,6 +15,18 @@ public class MaterialStockService implements IMaterialStockService {
     private IMaterialStockRepository materialStockRepository;
 
     @Override
+    public MaterialStockAggregate queryMaterialStockById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("原料库存的ID不能为空");
+        }
+        MaterialStockAggregate materialStock = materialStockRepository.queryById(id);
+        if  (materialStock == null) {
+            throw new IllegalArgumentException("原料库存的不存在");
+        }
+        return materialStock;
+    }
+
+    @Override
     public void inbound(Long materialId, String storageAddress, BigDecimal inboundQty, String reason) {
         if (materialId == null) {
             throw new IllegalArgumentException("原料ID不能为空");
