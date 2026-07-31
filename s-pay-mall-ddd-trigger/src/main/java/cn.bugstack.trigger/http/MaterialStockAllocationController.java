@@ -3,7 +3,9 @@ package cn.bugstack.trigger.http;
 import cn.bugstack.api.request.materialstockallocation.MaterialStockAllocationCreateRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationDetailResponse;
+import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
+import cn.bugstack.trigger.assembler.MaterialStockAllocationAssembler;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -39,7 +41,7 @@ public class MaterialStockAllocationController {
         log.info("创建原料库存分配单完成 allocationNo:{} requestStockId:{} quantity:{}", allocationNo, request.getRequestStockId(), request.getQuantity());
         return Response.<String>builder()
                 .code(ResponseCode.SUCCESS.getCode())
-                .info("原料库存分配单创建成功")
+                .info("原料库存分配单-创建成功")
                 .data(allocationNo)
                 .build();
     }
@@ -50,7 +52,17 @@ public class MaterialStockAllocationController {
     @GetMapping("{allocationNo}")
     public Response<MaterialStockAllocationDetailResponse> detail(@PathVariable("allocationNo") @NotBlank String allocationNo) {
         log.info("查询原料库存分配单详情开始 allocationNo:{}", allocationNo);
-        throw new UnsupportedOperationException("待实现：查询原料库存分配单详情");
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("分配单号不能为空");
+        }
+        MaterialStockAllocationAggregate materialStockAllocationAggregate = materialStockAllocationService.queryByAllocationNo(allocationNo);
+        MaterialStockAllocationDetailResponse response = MaterialStockAllocationAssembler.toDetailResponse(materialStockAllocationAggregate);
+        log.info("查询原料库存分配单详情完成 allocationNo：{}", allocationNo);
+        return Response.<MaterialStockAllocationDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-查询详情完成")
+                .data(response)
+                .build();
     }
 
     /**
@@ -59,7 +71,14 @@ public class MaterialStockAllocationController {
     @GetMapping("id/{id}")
     public Response<MaterialStockAllocationDetailResponse> detailById(@PathVariable("id") @NotNull Long id) {
         log.info("按ID查询原料库存分配单详情开始 id:{}", id);
-        throw new UnsupportedOperationException("待实现：按ID查询原料库存分配单详情");
+        MaterialStockAllocationAggregate materialStockAllocationAggregate = materialStockAllocationService.queryById(id);
+        MaterialStockAllocationDetailResponse response = MaterialStockAllocationAssembler.toDetailResponse(materialStockAllocationAggregate);
+        log.info("按ID查询原料库存分配单详情完成 id:{}", id);
+        return Response.<MaterialStockAllocationDetailResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-按ID查询详情完成")
+                .data(response)
+                .build();
     }
 
     /**

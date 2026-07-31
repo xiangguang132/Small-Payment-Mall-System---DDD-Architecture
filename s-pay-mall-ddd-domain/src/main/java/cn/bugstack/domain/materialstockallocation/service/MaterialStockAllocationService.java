@@ -2,6 +2,7 @@ package cn.bugstack.domain.materialstockallocation.service;
 
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
+import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.model.vo.MaterialStockAllocationItemVO;
 import cn.bugstack.domain.materialstockallocation.repository.IMaterialStockAllocationRepository;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,30 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         // 6. 返回 allocationNo
         return allocationNo;
+    }
+
+    @Override
+    public MaterialStockAllocationAggregate queryByAllocationNo(String allocationNo) {
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("原料库存分配单号不能为空");
+        }
+        MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
+        if (aggregate == null) {
+            throw new IllegalArgumentException("原料库存分配单不存在");
+        }
+        return aggregate;
+    }
+
+    @Override
+    public MaterialStockAllocationAggregate queryById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("原料库存分配单ID不能为空");
+        }
+        MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryById(id);
+        if (aggregate == null) {
+            throw new IllegalArgumentException("原料库存分配单不存在");
+        }
+        return aggregate;
     }
 
     private void validateCreateParams(Long requestStockId, Integer quantity) {

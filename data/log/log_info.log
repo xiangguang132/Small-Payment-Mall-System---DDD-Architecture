@@ -501,3 +501,269 @@ Caused by: java.lang.NumberFormatException: For input string: "query"
 26-07-31.15:32:15.949 [main            ] INFO  Application            - Started Application in 4.406 seconds (JVM running for 4.8)
 26-07-31.15:32:18.029 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
 26-07-31.15:32:18.382 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.15:33:22.777 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.15:33:22.778 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.15:33:22.779 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-07-31.15:33:22.943 [http-nio-8080-exec-2] INFO  MaterialStockController - 原料入库开始 request:MaterialStockInboundRequest(materialId=1, storageAddress=A区-原料架-02, inboundQty=100, reason=采购进货)
+26-07-31.15:33:22.993 [http-nio-8080-exec-2] INFO  MaterialStockController - 原料入库完成 materialId:1 storageAddress:A区-原料架-02
+26-07-31.15:38:15.083 [http-nio-8080-exec-5] INFO  MaterialStockAllocationController - 创建原料库存分配单开始 request:MaterialStockAllocationCreateRequest(requestStockId=1, quantity=60, reason=测试跨库分配)
+26-07-31.15:38:15.127 [http-nio-8080-exec-5] INFO  MaterialStockAllocationController - 创建原料库存分配单完成 allocationNo:MSA202607311538153041 requestStockId:1 quantity:60
+26-07-31.15:40:00.019 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-31.15:48:17.877 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.15:48:17.888 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.15:56:12.012 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.15:56:12.016 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 15312 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.15:56:12.017 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.15:56:13.040 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.15:56:13.043 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.15:56:13.090 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+26-07-31.15:56:13.921 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.15:56:13.930 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.15:56:13.931 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.15:56:13.931 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.15:56:14.048 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.15:56:14.048 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1989 ms
+26-07-31.15:56:15.075 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.15:56:15.661 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:56:15.730 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:56:16.025 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.15:56:16.043 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.15:56:16.053 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.15:56:16.066 [main            ] INFO  Application            - Started Application in 4.513 seconds (JVM running for 4.937)
+26-07-31.15:56:18.025 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.15:56:18.187 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.15:57:42.373 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.15:57:42.373 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.15:57:42.374 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-07-31.15:57:42.390 [http-nio-8080-exec-2] ERROR GlobalExceptionHandler - 系统异常
+org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.handleNoMatch(RequestMappingInfoHandlerMapping.java:260)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:442)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383)
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125)
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:67)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:498)
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1266)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1048)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-07-31.15:57:51.195 [http-nio-8080-exec-4] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:1
+26-07-31.15:57:51.202 [http-nio-8080-exec-4] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：1
+26-07-31.15:58:16.532 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.15:58:16.543 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.15:58:19.189 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 22320 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.15:58:19.189 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.15:58:19.193 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.15:58:19.960 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.15:58:19.961 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.15:58:20.008 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
+26-07-31.15:58:20.793 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.15:58:20.925 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1692 ms
+26-07-31.15:58:21.891 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.15:58:22.429 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:58:22.496 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:58:22.807 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.15:58:22.836 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.15:58:22.849 [main            ] INFO  Application            - Started Application in 4.171 seconds (JVM running for 4.941)
+26-07-31.15:58:30.765 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.15:58:30.764 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 15224 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.15:58:30.767 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.15:58:31.617 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.15:58:31.618 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.15:58:31.665 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
+26-07-31.15:58:32.475 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.15:58:32.483 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.15:58:32.483 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.15:58:32.483 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.15:58:32.617 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.15:58:32.617 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1808 ms
+26-07-31.15:58:33.689 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.15:58:34.320 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:58:34.443 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:58:34.855 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.15:58:34.879 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.15:58:34.890 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.15:58:34.905 [main            ] INFO  Application            - Started Application in 4.631 seconds (JVM running for 5.128)
+26-07-31.15:58:36.031 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.15:58:36.216 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.15:58:36.527 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.15:58:36.528 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.15:58:36.530 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-07-31.15:58:36.649 [http-nio-8080-exec-3] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:1
+26-07-31.15:59:25.569 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s245ms147µs700ns).
+26-07-31.15:59:25.580 [http-nio-8080-exec-3] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：1
+26-07-31.15:59:25.921 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.15:59:25.935 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.15:59:28.165 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.15:59:28.168 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 14324 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.15:59:28.169 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.15:59:29.123 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.15:59:29.124 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.15:59:29.173 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
+26-07-31.15:59:30.067 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.15:59:30.076 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.15:59:30.076 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.15:59:30.076 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.15:59:30.266 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.15:59:30.266 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2055 ms
+26-07-31.15:59:31.450 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.15:59:32.014 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:59:32.092 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.15:59:32.420 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.15:59:32.439 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.15:59:32.449 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.15:59:32.462 [main            ] INFO  Application            - Started Application in 4.782 seconds (JVM running for 5.344)
+26-07-31.15:59:33.021 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.15:59:33.212 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.15:59:33.295 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.15:59:33.295 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.15:59:33.297 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-07-31.15:59:33.424 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:1
+26-07-31.15:59:43.323 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：1
+26-07-31.15:59:59.278 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.15:59:59.290 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.16:01:02.393 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.16:01:02.393 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 26520 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.16:01:02.397 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.16:01:03.235 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.16:01:03.236 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.16:01:03.282 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
+26-07-31.16:01:04.091 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.16:01:04.099 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.16:01:04.100 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.16:01:04.100 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.16:01:04.231 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.16:01:04.231 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1794 ms
+26-07-31.16:01:05.260 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.16:01:05.820 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:01:05.895 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:01:06.209 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.16:01:06.229 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.16:01:06.238 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.16:01:06.251 [main            ] INFO  Application            - Started Application in 4.326 seconds (JVM running for 4.794)
+26-07-31.16:01:09.031 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.16:01:09.247 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.16:01:10.209 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.16:01:10.209 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.16:01:10.210 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-07-31.16:01:10.329 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:1
+26-07-31.16:05:40.840 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m31s484ms139µs).
+26-07-31.16:05:40.842 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：1
+26-07-31.16:05:41.170 [redisson-netty-1-4] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x6f82ece4, L:/127.0.0.1:49913 - R:localhost/127.0.0.1:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-07-31.16:05:41.185 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.16:05:41.197 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.16:05:45.517 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 11440 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.16:05:45.517 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.16:05:45.520 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.16:05:46.377 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.16:05:46.379 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.16:05:46.431 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 0 Redis repository interfaces.
+26-07-31.16:05:47.332 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.16:05:47.342 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.16:05:47.343 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.16:05:47.343 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.16:05:47.498 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.16:05:47.499 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1942 ms
+26-07-31.16:05:48.515 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.16:05:49.062 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:05:49.170 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:05:49.472 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.16:05:49.492 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.16:05:49.502 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.16:05:49.516 [main            ] INFO  Application            - Started Application in 4.551 seconds (JVM running for 5.013)
+26-07-31.16:05:51.030 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.16:05:51.225 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.16:05:55.081 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.16:05:55.081 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.16:05:55.083 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-07-31.16:05:55.206 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:MSA202607311538153041
+26-07-31.16:06:45.153 [http-nio-8080-exec-2] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：MSA202607311538153041
+26-07-31.16:07:05.582 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.16:07:05.593 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.16:07:19.127 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 14348 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.16:07:19.127 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.16:07:19.129 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.16:07:19.889 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.16:07:19.891 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.16:07:19.934 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+26-07-31.16:07:20.698 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.16:07:20.704 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.16:07:20.705 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.16:07:20.705 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.16:07:20.812 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.16:07:20.812 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1649 ms
+26-07-31.16:07:21.750 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.16:07:22.297 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:07:22.377 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.16:07:22.638 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.16:07:22.653 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.16:07:22.662 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.16:07:22.673 [main            ] INFO  Application            - Started Application in 3.942 seconds (JVM running for 4.29)
+26-07-31.16:07:24.033 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.16:07:24.191 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.16:07:26.181 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.16:07:26.181 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.16:07:26.182 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 0 ms
+26-07-31.16:07:26.289 [http-nio-8080-exec-3] INFO  MaterialStockAllocationController - 查询原料库存分配单详情开始 allocationNo:MSA202607311538153041
+26-07-31.16:07:26.304 [http-nio-8080-exec-3] INFO  MaterialStockAllocationController - 查询原料库存分配单详情完成 allocationNo：MSA202607311538153041
+26-07-31.16:10:00.018 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
