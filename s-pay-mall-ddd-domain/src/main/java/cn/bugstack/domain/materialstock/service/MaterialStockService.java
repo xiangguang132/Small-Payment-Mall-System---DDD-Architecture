@@ -41,6 +41,30 @@ public class MaterialStockService implements IMaterialStockService {
     }
 
     @Override
+    public MaterialStockAggregate adjust(Long id, Long materialId, String storageAddress, BigDecimal quantity, String reason) {
+        if (materialId == null) {
+            throw new IllegalArgumentException("原料ID不能为空");
+        }
+        if (storageAddress == null || storageAddress.trim().isEmpty()) {
+            throw new IllegalArgumentException("存储位置不能为空");
+        }
+        if (quantity == null || quantity.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("调整后库存数量不能为空且不能小于0");
+        }
+        MaterialStockAggregate stock = getExistingStockById(id);
+        BigDecimal lockedQty = valueOf(stock.getLockedQty());
+        if (quantity.compareTo(lockedQty) < 0) {
+            throw new IllegalArgumentException("调整后库存不能小于锁定库存");
+        }
+        stock.setMaterialId(materialId);
+        stock.setStorageAddress(storageAddress.trim());
+        stock.setTotalQty(quantity);
+        stock.setAvailableQty(quantity.subtract(lockedQty));
+        saveUpdated(stock);
+        return stock;
+    }
+
+    @Override
     public MaterialStockAggregate manualOutbound(Long id, Integer quantity, String reason) {
         validatePositiveQuantity(quantity, "出库数量必须大于0");
         MaterialStockAggregate stock = getExistingStockById(id);

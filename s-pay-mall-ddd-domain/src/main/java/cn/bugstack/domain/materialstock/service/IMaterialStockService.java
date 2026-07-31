@@ -10,6 +10,8 @@ public interface IMaterialStockService {
 
     void inbound(Long materialId, String storageAddress, BigDecimal inboundQty, String reason);
 
+    MaterialStockAggregate adjust(Long id, Long materialId, String storageAddress, BigDecimal quantity, String reason);
+
     void lock(Long id, Integer quantity);
 
     MaterialStockAggregate manualOutbound(Long id, Integer quantity, String reason);

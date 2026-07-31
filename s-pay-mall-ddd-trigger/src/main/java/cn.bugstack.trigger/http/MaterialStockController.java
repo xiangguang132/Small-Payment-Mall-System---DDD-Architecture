@@ -10,6 +10,7 @@ import cn.bugstack.domain.materialstock.service.IMaterialStockService;
 import cn.bugstack.trigger.assembler.MaterialStockAssembler;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @CrossOrigin("*")
+@Validated
 @RequestMapping("/api/v1/material-stock")
 @Slf4j
 public class MaterialStockController {
@@ -64,7 +66,14 @@ public class MaterialStockController {
                 .build();
     }
 
-    @PostMapping("outbound/{id}")
+    /**
+     * 人工类型出库
+     * 不需要 锁库
+     * @param id
+     * @param request
+     * @return
+     */
+    @PostMapping("manual-outbound/{id}")
     public Response<MaterialStockManualOutboundResponse> outbound(@PathVariable("id") @NotNull Long id,
                                                           @Valid @RequestBody MaterialStockQuantityRequest request) {
         log.info("人工原料出库开始 id:{} request:{}", id, request);
@@ -72,6 +81,26 @@ public class MaterialStockController {
         MaterialStockManualOutboundResponse response = MaterialStockAssembler.toManualOutboundResponse(updated);
         log.info("人工原料出库完成 id:{} availableQty:{} totalQty:{}", id, response.getAvailableQty(), response.getTotalQty());
         return Response.<MaterialStockManualOutboundResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(response)
+                .build();
+    }
+
+    @PostMapping("adjust/{id}")
+    public Response<MaterialStockDetailResponse>  adjust(@PathVariable("id") @NotNull Long id,
+                                                         @Valid @RequestBody MaterialStockInboundRequest request) {
+        log.info("人工原料调库开始 id:{} request:{}", id, request);
+        MaterialStockAggregate updated = materialStockService.adjust(
+                id,
+                request.getMaterialId(),
+                request.getStorageAddress(),
+                request.getInboundQty(),
+                request.getReason()
+        );
+        MaterialStockDetailResponse response = MaterialStockAssembler.toDetailResponse(updated);
+        log.info("人工原料调库完成 id:{} availableQty:{} totalQty:{}", id, response.getAvailableQty(), response.getTotalQty());
+        return Response.<MaterialStockDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(response)
