@@ -1,5 +1,6 @@
 package cn.bugstack.domain.materialstock.service;
 
+import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class MaterialStockService implements IMaterialStockService {
 
     @Resource
     private IMaterialStockRepository materialStockRepository;
+    @Resource
+    private IMaterialService materialService;
 
     @Override
     public MaterialStockAggregate queryMaterialStockById(Long id) {
@@ -37,6 +40,7 @@ public class MaterialStockService implements IMaterialStockService {
         if (inboundQty == null || inboundQty.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("入库数量必须大于0");
         }
+        materialService.validateMaterialEnabled(materialId);
         materialStockRepository.inbound(materialId, storageAddress.trim(), inboundQty);
     }
 
@@ -51,6 +55,7 @@ public class MaterialStockService implements IMaterialStockService {
         if (quantity == null || quantity.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("调整后库存数量不能为空且不能小于0");
         }
+        materialService.validateMaterialEnabled(materialId);
         MaterialStockAggregate stock = getExistingStockById(id);
         BigDecimal lockedQty = valueOf(stock.getLockedQty());
         if (quantity.compareTo(lockedQty) < 0) {

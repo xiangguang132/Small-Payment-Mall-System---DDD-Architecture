@@ -332,3 +332,33 @@ Caused by: java.lang.NumberFormatException: For input string: "query"
 26-07-31.10:29:09.047 [http-nio-8080-exec-2] INFO  MaterialStockController - 人工原料调库开始 id:1 request:MaterialStockInboundRequest(materialId=10086, storageAddress=A区-原料架-01-044, inboundQty=100, reason=采购进货)
 26-07-31.10:29:09.063 [http-nio-8080-exec-2] INFO  MaterialStockController - 人工原料调库完成 id:1 availableQty:100.00 totalQty:100
 26-07-31.10:30:00.016 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-07-31.10:35:19.323 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-07-31.10:35:19.335 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-07-31.10:35:22.656 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 38448 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-07-31.10:35:22.656 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-07-31.10:35:22.659 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-07-31.10:35:23.458 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-07-31.10:35:23.460 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-07-31.10:35:23.501 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+26-07-31.10:35:24.267 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-07-31.10:35:24.276 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-07-31.10:35:24.276 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-07-31.10:35:24.277 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-07-31.10:35:24.396 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-07-31.10:35:24.396 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1705 ms
+26-07-31.10:35:25.360 [main            ] INFO  Version                - Redisson 3.26.0
+26-07-31.10:35:25.939 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-07-31.10:35:26.011 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-07-31.10:35:26.284 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-07-31.10:35:26.302 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-07-31.10:35:26.310 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-07-31.10:35:26.324 [main            ] INFO  Application            - Started Application in 4.091 seconds (JVM running for 4.46)
+26-07-31.10:35:27.032 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-07-31.10:35:27.237 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-07-31.10:35:27.573 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-07-31.10:35:27.574 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-07-31.10:35:27.574 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 0 ms
+26-07-31.10:35:27.730 [http-nio-8080-exec-3] INFO  MaterialStockController - 人工原料调库开始 id:1 request:MaterialStockInboundRequest(materialId=10086, storageAddress=A区-原料架-01-044, inboundQty=100, reason=采购进货)
+26-07-31.10:35:32.232 [http-nio-8080-exec-2] INFO  MaterialStockController - 人工原料调库开始 id:1 request:MaterialStockInboundRequest(materialId=2, storageAddress=A区-原料架-01-044, inboundQty=100, reason=采购进货)
+26-07-31.10:35:36.114 [http-nio-8080-exec-4] INFO  MaterialStockController - 人工原料调库开始 id:1 request:MaterialStockInboundRequest(materialId=1, storageAddress=A区-原料架-01-044, inboundQty=100, reason=采购进货)
+26-07-31.10:35:36.135 [http-nio-8080-exec-4] INFO  MaterialStockController - 人工原料调库完成 id:1 availableQty:100.00 totalQty:100

@@ -52,6 +52,23 @@ public class MaterialService implements IMaterialService {
     }
 
     @Override
+    public void validateMaterialEnabled(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("原料id不能为空");
+        }
+        MaterialAggregate material = materialRepository.queryById(id);
+        if (material == null) {
+            throw new IllegalArgumentException("原料不存在");
+        }
+        if (material.getIsDel() != null && material.getIsDel() == 1) {
+            throw new IllegalArgumentException("原料已删除，不能使用");
+        }
+        if (material.getStatus() == null || material.getStatus() != 1) {
+            throw new IllegalArgumentException("原料未启用，不能使用");
+        }
+    }
+
+    @Override
     public void updateMaterialById(MaterialAggregate material) {
         if (material == null) {
             throw new IllegalArgumentException("原料信息不能为空");

@@ -10,5 +10,7 @@ public interface IMaterialService {
 
     MaterialAggregate queryMaterialById(Long id);
 
+    void validateMaterialEnabled(Long id);
+
     void updateMaterialById(MaterialAggregate material);
 }
