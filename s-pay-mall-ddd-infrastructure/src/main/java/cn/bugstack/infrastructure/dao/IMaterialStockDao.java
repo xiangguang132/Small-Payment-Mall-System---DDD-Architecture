@@ -4,6 +4,8 @@ import cn.bugstack.infrastructure.dao.po.MaterialStock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface IMaterialStockDao {
 
@@ -13,6 +15,9 @@ public interface IMaterialStockDao {
 
     MaterialStock queryByMaterialIdAndStorageAddress(@Param("materialId") Long materialId,
                                                      @Param("storageAddress") String storageAddress);
+
+    List<MaterialStock> queryAvailableByMaterialIdExcludeStockId(@Param("materialId") Long materialId,
+                                                                 @Param("excludeStockId") Long excludeStockId);
 
     void update(MaterialStock stock);
 

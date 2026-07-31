@@ -67,3 +67,4 @@ Caused by: java.lang.NumberFormatException: For input string: "query"
 	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:729)
 	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:125)
 	... 51 common frames omitted
+26-07-31.14:55:47.871 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m37s893ms81µs200ns).

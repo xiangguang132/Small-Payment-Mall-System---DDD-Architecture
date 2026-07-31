@@ -3,11 +3,13 @@ package cn.bugstack.trigger.http;
 import cn.bugstack.api.request.materialstockallocation.MaterialStockAllocationCreateRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationDetailResponse;
+import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,14 +21,27 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 public class MaterialStockAllocationController {
 
+    @Resource
+    private IMaterialStockAllocationService materialStockAllocationService;
+
     /**
      * 创建一张跨库位分配单。
-     * 当前阶段先把 Controller 骨架搭起来，后续接入 service 后再补业务实现。
      */
     @PostMapping("create")
     public Response<String> create(@Valid @RequestBody MaterialStockAllocationCreateRequest request) {
         log.info("创建原料库存分配单开始 request:{}", request);
-        throw new UnsupportedOperationException("待实现：创建原料库存分配单");
+        String allocationNo = materialStockAllocationService.create(
+                request.getRequestStockId(),
+                request.getQuantity(),
+                request.getReason()
+        );
+
+        log.info("创建原料库存分配单完成 allocationNo:{} requestStockId:{} quantity:{}", allocationNo, request.getRequestStockId(), request.getQuantity());
+        return Response.<String>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单创建成功")
+                .data(allocationNo)
+                .build();
     }
 
     /**
@@ -72,14 +87,5 @@ public class MaterialStockAllocationController {
     public Response<Boolean> autoOutbound(@PathVariable("allocationNo") @NotBlank String allocationNo) {
         log.info("流水线原料出库开始 allocationNo:{}", allocationNo);
         throw new UnsupportedOperationException("待实现：原料库存分配单流水线出库");
-    }
-
-    @ExceptionHandler(UnsupportedOperationException.class)
-    public Response<Boolean> handleUnsupportedOperationException(UnsupportedOperationException e) {
-        return Response.<Boolean>builder()
-                .code(ResponseCode.UN_ERROR.getCode())
-                .info(e.getMessage())
-                .data(false)
-                .build();
     }
 }

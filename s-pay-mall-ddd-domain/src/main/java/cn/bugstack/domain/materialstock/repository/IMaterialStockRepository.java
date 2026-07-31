@@ -3,6 +3,7 @@ package cn.bugstack.domain.materialstock.repository;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface IMaterialStockRepository {
 
@@ -12,4 +13,5 @@ public interface IMaterialStockRepository {
 
     void updateById(MaterialStockAggregate stock);
 
+    List<MaterialStockAggregate> queryAvailableByMaterialIdExcludeStockId(Long materialId, Long excludeStockId);
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class MaterialStockRepository implements IMaterialStockRepository {
@@ -58,6 +61,20 @@ public class MaterialStockRepository implements IMaterialStockRepository {
         materialStockDao.update(toPo(stock));
     }
 
+    @Override
+    public List<MaterialStockAggregate> queryAvailableByMaterialIdExcludeStockId(Long materialId, Long excludeStockId) {
+        if (materialId == null || excludeStockId == null) {
+            return Collections.emptyList();
+        }
+        List<MaterialStock> stocks = materialStockDao.queryAvailableByMaterialIdExcludeStockId(materialId, excludeStockId);
+        if (stocks == null || stocks.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return stocks.stream()
+                .map(this::toAggregate)
+                .collect(Collectors.toList());
+    }
+
     private MaterialStock toPo(MaterialStockAggregate stock) {
         MaterialStock po = new MaterialStock();
         po.setId(stock.getId());
@@ -88,4 +105,6 @@ public class MaterialStockRepository implements IMaterialStockRepository {
                 .updateTime(stock.getUpdateTime())
                 .build();
     }
+
+
 }
