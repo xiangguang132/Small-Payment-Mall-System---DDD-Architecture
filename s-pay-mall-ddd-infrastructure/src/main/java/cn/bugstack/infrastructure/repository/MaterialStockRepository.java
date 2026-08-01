@@ -62,6 +62,38 @@ public class MaterialStockRepository implements IMaterialStockRepository {
     }
 
     @Override
+    public boolean lockStock(Long stockId, BigDecimal lockQty) {
+        if (stockId == null || lockQty == null || lockQty.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+        return materialStockDao.lockStock(stockId, lockQty) == 1;
+    }
+
+    @Override
+    public boolean releaseStock(Long stockId, BigDecimal releaseQty) {
+        if (stockId == null || releaseQty == null || releaseQty.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+        return materialStockDao.releaseStock(stockId, releaseQty) == 1;
+    }
+
+    @Override
+    public boolean outboundLockedStock(Long stockId, BigDecimal outboundQty) {
+        if (stockId == null || outboundQty == null || outboundQty.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+        return materialStockDao.outboundLockedStock(stockId, outboundQty) == 1;
+    }
+
+    @Override
+    public boolean outboundAvailableStock(Long stockId, BigDecimal outboundQty) {
+        if (stockId == null || outboundQty == null || outboundQty.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+        return materialStockDao.outboundAvailableStock(stockId, outboundQty) == 1;
+    }
+
+    @Override
     public List<MaterialStockAggregate> queryAvailableByMaterialId(Long materialId) {
         if (materialId == null) {
             return Collections.emptyList();

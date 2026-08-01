@@ -72,60 +72,43 @@ public class MaterialStockService implements IMaterialStockService {
     @Override
     public MaterialStockAggregate manualOutbound(Long id, Integer quantity, String reason) {
         validatePositiveQuantity(quantity, "出库数量必须大于0");
-        MaterialStockAggregate stock = getExistingStockById(id);
         BigDecimal outboundQty = BigDecimal.valueOf(quantity);
-        BigDecimal available = valueOf(stock.getAvailableQty());
-        if (available.compareTo(outboundQty) < 0) {
+        getExistingStockById(id);
+        if (!materialStockRepository.outboundAvailableStock(id, outboundQty)) {
             throw new IllegalArgumentException("原料可用库存不足，不能出库");
         }
-        stock.setAvailableQty(available.subtract(outboundQty));
-        stock.setTotalQty(valueOf(stock.getTotalQty()).subtract(outboundQty));
-        saveUpdated(stock);
-        return stock;
+        return getExistingStockById(id);
     }
 
     @Override
     public MaterialStockAggregate autoOutbound(Long id, Integer quantity, String reason) {
         validatePositiveQuantity(quantity, "流水线出库数量必须大于0");
-        MaterialStockAggregate stock = getExistingStockById(id);
         BigDecimal outboundQty = BigDecimal.valueOf(quantity);
-        BigDecimal locked = valueOf(stock.getLockedQty());
-        if (locked.compareTo(outboundQty) < 0) {
+        getExistingStockById(id);
+        if (!materialStockRepository.outboundLockedStock(id, outboundQty)) {
             throw new IllegalArgumentException("锁定库存不足，不能进行流水线出库");
         }
-        stock.setLockedQty(locked.subtract(outboundQty));
-        stock.setTotalQty(valueOf(stock.getTotalQty()).subtract(outboundQty));
-        saveUpdated(stock);
-        return stock;
+        return getExistingStockById(id);
     }
 
     @Override
     public void lock(Long id, Integer quantity) {
         validatePositiveQuantity(quantity, "锁定数量必须大于0");
-        MaterialStockAggregate stock = getExistingStockById(id);
-        // 从 stock 对象中获取“可用库存”数量
-        BigDecimal available = valueOf(stock.getAvailableQty());
-        BigDecimal locked = BigDecimal.valueOf(quantity);
-        if (available.compareTo(locked) < 0) {
+        getExistingStockById(id);
+        BigDecimal lockQty = BigDecimal.valueOf(quantity);
+        if (!materialStockRepository.lockStock(id, lockQty)) {
             throw new IllegalArgumentException("原料可用库存不足，不能锁定");
         }
-        stock.setAvailableQty(available.subtract(locked));
-        stock.setLockedQty(valueOf(stock.getLockedQty()).add(locked));
-        saveUpdated(stock);
     }
 
     @Override
     public void release(Long id, Integer quantity) {
         validatePositiveQuantity(quantity, "释放数量必须大于0");
-        MaterialStockAggregate stock = getExistingStockById(id);
-        BigDecimal locked = valueOf(stock.getLockedQty());
+        getExistingStockById(id);
         BigDecimal release = BigDecimal.valueOf(quantity);
-        if (locked.compareTo(release) < 0) {
+        if (!materialStockRepository.releaseStock(id, release)) {
             throw new IllegalArgumentException("锁定库存不足，不能释放");
         }
-        stock.setLockedQty(locked.subtract(release));
-        stock.setAvailableQty(valueOf(stock.getAvailableQty()).add(release));
-        saveUpdated(stock);
     }
 
     private void validatePositiveQuantity(Integer quantity, String message) {

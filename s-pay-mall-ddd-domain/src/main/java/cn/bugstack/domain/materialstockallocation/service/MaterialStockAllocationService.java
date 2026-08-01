@@ -102,21 +102,9 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             if (lockQty.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new IllegalArgumentException("分配明细锁定数量必须大于0");
             }
-            MaterialStockAggregate stock =  materialStockRepository.queryById(item.getStockId());
-            if (stock == null) {
-                throw new IllegalArgumentException("原料库存不存在");
-            }
-            BigDecimal availableQty = stock.getAvailableQty() == null ? BigDecimal.ZERO : stock.getAvailableQty();
-            BigDecimal lockedQty = stock.getLockedQty() == null ? BigDecimal.ZERO : stock.getLockedQty();
-
-            if (availableQty.compareTo(lockQty) < 0) {
+            if (!materialStockRepository.lockStock(item.getStockId(), lockQty)) {
                 throw new IllegalArgumentException("原料可用库存不足，不能锁定");
             }
-
-            stock.setAvailableQty(availableQty.subtract(lockQty));
-            stock.setLockedQty(lockedQty.add(lockQty));
-            stock.setUpdateTime(LocalDateTime.now());
-            materialStockRepository.updateById(stock);
 
             item.setLockedQty(lockQty);
             item.setStatus(1);
@@ -155,21 +143,9 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             if (releaseQty.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new IllegalArgumentException("分配明细释放数量必须大于0");
             }
-            MaterialStockAggregate stock =  materialStockRepository.queryById(item.getStockId());
-            if (stock == null) {
-                throw new IllegalArgumentException("原料库存不存在");
-            }
-            BigDecimal availableQty = stock.getAvailableQty() == null ? BigDecimal.ZERO : stock.getAvailableQty();
-            BigDecimal lockedQty = stock.getLockedQty() == null ? BigDecimal.ZERO : stock.getLockedQty();
-
-            if (releaseQty.compareTo(lockedQty) > 0) {
+            if (!materialStockRepository.releaseStock(item.getStockId(), releaseQty)) {
                 throw new IllegalArgumentException("原料锁定库存不足，不能释放");
             }
-
-            stock.setAvailableQty(availableQty.add(releaseQty));
-            stock.setLockedQty(lockedQty.subtract(releaseQty));
-            stock.setUpdateTime(LocalDateTime.now());
-            materialStockRepository.updateById(stock);
 
             item.setLockedQty(BigDecimal.ZERO);
             item.setReleasedQty(releaseQty);
@@ -210,24 +186,9 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             if (outboundQty.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new IllegalArgumentException("分配明细出库数量必须大于0");
             }
-            MaterialStockAggregate stock = materialStockRepository.queryById(item.getStockId());
-            if (stock == null) {
-                throw new IllegalArgumentException("原料库存不存在");
-            }
-
-            BigDecimal lockedQty = valueOf(stock.getLockedQty());
-            BigDecimal totalQty = valueOf(stock.getTotalQty());
-            if (outboundQty.compareTo(lockedQty) > 0) {
+            if (!materialStockRepository.outboundLockedStock(item.getStockId(), outboundQty)) {
                 throw new IllegalArgumentException("原料锁定库存不足，不能出库");
             }
-            if (outboundQty.compareTo(totalQty) > 0) {
-                throw new IllegalArgumentException("原料总库存不足，不能出库");
-            }
-
-            stock.setLockedQty(lockedQty.subtract(outboundQty));
-            stock.setTotalQty(totalQty.subtract(outboundQty));
-            stock.setUpdateTime(LocalDateTime.now());
-            materialStockRepository.updateById(stock);
 
             item.setLockedQty(BigDecimal.ZERO);
             item.setOutboundQty(outboundQty);

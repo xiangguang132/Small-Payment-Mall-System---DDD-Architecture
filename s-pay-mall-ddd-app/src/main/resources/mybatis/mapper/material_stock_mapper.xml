@@ -68,4 +68,46 @@
           and is_del = 0
     </update>
 
+    <update id="lockStock">
+        update material_stock
+        set available_qty = available_qty - #{lockQty},
+            locked_qty = locked_qty + #{lockQty},
+            update_time = now()
+        where id = #{stockId}
+          and available_qty >= #{lockQty}
+          and is_del = 0
+    </update>
+
+    <update id="releaseStock">
+        update material_stock
+        set available_qty = available_qty + #{releaseQty},
+            locked_qty = locked_qty - #{releaseQty},
+            update_time = now()
+        where id = #{stockId}
+          and locked_qty >= #{releaseQty}
+          and is_del = 0
+    </update>
+
+    <update id="outboundLockedStock">
+        update material_stock
+        set locked_qty = locked_qty - #{outboundQty},
+            total_qty = total_qty - #{outboundQty},
+            update_time = now()
+        where id = #{stockId}
+          and locked_qty >= #{outboundQty}
+          and total_qty >= #{outboundQty}
+          and is_del = 0
+    </update>
+
+    <update id="outboundAvailableStock">
+        update material_stock
+        set available_qty = available_qty - #{outboundQty},
+            total_qty = total_qty - #{outboundQty},
+            update_time = now()
+        where id = #{stockId}
+          and available_qty >= #{outboundQty}
+          and total_qty >= #{outboundQty}
+          and is_del = 0
+    </update>
+
 </mapper>

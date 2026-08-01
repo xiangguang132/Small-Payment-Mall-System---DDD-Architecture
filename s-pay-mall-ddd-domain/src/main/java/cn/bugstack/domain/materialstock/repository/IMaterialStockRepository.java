@@ -13,6 +13,14 @@ public interface IMaterialStockRepository {
 
     void updateById(MaterialStockAggregate stock);
 
+    boolean lockStock(Long stockId, BigDecimal lockQty);
+
+    boolean releaseStock(Long stockId, BigDecimal releaseQty);
+
+    boolean outboundLockedStock(Long stockId, BigDecimal outboundQty);
+
+    boolean outboundAvailableStock(Long stockId, BigDecimal outboundQty);
+
     List<MaterialStockAggregate> queryAvailableByMaterialId(Long materialId);
 
     List<MaterialStockAggregate> queryAvailableByMaterialIdExcludeStockId(Long materialId, Long excludeStockId);

@@ -4,6 +4,7 @@ import cn.bugstack.infrastructure.dao.po.MaterialStock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
@@ -22,5 +23,13 @@ public interface IMaterialStockDao {
                                                                  @Param("excludeStockId") Long excludeStockId);
 
     void update(MaterialStock stock);
+
+    int lockStock(@Param("stockId") Long stockId, @Param("lockQty") BigDecimal lockQty);
+
+    int releaseStock(@Param("stockId") Long stockId, @Param("releaseQty") BigDecimal releaseQty);
+
+    int outboundLockedStock(@Param("stockId") Long stockId, @Param("outboundQty") BigDecimal outboundQty);
+
+    int outboundAvailableStock(@Param("stockId") Long stockId, @Param("outboundQty") BigDecimal outboundQty);
 
 }
