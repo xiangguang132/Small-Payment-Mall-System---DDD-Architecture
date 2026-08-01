@@ -4,6 +4,8 @@ import cn.bugstack.infrastructure.dao.po.MaterialStockAllocation;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface IMaterialStockAllocationDao {
 
@@ -15,4 +17,7 @@ public interface IMaterialStockAllocationDao {
 
     void update(MaterialStockAllocation allocation);
 
+    List<MaterialStockAllocation> queryByStatus(@Param("status") Integer status,
+                                                @Param("offset") int offset,
+                                                @Param("pageSize") Integer pageSize);
 }

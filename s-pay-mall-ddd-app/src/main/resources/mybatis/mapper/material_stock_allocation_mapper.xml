@@ -54,4 +54,14 @@
           and is_del = 0
     </update>
 
+    <select id="queryByStatus" resultMap="allocationMap">
+        select id, allocation_no, material_id, request_stock_id, request_qty,
+        locked_qty, outbound_qty, released_qty, status, reason,
+        is_del, create_time, update_time
+        from material_stock_allocation
+        where status = #{status}
+        and is_del = 0
+        order by create_time asc, id asc
+        limit #{offset}, #{pageSize}
+    </select>
 </mapper>

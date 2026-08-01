@@ -206,6 +206,25 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         materialStockAllocationRepository.updateLockResult(aggregate);
     }
 
+    @Override
+    public List<MaterialStockAllocationAggregate> queryByStatus(Integer status, Integer pageNo, Integer pageSize) {
+        if (status == null || status < 0 || status > 4) {
+            throw new IllegalArgumentException("分配单状态值非法");
+        }
+        if (pageNo == null || pageNo <= 0) {
+            pageNo = 1;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 20;
+        }
+        if (pageSize > 100) {
+            pageSize = 100;
+        }
+
+        int offset = (pageNo - 1) * pageSize;
+        return materialStockAllocationRepository.queryByStatus(status, offset, pageSize);
+    }
+
     private void validateCreateParams(Long materialId, Integer quantity) {
         if (materialId == null) {
             throw new IllegalArgumentException("物料ID不能为空");

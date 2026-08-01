@@ -20,4 +20,6 @@ public interface IMaterialStockAllocationRepository {
     MaterialStockAllocationAggregate queryById(Long id);
 
     void updateLockResult(MaterialStockAllocationAggregate aggregate);
+
+    List<MaterialStockAllocationAggregate> queryByStatus(Integer status, int offset, Integer pageSize);
 }

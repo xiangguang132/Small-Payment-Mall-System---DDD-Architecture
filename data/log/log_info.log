@@ -364,3 +364,38 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 26-08-01.19:50:00.005 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
 26-08-01.20:00:00.015 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
 26-08-01.20:10:00.010 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-01.20:20:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-01.20:30:00.005 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-01.20:30:48.338 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-01.20:30:48.350 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-01.20:30:58.122 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-01.20:30:58.127 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 240 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-01.20:30:58.130 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-08-01.20:30:59.046 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-01.20:30:59.049 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-01.20:30:59.100 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
+26-08-01.20:31:00.033 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-01.20:31:00.043 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-01.20:31:00.043 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-01.20:31:00.043 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-01.20:31:00.178 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-01.20:31:00.178 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2007 ms
+26-08-01.20:31:01.249 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-01.20:31:01.801 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-08-01.20:31:01.870 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-08-01.20:31:02.153 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-01.20:31:02.169 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-01.20:31:02.177 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-01.20:31:02.191 [main            ] INFO  Application            - Started Application in 4.554 seconds (JVM running for 4.966)
+26-08-01.20:31:03.027 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-01.20:31:03.249 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-01.20:35:30.403 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-01.20:35:30.403 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-01.20:35:30.404 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-01.20:36:37.479 [http-nio-8080-exec-5] INFO  MaterialStockAllocationController - 按状态查询原料库存分配单开始 status:1 pageNo:1 pageSize:20
+26-08-01.20:36:37.491 [http-nio-8080-exec-5] INFO  MaterialStockAllocationController - 按状态查询原料库存分配单完成 status:1 count:0
+26-08-01.20:36:40.921 [http-nio-8080-exec-6] INFO  MaterialStockAllocationController - 按状态查询原料库存分配单开始 status:2 pageNo:1 pageSize:20
+26-08-01.20:36:40.947 [http-nio-8080-exec-6] INFO  MaterialStockAllocationController - 按状态查询原料库存分配单完成 status:2 count:2
+26-08-01.20:40:00.012 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-01.20:40:00.105 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-01.20:40:00.116 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.

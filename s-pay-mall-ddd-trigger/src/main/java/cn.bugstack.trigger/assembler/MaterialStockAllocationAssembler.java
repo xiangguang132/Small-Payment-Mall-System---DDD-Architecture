@@ -2,6 +2,7 @@ package cn.bugstack.trigger.assembler;
 
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationDetailResponse;
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationItemResponse;
+import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationStatusResponse;
 import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.model.vo.MaterialStockAllocationItemVO;
 
@@ -31,6 +32,26 @@ public class MaterialStockAllocationAssembler {
                 .createTime(aggregate.getCreateTime())
                 .updateTime(aggregate.getUpdateTime())
                 .items(toItemResponses(aggregate.getItems()))
+                .build();
+    }
+
+    public static MaterialStockAllocationStatusResponse toStatusResponse(MaterialStockAllocationAggregate aggregate) {
+        if (aggregate == null) {
+            return null;
+        }
+        return MaterialStockAllocationStatusResponse.builder()
+                .id(aggregate.getId())
+                .allocationNo(aggregate.getAllocationNo())
+                .materialId(aggregate.getMaterialId())
+                .requestStockId(aggregate.getRequestStockId())
+                .requestQty(aggregate.getRequestQty())
+                .lockedQty(aggregate.getLockedQty())
+                .outboundQty(aggregate.getOutboundQty())
+                .releasedQty(aggregate.getReleasedQty())
+                .status(aggregate.getStatus())
+                .reason(aggregate.getReason())
+                .createTime(aggregate.getCreateTime())
+                .updateTime(aggregate.getUpdateTime())
                 .build();
     }
 

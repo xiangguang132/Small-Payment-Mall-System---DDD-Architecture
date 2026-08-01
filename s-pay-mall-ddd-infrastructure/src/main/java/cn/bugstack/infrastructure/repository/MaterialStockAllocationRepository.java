@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,6 +87,19 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
         for (MaterialStockAllocationItemVO itemVO : aggregate.getItems()) {
             materialStockAllocationItemDao.update(toItemPo(itemVO));
         }
+    }
+
+    @Override
+    public List<MaterialStockAllocationAggregate> queryByStatus(Integer status, int offset, Integer pageSize) {
+        List<MaterialStockAllocation> allocations = materialStockAllocationDao.queryByStatus(status, offset, pageSize);
+
+        if  (allocations == null) {
+            return Collections.emptyList();
+        }
+
+        return allocations.stream()
+                .map(this::toAggregateWithItems)
+                .collect(Collectors.toList());
     }
 
     private MaterialStockAllocationAggregate toAggregateWithItems(MaterialStockAllocation allocation) {

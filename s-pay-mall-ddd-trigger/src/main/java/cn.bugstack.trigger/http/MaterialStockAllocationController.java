@@ -3,6 +3,7 @@ package cn.bugstack.trigger.http;
 import cn.bugstack.api.request.materialstockallocation.MaterialStockAllocationCreateRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationDetailResponse;
+import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationStatusResponse;
 import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.trigger.assembler.MaterialStockAllocationAssembler;
@@ -15,6 +16,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
@@ -126,6 +129,32 @@ public class MaterialStockAllocationController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info("原料库存分配单-流水线出库成功")
                 .data(true)
+                .build();
+    }
+
+    @GetMapping("status/{status}")
+    public Response<List<MaterialStockAllocationStatusResponse>> queryByStatus(
+            @PathVariable("status") @NotNull Integer status,
+            @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
+
+        log.info("按状态查询原料库存分配单开始 status:{} pageNo:{} pageSize:{}",
+                status, pageNo, pageSize);
+
+        List<MaterialStockAllocationAggregate> aggregates =
+                materialStockAllocationService.queryByStatus(status, pageNo, pageSize);
+
+        List<MaterialStockAllocationStatusResponse> responses = aggregates.stream()
+                .map(MaterialStockAllocationAssembler::toStatusResponse)
+                .collect(Collectors.toList());
+
+        log.info("按状态查询原料库存分配单完成 status:{} count:{}",
+                status, responses.size());
+
+        return Response.<List<MaterialStockAllocationStatusResponse>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-按状态查询完成")
+                .data(responses)
                 .build();
     }
 }
