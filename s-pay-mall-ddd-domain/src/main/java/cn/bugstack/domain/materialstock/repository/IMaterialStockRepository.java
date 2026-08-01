@@ -13,5 +13,7 @@ public interface IMaterialStockRepository {
 
     void updateById(MaterialStockAggregate stock);
 
+    List<MaterialStockAggregate> queryAvailableByMaterialId(Long materialId);
+
     List<MaterialStockAggregate> queryAvailableByMaterialIdExcludeStockId(Long materialId, Long excludeStockId);
 }

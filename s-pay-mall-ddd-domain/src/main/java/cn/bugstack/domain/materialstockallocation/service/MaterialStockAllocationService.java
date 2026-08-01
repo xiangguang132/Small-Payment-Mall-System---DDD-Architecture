@@ -1,5 +1,6 @@
 package cn.bugstack.domain.materialstockallocation.service;
 
+import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
 import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
@@ -20,47 +21,38 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MaterialStockAllocationService implements IMaterialStockAllocationService {
 
     @Resource
+    private IMaterialService materialService;
+    @Resource
     private IMaterialStockRepository materialStockRepository;
     @Resource
     private IMaterialStockAllocationRepository materialStockAllocationRepository;
 
     @Override
-    public String create(Long requestStockId, Integer quantity, String reason) {
-        validateCreateParams(requestStockId, quantity);
+    public String create(Long materialId, Integer quantity, String reason) {
+        validateCreateParams(materialId, quantity);
+        materialService.validateMaterialEnabled(materialId);
 
-        // 1. 查询 requestStockId 对应原料库存 ---》 查询的是 materialStock 的
-        MaterialStockAggregate requestStock = materialStockRepository.queryById(requestStockId);
-        if (requestStock == null) {
-            throw new IllegalArgumentException("请求原料仓储不存在");
-        }
+        // 1. 按 materialId 查询所有可用库位库存
+        List<MaterialStockAggregate> candidateStocks = materialStockRepository.queryAvailableByMaterialId(materialId);
 
-        Long materialId = requestStock.getMaterialId();
-        // 2. 按 materialId 查询其他可用库位库存 ---》 查询的是 materialStock 的
-        // 但是需要排除自己
-        List<MaterialStockAggregate> candidateStocks =
-                materialStockRepository.queryAvailableByMaterialIdExcludeStockId(
-                        materialId,
-                        requestStock.getId()
-                );
-
-        // 3. 按可用数量拆分生成 allocation item
+        // 2. 按可用数量拆分生成 allocation item
         BigDecimal requestQty = BigDecimal.valueOf(quantity);
         List<MaterialStockAllocationItemVO> allocationItems = splitAllocationItems(candidateStocks, requestQty);
 
-        // 4. 写入 material_stock_allocation 主单
+        // 3. 写入 material_stock_allocation 主单
         String allocationNo = generateAllocationNo();
 
-        // 5. 写入 material_stock_allocation_item 明细
+        // 4. 写入 material_stock_allocation_item 明细
         materialStockAllocationRepository.create(
                 allocationNo,
                 materialId,
-                requestStockId,
+                null,
                 requestQty,
                 reason,
                 allocationItems
         );
 
-        // 6. 返回 allocationNo
+        // 5. 返回 allocationNo
         return allocationNo;
     }
 
@@ -170,7 +162,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             BigDecimal availableQty = stock.getAvailableQty() == null ? BigDecimal.ZERO : stock.getAvailableQty();
             BigDecimal lockedQty = stock.getLockedQty() == null ? BigDecimal.ZERO : stock.getLockedQty();
 
-            if (releaseQty.compareTo(lockedQty) <= 0) {
+            if (releaseQty.compareTo(lockedQty) > 0) {
                 throw new IllegalArgumentException("原料锁定库存不足，不能释放");
             }
 
@@ -181,7 +173,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
             item.setLockedQty(BigDecimal.ZERO);
             item.setReleasedQty(releaseQty);
-            item.setStatus(2);
+            item.setStatus(3);
             item.setUpdateTime(LocalDateTime.now());
 
             totalReleasedQty = totalReleasedQty.add(releaseQty);
@@ -189,15 +181,73 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         aggregate.setLockedQty(BigDecimal.ZERO);
         aggregate.setReleasedQty(totalReleasedQty);
+        aggregate.setStatus(3);
+        aggregate.setUpdateTime(LocalDateTime.now());
+
+        materialStockAllocationRepository.updateLockResult(aggregate);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void autoOutbound(String allocationNo) {
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("分配订单号不存在，无法出库");
+        }
+        MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
+        if (aggregate == null) {
+            throw new IllegalArgumentException("分配订单为空，无法出库");
+        }
+        if (aggregate.getStatus() == null || aggregate.getStatus() != 1) {
+            throw new IllegalArgumentException("分配单不是锁定状态");
+        }
+        if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
+            throw new IllegalArgumentException("分配单明细为空，无法出库");
+        }
+
+        BigDecimal totalOutboundQty = BigDecimal.ZERO;
+        for (MaterialStockAllocationItemVO item : aggregate.getItems()) {
+            BigDecimal outboundQty = valueOf(item.getLockedQty());
+            if (outboundQty.compareTo(BigDecimal.ZERO) <= 0) {
+                throw new IllegalArgumentException("分配明细出库数量必须大于0");
+            }
+            MaterialStockAggregate stock = materialStockRepository.queryById(item.getStockId());
+            if (stock == null) {
+                throw new IllegalArgumentException("原料库存不存在");
+            }
+
+            BigDecimal lockedQty = valueOf(stock.getLockedQty());
+            BigDecimal totalQty = valueOf(stock.getTotalQty());
+            if (outboundQty.compareTo(lockedQty) > 0) {
+                throw new IllegalArgumentException("原料锁定库存不足，不能出库");
+            }
+            if (outboundQty.compareTo(totalQty) > 0) {
+                throw new IllegalArgumentException("原料总库存不足，不能出库");
+            }
+
+            stock.setLockedQty(lockedQty.subtract(outboundQty));
+            stock.setTotalQty(totalQty.subtract(outboundQty));
+            stock.setUpdateTime(LocalDateTime.now());
+            materialStockRepository.updateById(stock);
+
+            item.setLockedQty(BigDecimal.ZERO);
+            item.setOutboundQty(outboundQty);
+            item.setStatus(2);
+            item.setUpdateTime(LocalDateTime.now());
+
+            totalOutboundQty = totalOutboundQty.add(outboundQty);
+        }
+
+        aggregate.setLockedQty(BigDecimal.ZERO);
+        aggregate.setOutboundQty(totalOutboundQty);
         aggregate.setStatus(2);
         aggregate.setUpdateTime(LocalDateTime.now());
 
         materialStockAllocationRepository.updateLockResult(aggregate);
     }
 
-    private void validateCreateParams(Long requestStockId, Integer quantity) {
-        if (requestStockId == null) {
-            throw new IllegalArgumentException("请求入口库存ID不能为空");
+    private void validateCreateParams(Long materialId, Integer quantity) {
+        if (materialId == null) {
+            throw new IllegalArgumentException("物料ID不能为空");
         }
         if (quantity == null || quantity <= 0) {
             throw new IllegalArgumentException("分配数量必须大于0");
@@ -208,9 +258,9 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     private List<MaterialStockAllocationItemVO> splitAllocationItems(List<MaterialStockAggregate> candidateStocks,
                                                                      BigDecimal requestQty) {
         // 判空
-        // 如果库存序列为空，说明没有库存中没有相关数据，那就生成不了任何的出库单
+        // 如果库存序列为空，说明没有相关可用库存，那就生成不了任何的出库单
         if (candidateStocks == null || candidateStocks.isEmpty()) {
-            throw new IllegalArgumentException("无其他可用库位库存，不能创建分配单");
+            throw new IllegalArgumentException("无可用库位库存，不能创建分配单");
         }
 
         // 创建一个 详情vo 数组保存数据
@@ -253,7 +303,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         // 如果检查了所有的序列表之后发现还是不够，那就返回库存不足
         if (remainingQty.compareTo(BigDecimal.ZERO) > 0) {
-            throw new IllegalArgumentException("其他库位可用库存不足，不能创建分配单");
+            throw new IllegalArgumentException("可用库存不足，不能创建分配单");
         }
 
         return allocationItems;

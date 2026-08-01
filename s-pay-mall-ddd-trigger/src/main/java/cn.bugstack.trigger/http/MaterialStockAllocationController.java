@@ -33,12 +33,12 @@ public class MaterialStockAllocationController {
     public Response<String> create(@Valid @RequestBody MaterialStockAllocationCreateRequest request) {
         log.info("创建原料库存分配单开始 request:{}", request);
         String allocationNo = materialStockAllocationService.create(
-                request.getRequestStockId(),
+                request.getMaterialId(),
                 request.getQuantity(),
                 request.getReason()
         );
 
-        log.info("创建原料库存分配单完成 allocationNo:{} requestStockId:{} quantity:{}", allocationNo, request.getRequestStockId(), request.getQuantity());
+        log.info("创建原料库存分配单完成 allocationNo:{} materialId:{} quantity:{}", allocationNo, request.getMaterialId(), request.getQuantity());
         return Response.<String>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info("原料库存分配单-创建成功")
@@ -119,6 +119,13 @@ public class MaterialStockAllocationController {
     @PostMapping("auto-outbound/{allocationNo}")
     public Response<Boolean> autoOutbound(@PathVariable("allocationNo") @NotBlank String allocationNo) {
         log.info("流水线原料出库开始 allocationNo:{}", allocationNo);
-        throw new UnsupportedOperationException("待实现：原料库存分配单流水线出库");
+        materialStockAllocationService.autoOutbound(allocationNo);
+        log.info("流水线原料出库完成 allocationNo:{}", allocationNo);
+
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("原料库存分配单-流水线出库成功")
+                .data(true)
+                .build();
     }
 }

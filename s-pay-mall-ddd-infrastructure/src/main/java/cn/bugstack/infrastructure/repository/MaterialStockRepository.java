@@ -62,6 +62,20 @@ public class MaterialStockRepository implements IMaterialStockRepository {
     }
 
     @Override
+    public List<MaterialStockAggregate> queryAvailableByMaterialId(Long materialId) {
+        if (materialId == null) {
+            return Collections.emptyList();
+        }
+        List<MaterialStock> stocks = materialStockDao.queryAvailableByMaterialId(materialId);
+        if (stocks == null || stocks.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return stocks.stream()
+                .map(this::toAggregate)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<MaterialStockAggregate> queryAvailableByMaterialIdExcludeStockId(Long materialId, Long excludeStockId) {
         if (materialId == null || excludeStockId == null) {
             return Collections.emptyList();

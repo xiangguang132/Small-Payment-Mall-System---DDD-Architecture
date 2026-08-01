@@ -16,6 +16,8 @@ public interface IMaterialStockDao {
     MaterialStock queryByMaterialIdAndStorageAddress(@Param("materialId") Long materialId,
                                                      @Param("storageAddress") String storageAddress);
 
+    List<MaterialStock> queryAvailableByMaterialId(@Param("materialId") Long materialId);
+
     List<MaterialStock> queryAvailableByMaterialIdExcludeStockId(@Param("materialId") Long materialId,
                                                                  @Param("excludeStockId") Long excludeStockId);
 

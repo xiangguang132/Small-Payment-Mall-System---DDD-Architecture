@@ -4,7 +4,7 @@ import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockA
 
 public interface IMaterialStockAllocationService {
 
-    String create(Long requestStockId, Integer quantity, String reason);
+    String create(Long materialId, Integer quantity, String reason);
 
     MaterialStockAllocationAggregate queryByAllocationNo(String allocationNo);
 
@@ -13,4 +13,6 @@ public interface IMaterialStockAllocationService {
     void lock(String allocationNo);
 
     void release(String allocationNo);
+
+    void autoOutbound(String allocationNo);
 }
