@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +74,24 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 .updateTime(productionOrder.getUpdateTime())
                 .materials(materials)
                 .build();
+    }
+
+    @Override
+    public boolean existsRecentSameOrder(Long productId,
+                                         Long productQuantity,
+                                         Long warehouseId,
+                                         Integer status,
+                                         Integer isDel,
+                                         LocalDateTime startTime) {
+        Integer count = productionOrderDao.countRecentSameOrder(
+                productId,
+                productQuantity,
+                warehouseId,
+                status,
+                isDel,
+                startTime
+        );
+        return count != null && count > 0;
     }
 
     private ProductionOrder toProductionOrder(ProductionOrderAggregate order) {

@@ -4,10 +4,19 @@ import cn.bugstack.infrastructure.dao.po.ProductionOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
+
 @Mapper
 public interface IProductionOrderDao {
 
     void insert(ProductionOrder order);
 
     ProductionOrder queryById(@Param("id") Long id);
+
+    Integer countRecentSameOrder(@Param("productId") Long productId,
+                                 @Param("productQuantity") Long productQuantity,
+                                 @Param("warehouseId") Long warehouseId,
+                                 @Param("status") Integer status,
+                                 @Param("isDel") Integer isDel,
+                                 @Param("startTime") LocalDateTime startTime);
 }

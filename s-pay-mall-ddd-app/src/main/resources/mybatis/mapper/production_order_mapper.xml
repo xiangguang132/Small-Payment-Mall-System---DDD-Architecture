@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bugstack.infrastructure.dao.IProductionOrderDao">
+
+    <resultMap id="productionOrderMap" type="cn.bugstack.infrastructure.dao.po.ProductionOrder">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="warehouse_id" property="warehouseId"/>
+        <result column="status" property="status"/>
+        <result column="is_del" property="isDel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductionOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into production_order
+        (order_no, product_id, product_quantity, warehouse_id, status, is_del, create_time, update_time)
+        values
+        (#{orderNo}, #{productId}, #{productQuantity}, #{warehouseId}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="queryById" parameterType="java.lang.Long" resultMap="productionOrderMap">
+        select id, order_no, product_id, product_quantity, warehouse_id, status, is_del, create_time, update_time
+        from production_order
+        where id = #{id}
+          and is_del = 0
+    </select>
+
+    <select id="countRecentSameOrder" resultType="java.lang.Integer">
+        select count(1)
+        from production_order
+        where product_id = #{productId}
+        and product_quantity = #{productQuantity}
+        and warehouse_id = #{warehouseId}
+        and status = #{status}
+        and is_del = #{isDel}
+        and create_time >= #{startTime}
+        and update_time >= #{startTime}
+    </select>
+</mapper>

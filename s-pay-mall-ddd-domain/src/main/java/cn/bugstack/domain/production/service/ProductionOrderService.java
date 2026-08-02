@@ -54,6 +54,13 @@ public class ProductionOrderService implements IProductionOrderService {
     @Transactional(rollbackFor = Exception.class)
     public Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
         validateCreateParams(productId, productQuantity, warehouseId, materials);
+        validateRecentDuplicateOrder(
+                productId,
+                productQuantity.longValue(),
+                warehouseId,
+                STATUS_CREATED,
+                0
+        );
         LocalDateTime now = LocalDateTime.now();
         ProductionOrderAggregate order = ProductionOrderAggregate.builder()
                 .orderNo(generateOrderNo())
@@ -141,6 +148,27 @@ public class ProductionOrderService implements IProductionOrderService {
         }
         if (warehouse.getStatus() == null || warehouse.getStatus() != 1) {
             throw new IllegalArgumentException("入库仓库未启用，不能创建生产需求单");
+        }
+    }
+
+    private void validateRecentDuplicateOrder(Long productId,
+                                              Long productQuantity,
+                                              Long warehouseId,
+                                              Integer status,
+                                              Integer isDel) {
+        LocalDateTime startTime = LocalDateTime.now().minusHours(1);
+
+        boolean exists = productionOrderRepository.existsRecentSameOrder(
+                productId,
+                productQuantity,
+                warehouseId,
+                status,
+                isDel,
+                startTime
+        );
+
+        if (exists) {
+            throw new IllegalArgumentException("1小时内已存在相同生产需求单，请勿重复创建");
         }
     }
 
