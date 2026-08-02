@@ -12,4 +12,8 @@ public interface IProductionOrderMaterialDao {
     void insertBatch(@Param("list") List<ProductionOrderMaterial> list);
 
     List<ProductionOrderMaterial> queryByProductionOrderId(@Param("productionOrderId") Long productionOrderId);
+
+    void updateAllocationNo(@Param("id") Long id,
+                            @Param("allocationNo") String allocationNo,
+                            @Param("status") Integer status);
 }

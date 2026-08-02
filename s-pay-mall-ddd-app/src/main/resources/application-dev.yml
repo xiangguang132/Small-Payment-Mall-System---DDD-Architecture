@@ -61,10 +61,9 @@ jwt:
   issuer: s-pay-mall
   expire-seconds: 604800
 
-# 定时任务有
+# 生产需求单定时任务
 production:
-  toothbrush:
+  order:
     job:
       enabled: true
-      run-once: true
       cron: "0 0/1 * * * ?"

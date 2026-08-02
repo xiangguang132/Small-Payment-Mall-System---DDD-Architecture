@@ -10,4 +10,8 @@ public interface IProductionOrderService {
     Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials);
 
     ProductionOrderAggregate queryProductionOrderById(Long id);
+
+    void executeCreatedOrders();
+
+    void executeOrder(Long productionOrderId);
 }

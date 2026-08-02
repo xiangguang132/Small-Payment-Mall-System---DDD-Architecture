@@ -1622,3 +1622,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'create_time' in 'fi
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
 	... 95 common frames omitted
+26-08-02.21:30:00.117 [scheduling-1    ] WARN  ProductionOrderService - 生产需求单执行失败，开始释放已锁定原料 orderId:4 reason:无可用库位库存，不能创建分配单
+26-08-02.21:34:00.020 [scheduling-1    ] WARN  ProductionOrderService - 生产需求单执行失败，开始释放已锁定原料 orderId:5 reason:无可用库位库存，不能创建分配单
+26-08-02.21:35:00.021 [scheduling-1    ] WARN  ProductionOrderService - 生产需求单执行失败，开始释放已锁定原料 orderId:6 reason:无可用库位库存，不能创建分配单
+26-08-02.21:41:00.016 [scheduling-1    ] WARN  ProductionOrderService - 生产需求单执行失败，开始释放已锁定原料 orderId:7 reason:原料可用库存不足，不能创建分配单

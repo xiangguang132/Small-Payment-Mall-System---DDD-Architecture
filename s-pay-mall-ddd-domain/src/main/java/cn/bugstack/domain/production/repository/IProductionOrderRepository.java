@@ -20,4 +20,10 @@ public interface IProductionOrderRepository {
                                   Integer status,
                                   Integer isDel,
                                   LocalDateTime startTime);
+
+    List<ProductionOrderAggregate> queryCreatedOrders(Integer limit);
+
+    void updateOrderStatus(Long orderId, Integer status);
+
+    void updateMaterialAllocationNo(Long orderMaterialId, String allocationNo, Integer status);
 }

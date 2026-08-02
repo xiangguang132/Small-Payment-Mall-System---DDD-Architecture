@@ -62,18 +62,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 .map(this::toProductionOrderMaterialVO)
                 .collect(Collectors.toList());
 
-        return ProductionOrderAggregate.builder()
-                .id(productionOrder.getId())
-                .orderNo(productionOrder.getOrderNo())
-                .productId(productionOrder.getProductId())
-                .productQuantity(productionOrder.getProductQuantity())
-                .warehouseId(productionOrder.getWarehouseId())
-                .status(productionOrder.getStatus())
-                .isDel(productionOrder.getIsDel())
-                .createTime(productionOrder.getCreateTime())
-                .updateTime(productionOrder.getUpdateTime())
-                .materials(materials)
-                .build();
+        return toProductionOrderAggregate(productionOrder, materials);
     }
 
     @Override
@@ -92,6 +81,67 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 startTime
         );
         return count != null && count > 0;
+    }
+
+    @Override
+    public List<ProductionOrderAggregate> queryCreatedOrders(Integer limit) {
+        if (limit == null || limit <= 0) {
+            limit = 10;
+        }
+
+        return productionOrderDao.queryByStatus(0, limit).stream()
+                .map(productionOrder -> {
+                    List<ProductionOrderMaterialVO> materials = productionOrderMaterialDao
+                            .queryByProductionOrderId(productionOrder.getId())
+                            .stream()
+                            .map(this::toProductionOrderMaterialVO)
+                            .collect(Collectors.toList());
+                    return toProductionOrderAggregate(productionOrder, materials);
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, Integer status) {
+        if (orderId == null) {
+            throw new IllegalArgumentException("生产需求单ID不能为空");
+        }
+        if (status == null) {
+            throw new IllegalArgumentException("生产需求单状态不能为空");
+        }
+
+        productionOrderDao.updateStatus(orderId, status);
+    }
+
+    @Override
+    public void updateMaterialAllocationNo(Long orderMaterialId, String allocationNo, Integer status) {
+        if (orderMaterialId == null) {
+            throw new IllegalArgumentException("生产需求单原料明细ID不能为空");
+        }
+        if (allocationNo == null || allocationNo.trim().isEmpty()) {
+            throw new IllegalArgumentException("原料备料单号不能为空");
+        }
+        if (status == null) {
+            throw new IllegalArgumentException("生产需求单原料状态不能为空");
+        }
+
+        productionOrderMaterialDao.updateAllocationNo(orderMaterialId, allocationNo, status);
+    }
+
+    private ProductionOrderAggregate toProductionOrderAggregate(ProductionOrder productionOrder,
+                                                                List<ProductionOrderMaterialVO> materials) {
+        return ProductionOrderAggregate.builder()
+                .id(productionOrder.getId())
+                .orderNo(productionOrder.getOrderNo())
+                .productId(productionOrder.getProductId())
+                .productQuantity(productionOrder.getProductQuantity())
+                .warehouseId(productionOrder.getWarehouseId())
+                .status(productionOrder.getStatus())
+                .isDel(productionOrder.getIsDel())
+                .createTime(productionOrder.getCreateTime())
+                .updateTime(productionOrder.getUpdateTime())
+                .materials(materials)
+                .build();
     }
 
     private ProductionOrder toProductionOrder(ProductionOrderAggregate order) {

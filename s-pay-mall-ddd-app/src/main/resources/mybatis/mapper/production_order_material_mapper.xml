@@ -31,4 +31,13 @@
           and is_del = 0
         order by id asc
     </select>
+
+    <update id="updateAllocationNo">
+        update production_order_material
+        set allocation_no = #{allocationNo},
+        status = #{status},
+        update_time = now()
+        where id = #{id}
+        and is_del = 0
+    </update>
 </mapper>

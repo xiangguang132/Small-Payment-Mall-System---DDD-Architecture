@@ -253,7 +253,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         // 判空
         // 如果库存序列为空，说明没有相关可用库存，那就生成不了任何的出库单
         if (candidateStocks == null || candidateStocks.isEmpty()) {
-            throw new IllegalArgumentException("无可用库位库存，不能创建分配单");
+            throw new IllegalArgumentException("原料可用库存不足，不能创建分配单");
         }
 
         // 创建一个 详情vo 数组保存数据

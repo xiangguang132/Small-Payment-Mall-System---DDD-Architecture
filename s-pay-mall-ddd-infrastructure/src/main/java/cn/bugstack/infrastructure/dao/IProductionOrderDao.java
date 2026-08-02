@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper
 public interface IProductionOrderDao {
@@ -19,4 +20,8 @@ public interface IProductionOrderDao {
                                  @Param("status") Integer status,
                                  @Param("isDel") Integer isDel,
                                  @Param("startTime") LocalDateTime startTime);
+
+    List<ProductionOrder> queryByStatus(@Param("status") Integer status, @Param("limit") Integer limit);
+
+    void updateStatus(@Param("id") Long id, @Param("status") Integer status);
 }

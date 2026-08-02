@@ -40,4 +40,20 @@
         and create_time >= #{startTime}
         and update_time >= #{startTime}
     </select>
+
+    <select id="queryByStatus" resultMap="productionOrderMap">
+        select id, order_no, product_id, product_quantity, warehouse_id, status, is_del, create_time, update_time
+        from production_order
+        where status = #{status}
+        and is_del = 0
+        order by id asc
+        limit #{limit}
+    </select>
+
+    <update id="updateStatus">
+        update production_order
+        set status = #{status}, update_time = now()
+        where id = #{id}
+        and is_del = 0
+    </update>
 </mapper>
