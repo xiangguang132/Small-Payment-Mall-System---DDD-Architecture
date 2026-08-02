@@ -1776,3 +1776,456 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 26-08-02.18:55:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
 26-08-02.18:56:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
 26-08-02.18:56:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.18:57:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.18:57:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.18:58:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.18:58:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.18:59:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.18:59:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:00:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:00:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:00:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:01:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:01:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:02:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:02:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:03:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:03:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:04:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:04:00.016 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:05:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:05:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:06:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:06:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:07:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:07:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:08:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:08:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:09:00.017 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:09:00.017 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:10:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:10:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:10:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:11:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:11:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:12:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:12:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:13:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:13:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:14:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:14:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:15:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:15:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:16:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:16:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:17:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:17:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:18:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:18:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:19:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:19:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:20:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:20:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:20:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:21:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:21:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:22:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:22:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:23:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:23:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:24:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:24:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:25:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:25:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:26:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:26:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:27:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:27:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:28:00.000 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:28:00.000 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:29:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:29:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:30:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:30:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:30:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:31:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:31:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:32:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:32:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:33:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:33:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:34:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:34:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:35:00.016 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:35:00.016 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:36:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:36:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:37:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:37:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:38:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:38:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:39:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:39:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:40:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:40:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:40:00.013 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:41:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:41:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:42:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:42:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:43:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:43:00.009 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:44:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:44:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:45:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:45:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:46:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:46:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:47:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:47:00.008 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:48:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:48:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:49:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:49:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:50:00.005 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.19:50:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:50:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:51:00.017 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:51:00.017 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:52:00.000 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:52:00.000 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:53:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:53:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:54:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:54:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:55:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:55:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:56:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:56:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:57:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:57:00.001 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:58:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:58:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.19:59:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.19:59:00.012 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:00:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:00:00.011 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:00:00.013 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.20:01:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:01:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:02:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:02:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:03:00.014 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:03:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:03:36.657 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-02.20:03:36.662 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-02.20:13:55.904 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-02.20:13:55.910 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 27896 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-02.20:13:55.911 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-08-02.20:13:57.115 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-02.20:13:57.116 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-02.20:13:57.168 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
+26-08-02.20:13:58.039 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-02.20:13:58.047 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-02.20:13:58.048 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-02.20:13:58.048 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-02.20:13:58.169 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-02.20:13:58.169 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2204 ms
+26-08-02.20:13:59.388 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-02.20:14:00.028 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
+26-08-02.20:14:00.101 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
+26-08-02.20:14:00.445 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-02.20:14:00.464 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-02.20:14:00.474 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-02.20:14:00.488 [main            ] INFO  Application            - Started Application in 5.215 seconds (JVM running for 5.659)
+26-08-02.20:14:03.027 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-02.20:14:03.199 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-02.20:14:31.395 [http-nio-8080-exec-4] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-02.20:14:31.395 [http-nio-8080-exec-4] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-02.20:14:31.398 [http-nio-8080-exec-4] INFO  DispatcherServlet      - Completed initialization in 3 ms
+26-08-02.20:14:31.614 [http-nio-8080-exec-4] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=1001, productQuantity=50, warehouseId=2001, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=3001, quantity=100), ProductionOrderCreateRequest.MaterialItem(materialId=3002, quantity=200)])
+26-08-02.20:14:31.715 [http-nio-8080-exec-4] ERROR GlobalExceptionHandler - 系统异常
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'is_del' in 'field list'
+### The error may exist in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\production_order_mapper.xml]
+### The error may involve cn.bugstack.infrastructure.dao.IProductionOrderDao.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into production_order         (order_no, product_id, product_quantity, warehouse_id, status, is_del, create_time, update_time)         values         (?, ?, ?, ?, ?, ?, ?, ?)
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'is_del' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'is_del' in 'field list'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441)
+	at com.sun.proxy.$Proxy97.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:152)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
+	at com.sun.proxy.$Proxy118.insert(Unknown Source)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository.saveOrder(ProductionOrderRepository.java:33)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository$$FastClassBySpringCGLIB$$34d3a52f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository$$EnhancerBySpringCGLIB$$b68b335a.saveOrder(<generated>)
+	at cn.bugstack.domain.production.service.ProductionOrderService.createOrder(ProductionOrderService.java:55)
+	at cn.bugstack.domain.production.service.ProductionOrderService$$FastClassBySpringCGLIB$$df657fdb.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.domain.production.service.ProductionOrderService$$EnhancerBySpringCGLIB$$f7b8cede.createOrder(<generated>)
+	at cn.bugstack.trigger.http.ProductionOrderController.create(ProductionOrderController.java:41)
+	at cn.bugstack.trigger.http.ProductionOrderController$$FastClassBySpringCGLIB$$8ef04b98.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.trigger.http.ProductionOrderController$$EnhancerBySpringCGLIB$$5630b132.create(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'is_del' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:370)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
+	... 100 common frames omitted
+26-08-02.20:15:00.003 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:15:00.094 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务完成 productId:1 quantity:100
+26-08-02.20:16:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:16:00.002 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:17:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:17:00.013 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:18:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:18:00.006 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:18:49.993 [http-nio-8080-exec-7] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=1001, productQuantity=50, warehouseId=2001, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=3001, quantity=100), ProductionOrderCreateRequest.MaterialItem(materialId=3002, quantity=200)])
+26-08-02.20:18:50.014 [http-nio-8080-exec-7] ERROR GlobalExceptionHandler - 系统异常
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'create_time' in 'field list'
+### The error may exist in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\production_order_material_mapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: insert into production_order_material         (production_order_id, material_id, material_quantity, allocation_no, status, is_del, create_time, update_time)         values                        (?, ?, ?, ?, ?, ?, ?, ?)          ,              (?, ?, ?, ?, ?, ?, ?, ?)
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'create_time' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'create_time' in 'field list'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441)
+	at com.sun.proxy.$Proxy97.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:152)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
+	at com.sun.proxy.$Proxy119.insertBatch(Unknown Source)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository.saveOrderMaterials(ProductionOrderRepository.java:49)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository$$FastClassBySpringCGLIB$$34d3a52f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.infrastructure.repository.ProductionOrderRepository$$EnhancerBySpringCGLIB$$b68b335a.saveOrderMaterials(<generated>)
+	at cn.bugstack.domain.production.service.ProductionOrderService.createOrder(ProductionOrderService.java:65)
+	at cn.bugstack.domain.production.service.ProductionOrderService$$FastClassBySpringCGLIB$$df657fdb.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.domain.production.service.ProductionOrderService$$EnhancerBySpringCGLIB$$f7b8cede.createOrder(<generated>)
+	at cn.bugstack.trigger.http.ProductionOrderController.create(ProductionOrderController.java:41)
+	at cn.bugstack.trigger.http.ProductionOrderController$$FastClassBySpringCGLIB$$8ef04b98.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at cn.bugstack.trigger.http.ProductionOrderController$$EnhancerBySpringCGLIB$$5630b132.create(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'create_time' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:370)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
+	... 95 common frames omitted
+26-08-02.20:19:00.004 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:19:00.005 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:20:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:20:00.007 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:20:00.009 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-02.20:20:47.265 [http-nio-8080-exec-2] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=1001, productQuantity=50, warehouseId=2001, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=3001, quantity=100), ProductionOrderCreateRequest.MaterialItem(materialId=3002, quantity=200)])
+26-08-02.20:20:47.271 [http-nio-8080-exec-2] INFO  ProductionOrderController - 创建生产需求单完成 orderId:2
+26-08-02.20:21:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:21:00.015 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
+26-08-02.20:21:42.477 [http-nio-8080-exec-6] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=1001, productQuantity=50, warehouseId=2001, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=3001, quantity=100), ProductionOrderCreateRequest.MaterialItem(materialId=3002, quantity=200)])
+26-08-02.20:21:42.484 [http-nio-8080-exec-6] INFO  ProductionOrderController - 创建生产需求单完成 orderId:3
+26-08-02.20:22:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 开始执行定时任务
+26-08-02.20:22:00.010 [scheduling-1    ] INFO  ToothbrushProductionJob - 牙刷生产任务已尝试执行，本次跳过
