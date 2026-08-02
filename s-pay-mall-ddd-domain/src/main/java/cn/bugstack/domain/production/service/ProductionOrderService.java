@@ -1,9 +1,14 @@
 package cn.bugstack.domain.production.service;
 
+import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
+import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
+import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.domain.production.repository.IProductionOrderRepository;
+import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
+import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import cn.bugstack.domain.warehousestock.service.IStockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,6 +41,15 @@ public class ProductionOrderService implements IProductionOrderService {
     @Resource
     private IStockService stockService;
 
+    @Resource
+    private IProductService productService;
+
+    @Resource
+    private IWarehouseService warehouseService;
+
+    @Resource
+    private IMaterialService materialService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
@@ -66,6 +80,15 @@ public class ProductionOrderService implements IProductionOrderService {
         return orderId;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ProductionOrderAggregate queryProductionOrderById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("生产需求单id不能为空");
+        }
+        return productionOrderRepository.queryById(id);
+    }
+
     private void validateCreateParams(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
         if (productId == null) {
             throw new IllegalArgumentException("生产商品ID不能为空");
@@ -80,6 +103,9 @@ public class ProductionOrderService implements IProductionOrderService {
             throw new IllegalArgumentException("生产原料不能为空");
         }
 
+        validateProductEnabled(productId);
+        validateWarehouseEnabled(warehouseId);
+
         for (ProductionOrderMaterialVO material : materials) {
             if (material.getMaterialId() == null) {
                 throw new IllegalArgumentException("原料ID不能为空");
@@ -87,6 +113,34 @@ public class ProductionOrderService implements IProductionOrderService {
             if (material.getMaterialQuantity() == null || material.getMaterialQuantity() <= 0) {
                 throw new IllegalArgumentException("原料数量必须大于0");
             }
+
+            materialService.validateMaterialEnabled(material.getMaterialId());
+        }
+    }
+
+    private void validateProductEnabled(Long productId) {
+        ProductAggregate product = productService.queryProductById(productId);
+        if (product == null) {
+            throw new IllegalArgumentException("生产商品不存在");
+        }
+        if (product.getIsDel() != null && product.getIsDel() == 1) {
+            throw new IllegalArgumentException("生产商品已删除，不能使用");
+        }
+        if (product.getStatus() == null || product.getStatus() != 1) {
+            throw new IllegalArgumentException("生产商品未上架，不能创建生产需求单");
+        }
+    }
+
+    private void validateWarehouseEnabled(Long warehouseId) {
+        WarehouseAggregate warehouse = warehouseService.queryWarehouseById(warehouseId);
+        if (warehouse == null) {
+            throw new IllegalArgumentException("入库仓库不存在");
+        }
+        if (warehouse.getIsDel() != null && warehouse.getIsDel() == 1) {
+            throw new IllegalArgumentException("入库仓库已删除，不能使用");
+        }
+        if (warehouse.getStatus() == null || warehouse.getStatus() != 1) {
+            throw new IllegalArgumentException("入库仓库未启用，不能创建生产需求单");
         }
     }
 

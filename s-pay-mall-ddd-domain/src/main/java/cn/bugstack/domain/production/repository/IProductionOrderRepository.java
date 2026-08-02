@@ -10,4 +10,7 @@ public interface IProductionOrderRepository {
     Long saveOrder(ProductionOrderAggregate order);
 
     void saveOrderMaterials(Long orderId, List<ProductionOrderMaterialVO> materials);
+
+    ProductionOrderAggregate queryById(Long id);
+
 }

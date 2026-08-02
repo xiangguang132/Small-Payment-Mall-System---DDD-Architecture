@@ -10,4 +10,6 @@ import java.util.List;
 public interface IProductionOrderMaterialDao {
 
     void insertBatch(@Param("list") List<ProductionOrderMaterial> list);
+
+    List<ProductionOrderMaterial> queryByProductionOrderId(@Param("productionOrderId") Long productionOrderId);
 }

@@ -1,11 +1,13 @@
 package cn.bugstack.domain.production.model.aggregate;
 
+import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,4 +25,5 @@ public class ProductionOrderAggregate {
     private Integer isDel = 0;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private List<ProductionOrderMaterialVO> materials;
 }

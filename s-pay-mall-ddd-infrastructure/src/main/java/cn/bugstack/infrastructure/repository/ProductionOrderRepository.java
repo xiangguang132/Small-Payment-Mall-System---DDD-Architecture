@@ -49,6 +49,32 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         productionOrderMaterialDao.insertBatch(materialList);
     }
 
+    @Override
+    public ProductionOrderAggregate queryById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("生产需求单id不能为空");
+        }
+        ProductionOrder productionOrder = productionOrderDao.queryById(id);
+        if (productionOrder == null) return null;
+
+        List<ProductionOrderMaterialVO> materials = productionOrderMaterialDao.queryByProductionOrderId(id).stream()
+                .map(this::toProductionOrderMaterialVO)
+                .collect(Collectors.toList());
+
+        return ProductionOrderAggregate.builder()
+                .id(productionOrder.getId())
+                .orderNo(productionOrder.getOrderNo())
+                .productId(productionOrder.getProductId())
+                .productQuantity(productionOrder.getProductQuantity())
+                .warehouseId(productionOrder.getWarehouseId())
+                .status(productionOrder.getStatus())
+                .isDel(productionOrder.getIsDel())
+                .createTime(productionOrder.getCreateTime())
+                .updateTime(productionOrder.getUpdateTime())
+                .materials(materials)
+                .build();
+    }
+
     private ProductionOrder toProductionOrder(ProductionOrderAggregate order) {
         ProductionOrder productionOrder = new ProductionOrder();
         productionOrder.setId(order.getId());
@@ -67,6 +93,20 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         return ProductionOrderMaterial.builder()
                 .id(material.getId())
                 .productionOrderId(orderId)
+                .materialId(material.getMaterialId())
+                .materialQuantity(material.getMaterialQuantity())
+                .allocationNo(material.getAllocationNo())
+                .status(material.getStatus())
+                .isDel(material.getIsDel())
+                .createTime(material.getCreateTime())
+                .updateTime(material.getUpdateTime())
+                .build();
+    }
+
+    private ProductionOrderMaterialVO toProductionOrderMaterialVO(ProductionOrderMaterial material) {
+        return ProductionOrderMaterialVO.builder()
+                .id(material.getId())
+                .productionOrderId(material.getProductionOrderId())
                 .materialId(material.getMaterialId())
                 .materialQuantity(material.getMaterialQuantity())
                 .allocationNo(material.getAllocationNo())
