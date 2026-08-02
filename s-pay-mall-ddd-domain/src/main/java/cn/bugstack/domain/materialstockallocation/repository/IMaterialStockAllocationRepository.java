@@ -19,7 +19,9 @@ public interface IMaterialStockAllocationRepository {
 
     MaterialStockAllocationAggregate queryById(Long id);
 
-    void updateLockResult(MaterialStockAllocationAggregate aggregate);
+    void updateLockResult(MaterialStockAllocationAggregate aggregate, Integer expectedStatus);
+
+    void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount);
 
     List<MaterialStockAllocationAggregate> queryByStatus(Integer status, int offset, Integer pageSize);
 }

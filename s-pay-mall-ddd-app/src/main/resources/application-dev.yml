@@ -60,3 +60,11 @@ jwt:
   secret: 12345
   issuer: s-pay-mall
   expire-seconds: 604800
+
+# 定时任务有
+production:
+  toothbrush:
+    job:
+      enabled: true
+      run-once: true
+      cron: "0 0/1 * * * ?"

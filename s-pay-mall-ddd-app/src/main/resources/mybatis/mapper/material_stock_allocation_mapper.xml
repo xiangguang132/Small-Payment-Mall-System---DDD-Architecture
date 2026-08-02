@@ -13,6 +13,8 @@
         <result column="outbound_qty" property="outboundQty"/>
         <result column="released_qty" property="releasedQty"/>
         <result column="status" property="status"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="fail_reason" property="failReason"/>
         <result column="reason" property="reason"/>
         <result column="is_del" property="isDel"/>
         <result column="create_time" property="createTime"/>
@@ -22,41 +24,58 @@
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocation"
             useGeneratedKeys="true" keyProperty="id">
         insert into material_stock_allocation
-        (allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, reason, is_del, create_time, update_time)
+        (allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, retry_count, fail_reason, reason, is_del, create_time, update_time)
         values
-        (#{allocationNo}, #{materialId}, #{requestStockId}, #{requestQty}, #{lockedQty}, #{outboundQty}, #{releasedQty}, #{status}, #{reason}, #{isDel}, #{createTime}, #{updateTime})
+        (#{allocationNo}, #{materialId}, #{requestStockId}, #{requestQty}, #{lockedQty}, #{outboundQty}, #{releasedQty}, #{status}, #{retryCount}, #{failReason}, #{reason}, #{isDel}, #{createTime}, #{updateTime})
     </insert>
 
     <select id="queryById" resultMap="allocationMap">
-        select id, allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, reason, is_del, create_time, update_time
+        select id, allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, retry_count, fail_reason, reason, is_del, create_time, update_time
         from material_stock_allocation
         where id = #{id}
           and is_del = 0
     </select>
 
     <select id="queryByAllocationNo" resultMap="allocationMap">
-        select id, allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, reason, is_del, create_time, update_time
+        select id, allocation_no, material_id, request_stock_id, request_qty, locked_qty, outbound_qty, released_qty, status, retry_count, fail_reason, reason, is_del, create_time, update_time
         from material_stock_allocation
         where allocation_no = #{allocationNo}
           and is_del = 0
         limit 1
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocation">
+    <update id="update">
         update material_stock_allocation
-        set locked_qty = #{lockedQty},
-            outbound_qty = #{outboundQty},
-            released_qty = #{releasedQty},
-            status = #{status},
-            reason = #{reason},
-            update_time = #{updateTime}
-        where id = #{id}
+        set locked_qty = #{allocation.lockedQty},
+            outbound_qty = #{allocation.outboundQty},
+            released_qty = #{allocation.releasedQty},
+            status = #{allocation.status},
+            retry_count = #{allocation.retryCount},
+            fail_reason = #{allocation.failReason},
+            reason = #{allocation.reason},
+            update_time = #{allocation.updateTime}
+        where id = #{allocation.id}
+          and status = #{expectedStatus}
+          and is_del = 0
+    </update>
+
+    <update id="recordLockFailure">
+        update material_stock_allocation
+        set retry_count = retry_count + 1,
+            fail_reason = #{failReason},
+            status = case
+                when retry_count + 1 >= #{maxRetryCount} then 5
+                else status
+            end,
+            update_time = now()
+        where allocation_no = #{allocationNo}
+          and status = 0
           and is_del = 0
     </update>
 
     <select id="queryByStatus" resultMap="allocationMap">
         select id, allocation_no, material_id, request_stock_id, request_qty,
-        locked_qty, outbound_qty, released_qty, status, reason,
+        locked_qty, outbound_qty, released_qty, status, retry_count, fail_reason, reason,
         is_del, create_time, update_time
         from material_stock_allocation
         where status = #{status}

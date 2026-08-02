@@ -15,7 +15,12 @@ public interface IMaterialStockAllocationDao {
 
     MaterialStockAllocation queryByAllocationNo(@Param("allocationNo") String allocationNo);
 
-    void update(MaterialStockAllocation allocation);
+    int update(@Param("allocation") MaterialStockAllocation allocation,
+               @Param("expectedStatus") Integer expectedStatus);
+
+    int recordLockFailure(@Param("allocationNo") String allocationNo,
+                          @Param("failReason") String failReason,
+                          @Param("maxRetryCount") Integer maxRetryCount);
 
     List<MaterialStockAllocation> queryByStatus(@Param("status") Integer status,
                                                 @Param("offset") int offset,

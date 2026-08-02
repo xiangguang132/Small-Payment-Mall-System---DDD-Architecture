@@ -115,9 +115,11 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         aggregate.setLockedQty(totalLockedQty);
         aggregate.setStatus(1);
+        aggregate.setRetryCount(0);
+        aggregate.setFailReason(null);
         aggregate.setUpdateTime(LocalDateTime.now());
 
-        materialStockAllocationRepository.updateLockResult(aggregate);
+        materialStockAllocationRepository.updateLockResult(aggregate, 0);
     }
 
     @Override
@@ -160,7 +162,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         aggregate.setStatus(3);
         aggregate.setUpdateTime(LocalDateTime.now());
 
-        materialStockAllocationRepository.updateLockResult(aggregate);
+        materialStockAllocationRepository.updateLockResult(aggregate, 1);
     }
 
     @Override
@@ -203,12 +205,12 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         aggregate.setStatus(2);
         aggregate.setUpdateTime(LocalDateTime.now());
 
-        materialStockAllocationRepository.updateLockResult(aggregate);
+        materialStockAllocationRepository.updateLockResult(aggregate, 1);
     }
 
     @Override
     public List<MaterialStockAllocationAggregate> queryByStatus(Integer status, Integer pageNo, Integer pageSize) {
-        if (status == null || status < 0 || status > 4) {
+        if (status == null || status < 0 || status > 5) {
             throw new IllegalArgumentException("分配单状态值非法");
         }
         if (pageNo == null || pageNo <= 0) {
@@ -223,6 +225,17 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         int offset = (pageNo - 1) * pageSize;
         return materialStockAllocationRepository.queryByStatus(status, offset, pageSize);
+    }
+
+    @Override
+    public void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount) {
+        if (allocationNo == null) {
+            throw new IllegalArgumentException("分配订单号不存在，无法记录锁库失败");
+        }
+        if (maxRetryCount == null || maxRetryCount <= 0) {
+            throw new IllegalArgumentException("最大重试次数必须大于0");
+        }
+        materialStockAllocationRepository.recordLockFailure(allocationNo, failReason, maxRetryCount);
     }
 
     private void validateCreateParams(Long materialId, Integer quantity) {

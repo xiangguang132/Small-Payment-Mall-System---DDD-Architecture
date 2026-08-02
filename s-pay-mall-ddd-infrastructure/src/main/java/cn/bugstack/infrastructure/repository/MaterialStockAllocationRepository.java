@@ -74,12 +74,17 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateLockResult(MaterialStockAllocationAggregate aggregate) {
+    public void updateLockResult(MaterialStockAllocationAggregate aggregate, Integer expectedStatus) {
         if (aggregate == null || aggregate.getId() == null) {
             throw new IllegalArgumentException("原料库存分配单信息或ID不能为空");
         }
+        if (expectedStatus == null) {
+            throw new IllegalArgumentException("原料库存分配单期望状态不能为空");
+        }
 
-        materialStockAllocationDao.update(toAllocationPo(aggregate));
+        if (materialStockAllocationDao.update(toAllocationPo(aggregate), expectedStatus) != 1) {
+            throw new IllegalArgumentException("原料库存分配单状态已变化，不能重复处理");
+        }
 
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
             return;
@@ -126,6 +131,7 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
         allocation.setOutboundQty(BigDecimal.ZERO);
         allocation.setReleasedQty(BigDecimal.ZERO);
         allocation.setStatus(STATUS_CREATED);
+        allocation.setRetryCount(0);
         allocation.setIsDel(0);
         allocation.setCreateTime(now);
         allocation.setUpdateTime(now);
@@ -153,6 +159,8 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
                 .outboundQty(allocation.getOutboundQty())
                 .releasedQty(allocation.getReleasedQty())
                 .status(allocation.getStatus())
+                .retryCount(allocation.getRetryCount())
+                .failReason(allocation.getFailReason())
                 .reason(allocation.getReason())
                 .isDel(allocation.getIsDel())
                 .createTime(allocation.getCreateTime())
@@ -200,6 +208,8 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
         allocation.setOutboundQty(aggregate.getOutboundQty());
         allocation.setReleasedQty(aggregate.getReleasedQty());
         allocation.setStatus(aggregate.getStatus());
+        allocation.setRetryCount(aggregate.getRetryCount());
+        allocation.setFailReason(aggregate.getFailReason());
         allocation.setReason(aggregate.getReason());
         allocation.setIsDel(aggregate.getIsDel());
         allocation.setCreateTime(aggregate.getCreateTime());
@@ -224,5 +234,16 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
         item.setCreateTime(itemVO.getCreateTime());
         item.setUpdateTime(itemVO.getUpdateTime());
         return item;
+    }
+
+    @Override
+    public void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount) {
+        if (allocationNo == null || allocationNo.trim().isEmpty()) {
+            throw new IllegalArgumentException("原料库存分配单号不能为空");
+        }
+        if (maxRetryCount == null || maxRetryCount <= 0) {
+            throw new IllegalArgumentException("最大重试次数必须大于0");
+        }
+        materialStockAllocationDao.recordLockFailure(allocationNo, failReason, maxRetryCount);
     }
 }

@@ -20,6 +20,8 @@ public class MaterialStockAllocationDetailResponse {
     private BigDecimal outboundQty;
     private BigDecimal releasedQty;
     private Integer status;
+    private Integer retryCount;
+    private String failReason;
     private String reason;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

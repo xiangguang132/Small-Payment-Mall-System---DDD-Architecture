@@ -17,6 +17,8 @@ public class MaterialStockAllocation {
     private BigDecimal outboundQty;
     private BigDecimal releasedQty;
     private Integer status;
+    private Integer retryCount;
+    private String failReason;
     private String reason;
     private Integer isDel;
     private LocalDateTime createTime;
