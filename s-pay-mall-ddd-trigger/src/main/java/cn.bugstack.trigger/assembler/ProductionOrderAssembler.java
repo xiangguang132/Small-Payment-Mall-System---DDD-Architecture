@@ -3,6 +3,8 @@ package cn.bugstack.trigger.assembler;
 import cn.bugstack.api.response.production.ProductionOrderDetailResponse;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ public class ProductionOrderAssembler {
 
     public static ProductionOrderDetailResponse toDetailResponse(ProductionOrderAggregate productionOrder, List<ProductionOrderMaterialVO> materials) {
         if (productionOrder == null) {
-            throw new IllegalArgumentException("生产需求单不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
         }
 
         ProductionOrderDetailResponse response = new ProductionOrderDetailResponse();

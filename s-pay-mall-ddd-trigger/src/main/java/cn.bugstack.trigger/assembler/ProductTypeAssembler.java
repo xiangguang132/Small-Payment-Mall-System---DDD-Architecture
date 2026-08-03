@@ -4,6 +4,8 @@ import cn.bugstack.api.request.producttype.ProductTypeAddRequest;
 import cn.bugstack.api.request.producttype.ProductTypeUpdateRequest;
 import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class ProductTypeAssembler {
 
@@ -12,7 +14,7 @@ public class ProductTypeAssembler {
 
     public static ProductTypeAggregate toAggregate(ProductTypeAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("品类信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "品类信息不能为空");
         }
         return ProductTypeAggregate.create(
                 request.getParentId(),
@@ -26,10 +28,10 @@ public class ProductTypeAssembler {
 
     public static ProductTypeAggregate toUpdatedAggregate(ProductTypeAggregate current, ProductTypeUpdateRequest request) {
         if (current == null) {
-            throw new IllegalArgumentException("商品分类不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "商品分类不存在");
         }
         if (request == null) {
-            throw new IllegalArgumentException("品类信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "品类信息不能为空");
         }
         return ProductTypeAggregate.builder()
                 .id(current.getId())
@@ -47,7 +49,7 @@ public class ProductTypeAssembler {
 
     public static ProductTypeDetailResponse toDetailResponse(ProductTypeAggregate productType) {
         if (productType == null) {
-            throw new IllegalArgumentException("暂无相关商品分类详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关商品分类详情");
         }
         ProductTypeDetailResponse response = new ProductTypeDetailResponse();
         response.setId(productType.getId());

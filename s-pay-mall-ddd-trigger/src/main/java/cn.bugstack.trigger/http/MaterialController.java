@@ -8,6 +8,7 @@ import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
 import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.trigger.assembler.MaterialAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +70,7 @@ public class MaterialController {
         log.info("更新原料开始 id:{} request:{}", id, request);
         MaterialAggregate current = materialService.queryMaterialById(id);
         if (current == null) {
-            throw new IllegalArgumentException("原料不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料不存在");
         }
         MaterialAggregate updated = MaterialAssembler.toUpdatedAggregate(current, request);
         materialService.updateMaterialById(updated);

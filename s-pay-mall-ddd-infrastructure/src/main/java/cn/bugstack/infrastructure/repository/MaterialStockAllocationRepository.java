@@ -7,6 +7,8 @@ import cn.bugstack.infrastructure.dao.IMaterialStockAllocationDao;
 import cn.bugstack.infrastructure.dao.IMaterialStockAllocationItemDao;
 import cn.bugstack.infrastructure.dao.po.MaterialStockAllocation;
 import cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,18 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
                        BigDecimal requestQty,
                        String reason,
                        List<MaterialStockAllocationItemVO> items) {
+        if (allocationNo == null || allocationNo.trim().isEmpty()) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单号不能为空");
+        }
+        if (materialId == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料ID不能为空");
+        }
+        if (requestQty == null || requestQty.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配数量必须大于0");
+        }
+        if (items == null || items.isEmpty()) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单明细不能为空");
+        }
         LocalDateTime now = LocalDateTime.now();
 
         MaterialStockAllocation allocation = new MaterialStockAllocation();
@@ -76,14 +90,14 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
     @Transactional(rollbackFor = Exception.class)
     public void updateLockResult(MaterialStockAllocationAggregate aggregate, Integer expectedStatus) {
         if (aggregate == null || aggregate.getId() == null) {
-            throw new IllegalArgumentException("原料库存分配单信息或ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单信息或ID不能为空");
         }
         if (expectedStatus == null) {
-            throw new IllegalArgumentException("原料库存分配单期望状态不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单期望状态不能为空");
         }
 
         if (materialStockAllocationDao.update(toAllocationPo(aggregate), expectedStatus) != 1) {
-            throw new IllegalArgumentException("原料库存分配单状态已变化，不能重复处理");
+            throw new AppException(ResponseCode.CONFLICT, "原料库存分配单状态已变化，不能重复处理");
         }
 
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
@@ -239,10 +253,10 @@ public class MaterialStockAllocationRepository implements IMaterialStockAllocati
     @Override
     public void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount) {
         if (allocationNo == null || allocationNo.trim().isEmpty()) {
-            throw new IllegalArgumentException("原料库存分配单号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单号不能为空");
         }
         if (maxRetryCount == null || maxRetryCount <= 0) {
-            throw new IllegalArgumentException("最大重试次数必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "最大重试次数必须大于0");
         }
         materialStockAllocationDao.recordLockFailure(allocationNo, failReason, maxRetryCount);
     }

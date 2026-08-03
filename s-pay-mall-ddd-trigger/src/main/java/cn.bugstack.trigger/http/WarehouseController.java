@@ -7,6 +7,7 @@ import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import cn.bugstack.trigger.assembler.WarehouseAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class WarehouseController {
         log.info("更新仓库开始 id:{} request:{}", id, request);
         WarehouseAggregate current = warehouseService.queryWarehouseById(id);
         if (current == null) {
-            throw new IllegalArgumentException("仓库不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "仓库不存在");
         }
         WarehouseAggregate updated = WarehouseAggregate.builder()
                 .id(current.getId())

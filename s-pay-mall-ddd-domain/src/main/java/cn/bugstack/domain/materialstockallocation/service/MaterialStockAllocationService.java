@@ -3,10 +3,11 @@ package cn.bugstack.domain.materialstockallocation.service;
 import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
-import cn.bugstack.domain.materialstockallocation.exception.MaterialLockFailedException;
 import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.model.vo.MaterialStockAllocationItemVO;
 import cn.bugstack.domain.materialstockallocation.repository.IMaterialStockAllocationRepository;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,11 +61,11 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Override
     public MaterialStockAllocationAggregate queryByAllocationNo(String allocationNo) {
         if (allocationNo == null) {
-            throw new IllegalArgumentException("原料库存分配单号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单号不能为空");
         }
         MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
         if (aggregate == null) {
-            throw new IllegalArgumentException("原料库存分配单不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料库存分配单不存在");
         }
         return aggregate;
     }
@@ -72,11 +73,11 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Override
     public MaterialStockAllocationAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料库存分配单ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存分配单ID不能为空");
         }
         MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryById(id);
         if (aggregate == null) {
-            throw new IllegalArgumentException("原料库存分配单不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料库存分配单不存在");
         }
         return aggregate;
     }
@@ -111,7 +112,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
      * @param allocationNo
      */
     @Override
-    @Transactional(rollbackFor = Exception.class, noRollbackFor = MaterialLockFailedException.class)
+    @Transactional(rollbackFor = Exception.class, noRollbackFor = AppException.class)
     public void lockWithAutoReleaseOnFailure(String allocationNo) {
         MaterialStockAllocationAggregate aggregate = queryWaitLockAllocation(allocationNo);
 
@@ -128,23 +129,23 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             materialStockAllocationRepository.updateLockResult(aggregate, 0);
         } catch (Exception e) {
             releaseLockedItemsAfterLockFailure(aggregate, lockedItems, e);
-            throw new MaterialLockFailedException(e.getMessage(), e);
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, e.getMessage(), e);
         }
     }
 
     private MaterialStockAllocationAggregate queryWaitLockAllocation(String allocationNo) {
         if (allocationNo == null) {
-            throw new IllegalArgumentException("分配订单号不存在，无法锁定");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配订单号不存在，无法锁定");
         }
         MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
         if (aggregate == null) {
-            throw new IllegalArgumentException("分配订单为空，无法锁定");
+            throw new AppException(ResponseCode.NOT_FOUND, "分配订单为空，无法锁定");
         }
         if (aggregate.getStatus() == null || aggregate.getStatus() != 0) {
-            throw new IllegalArgumentException("分配单不是待锁定状态");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单不是待锁定状态");
         }
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
-            throw new IllegalArgumentException("分配单明细为空，无法锁定");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单明细为空，无法锁定");
         }
         return aggregate;
     }
@@ -157,10 +158,10 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         for (MaterialStockAllocationItemVO item : items) {
             BigDecimal lockQty = valueOf(item.getAllocateQty());
             if (lockQty.compareTo(BigDecimal.ZERO) <= 0) {
-                throw new IllegalArgumentException("分配明细锁定数量必须大于0");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配明细锁定数量必须大于0");
             }
             if (!materialStockRepository.lockStock(item.getStockId(), lockQty)) {
-                throw new IllegalArgumentException("原料可用库存不足，不能锁定");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料可用库存不足，不能锁定");
             }
 
             // 锁定分配明细表，更新状态为 1
@@ -183,22 +184,22 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Transactional(rollbackFor = Exception.class)
     public void release(String allocationNo) {
         if (allocationNo == null) {
-            throw new IllegalArgumentException("分配订单号不存在，无法释放");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配订单号不存在，无法释放");
         }
         MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
         if (aggregate == null) {
-            throw new IllegalArgumentException("分配订单为空，无法释放");
+            throw new AppException(ResponseCode.NOT_FOUND, "分配订单为空，无法释放");
         }
         if (aggregate.getStatus() == null || aggregate.getStatus() != 1) {
-            throw new IllegalArgumentException("分配单不是锁定状态");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单不是锁定状态");
         }
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
-            throw new IllegalArgumentException("分配单明细为空，无法释放");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单明细为空，无法释放");
         }
 
         BigDecimal totalReleasedQty = releaseLockedItems(aggregate.getItems());
         if (totalReleasedQty.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("分配单没有可释放的锁定库存");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单没有可释放的锁定库存");
         }
 
         aggregate.setLockedQty(BigDecimal.ZERO);
@@ -237,7 +238,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
                 continue;
             }
             if (!materialStockRepository.releaseStock(item.getStockId(), releaseQty)) {
-                throw new IllegalArgumentException("原料锁定库存不足，不能释放");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料锁定库存不足，不能释放");
             }
 
             item.setLockedQty(BigDecimal.ZERO);
@@ -255,27 +256,27 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Transactional(rollbackFor = Exception.class)
     public void autoOutbound(String allocationNo) {
         if (allocationNo == null) {
-            throw new IllegalArgumentException("分配订单号不存在，无法出库");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配订单号不存在，无法出库");
         }
         MaterialStockAllocationAggregate aggregate = materialStockAllocationRepository.queryByAllocationNo(allocationNo);
         if (aggregate == null) {
-            throw new IllegalArgumentException("分配订单为空，无法出库");
+            throw new AppException(ResponseCode.NOT_FOUND, "分配订单为空，无法出库");
         }
         if (aggregate.getStatus() == null || aggregate.getStatus() != 1) {
-            throw new IllegalArgumentException("分配单不是锁定状态");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单不是锁定状态");
         }
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
-            throw new IllegalArgumentException("分配单明细为空，无法出库");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单明细为空，无法出库");
         }
 
         BigDecimal totalOutboundQty = BigDecimal.ZERO;
         for (MaterialStockAllocationItemVO item : aggregate.getItems()) {
             BigDecimal outboundQty = valueOf(item.getLockedQty());
             if (outboundQty.compareTo(BigDecimal.ZERO) <= 0) {
-                throw new IllegalArgumentException("分配明细出库数量必须大于0");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配明细出库数量必须大于0");
             }
             if (!materialStockRepository.outboundLockedStock(item.getStockId(), outboundQty)) {
-                throw new IllegalArgumentException("原料锁定库存不足，不能出库");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料锁定库存不足，不能出库");
             }
 
             item.setLockedQty(BigDecimal.ZERO);
@@ -297,7 +298,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Override
     public List<MaterialStockAllocationAggregate> queryByStatus(Integer status, Integer pageNo, Integer pageSize) {
         if (status == null || status < 0 || status > 5) {
-            throw new IllegalArgumentException("分配单状态值非法");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单状态值非法");
         }
         if (pageNo == null || pageNo <= 0) {
             pageNo = 1;
@@ -316,20 +317,20 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
     @Override
     public void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount) {
         if (allocationNo == null) {
-            throw new IllegalArgumentException("分配订单号不存在，无法记录锁库失败");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配订单号不存在，无法记录锁库失败");
         }
         if (maxRetryCount == null || maxRetryCount <= 0) {
-            throw new IllegalArgumentException("最大重试次数必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "最大重试次数必须大于0");
         }
         materialStockAllocationRepository.recordLockFailure(allocationNo, failReason, maxRetryCount);
     }
 
     private void validateCreateParams(Long materialId, Integer quantity) {
         if (materialId == null) {
-            throw new IllegalArgumentException("物料ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "物料ID不能为空");
         }
         if (quantity == null || quantity <= 0) {
-            throw new IllegalArgumentException("分配数量必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配数量必须大于0");
         }
     }
 
@@ -339,7 +340,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         // 判空
         // 如果库存序列为空，说明没有相关可用库存，那就生成不了任何的出库单
         if (candidateStocks == null || candidateStocks.isEmpty()) {
-            throw new IllegalArgumentException("原料可用库存不足，不能创建分配单");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料可用库存不足，不能创建分配单");
         }
 
         // 创建一个 详情vo 数组保存数据
@@ -382,7 +383,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
 
         // 如果检查了所有的序列表之后发现还是不够，那就返回库存不足
         if (remainingQty.compareTo(BigDecimal.ZERO) > 0) {
-            throw new IllegalArgumentException("可用库存不足，不能创建分配单");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "可用库存不足，不能创建分配单");
         }
 
         return allocationItems;

@@ -4,6 +4,8 @@ import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
 import cn.bugstack.infrastructure.dao.IMaterialStockDao;
 import cn.bugstack.infrastructure.dao.po.MaterialStock;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -56,7 +58,7 @@ public class MaterialStockRepository implements IMaterialStockRepository {
     @Override
     public void updateById(MaterialStockAggregate stock) {
         if (stock == null || stock.getId() == null) {
-            throw new IllegalArgumentException("库存信息或库存id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "库存信息或库存id不能为空");
         }
         materialStockDao.update(toPo(stock));
     }

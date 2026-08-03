@@ -8,6 +8,7 @@ import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.domain.production.service.IProductionOrderService;
 import cn.bugstack.trigger.assembler.ProductionOrderAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +37,13 @@ public class ProductionOrderController {
     public Response<ProductionOrderDetailResponse> detail(@PathVariable Long id) {
         log.info("查询生产需求单详情开始 id：{}", id);
         if (id == null) {
-            throw new IllegalArgumentException("商品需求单不存在");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
         }
 
         ProductionOrderAggregate productionOrder = productionOrderService.queryProductionOrderById(id);
+        if (productionOrder == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
+        }
         ProductionOrderDetailResponse response = ProductionOrderAssembler.toDetailResponse(productionOrder);
         log.info("查询商品生产需求单详情完成 id：{}", id);
         return Response.<ProductionOrderDetailResponse>builder()

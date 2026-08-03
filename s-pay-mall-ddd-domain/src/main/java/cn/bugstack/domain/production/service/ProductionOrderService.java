@@ -110,7 +110,7 @@ public class ProductionOrderService implements IProductionOrderService {
 
     private String validateAndNormalizeRequestNo(String requestNo) {
         if (requestNo == null || requestNo.trim().isEmpty()) {
-            throw new IllegalArgumentException("请求号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "请求号不能为空");
         }
         return requestNo.trim();
     }
@@ -119,9 +119,13 @@ public class ProductionOrderService implements IProductionOrderService {
     @Transactional(rollbackFor = Exception.class)
     public ProductionOrderAggregate queryProductionOrderById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("生产需求单id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
         }
-        return productionOrderRepository.queryById(id);
+        ProductionOrderAggregate order = productionOrderRepository.queryById(id);
+        if (order == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
+        }
+        return order;
     }
 
 
@@ -164,27 +168,30 @@ public class ProductionOrderService implements IProductionOrderService {
      */
     private void validateCreateParams(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
         if (productId == null) {
-            throw new IllegalArgumentException("生产商品ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产商品ID不能为空");
         }
         if (productQuantity == null || productQuantity <= 0) {
-            throw new IllegalArgumentException("生产数量必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产数量必须大于0");
         }
         if (warehouseId == null) {
-            throw new IllegalArgumentException("入库仓库ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "入库仓库ID不能为空");
         }
         if (materials == null || materials.isEmpty()) {
-            throw new IllegalArgumentException("生产原料不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产原料不能为空");
         }
 
         validateProductEnabled(productId);
         validateWarehouseEnabled(warehouseId);
 
         for (ProductionOrderMaterialVO material : materials) {
+            if (material == null) {
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产原料不能为空");
+            }
             if (material.getMaterialId() == null) {
-                throw new IllegalArgumentException("原料ID不能为空");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料ID不能为空");
             }
             if (material.getMaterialQuantity() == null || material.getMaterialQuantity() <= 0) {
-                throw new IllegalArgumentException("原料数量必须大于0");
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料数量必须大于0");
             }
 
             materialService.validateMaterialEnabled(material.getMaterialId());
@@ -198,13 +205,13 @@ public class ProductionOrderService implements IProductionOrderService {
     private void validateProductEnabled(Long productId) {
         ProductAggregate product = productService.queryProductById(productId);
         if (product == null) {
-            throw new IllegalArgumentException("生产商品不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "生产商品不存在");
         }
         if (product.getIsDel() != null && product.getIsDel() == 1) {
-            throw new IllegalArgumentException("生产商品已删除，不能使用");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产商品已删除，不能使用");
         }
         if (product.getStatus() == null || product.getStatus() != 1) {
-            throw new IllegalArgumentException("生产商品未上架，不能创建生产需求单");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产商品未上架，不能创建生产需求单");
         }
     }
 
@@ -215,13 +222,13 @@ public class ProductionOrderService implements IProductionOrderService {
     private void validateWarehouseEnabled(Long warehouseId) {
         WarehouseAggregate warehouse = warehouseService.queryWarehouseById(warehouseId);
         if (warehouse == null) {
-            throw new IllegalArgumentException("入库仓库不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "入库仓库不存在");
         }
         if (warehouse.getIsDel() != null && warehouse.getIsDel() == 1) {
-            throw new IllegalArgumentException("入库仓库已删除，不能使用");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "入库仓库已删除，不能使用");
         }
         if (warehouse.getStatus() == null || warehouse.getStatus() != 1) {
-            throw new IllegalArgumentException("入库仓库未启用，不能创建生产需求单");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "入库仓库未启用，不能创建生产需求单");
         }
     }
 

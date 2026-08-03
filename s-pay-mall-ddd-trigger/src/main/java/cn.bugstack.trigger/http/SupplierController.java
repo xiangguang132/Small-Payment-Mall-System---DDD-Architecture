@@ -7,6 +7,7 @@ import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.service.ISupplierService;
 import cn.bugstack.trigger.assembler.SupplierAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class SupplierController {
         log.info("更新供应商开始 id:{} request:{}", id, request);
         SupplierAggregate current = supplierService.querySupplierById(id);
         if (current == null) {
-            throw new IllegalArgumentException("供应商不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "供应商不存在");
         }
         SupplierAggregate updated = SupplierAggregate.builder()
                 .id(current.getId())

@@ -4,6 +4,8 @@ import cn.bugstack.api.request.material.MaterialAddRequest;
 import cn.bugstack.api.request.material.MaterialUpdateRequest;
 import cn.bugstack.api.response.material.MaterialDetailResponse;
 import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class MaterialAssembler {
 
@@ -12,7 +14,7 @@ public class MaterialAssembler {
 
     public static MaterialAggregate toAggregate(MaterialAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("原料信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料信息不能为空");
         }
         return MaterialAggregate.create(
                 trim(request.getMaterialCode()),
@@ -26,10 +28,10 @@ public class MaterialAssembler {
 
     public static MaterialAggregate toUpdatedAggregate(MaterialAggregate current, MaterialUpdateRequest request) {
         if (current == null) {
-            throw new IllegalArgumentException("原料不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料不存在");
         }
         if (request == null) {
-            throw new IllegalArgumentException("原料信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料信息不能为空");
         }
         return MaterialAggregate.builder()
                 .id(current.getId())
@@ -47,7 +49,7 @@ public class MaterialAssembler {
 
     public static MaterialDetailResponse toDetailResponse(MaterialAggregate material) {
         if (material == null) {
-            throw new IllegalArgumentException("暂无相关原料详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关原料详情");
         }
         MaterialDetailResponse response = new MaterialDetailResponse();
         response.setId(material.getId());

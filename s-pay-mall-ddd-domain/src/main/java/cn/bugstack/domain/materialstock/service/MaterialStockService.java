@@ -3,6 +3,8 @@ package cn.bugstack.domain.materialstock.service;
 import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,11 +22,11 @@ public class MaterialStockService implements IMaterialStockService {
     @Override
     public MaterialStockAggregate queryMaterialStockById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料库存的ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存的ID不能为空");
         }
         MaterialStockAggregate materialStock = materialStockRepository.queryById(id);
         if  (materialStock == null) {
-            throw new IllegalArgumentException("原料库存的不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料库存的不存在");
         }
         return materialStock;
     }
@@ -32,13 +34,13 @@ public class MaterialStockService implements IMaterialStockService {
     @Override
     public void inbound(Long materialId, String storageAddress, BigDecimal inboundQty, String reason) {
         if (materialId == null) {
-            throw new IllegalArgumentException("原料ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料ID不能为空");
         }
         if (storageAddress == null || storageAddress.trim().isEmpty()) {
-            throw new IllegalArgumentException("存储位置不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "存储位置不能为空");
         }
         if (inboundQty == null || inboundQty.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("入库数量必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "入库数量必须大于0");
         }
         materialService.validateMaterialEnabled(materialId);
         materialStockRepository.inbound(materialId, storageAddress.trim(), inboundQty);
@@ -47,19 +49,19 @@ public class MaterialStockService implements IMaterialStockService {
     @Override
     public MaterialStockAggregate adjust(Long id, Long materialId, String storageAddress, BigDecimal quantity, String reason) {
         if (materialId == null) {
-            throw new IllegalArgumentException("原料ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料ID不能为空");
         }
         if (storageAddress == null || storageAddress.trim().isEmpty()) {
-            throw new IllegalArgumentException("存储位置不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "存储位置不能为空");
         }
         if (quantity == null || quantity.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("调整后库存数量不能为空且不能小于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "调整后库存数量不能为空且不能小于0");
         }
         materialService.validateMaterialEnabled(materialId);
         MaterialStockAggregate stock = getExistingStockById(id);
         BigDecimal lockedQty = valueOf(stock.getLockedQty());
         if (quantity.compareTo(lockedQty) < 0) {
-            throw new IllegalArgumentException("调整后库存不能小于锁定库存");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "调整后库存不能小于锁定库存");
         }
         stock.setMaterialId(materialId);
         stock.setStorageAddress(storageAddress.trim());
@@ -75,7 +77,7 @@ public class MaterialStockService implements IMaterialStockService {
         BigDecimal outboundQty = BigDecimal.valueOf(quantity);
         getExistingStockById(id);
         if (!materialStockRepository.outboundAvailableStock(id, outboundQty)) {
-            throw new IllegalArgumentException("原料可用库存不足，不能出库");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料可用库存不足，不能出库");
         }
         return getExistingStockById(id);
     }
@@ -86,7 +88,7 @@ public class MaterialStockService implements IMaterialStockService {
         BigDecimal outboundQty = BigDecimal.valueOf(quantity);
         getExistingStockById(id);
         if (!materialStockRepository.outboundLockedStock(id, outboundQty)) {
-            throw new IllegalArgumentException("锁定库存不足，不能进行流水线出库");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "锁定库存不足，不能进行流水线出库");
         }
         return getExistingStockById(id);
     }
@@ -97,7 +99,7 @@ public class MaterialStockService implements IMaterialStockService {
         getExistingStockById(id);
         BigDecimal lockQty = BigDecimal.valueOf(quantity);
         if (!materialStockRepository.lockStock(id, lockQty)) {
-            throw new IllegalArgumentException("原料可用库存不足，不能锁定");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料可用库存不足，不能锁定");
         }
     }
 
@@ -107,23 +109,23 @@ public class MaterialStockService implements IMaterialStockService {
         getExistingStockById(id);
         BigDecimal release = BigDecimal.valueOf(quantity);
         if (!materialStockRepository.releaseStock(id, release)) {
-            throw new IllegalArgumentException("锁定库存不足，不能释放");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "锁定库存不足，不能释放");
         }
     }
 
     private void validatePositiveQuantity(Integer quantity, String message) {
         if (quantity == null || quantity <= 0) {
-            throw new IllegalArgumentException(message);
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, message);
         }
     }
 
     private MaterialStockAggregate getExistingStockById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("库存id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "库存id不能为空");
         }
         MaterialStockAggregate stock = materialStockRepository.queryById(id);
         if (stock == null) {
-            throw new IllegalArgumentException("原料库存记录不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料库存记录不存在");
         }
         return stock;
     }

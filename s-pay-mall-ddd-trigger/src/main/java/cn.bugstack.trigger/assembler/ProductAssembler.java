@@ -3,6 +3,8 @@ package cn.bugstack.trigger.assembler;
 import cn.bugstack.api.request.product.ProductAddRequest;
 import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class ProductAssembler {
 
@@ -11,7 +13,7 @@ public class ProductAssembler {
 
     public static ProductAggregate toAggregate(ProductAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("商品信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品信息不能为空");
         }
         return ProductAggregate.create(
                 trim(request.getName()),
@@ -29,7 +31,7 @@ public class ProductAssembler {
 
     public static ProductDetailResponse toDetailResponse(ProductAggregate product) {
         if (product == null) {
-            throw new IllegalArgumentException("暂无相关商品详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关商品详情");
         }
         ProductDetailResponse response = new ProductDetailResponse();
         response.setId(product.getId());

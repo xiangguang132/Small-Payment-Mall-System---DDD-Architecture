@@ -4,6 +4,8 @@ import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.repository.IWarehouseRepository;
 import cn.bugstack.infrastructure.dao.IWarehouseDao;
 import cn.bugstack.infrastructure.dao.po.Warehouse;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ public class WarehouseRepository implements IWarehouseRepository {
     @Override
     public Long save(WarehouseAggregate warehouseAggregate) {
         if (warehouseAggregate == null) {
-            throw new IllegalArgumentException("仓库信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库信息不能为空");
         }
         Warehouse warehouse = Warehouse.builder()
                 .warehouseCode(warehouseAggregate.getWarehouseCode())
@@ -38,7 +40,7 @@ public class WarehouseRepository implements IWarehouseRepository {
     @Override
     public void deleteById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("仓库id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         warehouseDao.deleteById(id);
     }
@@ -46,7 +48,7 @@ public class WarehouseRepository implements IWarehouseRepository {
     @Override
     public WarehouseAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("仓库id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         Warehouse warehouse = warehouseDao.queryById(id);
         if (warehouse == null) {
@@ -70,10 +72,10 @@ public class WarehouseRepository implements IWarehouseRepository {
     @Override
     public void updateById(WarehouseAggregate warehouseAggregate) {
         if (warehouseAggregate == null) {
-            throw new IllegalArgumentException("仓库信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库信息不能为空");
         }
         if (warehouseAggregate.getId() == null) {
-            throw new IllegalArgumentException("仓库id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         Warehouse warehouse = Warehouse.builder()
                 .id(warehouseAggregate.getId())

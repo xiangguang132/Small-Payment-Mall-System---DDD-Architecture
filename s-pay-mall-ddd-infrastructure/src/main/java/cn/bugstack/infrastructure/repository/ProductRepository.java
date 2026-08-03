@@ -5,6 +5,8 @@ import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.infrastructure.dao.IProductDao;
 import cn.bugstack.infrastructure.dao.po.Product;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -18,7 +20,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public Long save(ProductAggregate productAggregate) {
         if (productAggregate == null) {
-            throw new IllegalArgumentException("商品信息不能为空!");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品信息不能为空");
         }
         Product product = Product.builder()
                 .name(productAggregate.getName())
@@ -39,7 +41,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public void deleteById(Long id) {
         if  (id == null) {
-            throw new IllegalArgumentException("商品id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         productDao.deleteById(id);
     }
@@ -47,7 +49,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public ProductAggregate queryById(Long id) {
         if  (id == null) {
-            throw new IllegalArgumentException("商品id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         Product product = productDao.queryById(id);
         if  (product == null) {
@@ -72,10 +74,10 @@ public class ProductRepository implements IProductRepository {
     @Override
     public void updateById(ProductAggregate updated) {
         if (updated == null) {
-            throw new IllegalArgumentException("商品信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品信息不能为空");
         }
         if (updated.getId() == null) {
-            throw new IllegalArgumentException("商品id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         Product product = Product.builder()
                 .id(updated.getId())
@@ -97,7 +99,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public long countByCategoryId(Long categoryId) {
         if   (categoryId == null) {
-            throw new IllegalArgumentException("分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分类id不能为空");
         }
         return productDao.countByCategoryId(categoryId);
     }

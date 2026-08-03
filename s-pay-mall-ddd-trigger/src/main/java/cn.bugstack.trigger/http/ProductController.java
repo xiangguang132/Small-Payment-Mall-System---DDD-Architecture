@@ -7,6 +7,7 @@ import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.trigger.assembler.ProductAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +53,7 @@ public class ProductController {
     public Response<ProductDetailResponse> detail(@PathVariable Long id) {
         log.info("查询商品详情开始 id:{}", id);
         if (id == null) {
-            throw new IllegalArgumentException("商品id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         ProductAggregate product = productService.queryProductById(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(product);
@@ -71,7 +72,7 @@ public class ProductController {
     public Response<Boolean> delete(@PathVariable Long id) {
         log.info("删除商品开始 id:{}", id);
         if (id == null) {
-            throw new IllegalArgumentException("商品id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         productService.deleteProductById(id);
         log.info("删除商品完成 id:{}", id);
@@ -90,7 +91,7 @@ public class ProductController {
         log.info("更新商品开始 id:{} request:{}", id, request);
         ProductAggregate current = productService.queryProductById(id);
         if (current == null) {
-            throw new IllegalArgumentException("商品不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "商品不存在");
         }
         ProductAggregate updated = ProductAggregate.builder()
                 .id(current.getId())

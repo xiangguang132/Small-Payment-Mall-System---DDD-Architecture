@@ -4,6 +4,8 @@ import cn.bugstack.api.request.materialtype.MaterialTypeAddRequest;
 import cn.bugstack.api.request.materialtype.MaterialTypeUpdateRequest;
 import cn.bugstack.api.response.materialtype.MaterialTypeDetailResponse;
 import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class MaterialTypeAssembler {
 
@@ -12,7 +14,7 @@ public class MaterialTypeAssembler {
 
     public static MaterialTypeAggregate toAggregate(MaterialTypeAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("原料分类信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类信息不能为空");
         }
         return MaterialTypeAggregate.create(
                 request.getParentId(),
@@ -26,10 +28,10 @@ public class MaterialTypeAssembler {
 
     public static MaterialTypeAggregate toUpdatedAggregate(MaterialTypeAggregate current, MaterialTypeUpdateRequest request) {
         if (current == null) {
-            throw new IllegalArgumentException("原料分类不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料分类不存在");
         }
         if (request == null) {
-            throw new IllegalArgumentException("原料分类信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类信息不能为空");
         }
         return MaterialTypeAggregate.builder()
                 .id(current.getId())
@@ -47,7 +49,7 @@ public class MaterialTypeAssembler {
 
     public static MaterialTypeDetailResponse toDetailResponse(MaterialTypeAggregate materialType) {
         if (materialType == null) {
-            throw new IllegalArgumentException("暂无相关原料分类详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关原料分类详情");
         }
         MaterialTypeDetailResponse response = new MaterialTypeDetailResponse();
         response.setId(materialType.getId());

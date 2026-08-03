@@ -4,6 +4,8 @@ import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.repository.ISupplierRepository;
 import cn.bugstack.infrastructure.dao.ISupplierDao;
 import cn.bugstack.infrastructure.dao.po.Supplier;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ public class SupplierRepository implements ISupplierRepository {
     @Override
     public Long save(SupplierAggregate supplierAggregate) {
         if (supplierAggregate == null) {
-            throw new IllegalArgumentException("供应商信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商信息不能为空");
         }
         Supplier supplier = Supplier.builder()
                 .supplierCode(supplierAggregate.getSupplierCode())
@@ -37,7 +39,7 @@ public class SupplierRepository implements ISupplierRepository {
     @Override
     public void deleteById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("供应商id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         supplierDao.deleteById(id);
     }
@@ -45,7 +47,7 @@ public class SupplierRepository implements ISupplierRepository {
     @Override
     public SupplierAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("供应商id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         Supplier supplier = supplierDao.queryById(id);
         if (supplier == null) {
@@ -68,10 +70,10 @@ public class SupplierRepository implements ISupplierRepository {
     @Override
     public void updateById(SupplierAggregate supplierAggregate) {
         if (supplierAggregate == null) {
-            throw new IllegalArgumentException("供应商信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商信息不能为空");
         }
         if (supplierAggregate.getId() == null) {
-            throw new IllegalArgumentException("供应商id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         Supplier supplier = Supplier.builder()
                 .id(supplierAggregate.getId())

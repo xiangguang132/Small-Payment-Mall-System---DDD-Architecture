@@ -3,6 +3,8 @@ package cn.bugstack.trigger.assembler;
 import cn.bugstack.api.request.warehouse.WarehouseAddRequest;
 import cn.bugstack.api.response.warehouse.WarehouseDetailResponse;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class WarehouseAssembler {
 
@@ -11,7 +13,7 @@ public class WarehouseAssembler {
 
     public static WarehouseAggregate toAggregate(WarehouseAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("仓库信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库信息不能为空");
         }
         return WarehouseAggregate.create(
                 trim(request.getWarehouseCode()),
@@ -26,7 +28,7 @@ public class WarehouseAssembler {
 
     public static WarehouseDetailResponse toDetailResponse(WarehouseAggregate warehouse) {
         if (warehouse == null) {
-            throw new IllegalArgumentException("暂无相关仓库详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关仓库详情");
         }
         WarehouseDetailResponse response = new WarehouseDetailResponse();
         response.setId(warehouse.getId());

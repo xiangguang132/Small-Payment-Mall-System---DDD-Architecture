@@ -7,6 +7,8 @@ import cn.bugstack.infrastructure.dao.IProductionOrderDao;
 import cn.bugstack.infrastructure.dao.IProductionOrderMaterialDao;
 import cn.bugstack.infrastructure.dao.po.ProductionOrder;
 import cn.bugstack.infrastructure.dao.po.ProductionOrderMaterial;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +29,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Transactional(rollbackFor = Exception.class)
     public Long saveOrder(ProductionOrderAggregate order) {
         if (order == null) {
-            throw new IllegalArgumentException("生产单创建时不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产单创建时不能为空");
         }
 
         ProductionOrder productionOrder = toProductionOrder(order);
@@ -38,7 +40,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Override
     public void saveOrderMaterials(Long orderId, List<ProductionOrderMaterialVO> materials) {
         if (orderId == null) {
-            throw new IllegalArgumentException("生产单ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产单ID不能为空");
         }
         if (materials == null || materials.isEmpty()) {
             return;
@@ -53,7 +55,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Override
     public ProductionOrderAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("生产需求单id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
         }
         ProductionOrder productionOrder = productionOrderDao.queryById(id);
         if (productionOrder == null) return null;
@@ -68,7 +70,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Override
     public ProductionOrderAggregate queryByRequestNo(String requestNo) {
         if (requestNo == null || requestNo.trim().isEmpty()) {
-            throw new IllegalArgumentException("请求号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "请求号不能为空");
         }
 
         ProductionOrder productionOrder = productionOrderDao.queryByRequestNo(requestNo.trim());
@@ -102,10 +104,10 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Override
     public void updateOrderStatus(Long orderId, Integer status) {
         if (orderId == null) {
-            throw new IllegalArgumentException("生产需求单ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单ID不能为空");
         }
         if (status == null) {
-            throw new IllegalArgumentException("生产需求单状态不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单状态不能为空");
         }
 
         productionOrderDao.updateStatus(orderId, status);
@@ -119,10 +121,10 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                                      String failStage,
                                      Integer needManualIntervention) {
         if (orderId == null) {
-            throw new IllegalArgumentException("生产需求单ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单ID不能为空");
         }
         if (maxRetryCount == null || maxRetryCount <= 0) {
-            throw new IllegalArgumentException("最大重试次数必须大于0");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "最大重试次数必须大于0");
         }
         if (needManualIntervention == null) {
             needManualIntervention = 0;
@@ -139,13 +141,13 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     @Override
     public void updateMaterialAllocationNo(Long orderMaterialId, String allocationNo, Integer status) {
         if (orderMaterialId == null) {
-            throw new IllegalArgumentException("生产需求单原料明细ID不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单原料明细ID不能为空");
         }
         if (allocationNo == null || allocationNo.trim().isEmpty()) {
-            throw new IllegalArgumentException("原料备料单号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料备料单号不能为空");
         }
         if (status == null) {
-            throw new IllegalArgumentException("生产需求单原料状态不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单原料状态不能为空");
         }
 
         productionOrderMaterialDao.updateAllocationNo(orderMaterialId, allocationNo, status);

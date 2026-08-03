@@ -5,6 +5,8 @@ import cn.bugstack.domain.materialtype.repository.IMaterialTypeRepository;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.IMaterialTypeDao;
 import cn.bugstack.infrastructure.dao.po.MaterialType;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -20,7 +22,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public Long save(MaterialTypeAggregate materialTypeAggregate) {
         if (materialTypeAggregate == null) {
-            throw new IllegalArgumentException("原料分类不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类不能为空");
         }
         MaterialType materialType = MaterialType.builder()
                 .parentId(materialTypeAggregate.getParentId() == null ? 0L : materialTypeAggregate.getParentId())
@@ -40,7 +42,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public void deleteById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         materialTypeDao.deleteById(id);
     }
@@ -48,7 +50,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public MaterialTypeAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         MaterialType materialType = materialTypeDao.queryById(id);
         if (materialType == null) {
@@ -71,7 +73,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public MaterialTypeAggregate queryByTypeCode(String typeCode) {
         if (typeCode == null) {
-            throw new IllegalArgumentException("原料分类编码不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类编码不能为空");
         }
         MaterialType materialType = materialTypeDao.queryByTypeCode(typeCode);
         if (materialType == null) {
@@ -94,10 +96,10 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public void updateById(MaterialTypeAggregate materialTypeAggregate) {
         if (materialTypeAggregate == null) {
-            throw new IllegalArgumentException("原料分类不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类不能为空");
         }
         if (materialTypeAggregate.getId() == null) {
-            throw new IllegalArgumentException("原料分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         MaterialType materialType = MaterialType.builder()
                 .id(materialTypeAggregate.getId())
@@ -117,7 +119,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public long countByParentId(Long parentId) {
         if (parentId == null) {
-            throw new IllegalArgumentException("父分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "父分类id不能为空");
         }
         return materialTypeDao.countByParentId(parentId);
     }
@@ -125,7 +127,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
     @Override
     public long countByTypeId(Long typeId) {
         if (typeId == null) {
-            throw new IllegalArgumentException("原料分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         return materialDao.countByTypeId(typeId);
     }

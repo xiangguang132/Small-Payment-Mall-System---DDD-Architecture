@@ -8,6 +8,7 @@ import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockA
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.trigger.assembler.MaterialStockAllocationAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class MaterialStockAllocationController {
     public Response<MaterialStockAllocationDetailResponse> detail(@PathVariable("allocationNo") @NotBlank String allocationNo) {
         log.info("查询原料库存分配单详情开始 allocationNo:{}", allocationNo);
         if (allocationNo == null) {
-            throw new IllegalArgumentException("分配单号不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单号不能为空");
         }
         MaterialStockAllocationAggregate materialStockAllocationAggregate = materialStockAllocationService.queryByAllocationNo(allocationNo);
         MaterialStockAllocationDetailResponse response = MaterialStockAllocationAssembler.toDetailResponse(materialStockAllocationAggregate);

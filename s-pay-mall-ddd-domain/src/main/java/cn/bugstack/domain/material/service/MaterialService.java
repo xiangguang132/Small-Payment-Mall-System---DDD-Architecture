@@ -4,6 +4,8 @@ import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
 import cn.bugstack.domain.material.repository.IMaterialRepository;
 import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
 import cn.bugstack.domain.materialtype.repository.IMaterialTypeRepository;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +22,7 @@ public class MaterialService implements IMaterialService {
     @Override
     public Long addNewMaterial(MaterialAggregate material) {
         if (material == null) {
-            throw new IllegalArgumentException("原料信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料信息不能为空");
         }
         validateMaterialCode(material.getMaterialCode(), null);
         validateName(material.getName());
@@ -34,11 +36,11 @@ public class MaterialService implements IMaterialService {
     @Override
     public void deleteMaterialById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
         MaterialAggregate current = materialRepository.queryById(id);
         if (current == null) {
-            throw new IllegalArgumentException("原料不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料不存在");
         }
         materialRepository.deleteById(id);
     }
@@ -46,7 +48,7 @@ public class MaterialService implements IMaterialService {
     @Override
     public MaterialAggregate queryMaterialById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
         return materialRepository.queryById(id);
     }
@@ -54,32 +56,32 @@ public class MaterialService implements IMaterialService {
     @Override
     public void validateMaterialEnabled(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("原料id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
         MaterialAggregate material = materialRepository.queryById(id);
         if (material == null) {
-            throw new IllegalArgumentException("原料不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料不存在");
         }
         if (material.getIsDel() != null && material.getIsDel() == 1) {
-            throw new IllegalArgumentException("原料已删除，不能使用");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料已删除，不能使用");
         }
         if (material.getStatus() == null || material.getStatus() != 1) {
-            throw new IllegalArgumentException("原料未启用，不能使用");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料未启用，不能使用");
         }
     }
 
     @Override
     public void updateMaterialById(MaterialAggregate material) {
         if (material == null) {
-            throw new IllegalArgumentException("原料信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料信息不能为空");
         }
         if (material.getId() == null) {
-            throw new IllegalArgumentException("原料id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
 
         MaterialAggregate current = materialRepository.queryById(material.getId());
         if (current == null) {
-            throw new IllegalArgumentException("原料不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料不存在");
         }
 
         validateMaterialCode(material.getMaterialCode(), material.getId());
@@ -106,48 +108,48 @@ public class MaterialService implements IMaterialService {
 
     private void validateMaterialCode(String materialCode, Long currentId) {
         if (materialCode == null || materialCode.trim().isEmpty()) {
-            throw new IllegalArgumentException("原料编码不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料编码不能为空");
         }
         MaterialAggregate existed = materialRepository.queryByMaterialCode(materialCode);
         if (existed == null) {
             return;
         }
         if (currentId == null || !currentId.equals(existed.getId())) {
-            throw new IllegalArgumentException("原料编码已存在");
+            throw new AppException(ResponseCode.CONFLICT, "原料编码已存在");
         }
     }
 
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("原料名称不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料名称不能为空");
         }
     }
 
     private void validateTypeId(Long typeId) {
         if (typeId == null) {
-            throw new IllegalArgumentException("原料类型id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料类型id不能为空");
         }
     }
 
     private void validateUnit(String unit) {
         if (unit == null || unit.trim().isEmpty()) {
-            throw new IllegalArgumentException("计量单位不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "计量单位不能为空");
         }
     }
 
     private void validateStatus(Integer status) {
         if (status == null || (status != 0 && status != 1)) {
-            throw new IllegalArgumentException("原料状态值非法");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料状态值非法");
         }
     }
 
     private void validateTypeEnabled(Long typeId) {
         MaterialTypeAggregate materialType = materialTypeRepository.queryById(typeId);
         if (materialType == null) {
-            throw new IllegalArgumentException("原料类型不存在");
+            throw new AppException(ResponseCode.NOT_FOUND, "原料类型不存在");
         }
         if (materialType.getStatus() == null || materialType.getStatus() != 1) {
-            throw new IllegalArgumentException("原料类型未启用，不能使用");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料类型未启用，不能使用");
         }
     }
 }

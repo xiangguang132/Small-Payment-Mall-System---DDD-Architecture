@@ -5,6 +5,8 @@ import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
 import cn.bugstack.infrastructure.dao.po.ProductType;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -20,7 +22,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public Long save(ProductTypeAggregate productTypeAggregate) {
         if (productTypeAggregate == null) {
-            throw new IllegalArgumentException("商品类型不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品类型不能为空");
         }
         ProductType productType = ProductType.builder()
                 .parentId(productTypeAggregate.getParentId() == null ? 0L : productTypeAggregate.getParentId())
@@ -41,7 +43,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public void deleteById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("商品分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
         productTypeDao.deleteById(id);
     }
@@ -49,7 +51,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public ProductTypeAggregate queryById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("商品分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
         ProductType productType = productTypeDao.queryById(id);
         if  (productType == null) {
@@ -73,7 +75,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public ProductTypeAggregate queryByTypeCode(String typeCode) {
         if (typeCode == null) {
-            throw new IllegalArgumentException("商品分类编码不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类编码不能为空");
         }
         ProductType productType = productTypeDao.queryByTypeCode(typeCode);
         if (productType == null) {
@@ -97,7 +99,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public void updateById(ProductTypeAggregate productTypeAggregate) {
         if (productTypeAggregate == null) {
-            throw new IllegalArgumentException("商品类型不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品类型不能为空");
         }
         ProductType productType = ProductType.builder()
                 .id(productTypeAggregate.getId())
@@ -118,7 +120,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public long countProductByCategoryId(Long categoryId) {
         if (categoryId == null) {
-            throw new IllegalArgumentException("商品分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
         return productRepository.countByCategoryId(categoryId);
     }
@@ -126,7 +128,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     @Override
     public long countByParentId(Long parentId) {
         if (parentId == null) {
-            throw new IllegalArgumentException("父分类id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "父分类id不能为空");
         }
         return productTypeDao.countByParentId(parentId);
     }

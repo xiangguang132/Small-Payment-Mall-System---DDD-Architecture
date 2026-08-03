@@ -3,6 +3,8 @@ package cn.bugstack.trigger.assembler;
 import cn.bugstack.api.request.supplier.SupplierAddRequest;
 import cn.bugstack.api.response.supplier.SupplierDetailResponse;
 import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 
 public class SupplierAssembler {
 
@@ -11,7 +13,7 @@ public class SupplierAssembler {
 
     public static SupplierAggregate toAggregate(SupplierAddRequest request) {
         if (request == null) {
-            throw new IllegalArgumentException("供应商信息不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商信息不能为空");
         }
         return SupplierAggregate.create(
                 trim(request.getSupplierCode()),
@@ -25,7 +27,7 @@ public class SupplierAssembler {
 
     public static SupplierDetailResponse toDetailResponse(SupplierAggregate supplier) {
         if (supplier == null) {
-            throw new IllegalArgumentException("暂无相关供应商详情");
+            throw new AppException(ResponseCode.NOT_FOUND, "暂无相关供应商详情");
         }
         SupplierDetailResponse response = new SupplierDetailResponse();
         response.setId(supplier.getId());

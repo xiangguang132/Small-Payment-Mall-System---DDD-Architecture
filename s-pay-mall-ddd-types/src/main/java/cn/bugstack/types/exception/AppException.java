@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 自定义异常类
+ * 业务代码里主动抛的异常类型
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

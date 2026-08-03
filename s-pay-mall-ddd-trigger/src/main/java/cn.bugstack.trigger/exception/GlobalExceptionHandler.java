@@ -18,6 +18,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import javax.validation.ConstraintViolationException;
 
+/**
+ * Spring Web 层自动调用的异常处理器
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,10 +31,48 @@ public class GlobalExceptionHandler {
                 .code(ex.getCode())
                 .info(ex.getInfo())
                 .build();
-        HttpStatus httpStatus = ResponseCode.CONFLICT.getCode().equals(ex.getCode())
-                ? HttpStatus.CONFLICT
-                : HttpStatus.OK;
+        HttpStatus httpStatus = resolveHttpStatus(ex.getCode());
         return ResponseEntity.status(httpStatus).body(response);
+    }
+
+    private HttpStatus resolveHttpStatus(Integer code) {
+        if (ResponseCode.ILLEGAL_PARAMETER.getCode().equals(code)) {
+            return HttpStatus.BAD_REQUEST;
+        }
+        if (ResponseCode.NO_LOGIN.getCode().equals(code)) {
+            return HttpStatus.UNAUTHORIZED;
+        }
+        if (ResponseCode.FORBIDDEN.getCode().equals(code)) {
+            return HttpStatus.FORBIDDEN;
+        }
+        if (ResponseCode.NOT_FOUND.getCode().equals(code)) {
+            return HttpStatus.NOT_FOUND;
+        }
+        if (ResponseCode.METHOD_NOT_ALLOWED.getCode().equals(code)) {
+            return HttpStatus.METHOD_NOT_ALLOWED;
+        }
+        if (ResponseCode.CONFLICT.getCode().equals(code)) {
+            return HttpStatus.CONFLICT;
+        }
+        if (ResponseCode.UNPROCESSABLE_ENTITY.getCode().equals(code)) {
+            return HttpStatus.UNPROCESSABLE_ENTITY;
+        }
+        if (ResponseCode.TOO_MANY_REQUESTS.getCode().equals(code)) {
+            return HttpStatus.TOO_MANY_REQUESTS;
+        }
+        if (ResponseCode.BAD_GATEWAY.getCode().equals(code)) {
+            return HttpStatus.BAD_GATEWAY;
+        }
+        if (ResponseCode.SERVICE_UNAVAILABLE.getCode().equals(code)) {
+            return HttpStatus.SERVICE_UNAVAILABLE;
+        }
+        if (ResponseCode.GATEWAY_TIMEOUT.getCode().equals(code)) {
+            return HttpStatus.GATEWAY_TIMEOUT;
+        }
+        if (ResponseCode.UN_ERROR.getCode().equals(code)) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return HttpStatus.OK;
     }
 
     @ExceptionHandler(DuplicateKeyException.class)

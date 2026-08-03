@@ -9,6 +9,7 @@ import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.service.IMaterialStockService;
 import cn.bugstack.trigger.assembler.MaterialStockAssembler;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class MaterialStockController {
     public Response<MaterialStockDetailResponse> detail(@PathVariable @NotNull Long id) {
         log.info("查询原料库存详情开始 id:{}", id);
         if (id == null) {
-            throw new IllegalArgumentException("原料库存的id不能为空");
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料库存的id不能为空");
         }
         MaterialStockAggregate materialStockAggregate = materialStockService.queryMaterialStockById(id);
         MaterialStockDetailResponse response = MaterialStockAssembler.toDetailResponse(materialStockAggregate);
