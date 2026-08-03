@@ -27,6 +27,11 @@ public class ProductionOrderController {
     @Resource
     private IProductionOrderService productionOrderService;
 
+    /**
+     * 依据id查询生产需求单详情
+     * @param id
+     * @return
+     */
     @GetMapping("{id}")
     public Response<ProductionOrderDetailResponse> detail(@PathVariable Long id) {
         log.info("查询生产需求单详情开始 id：{}", id);
@@ -44,11 +49,16 @@ public class ProductionOrderController {
                 .build();
     }
 
+    /**
+     * 创建生产需求单
+     * @param request
+     * @return
+     */
     @PostMapping("create")
     public Response<Long> create(@Valid @RequestBody ProductionOrderCreateRequest request) {
         log.info("创建生产需求单开始 request:{}", request);
 
-        // 将请求中的原始材料数据，批量转换并封装成数据库实体对象（Entity），最后收集成一个列表
+        // 将请求中的原始材料数据，批量转换并封装成数据库实体对象，最后收集成一个列表
         List<ProductionOrderMaterialVO> materials = request.getMaterials().stream()
                 .map(item -> ProductionOrderMaterialVO.builder()
                         .materialId(item.getMaterialId())

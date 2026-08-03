@@ -53,6 +53,9 @@ public class ProductionOrderService implements IProductionOrderService {
     @Resource
     private IMaterialService materialService;
 
+    @Resource
+    private ProductionOrderExecutor productionOrderExecutor;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
@@ -99,89 +102,17 @@ public class ProductionOrderService implements IProductionOrderService {
         return productionOrderRepository.queryById(id);
     }
 
-    @Override
-    public void executeOrder(Long productionOrderId) {
-        ProductionOrderAggregate order = productionOrderRepository.queryById(productionOrderId);
-        if (order == null) {
-            throw new IllegalArgumentException("生产需求单不存在");
-        }
-        if (order.getStatus() == null || order.getStatus() != 0) {
-            log.info("生产需求单状态不是待处理，跳过 orderId:{} status:{}", order.getId(), order.getStatus());
-            return;
-        }
-        if (order.getMaterials() == null || order.getMaterials().isEmpty()) {
-            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
-            log.warn("生产需求单没有原料明细，标记为失败 orderId:{}", order.getId());
-            return;
-        }
-
-        productionOrderRepository.updateOrderStatus(order.getId(), STATUS_PROCESSING);
-
-        List<ProductionOrderMaterialVO> lockedMaterials = new ArrayList<>();
-
-        try {
-            for (ProductionOrderMaterialVO material : order.getMaterials()) {
-                String allocationNo = materialStockAllocationService.create(
-                        material.getMaterialId(),
-                        material.getMaterialQuantity(),
-                        "生产单" + order.getOrderNo() + "备料"
-                );
-
-                materialStockAllocationService.lock(allocationNo);
-
-                material.setAllocationNo(allocationNo);
-                lockedMaterials.add(material);
-
-                productionOrderRepository.updateMaterialAllocationNo(
-                        material.getId(),
-                        allocationNo,
-                        MATERIAL_STATUS_LOCKED
-                );
-            }
-
-            for (ProductionOrderMaterialVO material : lockedMaterials) {
-                materialStockAllocationService.autoOutbound(material.getAllocationNo());
-                productionOrderRepository.updateMaterialAllocationNo(
-                        material.getId(),
-                        material.getAllocationNo(),
-                        MATERIAL_STATUS_OUTBOUND
-                );
-            }
-
-            stockService.inbound(
-                    order.getWarehouseId(),
-                    order.getProductId(),
-                    order.getProductQuantity().intValue()
-            );
-
-            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_COMPLETED);
-            log.info("生产需求单执行完成 orderId:{}", order.getId());
-
-        } catch (Exception e) {
-            log.warn("生产需求单执行失败，开始释放已锁定原料 orderId:{} reason:{}", order.getId(), e.getMessage());
-
-            for (ProductionOrderMaterialVO material : lockedMaterials) {
-                try {
-                    materialStockAllocationService.release(material.getAllocationNo());
-                    productionOrderRepository.updateMaterialAllocationNo(
-                            material.getId(),
-                            material.getAllocationNo(),
-                            MATERIAL_STATUS_RELEASED
-                    );
-                } catch (Exception releaseException) {
-                    log.error("释放原料失败 allocationNo:{}", material.getAllocationNo(), releaseException);
-                }
-            }
-
-            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
-        }
-    }
 
     @Override
     public void executeCreatedOrders() {
         List<ProductionOrderAggregate> orders = productionOrderRepository.queryCreatedOrders(10);
         for (ProductionOrderAggregate order : orders) {
-            executeOrder(order.getId());
+            try {
+                productionOrderExecutor.execute(order.getId());
+            } catch (Exception e) {
+                log.warn("生产需求单执行失败 orderId:{} reason:{}", order.getId(), e.getMessage(), e);
+                productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
+            }
         }
     }
 
@@ -267,3 +198,83 @@ public class ProductionOrderService implements IProductionOrderService {
                 ThreadLocalRandom.current().nextInt(1000, 10000);
     }
 }
+
+
+//    @Override
+//    @Transactional(rollbackFor = Exception.class)
+//    public void executeOrder(Long productionOrderId) {
+//        ProductionOrderAggregate order = productionOrderRepository.queryById(productionOrderId);
+//        if (order == null) {
+//            throw new IllegalArgumentException("生产需求单不存在");
+//        }
+//        if (order.getStatus() == null || order.getStatus() != 0) {
+//            log.info("生产需求单状态不是待处理，跳过 orderId:{} status:{}", order.getId(), order.getStatus());
+//            return;
+//        }
+//        if (order.getMaterials() == null || order.getMaterials().isEmpty()) {
+//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
+//            log.warn("生产需求单没有原料明细，标记为失败 orderId:{}", order.getId());
+//            return;
+//        }
+//
+//        productionOrderRepository.updateOrderStatus(order.getId(), STATUS_PROCESSING);
+//
+//        List<ProductionOrderMaterialVO> lockedMaterials = new ArrayList<>();
+//
+//        try {
+//            for (ProductionOrderMaterialVO material : order.getMaterials()) {
+//                String allocationNo = materialStockAllocationService.create(
+//                        material.getMaterialId(),
+//                        material.getMaterialQuantity(),
+//                        "生产单" + order.getOrderNo() + "备料"
+//                );
+//
+//                materialStockAllocationService.lock(allocationNo);
+//
+//                material.setAllocationNo(allocationNo);
+//                lockedMaterials.add(material);
+//
+//                productionOrderRepository.updateMaterialAllocationNo(
+//                        material.getId(),
+//                        allocationNo,
+//                        MATERIAL_STATUS_LOCKED
+//                );
+//            }
+//
+//            for (ProductionOrderMaterialVO material : lockedMaterials) {
+//                materialStockAllocationService.autoOutbound(material.getAllocationNo());
+//                productionOrderRepository.updateMaterialAllocationNo(
+//                        material.getId(),
+//                        material.getAllocationNo(),
+//                        MATERIAL_STATUS_OUTBOUND
+//                );
+//            }
+//
+//            stockService.inbound(
+//                    order.getWarehouseId(),
+//                    order.getProductId(),
+//                    order.getProductQuantity().intValue()
+//            );
+//
+//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_COMPLETED);
+//            log.info("生产需求单执行完成 orderId:{}", order.getId());
+//
+//        } catch (Exception e) {
+//            log.warn("生产需求单执行失败，开始释放已锁定原料 orderId:{} reason:{}", order.getId(), e.getMessage());
+//
+//            for (ProductionOrderMaterialVO material : lockedMaterials) {
+//                try {
+//                    materialStockAllocationService.release(material.getAllocationNo());
+//                    productionOrderRepository.updateMaterialAllocationNo(
+//                            material.getId(),
+//                            material.getAllocationNo(),
+//                            MATERIAL_STATUS_RELEASED
+//                    );
+//                } catch (Exception releaseException) {
+//                    log.error("释放原料失败 allocationNo:{}", material.getAllocationNo(), releaseException);
+//                }
+//            }
+//
+//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
+//        }
+//    }

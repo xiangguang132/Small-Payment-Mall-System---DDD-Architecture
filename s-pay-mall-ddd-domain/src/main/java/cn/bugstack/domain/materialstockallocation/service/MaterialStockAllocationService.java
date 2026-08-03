@@ -80,6 +80,11 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         return aggregate;
     }
 
+    /**
+     * 锁库
+     * 直接锁定 material_stock 表，更新material_stock_allocation 和 material_allocation_item 的状态
+     * @param allocationNo
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void lock(String allocationNo) {
@@ -106,6 +111,7 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
                 throw new IllegalArgumentException("原料可用库存不足，不能锁定");
             }
 
+            // 锁定分配明细表，更新状态为 1
             item.setLockedQty(lockQty);
             item.setStatus(1);
             item.setUpdateTime(LocalDateTime.now());
@@ -113,15 +119,22 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
             totalLockedQty = totalLockedQty.add(lockQty);
         }
 
+        // 将数据设定到新创建的 数据对象里，方便一次性直接快速更新
+        // 锁定原料分配表，更新状态为 1
         aggregate.setLockedQty(totalLockedQty);
         aggregate.setStatus(1);
         aggregate.setRetryCount(0);
         aggregate.setFailReason(null);
         aggregate.setUpdateTime(LocalDateTime.now());
 
+        // 更新原料库存分配表 -》 持久化
         materialStockAllocationRepository.updateLockResult(aggregate, 0);
     }
 
+    /**
+     * 放库
+     * @param allocationNo
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void release(String allocationNo) {
