@@ -147,3 +147,14 @@ Caused by: java.lang.IllegalArgumentException: 原料可用库存不足，不能
 	at cn.bugstack.domain.production.service.ProductionOrderExecutor.lambda$execute$1(ProductionOrderExecutor.java:46)
 	at cn.bugstack.domain.production.service.ProductionOrderExecutor.executeStage(ProductionOrderExecutor.java:89)
 	... 22 common frames omitted
+26-08-03.15:43:42.352 [http-nio-8080-exec-3] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.15:46:37.512 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s172ms234µs200ns).
+26-08-03.15:46:42.882 [http-nio-8080-exec-3] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.15:47:34.633 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s121ms544µs800ns).
+26-08-03.15:48:53.481 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56s656ms147µs300ns).
+26-08-03.15:49:24.435 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s145ms337µs500ns).
+26-08-03.15:51:30.288 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m5s852ms662µs700ns).
+26-08-03.15:51:30.297 [http-nio-8080-exec-2] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.15:51:54.568 [http-nio-8080-exec-3] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.15:52:42.114 [http-nio-8080-exec-4] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.15:52:55.818 [http-nio-8080-exec-2] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331

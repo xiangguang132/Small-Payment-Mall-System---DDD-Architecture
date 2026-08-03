@@ -10,6 +10,8 @@ import cn.bugstack.domain.production.model.vo.ProductionOrderStatusVO;
 import cn.bugstack.domain.production.repository.IProductionOrderRepository;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
@@ -55,7 +57,7 @@ public class ProductionOrderService implements IProductionOrderService {
         requestNo = validateAndNormalizeRequestNo(requestNo);
         ProductionOrderAggregate existsOrder = productionOrderRepository.queryByRequestNo(requestNo);
         if (existsOrder != null) {
-            return existsOrder.getId();
+            throw duplicateRequestNo(requestNo);
         }
 
         validateCreateParams(productId, productQuantity, warehouseId, materials);
@@ -84,7 +86,7 @@ public class ProductionOrderService implements IProductionOrderService {
         } catch (DuplicateKeyException e) {
             ProductionOrderAggregate duplicateOrder = productionOrderRepository.queryByRequestNo(requestNo);
             if (duplicateOrder != null) {
-                return duplicateOrder.getId();
+                throw duplicateRequestNo(requestNo);
             }
             throw e;
         }
@@ -99,6 +101,11 @@ public class ProductionOrderService implements IProductionOrderService {
 
         productionOrderRepository.saveOrderMaterials(orderId, materials);
         return orderId;
+    }
+
+    private AppException duplicateRequestNo(String requestNo) {
+        log.warn("生产需求单请求号已存在 requestNo:{}", requestNo);
+        return new AppException(ResponseCode.CONFLICT, "请求号已存在，请勿重复创建生产需求单");
     }
 
     private String validateAndNormalizeRequestNo(String requestNo) {

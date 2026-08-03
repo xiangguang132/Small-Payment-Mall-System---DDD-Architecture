@@ -28,7 +28,10 @@ public class GlobalExceptionHandler {
                 .code(ex.getCode())
                 .info(ex.getInfo())
                 .build();
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        HttpStatus httpStatus = ResponseCode.CONFLICT.getCode().equals(ex.getCode())
+                ? HttpStatus.CONFLICT
+                : HttpStatus.OK;
+        return ResponseEntity.status(httpStatus).body(response);
     }
 
     @ExceptionHandler(DuplicateKeyException.class)
