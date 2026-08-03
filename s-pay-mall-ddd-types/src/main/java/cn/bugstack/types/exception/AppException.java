@@ -1,5 +1,6 @@
 package cn.bugstack.types.exception;
 
+import cn.bugstack.types.enums.ResponseCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,31 +16,50 @@ public class AppException extends RuntimeException {
     /**
      * 异常码
      */
-    private String code;
+    private Integer code;
 
     /**
      * 异常信息
      */
     private String info;
 
-    public AppException(String code) {
+    public AppException(Integer code) {
         this.code = code;
     }
 
-    public AppException(String code, Throwable cause) {
+    public AppException(Integer code, Throwable cause) {
+        super(cause);
         this.code = code;
-        super.initCause(cause);
     }
 
-    public AppException(String code, String message) {
+    public AppException(Integer code, String message) {
+        super(message);
         this.code = code;
         this.info = message;
     }
 
-    public AppException(String code, String message, Throwable cause) {
+    public AppException(Integer code, String message, Throwable cause) {
+        super(message, cause);
         this.code = code;
         this.info = message;
-        super.initCause(cause);
+    }
+
+    public AppException(ResponseCode responseCode) {
+        super(responseCode.getInfo());
+        this.code = responseCode.getCode();
+        this.info = responseCode.getInfo();
+    }
+
+    public AppException(ResponseCode responseCode, String message) {
+        super(message);
+        this.code = responseCode.getCode();
+        this.info = message;
+    }
+
+    public AppException(ResponseCode responseCode, String message, Throwable cause) {
+        super(message, cause);
+        this.code = responseCode.getCode();
+        this.info = message;
     }
 
     @Override

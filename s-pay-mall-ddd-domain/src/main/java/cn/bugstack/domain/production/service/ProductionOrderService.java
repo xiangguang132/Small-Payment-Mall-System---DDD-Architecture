@@ -69,6 +69,8 @@ public class ProductionOrderService implements IProductionOrderService {
                 .retryCount(0)
                 .failReason(null)
                 .nextRetryTime(null)
+                .failStage(null)
+                .needManualIntervention(0)
                 .status(ProductionOrderStatusVO.CREATED)
                 .isDel(0)
                 .createTime(now)
@@ -217,17 +219,26 @@ public class ProductionOrderService implements IProductionOrderService {
             return;
         }
 
+        String failReason = e == null ? "生产需求单执行失败" : e.getMessage();
+        String failStage = null;
+        Integer needManualIntervention = 0;
+        if (e instanceof ProductionExecuteException) {
+            ProductionExecuteException executeException = (ProductionExecuteException) e;
+            failStage = executeException.getFailStage();
+            needManualIntervention = executeException.getNeedManualIntervention();
+        }
         int currentRetryCount = order.getRetryCount() == null ? 0 : order.getRetryCount();
-        LocalDateTime nextRetryTime = currentRetryCount + 1 >= maxExecuteRetryCount
+        LocalDateTime nextRetryTime = needManualIntervention == 1 || currentRetryCount + 1 >= maxExecuteRetryCount
                 ? null
                 : LocalDateTime.now().plusMinutes(retryDelayMinutes);
-        String failReason = e == null ? "生产需求单执行失败" : e.getMessage();
 
         productionOrderRepository.recordExecuteFailure(
                 order.getId(),
                 failReason,
                 nextRetryTime,
-                maxExecuteRetryCount
+                maxExecuteRetryCount,
+                failStage,
+                needManualIntervention
         );
     }
 }

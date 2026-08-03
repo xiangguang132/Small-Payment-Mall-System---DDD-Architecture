@@ -17,6 +17,8 @@ public class ProductionOrder {
     private String failReason;
     private LocalDateTime nextRetryTime;
     private Integer status;
+    private String failStage;
+    private Integer needManualIntervention;
     private Integer isDel;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

@@ -17,6 +17,8 @@ public class ProductionOrderDetailResponse {
     private Integer retryCount;
     private String failReason;
     private LocalDateTime nextRetryTime;
+    private String failStage;
+    private Integer needManualIntervention;
     private Integer status;
     private Integer isDel;
     private LocalDateTime createTime;

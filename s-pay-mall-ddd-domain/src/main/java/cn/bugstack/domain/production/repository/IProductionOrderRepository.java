@@ -20,7 +20,8 @@ public interface IProductionOrderRepository {
 
     void updateOrderStatus(Long orderId, Integer status);
 
-    void recordExecuteFailure(Long orderId, String failReason, LocalDateTime nextRetryTime, Integer maxRetryCount);
+    void recordExecuteFailure(Long orderId, String failReason, LocalDateTime nextRetryTime, Integer maxRetryCount, String failStage,
+                              Integer needManualIntervention);
 
     void updateMaterialAllocationNo(Long orderMaterialId, String allocationNo, Integer status);
 }

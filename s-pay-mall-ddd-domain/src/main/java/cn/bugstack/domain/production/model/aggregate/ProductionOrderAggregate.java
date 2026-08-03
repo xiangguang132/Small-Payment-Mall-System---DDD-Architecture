@@ -24,6 +24,8 @@ public class ProductionOrderAggregate {
     private Integer retryCount;
     private String failReason;
     private LocalDateTime nextRetryTime;
+    private String failStage;
+    private Integer needManualIntervention;
     @Builder.Default
     private Integer status = 0;
     private Integer isDel = 0;

@@ -2,6 +2,7 @@ package cn.bugstack.domain.auth.service;
 
 import cn.bugstack.domain.auth.adapter.port.IJwtPort;
 import cn.bugstack.domain.auth.adapter.port.ILoginPort;
+import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.google.common.cache.Cache;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class WeixinLoginService implements ILoginService {
         try {
             return loginPort.createQrCodeTicket();
         } catch (Exception e) {
-            throw new AppException(e.getMessage());
+            throw new AppException(ResponseCode.UN_ERROR, e.getMessage(), e);
         }
     }
 

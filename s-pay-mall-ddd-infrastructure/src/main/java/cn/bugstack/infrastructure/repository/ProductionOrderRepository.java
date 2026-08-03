@@ -112,15 +112,28 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     }
 
     @Override
-    public void recordExecuteFailure(Long orderId, String failReason, LocalDateTime nextRetryTime, Integer maxRetryCount) {
+    public void recordExecuteFailure(Long orderId,
+                                     String failReason,
+                                     LocalDateTime nextRetryTime,
+                                     Integer maxRetryCount,
+                                     String failStage,
+                                     Integer needManualIntervention) {
         if (orderId == null) {
             throw new IllegalArgumentException("生产需求单ID不能为空");
         }
         if (maxRetryCount == null || maxRetryCount <= 0) {
             throw new IllegalArgumentException("最大重试次数必须大于0");
         }
+        if (needManualIntervention == null) {
+            needManualIntervention = 0;
+        }
 
-        productionOrderDao.recordExecuteFailure(orderId, trimFailReason(failReason), nextRetryTime, maxRetryCount);
+        productionOrderDao.recordExecuteFailure(orderId,
+                trimFailReason(failReason),
+                nextRetryTime,
+                maxRetryCount,
+                failStage,
+                needManualIntervention);
     }
 
     @Override
@@ -151,6 +164,8 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 .failReason(productionOrder.getFailReason())
                 .nextRetryTime(productionOrder.getNextRetryTime())
                 .status(productionOrder.getStatus())
+                .failStage(productionOrder.getFailStage())
+                .needManualIntervention(productionOrder.getNeedManualIntervention())
                 .isDel(productionOrder.getIsDel())
                 .createTime(productionOrder.getCreateTime())
                 .updateTime(productionOrder.getUpdateTime())
@@ -170,6 +185,8 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         productionOrder.setFailReason(order.getFailReason());
         productionOrder.setNextRetryTime(order.getNextRetryTime());
         productionOrder.setStatus(order.getStatus());
+        productionOrder.setFailStage(order.getFailStage());
+        productionOrder.setNeedManualIntervention(order.getNeedManualIntervention());
         productionOrder.setIsDel(order.getIsDel());
         productionOrder.setCreateTime(order.getCreateTime());
         productionOrder.setUpdateTime(order.getUpdateTime());

@@ -2,19 +2,66 @@ package cn.bugstack.trigger.exception;
 
 import cn.bugstack.api.response.Response;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.validation.ConstraintViolationException;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<Response<Object>> handleAppException(AppException ex) {
+        Response<Object> response = Response.<Object>builder()
+                .code(ex.getCode())
+                .info(ex.getInfo())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<Response<Object>> handleDuplicateKeyException(DuplicateKeyException ex) {
+        log.warn("数据唯一约束冲突", ex);
+        Response<Object> response = Response.<Object>builder()
+                .code(ResponseCode.CONFLICT.getCode())
+                .info("数据已存在，请勿重复提交")
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler({
+            HttpMessageNotReadableException.class,
+            MethodArgumentTypeMismatchException.class,
+            MissingServletRequestParameterException.class
+    })
+    public ResponseEntity<Response<Object>> handleBadRequestException(Exception ex) {
+        Response<Object> response = Response.<Object>builder()
+                .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                .info("请求参数格式错误")
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Response<Object>> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        Response<Object> response = Response.<Object>builder()
+                .code(ResponseCode.METHOD_NOT_ALLOWED.getCode())
+                .info(ResponseCode.METHOD_NOT_ALLOWED.getInfo())
+                .build();
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(response);
+    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Response<Object>> handleIllegalArgumentException(IllegalArgumentException ex) {

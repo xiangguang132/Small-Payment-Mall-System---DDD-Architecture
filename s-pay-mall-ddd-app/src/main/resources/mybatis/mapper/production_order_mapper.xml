@@ -14,6 +14,8 @@
         <result column="fail_reason" property="failReason"/>
         <result column="next_retry_time" property="nextRetryTime"/>
         <result column="status" property="status"/>
+        <result column="fail_stage" property="failStage"/>
+        <result column="need_manual_intervention" property="needManualIntervention"/>
         <result column="is_del" property="isDel"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
@@ -21,27 +23,27 @@
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductionOrder" useGeneratedKeys="true" keyProperty="id">
         insert into production_order
-        (order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time)
+        (order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time)
         values
-        (#{orderNo}, #{requestNo}, #{productId}, #{productQuantity}, #{warehouseId}, #{retryCount}, #{failReason}, #{nextRetryTime}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+        (#{orderNo}, #{requestNo}, #{productId}, #{productQuantity}, #{warehouseId}, #{retryCount}, #{failReason}, #{nextRetryTime}, #{failStage}, #{needManualIntervention}, #{status}, #{isDel}, #{createTime}, #{updateTime})
     </insert>
 
     <select id="queryById" parameterType="java.lang.Long" resultMap="productionOrderMap">
-        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
         from production_order
         where id = #{id}
           and is_del = 0
     </select>
 
     <select id="queryByRequestNo" parameterType="java.lang.String" resultMap="productionOrderMap">
-        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
         from production_order
         where request_no = #{requestNo}
         limit 1
     </select>
 
     <select id="queryByStatus" resultMap="productionOrderMap">
-        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
         from production_order
         where status = #{status}
         and is_del = 0
@@ -50,7 +52,7 @@
     </select>
 
     <select id="queryExecutableOrders" resultMap="productionOrderMap">
-        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
         from production_order
         where status in (0, 3)
           and (next_retry_time is null or next_retry_time &lt;= now())
@@ -71,7 +73,10 @@
         set retry_count = retry_count + 1,
             fail_reason = #{failReason},
             next_retry_time = #{nextRetryTime},
+            fail_stage = #{failStage},
+            need_manual_intervention = #{needManualIntervention},
             status = case
+                when #{needManualIntervention} = 1 then 4
                 when retry_count + 1 >= #{maxRetryCount} then 4
                 else 3
             end,

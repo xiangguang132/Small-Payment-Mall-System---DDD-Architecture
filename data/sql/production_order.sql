@@ -9,6 +9,8 @@ CREATE TABLE production_order (
     retry_count int not null default 0 comment '重试次数',
     fail_reason varchar(512) default null comment '失败原因',
     next_retry_time datetime default null comment '下次重试时间',
+    fail_stage varchar(64) default null comment '失败阶段',
+    need_manual_intervention tinyint(1) not null default 0 comment '是否需要人工介入',
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     is_del TINYINT(1) DEFAULT 0 COMMENT '逻辑删除：0-未删除，1-已删除'

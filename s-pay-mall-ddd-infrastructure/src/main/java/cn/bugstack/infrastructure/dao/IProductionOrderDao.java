@@ -25,5 +25,7 @@ public interface IProductionOrderDao {
     void recordExecuteFailure(@Param("id") Long id,
                               @Param("failReason") String failReason,
                               @Param("nextRetryTime") LocalDateTime nextRetryTime,
-                              @Param("maxRetryCount") Integer maxRetryCount);
+                              @Param("maxRetryCount") Integer maxRetryCount,
+                              @Param("failStage") String failStage,
+                              @Param("needManualIntervention") Integer needManualIntervention);
 }
