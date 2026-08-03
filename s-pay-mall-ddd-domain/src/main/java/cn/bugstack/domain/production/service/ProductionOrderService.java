@@ -129,11 +129,23 @@ public class ProductionOrderService implements IProductionOrderService {
     public void executeCreatedOrders() {
         List<ProductionOrderAggregate> orders = productionOrderRepository.queryCreatedOrders(10);
         for (ProductionOrderAggregate order : orders) {
+            log.info("开始执行生产需求单 | orderId:{}, orderNo:{}, requestNo:{}, status:{}, retryCount:{}",
+                    order.getId(), order.getOrderNo(), order.getRequestNo(),
+                    order.getStatus(), order.getRetryCount());
+            // 开始计时器
+            long startTime = System.currentTimeMillis();
             try {
-                log.info("当前执行的生产需求单任务 orderId: {}",  order.getId());
                 productionOrderExecutor.execute(order.getId());
+
+                // 执行计时器
+                long costTime = System.currentTimeMillis() - startTime;
+                log.info("生产需求单执行成功 | orderId:{}, orderNo:{}, 耗时:{}ms",
+                        order.getId(), order.getOrderNo(), costTime);
+
             } catch (Exception e) {
-                log.warn("生产需求单执行失败 orderId:{} reason:{}", order.getId(), e.getMessage(), e);
+                long costTime = System.currentTimeMillis() - startTime;
+                log.warn("生产需求单执行失败 | orderId:{}, orderNo:{}, 耗时:{}ms, reason:{}",
+                        order.getId(), order.getOrderNo(), costTime, e.getMessage(), e);
                 // 初始写法 - 失败之后直接修改订单状态为 单纯的失败
                 // productionOrderRepository.updateOrderStatus(order.getId(), ProductionOrderStatusVO.RETRYABLE_FAILED);
 
@@ -215,11 +227,11 @@ public class ProductionOrderService implements IProductionOrderService {
 
     /**
      * 订单编号生成方法
-     * @return
+     * 格式：PO + 年月日时分秒毫秒 + 4位随机数 (例如: PO202608031603395001234)
      */
     private String generateOrderNo() {
         return "PO" +
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) +
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")) +
                 ThreadLocalRandom.current().nextInt(1000, 10000);
     }
 
@@ -251,3 +263,4 @@ public class ProductionOrderService implements IProductionOrderService {
         );
     }
 }
+

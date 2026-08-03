@@ -158,3 +158,4 @@ Caused by: java.lang.IllegalArgumentException: 原料可用库存不足，不能
 26-08-03.15:51:54.568 [http-nio-8080-exec-3] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
 26-08-03.15:52:42.114 [http-nio-8080-exec-4] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
 26-08-03.15:52:55.818 [http-nio-8080-exec-2] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
+26-08-03.16:07:47.224 [http-nio-8080-exec-2] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
