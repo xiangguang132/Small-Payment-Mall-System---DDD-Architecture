@@ -6,6 +6,7 @@
     <resultMap id="productionOrderMap" type="cn.bugstack.infrastructure.dao.po.ProductionOrder">
         <id column="id" property="id"/>
         <result column="order_no" property="orderNo"/>
+        <result column="request_no" property="requestNo"/>
         <result column="product_id" property="productId"/>
         <result column="product_quantity" property="productQuantity"/>
         <result column="warehouse_id" property="warehouseId"/>
@@ -20,32 +21,27 @@
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductionOrder" useGeneratedKeys="true" keyProperty="id">
         insert into production_order
-        (order_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time)
+        (order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time)
         values
-        (#{orderNo}, #{productId}, #{productQuantity}, #{warehouseId}, #{retryCount}, #{failReason}, #{nextRetryTime}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+        (#{orderNo}, #{requestNo}, #{productId}, #{productQuantity}, #{warehouseId}, #{retryCount}, #{failReason}, #{nextRetryTime}, #{status}, #{isDel}, #{createTime}, #{updateTime})
     </insert>
 
     <select id="queryById" parameterType="java.lang.Long" resultMap="productionOrderMap">
-        select id, order_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
         from production_order
         where id = #{id}
           and is_del = 0
     </select>
 
-    <select id="countRecentSameOrder" resultType="java.lang.Integer">
-        select count(1)
+    <select id="queryByRequestNo" parameterType="java.lang.String" resultMap="productionOrderMap">
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
         from production_order
-        where product_id = #{productId}
-        and product_quantity = #{productQuantity}
-        and warehouse_id = #{warehouseId}
-        and status = #{status}
-        and is_del = #{isDel}
-        and create_time >= #{startTime}
-        and update_time >= #{startTime}
+        where request_no = #{requestNo}
+        limit 1
     </select>
 
     <select id="queryByStatus" resultMap="productionOrderMap">
-        select id, order_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
         from production_order
         where status = #{status}
         and is_del = 0
@@ -54,7 +50,7 @@
     </select>
 
     <select id="queryExecutableOrders" resultMap="productionOrderMap">
-        select id, order_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, status, is_del, create_time, update_time
         from production_order
         where status in (0, 3)
           and (next_retry_time is null or next_retry_time &lt;= now())

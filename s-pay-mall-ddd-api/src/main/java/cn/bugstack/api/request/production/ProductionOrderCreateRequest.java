@@ -3,6 +3,7 @@ package cn.bugstack.api.request.production;
 import lombok.Data;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -13,6 +14,9 @@ public class ProductionOrderCreateRequest {
 
     @NotNull(message = "生产商品ID不能为空")
     private Long productId;
+
+    @NotBlank(message = "请求号不能为空")
+    private String requestNo;
 
     @NotNull(message = "生产数量不能为空")
     @Positive(message = "生产数量必须大于0")

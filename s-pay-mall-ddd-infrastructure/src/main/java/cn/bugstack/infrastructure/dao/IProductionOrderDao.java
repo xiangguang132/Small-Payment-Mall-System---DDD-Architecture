@@ -14,12 +14,7 @@ public interface IProductionOrderDao {
 
     ProductionOrder queryById(@Param("id") Long id);
 
-    Integer countRecentSameOrder(@Param("productId") Long productId,
-                                 @Param("productQuantity") Long productQuantity,
-                                 @Param("warehouseId") Long warehouseId,
-                                 @Param("status") Integer status,
-                                 @Param("isDel") Integer isDel,
-                                 @Param("startTime") LocalDateTime startTime);
+    ProductionOrder queryByRequestNo(@Param("requestNo") String requestNo);
 
     List<ProductionOrder> queryByStatus(@Param("status") Integer status, @Param("limit") Integer limit);
 

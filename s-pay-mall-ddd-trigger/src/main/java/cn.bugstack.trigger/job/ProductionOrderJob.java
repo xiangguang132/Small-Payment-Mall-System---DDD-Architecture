@@ -36,6 +36,8 @@ public class ProductionOrderJob {
         try {
             log.info("开始执行生产需求单任务");
             productionOrderService.executeCreatedOrders();
+        } catch (Exception e) {
+            log.error("生产需求单任务执行异常", e);
         } finally {
             running.set(false);
         }

@@ -18,6 +18,7 @@ public class ProductionOrderAggregate {
     private Long id;
     private String orderNo;
     private Long productId;
+    private String requestNo;
     private Long productQuantity;
     private Long warehouseId;
     private Integer retryCount;

@@ -11,6 +11,7 @@ import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,18 +50,19 @@ public class ProductionOrderService implements IProductionOrderService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
+    public Long createOrder(Long productId, String requestNo, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
+        requestNo = validateAndNormalizeRequestNo(requestNo);
+        ProductionOrderAggregate existsOrder = productionOrderRepository.queryByRequestNo(requestNo);
+        if (existsOrder != null) {
+            return existsOrder.getId();
+        }
+
         validateCreateParams(productId, productQuantity, warehouseId, materials);
-        validateRecentDuplicateOrder(
-                productId,
-                productQuantity.longValue(),
-                warehouseId,
-                ProductionOrderStatusVO.CREATED,
-                0
-        );
+
         LocalDateTime now = LocalDateTime.now();
         ProductionOrderAggregate order = ProductionOrderAggregate.builder()
                 .orderNo(generateOrderNo())
+                .requestNo(requestNo)
                 .productId(productId)
                 .productQuantity(productQuantity.longValue())
                 .warehouseId(warehouseId)
@@ -73,7 +75,16 @@ public class ProductionOrderService implements IProductionOrderService {
                 .updateTime(now)
                 .build();
 
-        Long orderId = productionOrderRepository.saveOrder(order);
+        Long orderId;
+        try {
+            orderId = productionOrderRepository.saveOrder(order);
+        } catch (DuplicateKeyException e) {
+            ProductionOrderAggregate duplicateOrder = productionOrderRepository.queryByRequestNo(requestNo);
+            if (duplicateOrder != null) {
+                return duplicateOrder.getId();
+            }
+            throw e;
+        }
 
         for (ProductionOrderMaterialVO material : materials) {
             material.setProductionOrderId(orderId);
@@ -85,6 +96,13 @@ public class ProductionOrderService implements IProductionOrderService {
 
         productionOrderRepository.saveOrderMaterials(orderId, materials);
         return orderId;
+    }
+
+    private String validateAndNormalizeRequestNo(String requestNo) {
+        if (requestNo == null || requestNo.trim().isEmpty()) {
+            throw new IllegalArgumentException("请求号不能为空");
+        }
+        return requestNo.trim();
     }
 
     @Override
@@ -181,35 +199,6 @@ public class ProductionOrderService implements IProductionOrderService {
         }
         if (warehouse.getStatus() == null || warehouse.getStatus() != 1) {
             throw new IllegalArgumentException("入库仓库未启用，不能创建生产需求单");
-        }
-    }
-
-    /**
-     * 验证 一小时内 是否存在重复生产需求单
-     * @param productId
-     * @param productQuantity
-     * @param warehouseId
-     * @param status
-     * @param isDel
-     */
-    private void validateRecentDuplicateOrder(Long productId,
-                                              Long productQuantity,
-                                              Long warehouseId,
-                                              Integer status,
-                                              Integer isDel) {
-        LocalDateTime startTime = LocalDateTime.now().minusHours(1);
-
-        boolean exists = productionOrderRepository.existsRecentSameOrder(
-                productId,
-                productQuantity,
-                warehouseId,
-                status,
-                isDel,
-                startTime
-        );
-
-        if (exists) {
-            throw new IllegalArgumentException("1小时内已存在相同生产需求单，请勿重复创建");
         }
     }
 

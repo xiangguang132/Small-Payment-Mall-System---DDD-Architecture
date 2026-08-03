@@ -66,21 +66,19 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     }
 
     @Override
-    public boolean existsRecentSameOrder(Long productId,
-                                         Long productQuantity,
-                                         Long warehouseId,
-                                         Integer status,
-                                         Integer isDel,
-                                         LocalDateTime startTime) {
-        Integer count = productionOrderDao.countRecentSameOrder(
-                productId,
-                productQuantity,
-                warehouseId,
-                status,
-                isDel,
-                startTime
-        );
-        return count != null && count > 0;
+    public ProductionOrderAggregate queryByRequestNo(String requestNo) {
+        if (requestNo == null || requestNo.trim().isEmpty()) {
+            throw new IllegalArgumentException("请求号不能为空");
+        }
+
+        ProductionOrder productionOrder = productionOrderDao.queryByRequestNo(requestNo.trim());
+        if (productionOrder == null) return null;
+
+        List<ProductionOrderMaterialVO> materials = productionOrderMaterialDao.queryByProductionOrderId(productionOrder.getId()).stream()
+                .map(this::toProductionOrderMaterialVO)
+                .collect(Collectors.toList());
+
+        return toProductionOrderAggregate(productionOrder, materials);
     }
 
     @Override
@@ -145,6 +143,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         return ProductionOrderAggregate.builder()
                 .id(productionOrder.getId())
                 .orderNo(productionOrder.getOrderNo())
+                .requestNo(productionOrder.getRequestNo())
                 .productId(productionOrder.getProductId())
                 .productQuantity(productionOrder.getProductQuantity())
                 .warehouseId(productionOrder.getWarehouseId())
@@ -163,6 +162,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         ProductionOrder productionOrder = new ProductionOrder();
         productionOrder.setId(order.getId());
         productionOrder.setOrderNo(order.getOrderNo());
+        productionOrder.setRequestNo(order.getRequestNo());
         productionOrder.setProductId(order.getProductId());
         productionOrder.setProductQuantity(order.getProductQuantity());
         productionOrder.setWarehouseId(order.getWarehouseId());

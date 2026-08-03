@@ -14,12 +14,7 @@ public interface IProductionOrderRepository {
 
     ProductionOrderAggregate queryById(Long id);
 
-    boolean existsRecentSameOrder(Long productId,
-                                  Long productQuantity,
-                                  Long warehouseId,
-                                  Integer status,
-                                  Integer isDel,
-                                  LocalDateTime startTime);
+    ProductionOrderAggregate queryByRequestNo(String requestNo);
 
     List<ProductionOrderAggregate> queryCreatedOrders(Integer limit);
 

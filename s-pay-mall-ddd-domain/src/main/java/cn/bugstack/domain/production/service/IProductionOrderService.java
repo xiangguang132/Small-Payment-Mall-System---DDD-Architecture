@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IProductionOrderService {
 
-    Long createOrder(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials);
+    Long createOrder(Long productId, String requestNo, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials);
 
     ProductionOrderAggregate queryProductionOrderById(Long id);
 

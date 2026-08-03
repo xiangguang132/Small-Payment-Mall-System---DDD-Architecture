@@ -10,6 +10,7 @@ public class ProductionOrderDetailResponse {
 
     private Long id;
     private String orderNo;
+    private String requestNo;
     private Long productId;
     private Long productQuantity;
     private Long warehouseId;

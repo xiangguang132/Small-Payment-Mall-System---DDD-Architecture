@@ -24,6 +24,7 @@ public class ProductionOrderAssembler {
         ProductionOrderDetailResponse response = new ProductionOrderDetailResponse();
         response.setId(productionOrder.getId());
         response.setOrderNo(productionOrder.getOrderNo());
+        response.setRequestNo(productionOrder.getRequestNo());
         response.setProductId(productionOrder.getProductId());
         response.setProductQuantity(productionOrder.getProductQuantity());
         response.setWarehouseId(productionOrder.getWarehouseId());

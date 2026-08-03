@@ -70,6 +70,7 @@ public class ProductionOrderController {
 
         Long orderId = productionOrderService.createOrder(
                 request.getProductId(),
+                request.getRequestNo(),
                 request.getProductQuantity(),
                 request.getWarehouseId(),
                 materials

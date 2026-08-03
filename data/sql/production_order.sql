@@ -1,6 +1,7 @@
 CREATE TABLE production_order (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     order_no VARCHAR(64) NOT NULL,
+    request_no VARCHAR(64) NOT NULL COMMENT '调用方业务请求号',
     product_id BIGINT NOT NULL COMMENT '生产成品ID',
     product_quantity INT NOT NULL COMMENT '生产数量',
     warehouse_id BIGINT NOT NULL COMMENT '成品入库仓库ID',
@@ -15,3 +16,9 @@ CREATE TABLE production_order (
 
 ALTER TABLE production_order
     MODIFY COLUMN status TINYINT NOT NULL COMMENT '0:待处理, 1:处理中, 2:已完成, 3:失败可重试, 4:失败终态, 5:已取消';
+
+alter table production_order
+    add unique key uk_order_no (order_no),
+    add unique key uk_request_no (request_no),
+    add key idx_status_isdel_id (status, is_del, id),
+    add key idx_product_warehouse_status_time (product_id, warehouse_id, status, create_time);
