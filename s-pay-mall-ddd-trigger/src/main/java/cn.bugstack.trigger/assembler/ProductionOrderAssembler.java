@@ -27,6 +27,9 @@ public class ProductionOrderAssembler {
         response.setProductId(productionOrder.getProductId());
         response.setProductQuantity(productionOrder.getProductQuantity());
         response.setWarehouseId(productionOrder.getWarehouseId());
+        response.setRetryCount(productionOrder.getRetryCount());
+        response.setFailReason(productionOrder.getFailReason());
+        response.setNextRetryTime(productionOrder.getNextRetryTime());
         response.setStatus(productionOrder.getStatus());
         response.setIsDel(productionOrder.getIsDel());
         response.setCreateTime(productionOrder.getCreateTime());

@@ -20,6 +20,9 @@ public class ProductionOrderAggregate {
     private Long productId;
     private Long productQuantity;
     private Long warehouseId;
+    private Integer retryCount;
+    private String failReason;
+    private LocalDateTime nextRetryTime;
     @Builder.Default
     private Integer status = 0;
     private Integer isDel = 0;

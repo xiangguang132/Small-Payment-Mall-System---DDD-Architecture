@@ -1,15 +1,14 @@
 package cn.bugstack.domain.production.service;
 
 import cn.bugstack.domain.material.service.IMaterialService;
-import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
+import cn.bugstack.domain.production.model.vo.ProductionOrderStatusVO;
 import cn.bugstack.domain.production.repository.IProductionOrderRepository;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
-import cn.bugstack.domain.warehousestock.service.IStockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,24 +23,12 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class ProductionOrderService implements IProductionOrderService {
 
-    private static final int STATUS_CREATED = 0;
-    private static final int STATUS_PROCESSING = 1;
-    private static final int STATUS_COMPLETED = 2;
-    private static final int STATUS_FAILED = 3;
-
     private static final int MATERIAL_STATUS_CREATED = 0;
-    private static final int MATERIAL_STATUS_LOCKED = 1;
-    private static final int MATERIAL_STATUS_OUTBOUND = 2;
-    private static final int MATERIAL_STATUS_RELEASED = 3;
+    private static final int MAX_EXECUTE_RETRY_COUNT = 3;
+    private static final long RETRY_DELAY_MINUTES = 1L;
 
     @Resource
     private IProductionOrderRepository productionOrderRepository;
-
-    @Resource
-    private IMaterialStockAllocationService materialStockAllocationService;
-
-    @Resource
-    private IStockService stockService;
 
     @Resource
     private IProductService productService;
@@ -64,7 +50,7 @@ public class ProductionOrderService implements IProductionOrderService {
                 productId,
                 productQuantity.longValue(),
                 warehouseId,
-                STATUS_CREATED,
+                ProductionOrderStatusVO.CREATED,
                 0
         );
         LocalDateTime now = LocalDateTime.now();
@@ -73,7 +59,10 @@ public class ProductionOrderService implements IProductionOrderService {
                 .productId(productId)
                 .productQuantity(productQuantity.longValue())
                 .warehouseId(warehouseId)
-                .status(STATUS_CREATED)
+                .retryCount(0)
+                .failReason(null)
+                .nextRetryTime(null)
+                .status(ProductionOrderStatusVO.CREATED)
                 .isDel(0)
                 .createTime(now)
                 .updateTime(now)
@@ -111,11 +100,22 @@ public class ProductionOrderService implements IProductionOrderService {
                 productionOrderExecutor.execute(order.getId());
             } catch (Exception e) {
                 log.warn("生产需求单执行失败 orderId:{} reason:{}", order.getId(), e.getMessage(), e);
-                productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
+                // 初始写法 - 失败之后直接修改订单状态为 单纯的失败
+                // productionOrderRepository.updateOrderStatus(order.getId(), ProductionOrderStatusVO.RETRYABLE_FAILED);
+
+                // 失败重试写法 - 失败之后 尝试在xx时间后重新尝试执行，此时定义状态为“失败可重试-3”，xx次后宣布“彻底失败-4”
+                recordExecuteFailure(order, e);
             }
         }
     }
 
+    /**
+     * 验证创建请求合法性
+     * @param productId
+     * @param productQuantity
+     * @param warehouseId
+     * @param materials
+     */
     private void validateCreateParams(Long productId, Integer productQuantity, Long warehouseId, List<ProductionOrderMaterialVO> materials) {
         if (productId == null) {
             throw new IllegalArgumentException("生产商品ID不能为空");
@@ -145,6 +145,10 @@ public class ProductionOrderService implements IProductionOrderService {
         }
     }
 
+    /**
+     * 验证商品合法性
+     * @param productId
+     */
     private void validateProductEnabled(Long productId) {
         ProductAggregate product = productService.queryProductById(productId);
         if (product == null) {
@@ -158,6 +162,10 @@ public class ProductionOrderService implements IProductionOrderService {
         }
     }
 
+    /**
+     * 验证商品仓库合法性
+     * @param warehouseId
+     */
     private void validateWarehouseEnabled(Long warehouseId) {
         WarehouseAggregate warehouse = warehouseService.queryWarehouseById(warehouseId);
         if (warehouse == null) {
@@ -171,6 +179,14 @@ public class ProductionOrderService implements IProductionOrderService {
         }
     }
 
+    /**
+     * 验证 一小时内 是否存在重复生产需求单
+     * @param productId
+     * @param productQuantity
+     * @param warehouseId
+     * @param status
+     * @param isDel
+     */
     private void validateRecentDuplicateOrder(Long productId,
                                               Long productQuantity,
                                               Long warehouseId,
@@ -192,89 +208,32 @@ public class ProductionOrderService implements IProductionOrderService {
         }
     }
 
+    /**
+     * 订单编号生成方法
+     * @return
+     */
     private String generateOrderNo() {
         return "PO" +
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) +
                 ThreadLocalRandom.current().nextInt(1000, 10000);
     }
+
+    private void recordExecuteFailure(ProductionOrderAggregate order, Exception e) {
+        if (order == null || order.getId() == null) {
+            return;
+        }
+
+        int currentRetryCount = order.getRetryCount() == null ? 0 : order.getRetryCount();
+        LocalDateTime nextRetryTime = currentRetryCount + 1 >= MAX_EXECUTE_RETRY_COUNT
+                ? null
+                : LocalDateTime.now().plusMinutes(RETRY_DELAY_MINUTES);
+        String failReason = e == null ? "生产需求单执行失败" : e.getMessage();
+
+        productionOrderRepository.recordExecuteFailure(
+                order.getId(),
+                failReason,
+                nextRetryTime,
+                MAX_EXECUTE_RETRY_COUNT
+        );
+    }
 }
-
-
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public void executeOrder(Long productionOrderId) {
-//        ProductionOrderAggregate order = productionOrderRepository.queryById(productionOrderId);
-//        if (order == null) {
-//            throw new IllegalArgumentException("生产需求单不存在");
-//        }
-//        if (order.getStatus() == null || order.getStatus() != 0) {
-//            log.info("生产需求单状态不是待处理，跳过 orderId:{} status:{}", order.getId(), order.getStatus());
-//            return;
-//        }
-//        if (order.getMaterials() == null || order.getMaterials().isEmpty()) {
-//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
-//            log.warn("生产需求单没有原料明细，标记为失败 orderId:{}", order.getId());
-//            return;
-//        }
-//
-//        productionOrderRepository.updateOrderStatus(order.getId(), STATUS_PROCESSING);
-//
-//        List<ProductionOrderMaterialVO> lockedMaterials = new ArrayList<>();
-//
-//        try {
-//            for (ProductionOrderMaterialVO material : order.getMaterials()) {
-//                String allocationNo = materialStockAllocationService.create(
-//                        material.getMaterialId(),
-//                        material.getMaterialQuantity(),
-//                        "生产单" + order.getOrderNo() + "备料"
-//                );
-//
-//                materialStockAllocationService.lock(allocationNo);
-//
-//                material.setAllocationNo(allocationNo);
-//                lockedMaterials.add(material);
-//
-//                productionOrderRepository.updateMaterialAllocationNo(
-//                        material.getId(),
-//                        allocationNo,
-//                        MATERIAL_STATUS_LOCKED
-//                );
-//            }
-//
-//            for (ProductionOrderMaterialVO material : lockedMaterials) {
-//                materialStockAllocationService.autoOutbound(material.getAllocationNo());
-//                productionOrderRepository.updateMaterialAllocationNo(
-//                        material.getId(),
-//                        material.getAllocationNo(),
-//                        MATERIAL_STATUS_OUTBOUND
-//                );
-//            }
-//
-//            stockService.inbound(
-//                    order.getWarehouseId(),
-//                    order.getProductId(),
-//                    order.getProductQuantity().intValue()
-//            );
-//
-//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_COMPLETED);
-//            log.info("生产需求单执行完成 orderId:{}", order.getId());
-//
-//        } catch (Exception e) {
-//            log.warn("生产需求单执行失败，开始释放已锁定原料 orderId:{} reason:{}", order.getId(), e.getMessage());
-//
-//            for (ProductionOrderMaterialVO material : lockedMaterials) {
-//                try {
-//                    materialStockAllocationService.release(material.getAllocationNo());
-//                    productionOrderRepository.updateMaterialAllocationNo(
-//                            material.getId(),
-//                            material.getAllocationNo(),
-//                            MATERIAL_STATUS_RELEASED
-//                    );
-//                } catch (Exception releaseException) {
-//                    log.error("释放原料失败 allocationNo:{}", material.getAllocationNo(), releaseException);
-//                }
-//            }
-//
-//            productionOrderRepository.updateOrderStatus(order.getId(), STATUS_FAILED);
-//        }
-//    }

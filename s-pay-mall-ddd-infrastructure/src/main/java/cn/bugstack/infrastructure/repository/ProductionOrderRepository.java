@@ -89,7 +89,7 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
             limit = 10;
         }
 
-        return productionOrderDao.queryByStatus(0, limit).stream()
+        return productionOrderDao.queryExecutableOrders(limit).stream()
                 .map(productionOrder -> {
                     List<ProductionOrderMaterialVO> materials = productionOrderMaterialDao
                             .queryByProductionOrderId(productionOrder.getId())
@@ -111,6 +111,18 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         }
 
         productionOrderDao.updateStatus(orderId, status);
+    }
+
+    @Override
+    public void recordExecuteFailure(Long orderId, String failReason, LocalDateTime nextRetryTime, Integer maxRetryCount) {
+        if (orderId == null) {
+            throw new IllegalArgumentException("生产需求单ID不能为空");
+        }
+        if (maxRetryCount == null || maxRetryCount <= 0) {
+            throw new IllegalArgumentException("最大重试次数必须大于0");
+        }
+
+        productionOrderDao.recordExecuteFailure(orderId, trimFailReason(failReason), nextRetryTime, maxRetryCount);
     }
 
     @Override
@@ -136,6 +148,9 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 .productId(productionOrder.getProductId())
                 .productQuantity(productionOrder.getProductQuantity())
                 .warehouseId(productionOrder.getWarehouseId())
+                .retryCount(productionOrder.getRetryCount())
+                .failReason(productionOrder.getFailReason())
+                .nextRetryTime(productionOrder.getNextRetryTime())
                 .status(productionOrder.getStatus())
                 .isDel(productionOrder.getIsDel())
                 .createTime(productionOrder.getCreateTime())
@@ -151,6 +166,9 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
         productionOrder.setProductId(order.getProductId());
         productionOrder.setProductQuantity(order.getProductQuantity());
         productionOrder.setWarehouseId(order.getWarehouseId());
+        productionOrder.setRetryCount(order.getRetryCount());
+        productionOrder.setFailReason(order.getFailReason());
+        productionOrder.setNextRetryTime(order.getNextRetryTime());
         productionOrder.setStatus(order.getStatus());
         productionOrder.setIsDel(order.getIsDel());
         productionOrder.setCreateTime(order.getCreateTime());
@@ -184,5 +202,12 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
                 .createTime(material.getCreateTime())
                 .updateTime(material.getUpdateTime())
                 .build();
+    }
+
+    private String trimFailReason(String failReason) {
+        if (failReason == null) {
+            return null;
+        }
+        return failReason.length() > 512 ? failReason.substring(0, 512) : failReason;
     }
 }

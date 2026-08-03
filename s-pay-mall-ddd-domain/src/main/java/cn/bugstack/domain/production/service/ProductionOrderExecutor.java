@@ -2,6 +2,7 @@ package cn.bugstack.domain.production.service;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
+import cn.bugstack.domain.production.model.vo.ProductionOrderStatusVO;
 import cn.bugstack.domain.production.repository.IProductionOrderRepository;
 import cn.bugstack.domain.warehousestock.service.IStockService;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class ProductionOrderExecutor {
         if (order == null) {
             throw new IllegalArgumentException("生产需求单不存在");
         }
-        if (order.getStatus() == null || order.getStatus() != 0) {
+        if (!ProductionOrderStatusVO.canExecute(order.getStatus())) {
             return ;
         }
         if (order.getMaterials() == null || order.getMaterials().isEmpty()) {

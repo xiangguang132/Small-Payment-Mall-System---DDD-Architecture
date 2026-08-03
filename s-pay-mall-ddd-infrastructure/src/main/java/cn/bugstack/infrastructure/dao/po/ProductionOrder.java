@@ -12,6 +12,9 @@ public class ProductionOrder {
     private Long productId;
     private Long productQuantity;
     private Long warehouseId;
+    private Integer retryCount;
+    private String failReason;
+    private LocalDateTime nextRetryTime;
     private Integer status;
     private Integer isDel;
     private LocalDateTime createTime;

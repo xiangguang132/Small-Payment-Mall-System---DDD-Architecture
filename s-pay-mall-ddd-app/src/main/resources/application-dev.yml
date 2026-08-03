@@ -61,9 +61,12 @@ jwt:
   issuer: s-pay-mall
   expire-seconds: 604800
 
-# 生产需求单定时任务
+# 生产需求单定时任务与重试次数定义
 production:
   order:
     job:
       enabled: true
       cron: "0 0/1 * * * ?"
+    retry:
+      max-count: 3
+      delay-minutes: 5

@@ -23,5 +23,12 @@ public interface IProductionOrderDao {
 
     List<ProductionOrder> queryByStatus(@Param("status") Integer status, @Param("limit") Integer limit);
 
+    List<ProductionOrder> queryExecutableOrders(@Param("limit") Integer limit);
+
     void updateStatus(@Param("id") Long id, @Param("status") Integer status);
+
+    void recordExecuteFailure(@Param("id") Long id,
+                              @Param("failReason") String failReason,
+                              @Param("nextRetryTime") LocalDateTime nextRetryTime,
+                              @Param("maxRetryCount") Integer maxRetryCount);
 }
