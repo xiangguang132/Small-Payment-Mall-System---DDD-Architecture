@@ -10,6 +10,7 @@ import cn.bugstack.domain.production.repository.IProductionOrderRepository;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ProductionOrderService implements IProductionOrderService {
 
     private static final int MATERIAL_STATUS_CREATED = 0;
-    private static final int MAX_EXECUTE_RETRY_COUNT = 3;
-    private static final long RETRY_DELAY_MINUTES = 1L;
+
+    @Value("${production.order.retry.max-count:3}")
+    private Integer maxExecuteRetryCount;
+
+    @Value("${production.order.retry.delay-minutes:5}")
+    private Long retryDelayMinutes;
 
     @Resource
     private IProductionOrderRepository productionOrderRepository;
@@ -224,16 +229,16 @@ public class ProductionOrderService implements IProductionOrderService {
         }
 
         int currentRetryCount = order.getRetryCount() == null ? 0 : order.getRetryCount();
-        LocalDateTime nextRetryTime = currentRetryCount + 1 >= MAX_EXECUTE_RETRY_COUNT
+        LocalDateTime nextRetryTime = currentRetryCount + 1 >= maxExecuteRetryCount
                 ? null
-                : LocalDateTime.now().plusMinutes(RETRY_DELAY_MINUTES);
+                : LocalDateTime.now().plusMinutes(retryDelayMinutes);
         String failReason = e == null ? "生产需求单执行失败" : e.getMessage();
 
         productionOrderRepository.recordExecuteFailure(
                 order.getId(),
                 failReason,
                 nextRetryTime,
-                MAX_EXECUTE_RETRY_COUNT
+                maxExecuteRetryCount
         );
     }
 }
