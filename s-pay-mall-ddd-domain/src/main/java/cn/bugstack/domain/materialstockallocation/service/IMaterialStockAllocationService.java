@@ -21,4 +21,6 @@ public interface IMaterialStockAllocationService {
     void recordLockFailure(String allocationNo, String failReason, Integer maxRetryCount);
 
     List<MaterialStockAllocationAggregate> queryByStatus(Integer status, Integer pageNo, Integer pageSize);
+
+    void lockWithAutoReleaseOnFailure(String allocationNo);
 }

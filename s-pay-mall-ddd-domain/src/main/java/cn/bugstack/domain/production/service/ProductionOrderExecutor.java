@@ -1,5 +1,6 @@
 package cn.bugstack.domain.production.service;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
+import cn.bugstack.domain.production.exception.ProductionExecuteException;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionExecuteStageVO;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
@@ -7,7 +8,6 @@ import cn.bugstack.domain.production.model.vo.ProductionOrderStatusVO;
 import cn.bugstack.domain.production.repository.IProductionOrderRepository;
 import cn.bugstack.domain.warehousestock.service.IStockService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -23,7 +23,6 @@ public class ProductionOrderExecutor {
     @Resource
     private IStockService stockService;
 
-    @Transactional(rollbackFor = Exception.class)
     public void execute(Long productionOrderId) {
         ProductionOrderAggregate order = productionOrderRepository.queryById(productionOrderId);
         if (order == null) {
@@ -51,7 +50,7 @@ public class ProductionOrderExecutor {
                     ));
             // 锁定 -》 锁定原料库存
             executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
-                    () -> materialStockAllocationService.lock(allocationNo));
+                    () -> materialStockAllocationService.lockWithAutoReleaseOnFailure(allocationNo));
             // 更新数据库状态为 1 -》 被锁
             executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
                     () -> productionOrderRepository.updateMaterialAllocationNo(material.getId(), allocationNo, 1));

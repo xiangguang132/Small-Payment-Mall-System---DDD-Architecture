@@ -3,6 +3,7 @@ package cn.bugstack.domain.production.service;
 import cn.bugstack.domain.material.service.IMaterialService;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
+import cn.bugstack.domain.production.exception.ProductionExecuteException;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.domain.production.model.vo.ProductionOrderStatusVO;
@@ -122,6 +123,7 @@ public class ProductionOrderService implements IProductionOrderService {
         List<ProductionOrderAggregate> orders = productionOrderRepository.queryCreatedOrders(10);
         for (ProductionOrderAggregate order : orders) {
             try {
+                log.info("当前执行的生产需求单任务 orderId: {}",  order.getId());
                 productionOrderExecutor.execute(order.getId());
             } catch (Exception e) {
                 log.warn("生产需求单执行失败 orderId:{} reason:{}", order.getId(), e.getMessage(), e);
