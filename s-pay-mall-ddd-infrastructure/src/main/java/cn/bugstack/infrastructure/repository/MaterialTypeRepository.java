@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
 import cn.bugstack.domain.materialtype.repository.IMaterialTypeRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.IMaterialTypeDao;
 import cn.bugstack.infrastructure.dao.po.MaterialType;
@@ -16,8 +17,12 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
 
     @Resource
     private IMaterialDao materialDao;
+
     @Resource
     private IMaterialTypeDao materialTypeDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(MaterialTypeAggregate materialTypeAggregate) {
@@ -44,7 +49,14 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
+        MaterialTypeAggregate current = queryById(id);
+
         materialTypeDao.deleteById(id);
+
+        redisCacheService.delete(
+                cacheKeyById(id),
+                current == null ? null : cacheKeyByTypeCode(current.getTypeCode())
+        );
     }
 
     @Override
@@ -52,11 +64,16 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        MaterialTypeAggregate cached = redisCacheService.get(cacheKey, MaterialTypeAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         MaterialType materialType = materialTypeDao.queryById(id);
         if (materialType == null) {
             return null;
         }
-        return MaterialTypeAggregate.builder()
+        MaterialTypeAggregate aggregate = MaterialTypeAggregate.builder()
                 .id(materialType.getId())
                 .parentId(materialType.getParentId())
                 .name(materialType.getName())
@@ -68,6 +85,8 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .createTime(materialType.getCreateTime())
                 .updateTime(materialType.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -75,11 +94,18 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
         if (typeCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类编码不能为空");
         }
+        String cacheKey = cacheKeyByTypeCode(typeCode);
+        MaterialTypeAggregate cached = redisCacheService.get(cacheKey, MaterialTypeAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
+
         MaterialType materialType = materialTypeDao.queryByTypeCode(typeCode);
         if (materialType == null) {
             return null;
         }
-        return MaterialTypeAggregate.builder()
+
+        MaterialTypeAggregate aggregate = MaterialTypeAggregate.builder()
                 .id(materialType.getId())
                 .parentId(materialType.getParentId())
                 .name(materialType.getName())
@@ -91,6 +117,9 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .createTime(materialType.getCreateTime())
                 .updateTime(materialType.getUpdateTime())
                 .build();
+
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -114,6 +143,11 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .updateTime(materialTypeAggregate.getUpdateTime())
                 .build();
         materialTypeDao.update(materialType);
+
+        redisCacheService.delete(
+                cacheKeyById(materialTypeAggregate.getId()),
+                materialTypeAggregate.getTypeCode() == null ? null : cacheKeyByTypeCode(materialTypeAggregate.getTypeCode())
+        );
     }
 
     @Override
@@ -130,5 +164,16 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         return materialDao.countByTypeId(typeId);
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:material-type:id:" + id;
+    }
+
+    private String cacheKeyByTypeCode(String typeCode) {
+        if (typeCode == null) {
+            return null;
+        }
+        return "s-pay-mall:material-type:code:" + typeCode;
     }
 }

@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
 import cn.bugstack.domain.material.repository.IMaterialRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.po.Material;
 import cn.bugstack.types.enums.ResponseCode;
@@ -15,6 +16,9 @@ public class MaterialRepository implements IMaterialRepository {
 
     @Resource
     private IMaterialDao materialDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(MaterialAggregate materialAggregate) {
@@ -41,7 +45,12 @@ public class MaterialRepository implements IMaterialRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
+        MaterialAggregate current = queryById(id);
         materialDao.deleteById(id);
+        redisCacheService.delete(
+                cacheKeyById(id),
+                current == null ? null : cacheKeyByMaterialCode(current.getMaterialCode())
+        );
     }
 
     @Override
@@ -49,11 +58,18 @@ public class MaterialRepository implements IMaterialRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        MaterialAggregate cached = redisCacheService.get(cacheKey, MaterialAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         Material material = materialDao.queryById(id);
         if (material == null) {
             return null;
         }
-        return toAggregate(material);
+        MaterialAggregate  aggregate = toAggregate(material);
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -61,11 +77,19 @@ public class MaterialRepository implements IMaterialRepository {
         if (materialCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料编码不能为空");
         }
+        String cacheKey = cacheKeyByMaterialCode(materialCode);
+        MaterialAggregate cached = redisCacheService.get(cacheKey, MaterialAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         Material material = materialDao.queryByMaterialCode(materialCode);
         if (material == null) {
             return null;
         }
-        return toAggregate(material);
+
+        MaterialAggregate  aggregate = toAggregate(material);
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -76,6 +100,7 @@ public class MaterialRepository implements IMaterialRepository {
         if (materialAggregate.getId() == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
+        MaterialAggregate current = queryById(materialAggregate.getId());
         Material material = Material.builder()
                 .id(materialAggregate.getId())
                 .materialCode(materialAggregate.getMaterialCode())
@@ -89,6 +114,11 @@ public class MaterialRepository implements IMaterialRepository {
                 .updateTime(materialAggregate.getUpdateTime())
                 .build();
         materialDao.update(material);
+        redisCacheService.delete(
+                cacheKeyById(materialAggregate.getId()),
+                current == null ? null : cacheKeyByMaterialCode(current.getMaterialCode()),
+                materialAggregate.getMaterialCode() == null ? null : cacheKeyByMaterialCode(materialAggregate.getMaterialCode())
+        );
     }
 
     @Override
@@ -115,5 +145,16 @@ public class MaterialRepository implements IMaterialRepository {
                 .createTime(material.getCreateTime())
                 .updateTime(material.getUpdateTime())
                 .build();
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:material:id:" + id;
+    }
+
+    private String cacheKeyByMaterialCode(String materialCode) {
+        if (materialCode == null) {
+            return null;
+        }
+        return "s-pay-mall:material:code:" + materialCode;
     }
 }
