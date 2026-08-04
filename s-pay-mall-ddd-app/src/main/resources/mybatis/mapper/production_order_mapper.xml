@@ -42,6 +42,38 @@
         limit 1
     </select>
 
+    <select id="queryList" resultMap="productionOrderMap">
+        select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
+        from production_order
+        where is_del = 0
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="productId != null">
+            and product_id = #{productId}
+        </if>
+        <if test="warehouseId != null">
+            and warehouse_id = #{warehouseId}
+        </if>
+        order by id desc
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <select id="countList" resultType="java.lang.Long">
+        select count(1)
+        from production_order
+        where is_del = 0
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="productId != null">
+            and product_id = #{productId}
+        </if>
+        <if test="warehouseId != null">
+            and warehouse_id = #{warehouseId}
+        </if>
+    </select>
+
     <select id="queryByStatus" resultMap="productionOrderMap">
         select id, order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time
         from production_order

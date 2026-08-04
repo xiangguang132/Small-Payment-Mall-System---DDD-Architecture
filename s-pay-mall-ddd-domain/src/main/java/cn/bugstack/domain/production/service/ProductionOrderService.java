@@ -128,6 +128,29 @@ public class ProductionOrderService implements IProductionOrderService {
         return order;
     }
 
+    @Override
+    public List<ProductionOrderAggregate> queryProductionOrders(Integer status, Long productId, Long warehouseId, Integer pageNo, Integer pageSize) {
+        pageNo = normalizePageNo(pageNo);
+        pageSize = normalizePageSize(pageSize);
+        int offset = (pageNo - 1) * pageSize;
+        return productionOrderRepository.queryOrders(status, productId, warehouseId, offset, pageSize);
+    }
+
+    @Override
+    public Long countProductionOrders(Integer status, Long productId, Long warehouseId) {
+        return productionOrderRepository.countOrders(status, productId, warehouseId);
+    }
+
+    private Integer normalizePageNo(Integer pageNo) {
+        return pageNo == null || pageNo <= 0 ? 1 : pageNo;
+    }
+
+    private Integer normalizePageSize(Integer pageSize) {
+        if (pageSize == null || pageSize <= 0) {
+            return 10;
+        }
+        return Math.min(pageSize, 100);
+    }
 
     @Override
     public void executeCreatedOrders() {
@@ -157,6 +180,84 @@ public class ProductionOrderService implements IProductionOrderService {
                 recordExecuteFailure(order, e);
             }
         }
+    }
+
+    @Override
+    public void handExecuteById(Long id) {
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单ID不能为空");
+        }
+
+        ProductionOrderAggregate order = productionOrderRepository.queryById(id);
+        if (order == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
+        }
+        if (!ProductionOrderStatusVO.canManualExecute(order.getStatus())) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "当前生产需求单状态不允许执行");
+        }
+
+        try {
+            log.info("手动执行生产需求单开始 orderId:{} orderNo:{} status:{} retryCount:{}",
+                    order.getId(), order.getOrderNo(), order.getStatus(), order.getRetryCount());
+            // 触发生产订单执行流程的入口
+            productionOrderExecutor.execute(order.getId());
+            log.info("手动执行生产需求单完成 orderId:{} orderNo:{}",
+                    order.getId(), order.getOrderNo());
+        } catch (Exception e) {
+            log.warn("手动执行生产需求单失败 orderId:{} orderNo:{} reason:{}",
+                    order.getId(), order.getOrderNo(), e.getMessage(), e);
+            recordExecuteFailure(order, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public void handRetryById(Long id) {
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单ID不能为空");
+        }
+        ProductionOrderAggregate order = productionOrderRepository.queryById(id);
+        if (order == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
+        }
+
+        if (!ProductionOrderStatusVO.canRetry(order.getStatus())) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "当前生产需求单状态不允许手动重试");
+        }
+
+        try {
+            log.info("手动重试生产需求单开始 orderId:{} orderNo:{} retryCount:{}",
+                    order.getId(), order.getOrderNo(), order.getRetryCount());
+
+            productionOrderExecutor.execute(order.getId());
+
+            log.info("手动重试生产需求单完成 orderId:{} orderNo:{}",
+                    order.getId(), order.getOrderNo());
+        } catch (Exception e) {
+            log.warn("手动重试生产需求单失败 orderId:{} orderNo:{} reason:{}",
+                    order.getId(), order.getOrderNo(), e.getMessage(), e);
+
+            recordExecuteFailure(order, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public void cancelProductionOrderById(Long id) {
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单ID不能为空");
+        }
+
+        ProductionOrderAggregate order = productionOrderRepository.queryById(id);
+        if (order == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "生产需求单不存在");
+        }
+
+        if (!ProductionOrderStatusVO.canCancel(order.getStatus())) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "当前生产需求单状态不允许取消");
+        }
+        // 更新为已取消
+        productionOrderRepository.updateOrderStatus(order.getId(), ProductionOrderStatusVO.CANCELED);
     }
 
     /**

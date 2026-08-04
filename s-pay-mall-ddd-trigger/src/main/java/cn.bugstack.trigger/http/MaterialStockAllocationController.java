@@ -6,6 +6,7 @@ import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationD
 import cn.bugstack.api.response.materialstockallocation.MaterialStockAllocationStatusResponse;
 import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockAllocationAggregate;
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
+import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.trigger.assembler.MaterialStockAllocationAssembler;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
@@ -36,7 +37,7 @@ public class MaterialStockAllocationController {
     @PostMapping("create")
     public Response<String> create(@Valid @RequestBody MaterialStockAllocationCreateRequest request) {
         log.info("创建原料库存分配单开始 request:{}", request);
-        String allocationNo = materialStockAllocationService.create(
+                String allocationNo = materialStockAllocationService.create(
                 request.getMaterialId(),
                 request.getQuantity(),
                 request.getReason()

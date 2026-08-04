@@ -16,6 +16,16 @@ public interface IProductionOrderDao {
 
     ProductionOrder queryByRequestNo(@Param("requestNo") String requestNo);
 
+    List<ProductionOrder> queryList(@Param("status") Integer status,
+                                    @Param("productId") Long productId,
+                                    @Param("warehouseId") Long warehouseId,
+                                    @Param("offset") Integer offset,
+                                    @Param("pageSize") Integer pageSize);
+
+    Long countList(@Param("status") Integer status,
+                   @Param("productId") Long productId,
+                   @Param("warehouseId") Long warehouseId);
+
     List<ProductionOrder> queryByStatus(@Param("status") Integer status, @Param("limit") Integer limit);
 
     List<ProductionOrder> queryExecutableOrders(@Param("limit") Integer limit);

@@ -13,10 +13,24 @@ public final class ProductionOrderStatusVO {
     public static final int CANCELED = 5;
 
     public static boolean canExecute(Integer status) {
-        return CREATED == status || RETRYABLE_FAILED == status;
+        return Integer.valueOf(CREATED).equals(status) || Integer.valueOf(RETRYABLE_FAILED).equals(status);
+    }
+
+    public static boolean canManualExecute(Integer status) {
+        return Integer.valueOf(CREATED).equals(status);
+    }
+
+    public static boolean canRetry(Integer status) {
+        return Integer.valueOf(RETRYABLE_FAILED).equals(status);
+    }
+
+    public static boolean canCancel(Integer status) {
+        return Integer.valueOf(CREATED).equals(status) || Integer.valueOf(RETRYABLE_FAILED).equals(status);
     }
 
     public static boolean isTerminal(Integer status) {
-        return COMPLETED == status || FINAL_FAILED == status || CANCELED == status;
+        return Integer.valueOf(COMPLETED).equals(status)
+                || Integer.valueOf(FINAL_FAILED).equals(status)
+                || Integer.valueOf(CANCELED).equals(status);
     }
 }

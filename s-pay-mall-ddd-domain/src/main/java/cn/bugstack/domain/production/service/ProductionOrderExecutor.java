@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * 生产订单执行器
+ * 驱动一个生产订单从“接单”到“完成”的整个自动化流程
+ */
 @Service
 public class ProductionOrderExecutor {
 
@@ -40,26 +44,54 @@ public class ProductionOrderExecutor {
                 () -> productionOrderRepository.updateOrderStatus(order.getId(), ProductionOrderStatusVO.PROCESSING));
         // 针对生产需求单需要的 每一种 “原料” ，都进行 分配-锁定-扣减
         for (ProductionOrderMaterialVO material : order.getMaterials()) {
-            // 分配
-            // 该方法 -》 生成一份原料库存分配单，并返回分配单单号
-            String allocationNo = executeStage(ProductionExecuteStageVO.CREATE_ALLOCATION,
-                    () -> materialStockAllocationService.create(
-                            material.getMaterialId(),
-                            material.getMaterialQuantity(),
-                            "生产单" + order.getOrderNo() + "备料"
-                    ));
-            // 锁定 -》 锁定原料库存
-            executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
-                    () -> materialStockAllocationService.lockWithAutoReleaseOnFailure(allocationNo));
-            // 更新数据库状态为 1 -》 被锁
-            executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
-                    () -> productionOrderRepository.updateMaterialAllocationNo(material.getId(), allocationNo, 1));
-            // 自动出库
-            executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
-                    () -> materialStockAllocationService.autoOutbound(allocationNo));
 
-            executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
-                    () -> productionOrderRepository.updateMaterialAllocationNo(material.getId(), allocationNo, 2));
+            // 获取当前物料在数据库中已有的分配单单号（如果是首次执行，这里会是 null）
+            String allocationNo = material.getAllocationNo();
+            // 获取当前物料的状态。如果数据库中还没记录状态，默认初始化为 0（未分配）
+            Integer materialStatus = material.getStatus() == null ? 0 : material.getStatus();
+
+            // 核心检查点：如果分配单号为空，说明这个物料还没有经历过“分配”流程
+            if (allocationNo == null || allocationNo.trim().isEmpty()) {
+                // 分配
+                // 该方法 -》 生成一份原料库存分配单，并返回分配单单号
+                allocationNo = executeStage(ProductionExecuteStageVO.CREATE_ALLOCATION,
+                        () -> materialStockAllocationService.create(
+                                material.getMaterialId(),
+                                material.getMaterialQuantity(),
+                                "生产单" + order.getOrderNo() + "备料"
+                        ));
+
+                // 持久化到数据库
+                // 锁定 -》 锁定原料库存
+                final String createdAllocationNo = allocationNo;
+                executeStage(ProductionExecuteStageVO.CREATE_ALLOCATION,
+                        () -> productionOrderRepository.updateMaterialAllocationNo(
+                                material.getId(), createdAllocationNo, 0));
+
+                final String currentAllocationNo = allocationNo;
+
+                // 检查点：如果当前状态小于 1（即状态为0，未锁定），才执行锁定
+                if (materialStatus < 1) {
+                    executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
+                            () -> materialStockAllocationService.lockWithAutoReleaseOnFailure(currentAllocationNo));
+
+                    executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
+                            () -> productionOrderRepository.updateMaterialAllocationNo(
+                                    material.getId(), currentAllocationNo, 1));
+
+                    materialStatus = 1;
+                }
+
+                // 检查点：如果当前状态小于 2（即状态为0或1，未出库），才执行出库
+                if (materialStatus < 2) {
+                    executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
+                            () -> materialStockAllocationService.autoOutbound(currentAllocationNo));
+
+                    executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
+                            () -> productionOrderRepository.updateMaterialAllocationNo(
+                                    material.getId(), currentAllocationNo, 2));
+                }
+            }
         }
 
         // 产品入库

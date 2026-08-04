@@ -11,7 +11,16 @@ public interface IProductionOrderService {
 
     ProductionOrderAggregate queryProductionOrderById(Long id);
 
+    List<ProductionOrderAggregate> queryProductionOrders(Integer status, Long productId, Long warehouseId, Integer pageNo, Integer pageSize);
+
+    Long countProductionOrders(Integer status, Long productId, Long warehouseId);
+
     void executeCreatedOrders();
 
-//    void executeOrder(Long productionOrderId);
+    void handExecuteById(Long id);
+
+    void handRetryById(Long id);
+
+    void cancelProductionOrderById(Long id);
+
 }

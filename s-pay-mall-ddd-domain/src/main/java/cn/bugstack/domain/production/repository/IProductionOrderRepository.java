@@ -16,6 +16,10 @@ public interface IProductionOrderRepository {
 
     ProductionOrderAggregate queryByRequestNo(String requestNo);
 
+    List<ProductionOrderAggregate> queryOrders(Integer status, Long productId, Long warehouseId, Integer offset, Integer pageSize);
+
+    Long countOrders(Integer status, Long productId, Long warehouseId);
+
     List<ProductionOrderAggregate> queryCreatedOrders(Integer limit);
 
     void updateOrderStatus(Long orderId, Integer status);

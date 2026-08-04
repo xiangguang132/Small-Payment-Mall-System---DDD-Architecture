@@ -84,6 +84,33 @@ public class ProductionOrderRepository implements IProductionOrderRepository {
     }
 
     @Override
+    public List<ProductionOrderAggregate> queryOrders(Integer status, Long productId, Long warehouseId, Integer offset, Integer pageSize) {
+        if (offset == null || offset < 0) {
+            offset = 0;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 10;
+        }
+
+        return productionOrderDao.queryList(status, productId, warehouseId, offset, pageSize).stream()
+                .map(productionOrder -> {
+                    List<ProductionOrderMaterialVO> materials = productionOrderMaterialDao
+                            .queryByProductionOrderId(productionOrder.getId())
+                            .stream()
+                            .map(this::toProductionOrderMaterialVO)
+                            .collect(Collectors.toList());
+                    return toProductionOrderAggregate(productionOrder, materials);
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long countOrders(Integer status, Long productId, Long warehouseId) {
+        Long total = productionOrderDao.countList(status, productId, warehouseId);
+        return total == null ? 0L : total;
+    }
+
+    @Override
     public List<ProductionOrderAggregate> queryCreatedOrders(Integer limit) {
         if (limit == null || limit <= 0) {
             limit = 10;

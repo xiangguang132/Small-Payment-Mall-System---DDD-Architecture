@@ -1,7 +1,9 @@
 package cn.bugstack.trigger.http;
 
+import cn.bugstack.api.request.production.ProductionOrderListRequest;
 import cn.bugstack.api.request.production.ProductionOrderCreateRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.production.ProductionOrderDetailResponse;
 import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
@@ -27,6 +29,47 @@ public class ProductionOrderController {
 
     @Resource
     private IProductionOrderService productionOrderService;
+
+    /**
+     * 分页查询生产需求单列表
+     * @param request
+     * @return
+     */
+    @GetMapping("list")
+    public Response<PageResponse<ProductionOrderDetailResponse>> list(@Valid ProductionOrderListRequest request) {
+        log.info("分页查询生产需求单列表开始 request:{}", request);
+
+        List<ProductionOrderAggregate> orders = productionOrderService.queryProductionOrders(
+                request.getStatus(),
+                request.getProductId(),
+                request.getWarehouseId(),
+                request.getSafePageNo(),
+                request.getSafePageSize()
+        );
+        Long total = productionOrderService.countProductionOrders(
+                request.getStatus(),
+                request.getProductId(),
+                request.getWarehouseId()
+        );
+
+        List<ProductionOrderDetailResponse> list = orders.stream()
+                .map(ProductionOrderAssembler::toDetailResponse)
+                .collect(Collectors.toList());
+
+        PageResponse<ProductionOrderDetailResponse> pageResponse = PageResponse.<ProductionOrderDetailResponse>builder()
+                .total(total)
+                .pageNo(request.getSafePageNo())
+                .pageSize(request.getSafePageSize())
+                .list(list)
+                .build();
+
+        log.info("分页查询生产需求单列表完成 count:{} total:{}", list.size(), total);
+        return Response.<PageResponse<ProductionOrderDetailResponse>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("分页查询生产需求单列表完成")
+                .data(pageResponse)
+                .build();
+    }
 
     /**
      * 依据id查询生产需求单详情
@@ -85,6 +128,61 @@ public class ProductionOrderController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(orderId)
+                .build();
+    }
+
+    /**
+     * 手动执行生产需求单
+     * @param id
+     * @return
+     */
+    @PostMapping("hand-execute/{id}")
+    public Response<Boolean> handExecute(@PathVariable("id") Long id) {
+        log.info("手动执行生产需求单开始 id:{}", id);
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
+        }
+        productionOrderService.handExecuteById(id);
+        log.info("手动执行生产需求单完成 id:{}", id);
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("生产需求单-手动执行成功")
+                .data(true)
+                .build();
+    }
+
+    @PostMapping("hand-retry/{id}")
+    public Response<Boolean> handRetry(@PathVariable("id") Long id) {
+        log.info("手动重试生产需求单开始 id:{}", id);
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
+        }
+        productionOrderService.handRetryById(id);
+        log.info("手动重试生产需求单完成 id:{}", id);
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("生产需求单-手动重试成功")
+                .data(true)
+                .build();
+    }
+
+    /**
+     * 依据 id 取消订单
+     * @param id
+     * @return
+     */
+    @PutMapping("cancel/{id}")
+    public Response<Boolean> cancel(@PathVariable("id") Long id) {
+        log.info("取消生产需求单开始 id:{}", id);
+        if (id == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "生产需求单id不能为空");
+        }
+        productionOrderService.cancelProductionOrderById(id);
+        log.info("取消生产需求单完成 id:{}", id);
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info("生产需求单-取消成功")
+                .data(true)
                 .build();
     }
 
