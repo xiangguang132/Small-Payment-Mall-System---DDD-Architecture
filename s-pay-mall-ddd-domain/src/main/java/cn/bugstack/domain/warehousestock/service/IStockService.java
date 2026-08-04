@@ -14,5 +14,7 @@ public interface IStockService {
 
     void inbound(Long warehouseId, Long productId, Integer quantity);
 
+    void inbound(Long warehouseId, Long productId, Integer quantity, String bizType, String bizNo);
+
     void outbound(Long warehouseId, Long productId, Integer quantity);
 }

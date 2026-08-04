@@ -141,7 +141,14 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         if (aggregate == null) {
             throw new AppException(ResponseCode.NOT_FOUND, "分配订单为空，无法锁定");
         }
-        if (aggregate.getStatus() == null || aggregate.getStatus() != 0) {
+        Integer status = aggregate.getStatus();
+        if (status == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单状态为空，无法锁定");
+        }
+        if (status == 1 || status == 2) {
+            return null; // 或者在外层直接 return
+        }
+        if (status != 0) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单不是待锁定状态");
         }
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {
@@ -262,7 +269,14 @@ public class MaterialStockAllocationService implements IMaterialStockAllocationS
         if (aggregate == null) {
             throw new AppException(ResponseCode.NOT_FOUND, "分配订单为空，无法出库");
         }
-        if (aggregate.getStatus() == null || aggregate.getStatus() != 1) {
+        Integer status = aggregate.getStatus();
+        if (status == null) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单状态为空，无法出库");
+        }
+        if (status == 2) {
+            return;
+        }
+        if (status != 1) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分配单不是锁定状态");
         }
         if (aggregate.getItems() == null || aggregate.getItems().isEmpty()) {

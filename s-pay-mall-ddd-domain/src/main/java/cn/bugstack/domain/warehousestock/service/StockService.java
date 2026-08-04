@@ -5,6 +5,7 @@ import cn.bugstack.domain.warehousestock.repository.IStockRepository;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -79,6 +80,37 @@ public class StockService implements IStockService {
         }
         applyDelta(warehouseId, productId, BigDecimal.valueOf(quantity), "入库");
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void inbound(Long warehouseId, Long productId, Integer quantity, String bizType, String bizNo) {
+        if (quantity == null || quantity <= 0) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "入库数量必须大于0");
+        }
+        if (bizType == null || bizType.trim().isEmpty()) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "业务类型不能为空");
+        }
+        if (bizNo == null || bizNo.trim().isEmpty()) {
+            throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "业务单号不能为空");
+        }
+
+        BigDecimal delta = BigDecimal.valueOf(quantity);
+        boolean saved = stockRepository.saveFlow(
+                warehouseId,
+                productId,
+                delta,
+                bizType.trim(),
+                bizNo.trim(),
+                "生产单成品入库"
+        );
+
+        if (!saved) {
+            return;
+        }
+
+        applyDelta(warehouseId, productId, delta, "生产单成品入库");
+    }
+
 
     @Override
     public void outbound(Long warehouseId, Long productId, Integer quantity) {

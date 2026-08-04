@@ -67,30 +67,30 @@ public class ProductionOrderExecutor {
                 executeStage(ProductionExecuteStageVO.CREATE_ALLOCATION,
                         () -> productionOrderRepository.updateMaterialAllocationNo(
                                 material.getId(), createdAllocationNo, 0));
+            }
 
-                final String currentAllocationNo = allocationNo;
+            final String currentAllocationNo = allocationNo;
 
-                // 检查点：如果当前状态小于 1（即状态为0，未锁定），才执行锁定
-                if (materialStatus < 1) {
-                    executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
-                            () -> materialStockAllocationService.lockWithAutoReleaseOnFailure(currentAllocationNo));
+            // 检查点：如果当前状态小于 1（即状态为0，未锁定），才执行锁定
+            if (materialStatus < 1) {
+                executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
+                        () -> materialStockAllocationService.lockWithAutoReleaseOnFailure(currentAllocationNo));
 
-                    executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
-                            () -> productionOrderRepository.updateMaterialAllocationNo(
-                                    material.getId(), currentAllocationNo, 1));
+                executeStage(ProductionExecuteStageVO.LOCK_MATERIAL,
+                        () -> productionOrderRepository.updateMaterialAllocationNo(
+                                material.getId(), currentAllocationNo, 1));
 
-                    materialStatus = 1;
-                }
+                materialStatus = 1;
+            }
 
-                // 检查点：如果当前状态小于 2（即状态为0或1，未出库），才执行出库
-                if (materialStatus < 2) {
-                    executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
-                            () -> materialStockAllocationService.autoOutbound(currentAllocationNo));
+            // 检查点：如果当前状态小于 2（即状态为0或1，未出库），才执行出库
+            if (materialStatus < 2) {
+                executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
+                        () -> materialStockAllocationService.autoOutbound(currentAllocationNo));
 
-                    executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
-                            () -> productionOrderRepository.updateMaterialAllocationNo(
-                                    material.getId(), currentAllocationNo, 2));
-                }
+                executeStage(ProductionExecuteStageVO.OUTBOUND_MATERIAL,
+                        () -> productionOrderRepository.updateMaterialAllocationNo(
+                                material.getId(), currentAllocationNo, 2));
             }
         }
 
@@ -99,7 +99,9 @@ public class ProductionOrderExecutor {
                 () -> stockService.inbound(
                         order.getWarehouseId(),
                         order.getProductId(),
-                        order.getProductQuantity().intValue()
+                        order.getProductQuantity().intValue(),
+                        "PRODUCTION_ORDER",
+                        order.getOrderNo()
                 ));
 
         executeStage(ProductionExecuteStageVO.COMPLETE_ORDER,

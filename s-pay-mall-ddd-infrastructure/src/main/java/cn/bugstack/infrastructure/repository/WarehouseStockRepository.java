@@ -3,18 +3,26 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.warehousestock.model.aggregate.StockAggregate;
 import cn.bugstack.domain.warehousestock.repository.IStockRepository;
 import cn.bugstack.infrastructure.dao.IWarehouseStockDao;
+import cn.bugstack.infrastructure.dao.IWarehouseStockFlowDao;
 import cn.bugstack.infrastructure.dao.po.WarehouseStock;
+import cn.bugstack.infrastructure.dao.po.WarehouseStockFlow;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Repository
 public class WarehouseStockRepository implements IStockRepository {
 
     @Resource
     private IWarehouseStockDao warehouseStockDao;
+
+    @Resource
+    private IWarehouseStockFlowDao warehouseStockFlowDao;
 
     @Override
     public StockAggregate queryById(Long id) {
@@ -57,6 +65,31 @@ public class WarehouseStockRepository implements IStockRepository {
         }
         WarehouseStock po = toPo(stock);
         warehouseStockDao.update(po);
+    }
+
+    @Override
+    public boolean saveFlow(Long warehouseId,
+                            Long productId,
+                            BigDecimal quantity,
+                            String bizType,
+                            String bizNo,
+                            String reason) {
+        WarehouseStockFlow flow = new WarehouseStockFlow();
+        flow.setWarehouseId(warehouseId);
+        flow.setProductId(productId);
+        flow.setQuantity(quantity);
+        flow.setBizType(bizType);
+        flow.setBizNo(bizNo);
+        flow.setReason(reason);
+        flow.setIsDel(0);
+        flow.setCreateTime(LocalDateTime.now());
+
+        try {
+            warehouseStockFlowDao.insert(flow);
+            return true;
+        } catch (DuplicateKeyException e) {
+            return false;
+        }
     }
 
     private StockAggregate toAggregate(WarehouseStock stock) {
