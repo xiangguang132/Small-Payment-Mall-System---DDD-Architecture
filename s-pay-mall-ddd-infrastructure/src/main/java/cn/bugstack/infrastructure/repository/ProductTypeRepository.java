@@ -3,6 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
 import cn.bugstack.infrastructure.dao.po.ProductType;
 import cn.bugstack.types.enums.ResponseCode;
@@ -16,8 +17,12 @@ public class ProductTypeRepository implements IProductTypeRepository {
 
     @Resource
     private IProductRepository productRepository;
+
     @Resource
     private IProductTypeDao productTypeDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(ProductTypeAggregate productTypeAggregate) {
@@ -45,7 +50,12 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
+        ProductTypeAggregate current = queryById(id);
         productTypeDao.deleteById(id);
+        redisCacheService.delete(
+                cacheKeyById(id),
+                current == null ? null : cacheKeyByTypeCode(current.getTypeCode())
+        );
     }
 
     @Override
@@ -53,12 +63,17 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        ProductTypeAggregate cached = redisCacheService.get(cacheKey, ProductTypeAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         ProductType productType = productTypeDao.queryById(id);
-        if  (productType == null) {
+        if (productType == null) {
             return null;
         }
 
-        return ProductTypeAggregate.builder()
+        ProductTypeAggregate aggregate = ProductTypeAggregate.builder()
                 .id(productType.getId())
                 .parentId(productType.getParentId())
                 .name(productType.getName())
@@ -70,6 +85,8 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -77,12 +94,17 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (typeCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类编码不能为空");
         }
+        String cacheKey = cacheKeyByTypeCode(typeCode);
+        ProductTypeAggregate cached = redisCacheService.get(cacheKey, ProductTypeAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         ProductType productType = productTypeDao.queryByTypeCode(typeCode);
         if (productType == null) {
             return null;
         }
 
-        return ProductTypeAggregate.builder()
+        ProductTypeAggregate aggregate = ProductTypeAggregate.builder()
                 .id(productType.getId())
                 .parentId(productType.getParentId())
                 .name(productType.getName())
@@ -94,6 +116,8 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -101,6 +125,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (productTypeAggregate == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品类型不能为空");
         }
+        ProductTypeAggregate current = queryById(productTypeAggregate.getId());
         ProductType productType = ProductType.builder()
                 .id(productTypeAggregate.getId())
                 .parentId(productTypeAggregate.getParentId() == null ? 0L : productTypeAggregate.getParentId())
@@ -115,6 +140,11 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .build();
 
         productTypeDao.update(productType);
+        redisCacheService.delete(
+                cacheKeyById(productTypeAggregate.getId()),
+                current == null ? null : cacheKeyByTypeCode(current.getTypeCode()),
+                productTypeAggregate.getTypeCode() == null ? null : cacheKeyByTypeCode(productTypeAggregate.getTypeCode())
+        );
     }
 
     @Override
@@ -131,5 +161,16 @@ public class ProductTypeRepository implements IProductTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "父分类id不能为空");
         }
         return productTypeDao.countByParentId(parentId);
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:product-type:id:" + id;
+    }
+
+    private String cacheKeyByTypeCode(String typeCode) {
+        if (typeCode == null) {
+            return null;
+        }
+        return "s-pay-mall:product-type:code:" + typeCode;
     }
 }

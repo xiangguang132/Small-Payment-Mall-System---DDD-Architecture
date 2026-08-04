@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.repository.IWarehouseRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IWarehouseDao;
 import cn.bugstack.infrastructure.dao.po.Warehouse;
 import cn.bugstack.types.enums.ResponseCode;
@@ -15,6 +16,9 @@ public class WarehouseRepository implements IWarehouseRepository {
 
     @Resource
     private IWarehouseDao warehouseDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(WarehouseAggregate warehouseAggregate) {
@@ -43,6 +47,7 @@ public class WarehouseRepository implements IWarehouseRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         warehouseDao.deleteById(id);
+        redisCacheService.delete(cacheKeyById(id));
     }
 
     @Override
@@ -50,11 +55,16 @@ public class WarehouseRepository implements IWarehouseRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        WarehouseAggregate cached = redisCacheService.get(cacheKey, WarehouseAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         Warehouse warehouse = warehouseDao.queryById(id);
         if (warehouse == null) {
             return null;
         }
-        return WarehouseAggregate.builder()
+        WarehouseAggregate aggregate = WarehouseAggregate.builder()
                 .id(warehouse.getId())
                 .warehouseCode(warehouse.getWarehouseCode())
                 .name(warehouse.getName())
@@ -67,6 +77,8 @@ public class WarehouseRepository implements IWarehouseRepository {
                 .createTime(warehouse.getCreateTime())
                 .updateTime(warehouse.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -91,5 +103,10 @@ public class WarehouseRepository implements IWarehouseRepository {
                 .updateTime(warehouseAggregate.getUpdateTime())
                 .build();
         warehouseDao.update(warehouse);
+        redisCacheService.delete(cacheKeyById(warehouseAggregate.getId()));
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:warehouse:id:" + id;
     }
 }

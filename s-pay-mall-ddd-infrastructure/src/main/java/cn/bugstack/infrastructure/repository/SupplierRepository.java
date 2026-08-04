@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.repository.ISupplierRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.ISupplierDao;
 import cn.bugstack.infrastructure.dao.po.Supplier;
 import cn.bugstack.types.enums.ResponseCode;
@@ -15,6 +16,9 @@ public class SupplierRepository implements ISupplierRepository {
 
     @Resource
     private ISupplierDao supplierDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(SupplierAggregate supplierAggregate) {
@@ -42,6 +46,7 @@ public class SupplierRepository implements ISupplierRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         supplierDao.deleteById(id);
+        redisCacheService.delete(cacheKeyById(id));
     }
 
     @Override
@@ -49,11 +54,16 @@ public class SupplierRepository implements ISupplierRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        SupplierAggregate cached = redisCacheService.get(cacheKey, SupplierAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         Supplier supplier = supplierDao.queryById(id);
         if (supplier == null) {
             return null;
         }
-        return SupplierAggregate.builder()
+        SupplierAggregate aggregate = SupplierAggregate.builder()
                 .id(supplier.getId())
                 .supplierCode(supplier.getSupplierCode())
                 .name(supplier.getName())
@@ -65,6 +75,8 @@ public class SupplierRepository implements ISupplierRepository {
                 .createTime(supplier.getCreateTime())
                 .updateTime(supplier.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -88,5 +100,10 @@ public class SupplierRepository implements ISupplierRepository {
                 .updateTime(supplierAggregate.getUpdateTime())
                 .build();
         supplierDao.update(supplier);
+        redisCacheService.delete(cacheKeyById(supplierAggregate.getId()));
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:supplier:id:" + id;
     }
 }

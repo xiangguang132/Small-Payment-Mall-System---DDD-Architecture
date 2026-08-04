@@ -928,3 +928,32 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 26-08-04.14:20:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
 26-08-04.14:20:00.016 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
 26-08-04.14:20:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:21:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:21:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:21:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:22:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:22:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:22:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:23:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:23:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:23:00.018 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:24:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:24:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:24:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:25:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:25:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:25:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:26:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:26:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:26:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:27:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:27:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:27:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:28:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:28:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:28:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:29:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-04.14:29:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-04.14:29:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-04.14:29:30.876 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-04.14:29:30.890 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.

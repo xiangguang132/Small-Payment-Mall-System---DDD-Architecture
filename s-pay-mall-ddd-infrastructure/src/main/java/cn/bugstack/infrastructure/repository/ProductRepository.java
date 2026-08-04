@@ -3,6 +3,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
+import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IProductDao;
 import cn.bugstack.infrastructure.dao.po.Product;
 import cn.bugstack.types.enums.ResponseCode;
@@ -16,6 +17,9 @@ public class ProductRepository implements IProductRepository {
 
     @Resource
     private IProductDao productDao;
+
+    @Resource
+    private RedisCacheService redisCacheService;
 
     @Override
     public Long save(ProductAggregate productAggregate) {
@@ -44,6 +48,7 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         productDao.deleteById(id);
+        redisCacheService.delete(cacheKeyById(id));
     }
 
     @Override
@@ -51,11 +56,16 @@ public class ProductRepository implements IProductRepository {
         if  (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
+        String cacheKey = cacheKeyById(id);
+        ProductAggregate cached = redisCacheService.get(cacheKey, ProductAggregate.class);
+        if (cached != null) {
+            return cached;
+        }
         Product product = productDao.queryById(id);
         if  (product == null) {
             return null;
         }
-        return ProductAggregate.builder()
+        ProductAggregate aggregate = ProductAggregate.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
@@ -69,6 +79,8 @@ public class ProductRepository implements IProductRepository {
                 .createTime(product.getCreateTime())
                 .updateTime(product.getUpdateTime())
                 .build();
+        redisCacheService.set(cacheKey, aggregate);
+        return aggregate;
     }
 
     @Override
@@ -94,6 +106,7 @@ public class ProductRepository implements IProductRepository {
                 .updateTime(updated.getUpdateTime())
                 .build();
         productDao.update(product);
+        redisCacheService.delete(cacheKeyById(updated.getId()));
     }
 
     @Override
@@ -102,5 +115,9 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分类id不能为空");
         }
         return productDao.countByCategoryId(categoryId);
+    }
+
+    private String cacheKeyById(Long id) {
+        return "s-pay-mall:product:id:" + id;
     }
 }
