@@ -73,7 +73,7 @@ where id = #{stockId}
 
 文件：
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/repository/IMaterialStockRepository.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/repository/IMaterialStockRepository.java`
 
 新增方法：
 
@@ -100,7 +100,7 @@ boolean outboundAvailableStock(Long stockId, BigDecimal outboundQty);
 
 文件：
 
-`s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
+`../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
 
 新增方法：
 
@@ -125,7 +125,7 @@ int outboundAvailableStock(@Param("stockId") Long stockId, @Param("outboundQty")
 
 文件：
 
-`s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/material_stock_mapper.xml`
+`../../../s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/material_stock_mapper.xml`
 
 新增 4 条条件更新 SQL。
 
@@ -201,7 +201,7 @@ where id = #{stockId}
 
 文件：
 
-`s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/repository/MaterialStockRepository.java`
+`../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/repository/MaterialStockRepository.java`
 
 新增实现：
 
@@ -227,7 +227,7 @@ public boolean lockStock(Long stockId, BigDecimal lockQty) {
 
 文件：
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/service/MaterialStockService.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/service/MaterialStockService.java`
 
 改造方法：
 
@@ -260,7 +260,7 @@ if (!materialStockRepository.lockStock(id, lockQty)) {
 
 文件：
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstockallocation/service/MaterialStockAllocationService.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstockallocation/service/MaterialStockAllocationService.java`
 
 改造方法：
 

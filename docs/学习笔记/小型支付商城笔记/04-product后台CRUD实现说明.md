@@ -20,8 +20,8 @@
 
 对应现状可见：
 
-- [ProductPort.java](../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/port/ProductPort.java)
-- [ProductRPC.java](../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/gateway/ProductRPC.java)
+- [ProductPort.java](../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/port/ProductPort.java)
+- [ProductRPC.java](../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/gateway/ProductRPC.java)
 
 ## 2. 你要做的最小版本
 

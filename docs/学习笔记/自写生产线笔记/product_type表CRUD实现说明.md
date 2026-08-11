@@ -21,7 +21,7 @@
 
 对应 SQL 已放到：
 
-- [product_type.sql](../data/sql/product_type.sql)
+- [product_type.sql](../../../data/sql/product_type.sql)
 
 SQL 内容如下：
 
@@ -92,7 +92,7 @@ CREATE TABLE `product_type` (
 
 文件建议：
 
-- `s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/ProductType.java`
+- `../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/ProductType.java`
 
 ```java
 package cn.bugstack.infrastructure.dao.po;
@@ -136,7 +136,7 @@ public class ProductType {
 
 文件建议：
 
-- `s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IProductTypeDao.java`
+- `../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IProductTypeDao.java`
 
 ```java
 package cn.bugstack.infrastructure.dao;
@@ -168,7 +168,7 @@ public interface IProductTypeDao {
 
 文件建议：
 
-- `s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/product_type_mapper.xml`
+- `../../../s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/product_type_mapper.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -235,7 +235,7 @@ public interface IProductTypeDao {
 
 文件建议：
 
-- `s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/repository/ProductTypeRepository.java`
+- `../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/repository/ProductTypeRepository.java`
 
 ```java
 package cn.bugstack.infrastructure.repository;
@@ -294,9 +294,9 @@ public class ProductTypeRepository {
 
 文件建议：
 
-- `s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/model/aggregate/ProductTypeAggregate.java`
-- `s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/repository/IProductTypeRepository.java`
-- `s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/service/IProductTypeService.java`
+- `../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/model/aggregate/ProductTypeAggregate.java`
+- `../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/repository/IProductTypeRepository.java`
+- `../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/producttype/service/IProductTypeService.java`
 
 #### `ProductTypeAggregate`
 

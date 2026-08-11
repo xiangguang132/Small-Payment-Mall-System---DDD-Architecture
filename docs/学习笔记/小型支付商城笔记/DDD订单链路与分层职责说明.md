@@ -142,11 +142,11 @@ MyBatis 接口，只定义数据库方法。
 
 当前项目里，`mapper.xml` 的路径在：
 
-- `s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/pay_order_mapper.xml`
+- `../../../s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/pay_order_mapper.xml`
 
 而 `IOrderDao` 在：
 
-- `s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IOrderDao.java`
+- `../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IOrderDao.java`
 
 这说明：
 

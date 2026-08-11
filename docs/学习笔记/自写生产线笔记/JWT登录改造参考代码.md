@@ -60,7 +60,7 @@
 
 ### 文件
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/auth/adapter/port/IJwtPort.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/auth/adapter/port/IJwtPort.java`
 
 ### 参考代码
 
@@ -89,7 +89,7 @@ JWT 的具体实现放在基础设施层，使用项目里已经引入的 `java-
 
 ### 文件
 
-`s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/port/JwtPort.java`
+`../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/port/JwtPort.java`
 
 ### 参考代码
 
@@ -156,7 +156,7 @@ public class JwtPort implements IJwtPort {
 
 ### 配套配置
 
-`s-pay-mall-ddd-app/src/main/java/cn/bugstack/config/JwtConfig.java`
+`../../../s-pay-mall-ddd-app/src/main/java/cn/bugstack/config/JwtConfig.java`
 
 ```java
 package cn.bugstack.config;
@@ -228,7 +228,7 @@ public String checkLogin(String ticket) {
 
 ### 参考代码
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/auth/service/WeixinLoginService.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/auth/service/WeixinLoginService.java`
 
 ```java
 package cn.bugstack.domain.auth.service;
@@ -288,7 +288,7 @@ public class WeixinLoginService implements ILoginService {
 
 ### 文件
 
-`s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/LoginController.java`
+`../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/LoginController.java`
 
 ### 改造点
 
@@ -329,7 +329,7 @@ JWT 真正有价值的地方，不是“登录成功返回一个字符串”，�
 
 ### 文件
 
-`s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/interceptor/AuthInterceptor.java`
+`../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/interceptor/AuthInterceptor.java`
 
 ### 参考代码
 
@@ -397,7 +397,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 ### 文件
 
-`s-pay-mall-ddd-app/src/main/java/cn/bugstack/config/WebMvcConfig.java`
+`../../../s-pay-mall-ddd-app/src/main/java/cn/bugstack/config/WebMvcConfig.java`
 
 ### 参考代码
 

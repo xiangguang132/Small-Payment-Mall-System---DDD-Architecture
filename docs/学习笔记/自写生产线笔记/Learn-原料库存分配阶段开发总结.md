@@ -84,7 +84,7 @@
 
 Controller：
 
-`s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/MaterialStockAllocationController.java`
+`../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/MaterialStockAllocationController.java`
 
 ## 3.1 创建分配单
 
@@ -255,7 +255,7 @@ GET /api/v1/material-stock-allocation/status/{status}?pageNo=1&pageSize=20
 
 文件：
 
-`s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationDetailResponse.java`
+`../../../s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationDetailResponse.java`
 
 用途：
 
@@ -270,7 +270,7 @@ GET /api/v1/material-stock-allocation/status/{status}?pageNo=1&pageSize=20
 
 文件：
 
-`s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationItemResponse.java`
+`../../../s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationItemResponse.java`
 
 用途：
 
@@ -280,7 +280,7 @@ GET /api/v1/material-stock-allocation/status/{status}?pageNo=1&pageSize=20
 
 文件：
 
-`s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationStatusResponse.java`
+`../../../s-pay-mall-ddd-api/src/main/java/cn/bugstack/api/response/materialstockallocation/MaterialStockAllocationStatusResponse.java`
 
 用途：
 
@@ -298,7 +298,7 @@ GET /api/v1/material-stock-allocation/status/{status}?pageNo=1&pageSize=20
 
 文件：
 
-`s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/assembler/MaterialStockAllocationAssembler.java`
+`../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/assembler/MaterialStockAllocationAssembler.java`
 
 当前有两个转换方法：
 
@@ -320,7 +320,7 @@ toStatusResponse(MaterialStockAllocationAggregate aggregate)
 
 Service：
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstockallocation/service/MaterialStockAllocationService.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstockallocation/service/MaterialStockAllocationService.java`
 
 创建流程：
 
@@ -378,7 +378,7 @@ SQL：
 
 说明文档：
 
-`docs/Learn-原料库存并发安全条件更新改造说明.md`
+`Learn-原料库存并发安全条件更新改造说明.md`
 
 本次没有使用 Redis 分布式锁。
 
@@ -420,7 +420,7 @@ where id = #{stockId}
 
 领域仓储接口：
 
-`s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/repository/IMaterialStockRepository.java`
+`../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/repository/IMaterialStockRepository.java`
 
 新增：
 
@@ -436,7 +436,7 @@ boolean outboundAvailableStock(Long stockId, BigDecimal outboundQty);
 
 DAO：
 
-`s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
+`../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
 
 新增：
 
@@ -449,7 +449,7 @@ int outboundAvailableStock(...);
 
 Mapper：
 
-`s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/material_stock_mapper.xml`
+`../../../s-pay-mall-ddd-app/src/main/resources/mybatis/mapper/material_stock_mapper.xml`
 
 新增 4 条条件更新 SQL。
 
@@ -474,7 +474,7 @@ Mapper：
 
 后续如果写定时任务，建议位置：
 
-`s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/job/MaterialStockAllocationJob.java`
+`../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/job/MaterialStockAllocationJob.java`
 
 定时任务异常处理建议：
 

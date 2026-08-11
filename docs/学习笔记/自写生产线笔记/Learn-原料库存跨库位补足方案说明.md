@@ -6,12 +6,12 @@
 
 现有实现链路如下：
 
-- `s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/MaterialStockController.java`
+- `../../../s-pay-mall-ddd-trigger/src/main/java/cn.bugstack.trigger/http/MaterialStockController.java`
   - `autoOutBound(...)` 只把单个 `id` 和数量传给服务层。
-- `s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/service/MaterialStockService.java`
+- `../../../s-pay-mall-ddd-domain/src/main/java/cn/bugstack/domain/materialstock/service/MaterialStockService.java`
   - `lock(...)` 只检查当前 `id` 对应记录的 `availableQty`
   - `autoOutbound(...)` 只消费当前 `id` 对应记录的 `lockedQty`
-- `s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
+- `../../../s-pay-mall-ddd-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IMaterialStockDao.java`
   - 目前只有按 `id` 查询、按 `materialId + storageAddress` 查询，没有“按物料聚合搜索多个库位”的查询能力
 
 所以现在的系统模型是：**流水线绑定单条库存记录**。  
