@@ -61,5 +61,5 @@ public class GroupBuyDiscount {
     /**
      * 更新时间
      */
-    private LocalDateTime upLocalDateTimeTime;
+    private LocalDateTime updateTime;
 }

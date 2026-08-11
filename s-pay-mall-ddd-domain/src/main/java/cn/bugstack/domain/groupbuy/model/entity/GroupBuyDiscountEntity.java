@@ -19,9 +19,13 @@ public class GroupBuyDiscountEntity {
 
     private String discountName;
 
+    private String discountDesc;
+
     private Integer discountType;
 
-    private String MarketExpr;
+    private String marketPlan;
+
+    private String marketExpr;
 
     private String tagId;
 

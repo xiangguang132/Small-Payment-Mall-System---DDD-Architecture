@@ -20,7 +20,8 @@
     </select>
 
     <select id="queryGroupBuyActivityDiscountByDiscountId" parameterType="java.lang.String" resultMap="dataMap">
-        select discount_id, discount_name, discount_desc, discount_type, market_plan, market_expr, tag_id
+        select id, discount_id, discount_name, discount_desc, discount_type,
+               market_plan, market_expr, tag_id, create_time, update_time
         from group_buy_discount
         where discount_id = #{discountId}
     </select>
