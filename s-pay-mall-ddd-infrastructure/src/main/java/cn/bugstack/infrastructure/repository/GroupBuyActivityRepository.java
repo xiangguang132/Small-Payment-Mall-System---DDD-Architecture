@@ -39,4 +39,9 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
                 .tagScope(activity.getTagScope())
                 .build();
     }
+
+    @Override
+    public boolean withinTagCrowdRange(String tagId, String userId) {
+        return false;
+    }
 }

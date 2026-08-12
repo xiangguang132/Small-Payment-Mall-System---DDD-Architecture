@@ -4,6 +4,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyDiscountEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
+import cn.bugstack.domain.groupbuy.service.discount.IGroupBuyDiscountService;
 import cn.bugstack.domain.groupbuy.service.trial.AbstractGroupBuyMarketSupport;
 import cn.bugstack.domain.groupbuy.service.trial.factory.DefaultActivityStrategyFactory;
 import cn.bugstack.domain.groupbuy.service.trial.thread.QueryGroupBuyActivityVOThreadTask;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -29,14 +31,12 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
 
     @Resource
     private ThreadPoolExecutor threadPoolExecutor;
-
     @Resource
     private TagNode tagNode;
-
     @Resource
     private ErrorNode errorNode;
-
-    // todo 引入多线程查询商品配置与商品信息
+    @Resource
+    private Map<String, IGroupBuyDiscountService> discountServiceMap;
 
 
     @Override
@@ -77,26 +77,33 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
     @Override
     public GroupBuyTrialResult doApply(GroupBuyTrialRequest requestParameter,DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
 
+        GroupBuyActivityEntity activity = dynamicContext.getActivity();
+        GroupBuyDiscountEntity discount = dynamicContext.getDiscount();
+        ProductAggregate product = dynamicContext.getProduct();
+
         // 获取配置信息
         GroupBuyActivityEntity activityEntity = activityRepository.queryGroupBuyActivityByActivityId(requestParameter.getActivityId());
-        if (activityEntity == null ) {
-            throw new AppException(ResponseCode.NOT_FOUND);
-        }
         // 获取折扣信息
         GroupBuyDiscountEntity discountEntity = discountRepository.queryDiscountById(activityEntity.getDiscountId());
         // 获取商品信息
         ProductAggregate productAggregate = productRepository.queryById(activityEntity.getProductId());
-
-        dynamicContext.setActivity(activityEntity);
-        dynamicContext.setDiscount(discountEntity);
-        dynamicContext.setProduct(productAggregate);
-
-        if (productAggregate == null) {
-            throw new AppException(ResponseCode.NOT_FOUND);
+        if (activityEntity == null || discountEntity == null || productAggregate == null ) {
+            router(requestParameter, dynamicContext);
         }
-        dynamicContext.setOriginalPrice(productAggregate.getPrice());
-        dynamicContext.setPayPrice(productAggregate.getPrice());
-        dynamicContext.setDeductionPrice(BigDecimal.ZERO);
+
+        BigDecimal originalPrice = product.getPrice() == null ? BigDecimal.ZERO : product.getPrice();
+        // 优惠试算
+        IGroupBuyDiscountService groupBuyDiscountService = discountServiceMap.get(discountEntity.getMarketPlan());
+        discountServiceMap.get(discount.getMarketPlan());
+        if (groupBuyDiscountService == null) {
+            throw new AppException(ResponseCode.E0001);
+        }
+
+        BigDecimal payPrice = groupBuyDiscountService.calculate(requestParameter.getUserId(), originalPrice, discount);
+
+        dynamicContext.setOriginalPrice(originalPrice);
+        dynamicContext.setPayPrice(payPrice);
+        dynamicContext.setDiscount(discount);
 
         return router(requestParameter, dynamicContext);
     }
