@@ -3,9 +3,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
-import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IProductDao;
 import cn.bugstack.infrastructure.dao.po.Product;
+import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,7 @@ public class ProductRepository implements IProductRepository {
     private IProductDao productDao;
 
     @Resource
-    private RedisCacheService redisCacheService;
+    private IRedisService redisService;
 
     @Override
     public Long save(ProductAggregate productAggregate) {
@@ -48,7 +48,7 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         productDao.deleteById(id);
-        redisCacheService.delete(cacheKeyById(id));
+        redisService.delete(cacheKeyById(id));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        ProductAggregate cached = redisCacheService.get(cacheKey, ProductAggregate.class);
+        ProductAggregate cached = redisService.get(cacheKey, ProductAggregate.class);
         if (cached != null) {
             return cached;
         }
@@ -79,7 +79,7 @@ public class ProductRepository implements IProductRepository {
                 .createTime(product.getCreateTime())
                 .updateTime(product.getUpdateTime())
                 .build();
-        redisCacheService.set(cacheKey, aggregate);
+        redisService.set(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -106,7 +106,7 @@ public class ProductRepository implements IProductRepository {
                 .updateTime(updated.getUpdateTime())
                 .build();
         productDao.update(product);
-        redisCacheService.delete(cacheKeyById(updated.getId()));
+        redisService.delete(cacheKeyById(updated.getId()));
     }
 
     @Override

@@ -4,6 +4,9 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyActivityDao;
 import cn.bugstack.infrastructure.dao.po.GroupBuyActivity;
+import cn.bugstack.infrastructure.redis.IRedisService;
+import org.apache.commons.lang3.StringUtils;
+import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -13,6 +16,8 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
 
     @Resource
     private IGroupBuyActivityDao groupBuyActivityDao;
+    @Resource
+    private IRedisService redisService;
 
     @Override
     public GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long
@@ -45,6 +50,13 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
 
     @Override
     public boolean withinTagCrowdRange(String tagId, String userId) {
-        return false;
+        if (StringUtils.isBlank(tagId)) {
+            return true;
+        }
+        RBitSet bitSet = redisService.getBitSet(tagId);
+        if (!bitSet.isExists()) {
+            return true;
+        }
+        return bitSet.get(redisService.getIndexFromUserId(userId));
     }
 }

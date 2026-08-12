@@ -1,5 +1,4 @@
 package cn.bugstack.infrastructure.repository;
-
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyDiscountEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyDiscountRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyDiscountDao;

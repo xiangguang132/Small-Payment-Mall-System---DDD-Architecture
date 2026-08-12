@@ -3,9 +3,9 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
-import cn.bugstack.infrastructure.config.RedisCacheService;
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
 import cn.bugstack.infrastructure.dao.po.ProductType;
+import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
     private IProductTypeDao productTypeDao;
 
     @Resource
-    private RedisCacheService redisCacheService;
+    private IRedisService redisService;
 
     @Override
     public Long save(ProductTypeAggregate productTypeAggregate) {
@@ -52,7 +52,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
         }
         ProductTypeAggregate current = queryById(id);
         productTypeDao.deleteById(id);
-        redisCacheService.delete(
+        redisService.delete(
                 cacheKeyById(id),
                 current == null ? null : cacheKeyByTypeCode(current.getTypeCode())
         );
@@ -64,7 +64,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        ProductTypeAggregate cached = redisCacheService.get(cacheKey, ProductTypeAggregate.class);
+        ProductTypeAggregate cached = redisService.get(cacheKey, ProductTypeAggregate.class);
         if (cached != null) {
             return cached;
         }
@@ -85,7 +85,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
-        redisCacheService.set(cacheKey, aggregate);
+        redisService.set(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -95,7 +95,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类编码不能为空");
         }
         String cacheKey = cacheKeyByTypeCode(typeCode);
-        ProductTypeAggregate cached = redisCacheService.get(cacheKey, ProductTypeAggregate.class);
+        ProductTypeAggregate cached = redisService.get(cacheKey, ProductTypeAggregate.class);
         if (cached != null) {
             return cached;
         }
@@ -116,7 +116,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
-        redisCacheService.set(cacheKey, aggregate);
+        redisService.set(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -140,7 +140,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .build();
 
         productTypeDao.update(productType);
-        redisCacheService.delete(
+        redisService.delete(
                 cacheKeyById(productTypeAggregate.getId()),
                 current == null ? null : cacheKeyByTypeCode(current.getTypeCode()),
                 productTypeAggregate.getTypeCode() == null ? null : cacheKeyByTypeCode(productTypeAggregate.getTypeCode())
