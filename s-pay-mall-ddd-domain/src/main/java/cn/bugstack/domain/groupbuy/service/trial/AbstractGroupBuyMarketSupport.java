@@ -33,7 +33,7 @@ public abstract class AbstractGroupBuyMarketSupport extends AbstractMultiThreadS
     @Override
     protected void multiThread(GroupBuyTrialRequest request,
                                DefaultActivityStrategyFactory.DynamicContext
-                                       dynamicContext) {
+                                       dynamicContext) throws ExecutionException, InterruptedException, TimeoutException {
         // 默认不异步，具体节点按需重写
     }
 }

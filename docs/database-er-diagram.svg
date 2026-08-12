@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <style>
+      .title { font: 700 24px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 13px Arial, sans-serif; fill: #4b5563; }
+      .legend { font: 400 12px Arial, sans-serif; fill: #374151; }
+      .section-label { font: 700 15px Arial, sans-serif; fill: #111827; }
+      .box-title { font: 700 15px Arial, sans-serif; fill: #111827; }
+      .box-field { font: 12px Arial, sans-serif; fill: #374151; }
+      .small-note { font: 12px Arial, sans-serif; fill: #6b7280; }
+      .rel { stroke: #4b5563; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .rel-dashed { stroke: #6b7280; stroke-width: 2; fill: none; stroke-dasharray: 6 5; marker-end: url(#arrow); }
+      .group { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1.5; rx: 18; }
+      .material { fill: #fff7ed; stroke: #fb923c; stroke-width: 1.5; rx: 14; }
+      .warehouse { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; rx: 14; }
+      .production { fill: #f5f3ff; stroke: #8b5cf6; stroke-width: 1.5; rx: 14; }
+      .external { fill: #ffffff; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 6 4; rx: 14; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="960" fill="#ffffff"/>
+  <text x="40" y="40" class="title">数据库表关系图</text>
+  <text x="40" y="64" class="subtitle">来源：data/sql/*.sql。部分关系为根据字段命名和索引语义推断，未显式声明外键。</text>
+
+  <rect x="40" y="84" width="230" height="32" class="group"/>
+  <text x="54" y="105" class="legend">橙色：物料域</text>
+  <rect x="280" y="84" width="230" height="32" class="group"/>
+  <text x="294" y="105" class="legend">蓝色：仓库库存域</text>
+  <rect x="520" y="84" width="230" height="32" class="group"/>
+  <text x="534" y="105" class="legend">紫色：生产域</text>
+  <rect x="760" y="84" width="260" height="32" class="group"/>
+  <text x="774" y="105" class="legend">虚线边框：外部表或未在 data/sql 中定义</text>
+
+  <!-- Group backgrounds -->
+  <rect x="28" y="120" width="430" height="780" class="group"/>
+  <rect x="472" y="120" width="430" height="780" class="group"/>
+  <rect x="916" y="120" width="656" height="780" class="group"/>
+
+  <text x="48" y="148" class="section-label">物料域</text>
+  <text x="492" y="148" class="section-label">库存与分配域</text>
+  <text x="936" y="148" class="section-label">生产与商品域</text>
+
+  <!-- Boxes: material domain -->
+  <rect x="50" y="170" width="250" height="112" class="material"/>
+  <text x="68" y="195" class="box-title">material_type</text>
+  <text x="68" y="216" class="box-field">id PK</text>
+  <text x="68" y="234" class="box-field">parent_id</text>
+  <text x="68" y="252" class="box-field">name, type_code</text>
+  <text x="68" y="270" class="box-field">status, is_del</text>
+
+  <rect x="50" y="316" width="250" height="112" class="material"/>
+  <text x="68" y="341" class="box-title">material</text>
+  <text x="68" y="362" class="box-field">id PK</text>
+  <text x="68" y="380" class="box-field">material_code</text>
+  <text x="68" y="398" class="box-field">type_id</text>
+  <text x="68" y="416" class="box-field">name, unit, status</text>
+
+  <rect x="50" y="462" width="250" height="112" class="material"/>
+  <text x="68" y="487" class="box-title">supplier</text>
+  <text x="68" y="508" class="box-field">id PK</text>
+  <text x="68" y="526" class="box-field">supplier_code</text>
+  <text x="68" y="544" class="box-field">name, contact_phone</text>
+  <text x="68" y="562" class="box-field">status, is_del</text>
+
+  <rect x="50" y="608" width="250" height="126" class="material"/>
+  <text x="68" y="633" class="box-title">supplier_material</text>
+  <text x="68" y="654" class="box-field">id PK</text>
+  <text x="68" y="672" class="box-field">supplier_id</text>
+  <text x="68" y="690" class="box-field">material_id</text>
+  <text x="68" y="708" class="box-field">supply_price, lead_time_days</text>
+  <text x="68" y="726" class="box-field">status, is_del</text>
+
+  <!-- Boxes: warehouse / allocation -->
+  <rect x="494" y="170" width="250" height="112" class="warehouse"/>
+  <text x="512" y="195" class="box-title">material_stock</text>
+  <text x="512" y="216" class="box-field">id PK</text>
+  <text x="512" y="234" class="box-field">material_id</text>
+  <text x="512" y="252" class="box-field">storage_address</text>
+  <text x="512" y="270" class="box-field">available_qty, locked_qty</text>
+
+  <rect x="494" y="316" width="250" height="126" class="warehouse"/>
+  <text x="512" y="341" class="box-title">material_stock_allocation</text>
+  <text x="512" y="362" class="box-field">id PK</text>
+  <text x="512" y="380" class="box-field">allocation_no</text>
+  <text x="512" y="398" class="box-field">material_id</text>
+  <text x="512" y="416" class="box-field">request_stock_id</text>
+  <text x="512" y="434" class="box-field">status, retry_count</text>
+
+  <rect x="494" y="472" width="250" height="130" class="warehouse"/>
+  <text x="512" y="497" class="box-title">material_stock_allocation_item</text>
+  <text x="512" y="518" class="box-field">id PK</text>
+  <text x="512" y="536" class="box-field">allocation_id</text>
+  <text x="512" y="554" class="box-field">stock_id</text>
+  <text x="512" y="572" class="box-field">material_id, storage_address</text>
+  <text x="512" y="590" class="box-field">allocate_qty, sort_no, status</text>
+
+  <rect x="494" y="636" width="250" height="112" class="warehouse"/>
+  <text x="512" y="661" class="box-title">warehouse</text>
+  <text x="512" y="682" class="box-field">id PK</text>
+  <text x="512" y="700" class="box-field">warehouse_code</text>
+  <text x="512" y="718" class="box-field">name, type, status</text>
+  <text x="512" y="736" class="box-field">address, contact_phone</text>
+
+  <rect x="494" y="780" width="250" height="112" class="warehouse"/>
+  <text x="512" y="805" class="box-title">warehouse_stock</text>
+  <text x="512" y="826" class="box-field">id PK</text>
+  <text x="512" y="844" class="box-field">warehouse_id</text>
+  <text x="512" y="862" class="box-field">product_id</text>
+  <text x="512" y="880" class="box-field">available_qty, locked_qty</text>
+
+  <rect x="774" y="170" width="250" height="112" class="warehouse"/>
+  <text x="792" y="195" class="box-title">warehouse_stock_flow</text>
+  <text x="792" y="216" class="box-field">id PK</text>
+  <text x="792" y="234" class="box-field">warehouse_id</text>
+  <text x="792" y="252" class="box-field">product_id</text>
+  <text x="792" y="270" class="box-field">biz_type, biz_no, quantity</text>
+
+  <!-- Boxes: production / product -->
+  <rect x="958" y="170" width="250" height="112" class="external"/>
+  <text x="976" y="195" class="box-title">product (external)</text>
+  <text x="976" y="216" class="box-field">未在 data/sql 中定义</text>
+  <text x="976" y="234" class="box-field">product_id 作为引用键使用</text>
+  <text x="976" y="252" class="box-field">用于库存、生产订单</text>
+
+  <rect x="958" y="316" width="250" height="126" class="production"/>
+  <text x="976" y="341" class="box-title">production_order</text>
+  <text x="976" y="362" class="box-field">id PK</text>
+  <text x="976" y="380" class="box-field">order_no, request_no</text>
+  <text x="976" y="398" class="box-field">product_id, product_quantity</text>
+  <text x="976" y="416" class="box-field">warehouse_id, status</text>
+  <text x="976" y="434" class="box-field">fail_stage, need_manual_intervention</text>
+
+  <rect x="958" y="472" width="250" height="112" class="production"/>
+  <text x="976" y="497" class="box-title">production_order_material</text>
+  <text x="976" y="518" class="box-field">id PK</text>
+  <text x="976" y="536" class="box-field">production_order_id</text>
+  <text x="976" y="554" class="box-field">material_id</text>
+  <text x="976" y="572" class="box-field">material_quantity, allocation_no</text>
+
+  <rect x="1238" y="316" width="250" height="126" class="production"/>
+  <text x="1256" y="341" class="box-title">product_type</text>
+  <text x="1256" y="362" class="box-field">id PK</text>
+  <text x="1256" y="380" class="box-field">parent_id</text>
+  <text x="1256" y="398" class="box-field">name, type_code</text>
+  <text x="1256" y="416" class="box-field">status, is_del</text>
+
+  <!-- Relationships -->
+  <!-- Hierarchies -->
+  <path d="M175 282 C175 300, 210 300, 210 282" class="rel"/>
+  <path d="M1378 442 C1378 460, 1413 460, 1413 442" class="rel"/>
+
+  <!-- Material relationships -->
+  <line x1="175" y1="282" x2="175" y2="316" class="rel"/>
+  <line x1="300" y1="372" x2="494" y2="372" class="rel"/>
+  <line x1="300" y1="522" x2="494" y2="522" class="rel"/>
+  <line x1="300" y1="672" x2="494" y2="672" class="rel"/>
+  <line x1="175" y1="572" x2="175" y2="608" class="rel"/>
+
+  <!-- Allocation relationships -->
+  <line x1="620" y1="442" x2="620" y2="472" class="rel"/>
+  <line x1="620" y1="442" x2="620" y2="316" class="rel-dashed"/>
+  <line x1="620" y1="602" x2="620" y2="636" class="rel"/>
+  <line x1="620" y1="636" x2="620" y2="780" class="rel"/>
+  <line x1="494" y1="538" x2="300" y2="538" class="rel"/>
+
+  <!-- Warehouse relationships -->
+  <line x1="619" y1="780" x2="619" y2="892" class="rel"/>
+  <line x1="744" y1="226" x2="774" y2="226" class="rel"/>
+  <line x1="744" y1="226" x2="744" y2="372" class="rel"/>
+  <line x1="744" y1="372" x2="774" y2="372" class="rel"/>
+  <line x1="744" y1="226" x2="958" y2="226" class="rel"/>
+  <line x1="744" y1="372" x2="958" y2="372" class="rel"/>
+
+  <!-- Production relationships -->
+  <line x1="958" y1="378" x2="1208" y2="378" class="rel"/>
+  <line x1="1083" y1="442" x2="1083" y2="472" class="rel"/>
+  <line x1="1083" y1="572" x2="1083" y2="636" class="rel"/>
+  <line x1="1208" y1="378" x2="1238" y2="378" class="rel"/>
+
+  <!-- Cross-domain note labels -->
+  <text x="308" y="366" class="small-note">material.type_id</text>
+  <text x="308" y="516" class="small-note">supplier_material.material_id</text>
+  <text x="308" y="666" class="small-note">supplier_material.supplier_id</text>
+  <text x="622" y="366" class="small-note">material_stock_allocation.material_id</text>
+  <text x="622" y="516" class="small-note">material_stock_allocation_item.allocation_id / stock_id</text>
+  <text x="790" y="214" class="small-note">warehouse_id / product_id</text>
+  <text x="976" y="304" class="small-note">product_id / warehouse_id</text>
+  <text x="976" y="594" class="small-note">production_order_id / material_id</text>
+  <text x="1256" y="304" class="small-note">parent_id</text>
+
+  <text x="40" y="930" class="subtitle">建议在 IDEA 中直接打开本 SVG；如果你需要，我还可以再补一份 Mermaid 源文件，便于后续维护。</text>
+</svg>

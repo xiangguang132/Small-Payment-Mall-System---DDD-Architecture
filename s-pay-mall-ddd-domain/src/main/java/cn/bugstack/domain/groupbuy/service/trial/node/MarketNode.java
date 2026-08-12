@@ -17,16 +17,18 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Slf4j
 @Service
 public class MarketNode extends AbstractGroupBuyMarketSupport {
 
-//    @Resource
-//    private ThreadPoolExecutor threadPoolExecutor;
+    @Resource
+    private ThreadPoolExecutor threadPoolExecutor;
 
     @Resource
     private TagNode tagNode;
@@ -35,6 +37,35 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
     private ErrorNode errorNode;
 
     // todo 引入多线程查询商品配置与商品信息
+
+
+    @Override
+    protected void multiThread(GroupBuyTrialRequest requestParameter, DefaultActivityStrategyFactory.DynamicContext dynamicContext)
+            throws ExecutionException, InterruptedException, TimeoutException {
+        // 异步获取活动配置 与 商品信息
+        // 活动配置
+        QueryGroupBuyActivityVOThreadTask queryGroupBuyActivityVOThreadTask = new QueryGroupBuyActivityVOThreadTask(
+                requestParameter.getActivityId(),
+                activityRepository
+        );
+
+        FutureTask<GroupBuyActivityEntity> groupBuyActivityEntityFutureTask = new FutureTask<>(queryGroupBuyActivityVOThreadTask);
+        threadPoolExecutor.execute(groupBuyActivityEntityFutureTask);
+
+        // 商品
+        QueryProductVOFromDBThreadTask queryProductVOFromDBThreadTask = new QueryProductVOFromDBThreadTask(
+                requestParameter.getProductId(),
+                productRepository
+        );
+        FutureTask<ProductAggregate> productAggregateFutureTask = new FutureTask<>(queryProductVOFromDBThreadTask);
+        threadPoolExecutor.execute(productAggregateFutureTask);
+
+        // 写入上下文
+        dynamicContext.setActivity(groupBuyActivityEntityFutureTask.get(timeout, TimeUnit.MILLISECONDS));
+        dynamicContext.setProduct(productAggregateFutureTask.get(timeout, TimeUnit.MILLISECONDS));
+
+        log.info("拼团商品查询 活动配置、商品 试算服务-MarketNode userId:{} 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成", requestParameter.getUserId());
+    }
 
     /**
      * 作用：通过 dynamic 传递信息
