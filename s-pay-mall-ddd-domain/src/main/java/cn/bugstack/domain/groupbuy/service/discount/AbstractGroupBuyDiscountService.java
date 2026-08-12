@@ -18,7 +18,7 @@ public abstract class AbstractGroupBuyDiscountService implements IGroupBuyDiscou
 
     @Override
     public BigDecimal calculate(String userId, BigDecimal originalPrice, GroupBuyDiscountEntity groupBuyDiscount) {
-        if (DiscountTypeEnum.TAG.equals(groupBuyDiscount.getDiscountType())) {
+        if (DiscountTypeEnum.TAG.getCode().equals(groupBuyDiscount.getDiscountType())) {
             boolean isCrowdRange = filterTagId(userId, groupBuyDiscount.getTagId());
             if (!isCrowdRange) {
                 log.info("折扣优惠计算被拦截，用户不属于优惠人群标签范围内");

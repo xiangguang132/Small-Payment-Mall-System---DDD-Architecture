@@ -83,27 +83,29 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
 
         // 获取配置信息
         GroupBuyActivityEntity activityEntity = activityRepository.queryGroupBuyActivityByActivityId(requestParameter.getActivityId());
+        if (activityEntity == null) {
+            throw new AppException(ResponseCode.NOT_FOUND);
+        }
         // 获取折扣信息
         GroupBuyDiscountEntity discountEntity = discountRepository.queryDiscountById(activityEntity.getDiscountId());
         // 获取商品信息
         ProductAggregate productAggregate = productRepository.queryById(activityEntity.getProductId());
-        if (activityEntity == null || discountEntity == null || productAggregate == null ) {
-            router(requestParameter, dynamicContext);
+        if (discountEntity == null || productAggregate == null) {
+            throw new AppException(ResponseCode.NOT_FOUND);
         }
 
         BigDecimal originalPrice = product.getPrice() == null ? BigDecimal.ZERO : product.getPrice();
         // 优惠试算
         IGroupBuyDiscountService groupBuyDiscountService = discountServiceMap.get(discountEntity.getMarketPlan());
-        discountServiceMap.get(discount.getMarketPlan());
         if (groupBuyDiscountService == null) {
             throw new AppException(ResponseCode.E0001);
         }
 
-        BigDecimal payPrice = groupBuyDiscountService.calculate(requestParameter.getUserId(), originalPrice, discount);
+        BigDecimal payPrice = groupBuyDiscountService.calculate(requestParameter.getUserId(), originalPrice, discountEntity);
 
         dynamicContext.setOriginalPrice(originalPrice);
         dynamicContext.setPayPrice(payPrice);
-        dynamicContext.setDiscount(discount);
+        dynamicContext.setDiscount(discountEntity);
 
         return router(requestParameter, dynamicContext);
     }

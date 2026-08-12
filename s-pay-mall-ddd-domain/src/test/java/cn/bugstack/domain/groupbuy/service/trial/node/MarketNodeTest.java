@@ -6,6 +6,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyDiscountRepository;
+import cn.bugstack.domain.groupbuy.service.discount.IGroupBuyDiscountService;
 import cn.bugstack.domain.groupbuy.service.trial.factory.DefaultActivityStrategyFactory;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -57,6 +60,7 @@ public class MarketNodeTest {
             GroupBuyDiscountEntity discount = GroupBuyDiscountEntity.builder()
                     .discountId("ZK001")
                     .discountName("9折")
+                    .marketPlan("ZK")
                     .build();
 
             ProductAggregate product = ProductAggregate.builder()
@@ -67,6 +71,7 @@ public class MarketNodeTest {
 
             MarketNode marketNode = marketNode(activity, discount, product);
             setField(marketNode, "threadPoolExecutor", executor);
+            setField(marketNode, "discountServiceMap", discountServiceMap());
 
             EndNode endNode = new EndNode();
             TagNode tagNode = new TagNode();
@@ -86,8 +91,8 @@ public class MarketNodeTest {
             assertEquals(Long.valueOf(101L), result.getProductId());
             assertEquals("ZK001", result.getDiscountId());
             assertEquals(new BigDecimal("100.00"), result.getOriginalPrice());
-            assertEquals(new BigDecimal("100.00"), result.getPayPrice());
-            assertEquals(new BigDecimal("0.00"), result.getDeductionPrice());
+            assertTrue(new BigDecimal("100.00").compareTo(result.getPayPrice()) == 0);
+            assertTrue(new BigDecimal("0.00").compareTo(result.getDeductionPrice()) == 0);
             assertTrue(Boolean.TRUE.equals(result.getVisible()));
             assertTrue(Boolean.TRUE.equals(result.getEnable()));
 
@@ -108,7 +113,7 @@ public class MarketNodeTest {
             setField(marketNode, "threadPoolExecutor", executor);
 
             try {
-                marketNode.multiThread(
+                marketNode.apply(
                         request(999L, 101L),
                         new DefaultActivityStrategyFactory.DynamicContext()
                 );
@@ -170,6 +175,12 @@ public class MarketNodeTest {
                 return 0L;
             }
         };
+    }
+
+    private Map<String, IGroupBuyDiscountService> discountServiceMap() {
+        Map<String, IGroupBuyDiscountService> map = new HashMap<>();
+        map.put("ZK", (userId, originalPrice, discount) -> originalPrice);
+        return map;
     }
 
     private ProductAggregate product() {
