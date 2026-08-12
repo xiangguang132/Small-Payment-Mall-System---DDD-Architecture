@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MarketNode extends AbstractGroupBuyMarketSupport {
 
-    @Resource
-    private ThreadPoolExecutor threadPoolExecutor;
+//    @Resource
+//    private ThreadPoolExecutor threadPoolExecutor;
 
     @Resource
     private TagNode tagNode;
@@ -78,11 +78,9 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
         if (dynamicContext.getActivity() == null
                 || dynamicContext.getProduct() == null
                 || dynamicContext.getDiscount() == null) {
-//            return errorNode;
-            return null;
+            return errorNode;
         }
-//        return tagNode;
-        return null;
+        return tagNode;
     }
 }
 
