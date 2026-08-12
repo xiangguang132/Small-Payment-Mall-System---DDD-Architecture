@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class GroupBuyActivityEntity {
 
+    private Long id;
+
     private Long activityId;
 
     private String activityName;
@@ -38,4 +40,8 @@ public class GroupBuyActivityEntity {
     private String tagId;
 
     private String tagScope;
+
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
 }

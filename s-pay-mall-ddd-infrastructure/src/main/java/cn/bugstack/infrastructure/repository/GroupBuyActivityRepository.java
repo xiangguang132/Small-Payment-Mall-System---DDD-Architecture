@@ -24,6 +24,7 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
         }
 
         return GroupBuyActivityEntity.builder()
+                .id(activity.getId())
                 .activityId(activity.getActivityId())
                 .activityName(activity.getActivityName())
                 .productId(activity.getProductId())
@@ -37,6 +38,8 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
                 .endTime(activity.getEndTime())
                 .tagId(activity.getTagId())
                 .tagScope(activity.getTagScope())
+                .createTime(activity.getCreateTime())
+                .updateTime(activity.getUpdateTime())
                 .build();
     }
 
