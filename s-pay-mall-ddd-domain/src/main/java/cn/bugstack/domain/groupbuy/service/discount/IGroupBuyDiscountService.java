@@ -6,6 +6,6 @@ import java.math.BigDecimal;
 
 public interface IGroupBuyDiscountService {
 
-    BigDecimal calculate(BigDecimal originalPrice, GroupBuyDiscountEntity groupBuyDiscount);
+    BigDecimal calculate(String userId, BigDecimal originalPrice, GroupBuyDiscountEntity groupBuyDiscount);
 
 }

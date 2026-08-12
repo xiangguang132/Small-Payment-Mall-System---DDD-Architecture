@@ -6,4 +6,5 @@ public interface IGroupBuyActivityRepository {
 
     GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long activityId);
 
+    boolean withinTagCrowdRange(String tagId, String userId);
 }
