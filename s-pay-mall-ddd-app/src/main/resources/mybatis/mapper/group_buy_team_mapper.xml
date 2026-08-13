@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IGroupBuyTeamDao">
+
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam">
+        <id column="id" property="id"/>
+        <result column="team_id" property="teamId"/>
+        <result column="activity_id" property="activityId"/>
+        <result column="initiator_user_id" property="initiatorUserId"/>
+        <result column="target_count" property="targetCount"/>
+        <result column="complete_count" property="completeCount"/>
+        <result column="lock_count" property="lockCount"/>
+        <result column="status" property="status"/>
+        <result column="valid_start_time" property="validStartTime"/>
+        <result column="valid_end_time" property="validEndTime"/>
+        <result column="notify_url" property="notifyUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam">
+        insert into group_buy_team(
+        team_id, activity_id, initiator_user_id, target_count,
+        complete_count, lock_count, status, valid_start_time,
+        valid_end_time, notify_url, create_time, update_time
+        ) values(
+        #{teamId}, #{activityId}, #{initiatorUserId}, #{targetCount},
+        #{completeCount}, #{lockCount}, #{status}, #{validStartTime},
+        #{validEndTime}, #{notifyUrl}, now(), now()
+        )
+    </insert>
+
+    <update id="updateAddLockCount" parameterType="java.lang.String">
+        update group_buy_team
+        set lock_count = lock_count + 1, update_time = now()
+        where team_id = #{teamId}
+          and lock_count < target_count
+    </update>
+
+</mapper>
