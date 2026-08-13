@@ -27,13 +27,28 @@ public class TagNode extends AbstractGroupBuyMarketSupport {
         if (StringUtils.isBlank(tagId)) {
             dynamicContext.setVisible(true);
             dynamicContext.setEnable(true);
-        } else {
-            // TODO 人群标签服务，暂时不放开带标签活动
-            dynamicContext.setVisible(false);
-            dynamicContext.setEnable(false);
+            return router(requestParameter, dynamicContext);
         }
 
+        String tagScope = activity == null ? null : activity.getTagScope();
+        boolean withCrowd = activityRepository.withinTagCrowdRange(tagId, requestParameter.getUserId());
+
+        boolean visibleAllowed = StringUtils.isBlank(tagScope) || !containsScope(tagScope, "1");
+        boolean enableAllowed = StringUtils.isBlank(tagScope) || !containsScope(tagScope, "2");
+
+        dynamicContext.setVisible(visibleAllowed || withCrowd);
+        dynamicContext.setEnable(enableAllowed || withCrowd);
+
         return router(requestParameter, dynamicContext);
+    }
+
+    private boolean containsScope(String tagScope, String scope) {
+        for (String item : tagScope.split(",")) {
+            if (scope.equals(StringUtils.trim(item))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
