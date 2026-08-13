@@ -2,8 +2,12 @@ package cn.bugstack.domain.groupbuy.service.order;
 
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleCommandEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleFilterFeedBackEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyRepository;
+import cn.bugstack.domain.groupbuy.service.rule.factory.GroupBuyRuleFilterFactory;
+import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.junit.Before;
@@ -24,16 +28,25 @@ public class GroupBuyOrderServiceTest {
     @Mock
     private IGroupBuyRepository groupBuyRepository;
 
+    @Mock
+    private BusinessLinkedList<GroupBuyRuleCommandEntity,
+            GroupBuyRuleFilterFactory.DynamicContext,
+            GroupBuyRuleFilterFeedBackEntity> groupBuyRuleFilter;
+
     @InjectMocks
     private GroupBuyOrderService groupBuyOrderService;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        when(groupBuyRuleFilter.apply(any(), any()))
+                .thenReturn(GroupBuyRuleFilterFeedBackEntity.builder()
+                        .userTakeOrderCount(0)
+                        .build());
     }
 
     @Test
-    public void shouldReturnExistingOrderWhenSameUserAndBizIdAlreadyLocked() {
+    public void shouldReturnExistingOrderWhenSameUserAndBizIdAlreadyLocked() throws Exception {
         GroupBuyOrderEntity existing = GroupBuyOrderEntity.builder()
                 .userId("U1")
                 .orderId("O1")
@@ -50,11 +63,11 @@ public class GroupBuyOrderServiceTest {
     }
 
     @Test
-    public void shouldRejectWhenUserTakeLimitExceeded() {
+    public void shouldRejectWhenUserTakeLimitExceeded() throws Exception {
         when(groupBuyRepository.queryGroupBuyOrderByBizId("U1", "B1"))
                 .thenReturn(null);
-        when(groupBuyRepository.countUserGroupBuyOrders("U1", 100L))
-                .thenReturn(3);
+        when(groupBuyRuleFilter.apply(any(), any()))
+                .thenThrow(new AppException(ResponseCode.E0103));
 
         try {
             groupBuyOrderService.lockGroupBuyOrder(aggregate("U1", "B1", 3));
@@ -67,15 +80,17 @@ public class GroupBuyOrderServiceTest {
     }
 
     @Test
-    public void shouldLockWhenNoExistingOrderAndUnderLimit() {
+    public void shouldLockWhenNoExistingOrderAndUnderLimit() throws Exception {
         GroupBuyOrderEntity created = GroupBuyOrderEntity.builder()
                 .userId("U1")
                 .orderId("O2")
                 .build();
         when(groupBuyRepository.queryGroupBuyOrderByBizId("U1", "B1"))
                 .thenReturn(null);
-        when(groupBuyRepository.countUserGroupBuyOrders("U1", 100L))
-                .thenReturn(1);
+        when(groupBuyRuleFilter.apply(any(), any()))
+                .thenReturn(GroupBuyRuleFilterFeedBackEntity.builder()
+                        .userTakeOrderCount(1)
+                        .build());
         when(groupBuyRepository.lockGroupBuyOrder(any(GroupBuyOrderAggregate.class)))
                 .thenReturn(created);
 
