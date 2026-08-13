@@ -153,5 +153,15 @@ public class TagNodeTest {
             withinTagCrowdRangeCalls++;
             return within;
         }
+
+        @Override
+        public boolean downgradeSwitch() {
+            return false;
+        }
+
+        @Override
+        public boolean cutRange(String userId) {
+            return true;
+        }
     }
 }

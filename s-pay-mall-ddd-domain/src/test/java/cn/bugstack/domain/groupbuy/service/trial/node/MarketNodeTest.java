@@ -144,6 +144,16 @@ public class MarketNodeTest {
             public boolean withinTagCrowdRange(String tagId, String userId) {
                 return true;
             }
+
+            @Override
+            public boolean downgradeSwitch() {
+                return false;
+            }
+
+            @Override
+            public boolean cutRange(String userId) {
+                return true;
+            }
         });
         setField(marketNode, "discountRepository", (IGroupBuyDiscountRepository) discountId -> discount);
         setField(marketNode, "productRepository", productRepository(product));

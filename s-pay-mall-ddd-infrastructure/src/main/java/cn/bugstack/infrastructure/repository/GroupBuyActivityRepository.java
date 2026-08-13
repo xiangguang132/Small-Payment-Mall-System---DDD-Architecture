@@ -4,6 +4,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyActivityDao;
 import cn.bugstack.infrastructure.dao.po.GroupBuyActivity;
+import cn.bugstack.infrastructure.dcc.DCCService;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RBitSet;
@@ -18,6 +19,8 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
     private IGroupBuyActivityDao groupBuyActivityDao;
     @Resource
     private IRedisService redisService;
+    @Resource
+    private DCCService dccService;
 
     @Override
     public GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long
@@ -47,7 +50,6 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
                 .updateTime(activity.getUpdateTime())
                 .build();
     }
-
     @Override
     public boolean withinTagCrowdRange(String tagId, String userId) {
         if (StringUtils.isBlank(tagId)) {
@@ -58,5 +60,15 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
             return true;
         }
         return bitSet.get(redisService.getIndexFromUserId(userId));
+    }
+
+    @Override
+    public boolean downgradeSwitch() {
+        return dccService.isDowngradeSwitch();
+    }
+
+    @Override
+    public boolean cutRange(String userId) {
+        return dccService.isCutRange(userId);
     }
 }

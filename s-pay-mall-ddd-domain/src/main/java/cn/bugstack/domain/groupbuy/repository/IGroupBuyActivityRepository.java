@@ -7,4 +7,8 @@ public interface IGroupBuyActivityRepository {
     GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long activityId);
 
     boolean withinTagCrowdRange(String tagId, String userId);
+
+    boolean downgradeSwitch();
+
+    boolean cutRange(String userId);
 }
