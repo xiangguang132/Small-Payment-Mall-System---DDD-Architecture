@@ -41,6 +41,8 @@
         from crowd_tags_job
         where tag_id = #{tagId}
           and batch_id = #{batchId}
+          and is_del = 0
+        limit 1
     </select>
 
     <select id="queryById" parameterType="java.lang.Long" resultMap="dataMap">
@@ -60,4 +62,73 @@
         where id = #{id}
           and is_del = 0
     </select>
+
+    <select id="queryPage" resultMap="dataMap">
+        select id,
+               tag_id,
+               batch_id,
+               tag_type,
+               tag_rule,
+               stat_start_time,
+               stat_end_time,
+               last_execute_time,
+               status,
+               is_del,
+               create_time,
+               update_time
+        from crowd_tags_job
+        <where>
+            is_del = 0
+            <if test="tagId != null and tagId != ''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="batchId != null and batchId != ''">
+                and batch_id = #{batchId}
+            </if>
+            <if test="tagType != null">
+                and tag_type = #{tagType}
+            </if>
+            <if test="tagRule != null and tagRule != ''">
+                and tag_rule like concat('%', #{tagRule}, '%')
+            </if>
+        </where>
+        order by id desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(1)
+        from crowd_tags_job
+        <where>
+            is_del = 0
+            <if test="tagId != null and tagId != ''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="batchId != null and batchId != ''">
+                and batch_id = #{batchId}
+            </if>
+            <if test="tagType != null">
+                and tag_type = #{tagType}
+            </if>
+            <if test="tagRule != null and tagRule != ''">
+                and tag_rule like concat('%', #{tagRule}, '%')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateStatus">
+        update crowd_tags_job
+        set status = #{status},
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update crowd_tags_job
+        set is_del = 1,
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
 </mapper>

@@ -10,6 +10,8 @@ public class CrowdTagsJobPageRequest extends PageRequest {
 
     private String tagId;
 
+    private String batchId;
+
     private Integer tagType;
 
     private String tagRule;

@@ -2,6 +2,7 @@ package cn.bugstack.trigger.assembler;
 
 import cn.bugstack.api.request.crowdtags.CrowdTagsJobAddRequest;
 import cn.bugstack.api.response.crowdtags.job.CrowdTagsJobAddResponse;
+import cn.bugstack.api.response.crowdtags.job.CrowdTagsJobDetailResponse;
 import cn.bugstack.domain.crowdtags.model.entity.CrowdTagsJobEntity;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
@@ -30,6 +31,23 @@ public class CrowdTagsJobAssembler {
         response.setTagId(crowdTagJob.getTagId());
         response.setTagType(crowdTagJob.getTagType());
         response.setTagRule(crowdTagJob.getTagRule());
+        return response;
+    }
+
+    public static CrowdTagsJobDetailResponse toDetailResponse(CrowdTagsJobEntity crowdTagJob) {
+        if (crowdTagJob == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "人群标签任务不存在");
+        }
+        CrowdTagsJobDetailResponse response = new CrowdTagsJobDetailResponse();
+        response.setId(crowdTagJob.getId() == null ? null : crowdTagJob.getId().longValue());
+        response.setTagId(crowdTagJob.getTagId());
+        response.setBatchId(crowdTagJob.getBatchId());
+        response.setTagType(crowdTagJob.getTagType());
+        response.setTagRule(crowdTagJob.getTagRule());
+        response.setStatStartTime(crowdTagJob.getStatStartTime());
+        response.setStatEndTime(crowdTagJob.getStatEndTime());
+        response.setLastExecuteTime(crowdTagJob.getLastExecuteTime());
+        response.setStatus(crowdTagJob.getStatus());
         return response;
     }
 

@@ -24,3 +24,7 @@ alter table production_order
     add unique key uk_request_no (request_no),
     add key idx_status_isdel_id (status, is_del, id),
     add key idx_product_warehouse_status_time (product_id, warehouse_id, status, create_time);
+
+alter table production_order
+    add column fail_stage varchar(64) default null comment '失败阶段' after next_retry_time,
+    add column need_manual_intervention tinyint(1) not null default 0 comment '是否需要人工介入' after fail_stage;
