@@ -41,4 +41,10 @@
         from group_buy_activity
     </select>
 
+    <select id="countByTagId" parameterType="java.lang.String" resultType="long">
+        select count(1)
+        from group_buy_activity
+        where tag_id = #{tagId}
+    </select>
+
 </mapper>

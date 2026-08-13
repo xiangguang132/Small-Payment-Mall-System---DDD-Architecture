@@ -23,6 +23,8 @@ public class CrowdTags {
 
     private Integer statistics;
 
+    private Integer isDel;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

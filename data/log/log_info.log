@@ -1,959 +1,252 @@
-26-08-04.10:36:19.364 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.10:36:19.369 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 8588 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.10:36:19.370 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.10:36:20.285 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.10:36:20.287 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.10:36:20.338 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
-26-08-04.10:36:21.128 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.10:36:21.136 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.10:36:21.137 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.10:36:21.137 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.10:36:21.260 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.10:36:21.260 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1848 ms
-26-08-04.10:36:22.481 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.10:36:23.105 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
-26-08-04.10:36:23.209 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
-26-08-04.10:36:23.540 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.10:36:23.557 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.10:36:23.567 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.10:36:23.581 [main            ] INFO  Application            - Started Application in 4.726 seconds (JVM running for 5.206)
-26-08-04.10:36:24.022 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.10:36:24.262 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.10:36:42.478 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.10:36:42.478 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.10:36:42.479 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.10:36:42.677 [http-nio-8080-exec-3] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=2, requestNo=HISTORY_PO202608022141259331, productQuantity=500, warehouseId=1, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=2, quantity=20), ProductionOrderCreateRequest.MaterialItem(materialId=3, quantity=20)])
-26-08-04.10:36:42.704 [http-nio-8080-exec-3] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259331
-26-08-04.10:36:46.972 [http-nio-8080-exec-2] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=2, requestNo=HISTORY_PO202608022141259332, productQuantity=500, warehouseId=1, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=2, quantity=20), ProductionOrderCreateRequest.MaterialItem(materialId=3, quantity=20)])
-26-08-04.10:36:46.977 [http-nio-8080-exec-2] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259332
-26-08-04.10:36:50.497 [http-nio-8080-exec-4] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=2, requestNo=HISTORY_PO202608022141259333, productQuantity=500, warehouseId=1, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=2, quantity=20), ProductionOrderCreateRequest.MaterialItem(materialId=3, quantity=20)])
-26-08-04.10:36:50.546 [http-nio-8080-exec-4] INFO  ProductionOrderController - 创建生产需求单完成 orderId:13
-26-08-04.10:37:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:37:00.018 [scheduling-1    ] INFO  ProductionOrderService - 开始执行生产需求单 | orderId:13, orderNo:PO202608041036505191462, requestNo:HISTORY_PO202608022141259333, status:0, retryCount:0
-26-08-04.10:37:00.116 [scheduling-1    ] WARN  ProductionOrderService - 生产需求单执行失败 | orderId:13, orderNo:PO202608041036505191462, 耗时:96ms, reason:Invalid bound statement (not found): cn.bugstack.infrastructure.dao.IWarehouseStockFlowDao.insert
-cn.bugstack.domain.production.exception.ProductionExecuteException: Invalid bound statement (not found): cn.bugstack.infrastructure.dao.IWarehouseStockFlowDao.insert
-	at cn.bugstack.domain.production.service.ProductionOrderExecutor.executeStage(ProductionOrderExecutor.java:117)
-	at cn.bugstack.domain.production.service.ProductionOrderExecutor.execute(ProductionOrderExecutor.java:98)
-	at cn.bugstack.domain.production.service.ProductionOrderService.executeCreatedOrders(ProductionOrderService.java:165)
-	at cn.bugstack.domain.production.service.ProductionOrderService$$FastClassBySpringCGLIB$$df657fdb.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
-	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
-	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704)
-	at cn.bugstack.domain.production.service.ProductionOrderService$$EnhancerBySpringCGLIB$$78a286ea.executeCreatedOrders(<generated>)
-	at cn.bugstack.trigger.job.ProductionOrderJob.exec(ProductionOrderJob.java:38)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-Caused by: org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.bugstack.infrastructure.dao.IWarehouseStockFlowDao.insert
-	at org.apache.ibatis.binding.MapperMethod$SqlCommand.<init>(MapperMethod.java:235)
-	at org.apache.ibatis.binding.MapperMethod.<init>(MapperMethod.java:53)
-	at org.apache.ibatis.binding.MapperProxy.lambda$cachedInvoker$0(MapperProxy.java:115)
-	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1705)
-	at org.apache.ibatis.binding.MapperProxy.cachedInvoker(MapperProxy.java:102)
-	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
-	at com.sun.proxy.$Proxy122.insert(Unknown Source)
-	at cn.bugstack.infrastructure.repository.WarehouseStockRepository.saveFlow(WarehouseStockRepository.java:88)
-	at cn.bugstack.infrastructure.repository.WarehouseStockRepository$$FastClassBySpringCGLIB$$9df9cd.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
-	at cn.bugstack.infrastructure.repository.WarehouseStockRepository$$EnhancerBySpringCGLIB$$8f7ad9c2.saveFlow(<generated>)
-	at cn.bugstack.domain.warehousestock.service.StockService.inbound(StockService.java:98)
-	at cn.bugstack.domain.warehousestock.service.StockService$$FastClassBySpringCGLIB$$735079c0.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
-	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
-	at cn.bugstack.domain.warehousestock.service.StockService$$EnhancerBySpringCGLIB$$c8a84bb9.inbound(<generated>)
-	at cn.bugstack.domain.production.service.ProductionOrderExecutor.lambda$execute$7(ProductionOrderExecutor.java:99)
-	at cn.bugstack.domain.production.service.ProductionOrderExecutor.executeStage(ProductionOrderExecutor.java:113)
-	... 22 common frames omitted
-26-08-04.10:37:00.120 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:37:00.121 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:38:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:38:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:38:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:38:59.193 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.10:38:59.203 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.10:39:01.211 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 6112 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.10:39:01.211 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.10:39:01.213 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.10:39:02.021 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.10:39:02.022 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.10:39:02.067 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
-26-08-04.10:39:02.761 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.10:39:02.768 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.10:39:02.768 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.10:39:02.769 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.10:39:02.882 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.10:39:02.882 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1634 ms
-26-08-04.10:39:03.251 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'aliPayController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-26-08-04.10:39:03.254 [main            ] INFO  StandardService        - Stopping service [Tomcat]
-26-08-04.10:39:03.267 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-26-08-04.10:39:03.284 [main            ] ERROR SpringApplication      - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'aliPayController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
-	at cn.bugstack.Application.main(Application.java:14)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeanByName(AbstractAutowireCapableBeanFactory.java:479)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:550)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:520)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:673)
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:329)
-	... 17 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
-	... 33 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1534)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1417)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:544)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:520)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:673)
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:329)
-	... 45 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1519)
-	... 61 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
-	... 74 common frames omitted
-Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:613)
-	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:491)
-	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:633)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:179)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$443adb55.CGLIB$sqlSessionFactory$1(<generated>)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$443adb55$$FastClassBySpringCGLIB$$3f957da.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
-	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$443adb55.sqlSessionFactory(<generated>)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
-	... 75 common frames omitted
-Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:123)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:95)
-	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:611)
-	... 88 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:1014)
-	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:970)
-	at org.apache.ibatis.session.Configuration.addMappedStatement(Configuration.java:768)
-	at org.apache.ibatis.builder.MapperBuilderAssistant.addMappedStatement(MapperBuilderAssistant.java:297)
-	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:113)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:138)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:131)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:121)
-	... 90 common frames omitted
-26-08-04.10:40:43.227 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.10:40:43.225 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 31676 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.10:40:43.228 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.10:40:43.970 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.10:40:43.971 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.10:40:44.017 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
-26-08-04.10:40:44.721 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.10:40:44.727 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.10:40:44.727 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.10:40:44.727 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.10:40:44.833 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.10:40:44.833 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1570 ms
-26-08-04.10:40:45.186 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'aliPayController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-26-08-04.10:40:45.188 [main            ] INFO  StandardService        - Stopping service [Tomcat]
-26-08-04.10:40:45.201 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-26-08-04.10:40:45.216 [main            ] ERROR SpringApplication      - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'aliPayController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
-	at cn.bugstack.Application.main(Application.java:14)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderService' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-domain\target\classes\cn\bugstack\domain\order\service\OrderService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeanByName(AbstractAutowireCapableBeanFactory.java:479)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:550)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:520)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:673)
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:329)
-	... 17 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderRepository': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
-	... 33 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IOrderDao' defined in file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-infrastructure\target\classes\cn\bugstack\infrastructure\dao\IOrderDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1534)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1417)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:544)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:520)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:673)
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:329)
-	... 45 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1519)
-	... 61 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
-	... 74 common frames omitted
-Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:613)
-	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:491)
-	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:633)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:179)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$ef06494f.CGLIB$sqlSessionFactory$0(<generated>)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$ef06494f$$FastClassBySpringCGLIB$$3377990c.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
-	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
-	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$ef06494f.sqlSessionFactory(<generated>)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
-	... 75 common frames omitted
-Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:123)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:95)
-	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:611)
-	... 88 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for cn.bugstack.infrastructure.dao.IWarehouseDao.insert. please check file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_mapper.xml] and file [D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes\mybatis\mapper\warehouse_stock_flow_mapper.xml]
-	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:1014)
-	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:970)
-	at org.apache.ibatis.session.Configuration.addMappedStatement(Configuration.java:768)
-	at org.apache.ibatis.builder.MapperBuilderAssistant.addMappedStatement(MapperBuilderAssistant.java:297)
-	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:113)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:138)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:131)
-	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:121)
-	... 90 common frames omitted
-26-08-04.10:43:28.275 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 23592 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.10:43:28.276 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.10:43:28.278 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.10:43:29.038 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.10:43:29.040 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.10:43:29.081 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
-26-08-04.10:43:29.770 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.10:43:29.775 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.10:43:29.776 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.10:43:29.776 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.10:43:29.881 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.10:43:29.881 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1569 ms
-26-08-04.10:43:30.900 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.10:43:31.362 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for localhost/127.0.0.1:6379
-26-08-04.10:43:31.429 [redisson-netty-1-20] INFO  ConnectionsHolder      - 24 connections initialized for localhost/127.0.0.1:6379
-26-08-04.10:43:31.688 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.10:43:31.703 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.10:43:31.718 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.10:43:31.731 [main            ] INFO  Application            - Started Application in 3.835 seconds (JVM running for 4.179)
-26-08-04.10:43:33.031 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.10:43:33.235 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.10:43:38.363 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.10:43:38.363 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.10:43:38.364 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.10:43:38.555 [http-nio-8080-exec-3] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=2, requestNo=HISTORY_PO202608022141259334, productQuantity=500, warehouseId=1, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=2, quantity=20), ProductionOrderCreateRequest.MaterialItem(materialId=3, quantity=20)])
-26-08-04.10:43:38.617 [http-nio-8080-exec-3] INFO  ProductionOrderController - 创建生产需求单完成 orderId:14
-26-08-04.10:43:40.581 [http-nio-8080-exec-5] INFO  ProductionOrderController - 创建生产需求单开始 request:ProductionOrderCreateRequest(productId=2, requestNo=HISTORY_PO202608022141259334, productQuantity=500, warehouseId=1, materials=[ProductionOrderCreateRequest.MaterialItem(materialId=2, quantity=20), ProductionOrderCreateRequest.MaterialItem(materialId=3, quantity=20)])
-26-08-04.10:43:40.586 [http-nio-8080-exec-5] WARN  ProductionOrderService - 生产需求单请求号已存在 requestNo:HISTORY_PO202608022141259334
-26-08-04.10:44:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:44:00.013 [scheduling-1    ] INFO  ProductionOrderService - 开始执行生产需求单 | orderId:14, orderNo:PO202608041043385951303, requestNo:HISTORY_PO202608022141259334, status:0, retryCount:0
-26-08-04.10:44:00.094 [scheduling-1    ] INFO  ProductionOrderService - 生产需求单执行成功 | orderId:14, orderNo:PO202608041043385951303, 耗时:81ms
-26-08-04.10:44:00.095 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:44:00.096 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:45:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:45:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:45:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:46:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:46:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:46:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:47:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:47:00.003 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:47:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:48:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:48:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:48:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:49:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.10:49:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.10:49:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.10:49:24.753 [redisson-netty-1-3] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xd841800f, L:/127.0.0.1:59386 - R:localhost/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.10:49:24.753 [redisson-netty-1-9] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x729d0a50, L:/127.0.0.1:59389 - R:localhost/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.10:49:24.753 [redisson-netty-1-11] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xcb254e34, L:/127.0.0.1:59406 - R:localhost/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.10:49:24.753 [redisson-netty-1-7] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x4a91ee57, L:/127.0.0.1:59404 - R:localhost/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.10:49:24.768 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.10:49:24.780 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.11:36:33.114 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 36572 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.11:36:33.114 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.11:36:33.116 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.11:36:33.959 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.11:36:33.961 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.11:36:34.009 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
-26-08-04.11:36:34.740 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.11:36:34.748 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.11:36:34.749 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.11:36:34.749 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.11:36:34.866 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.11:36:34.866 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1716 ms
-26-08-04.11:36:35.642 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.11:36:36.145 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:36:36.212 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:36:36.879 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.11:36:36.895 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.11:36:36.904 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.11:36:36.918 [main            ] INFO  Application            - Started Application in 4.215 seconds (JVM running for 4.604)
-26-08-04.11:36:39.035 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.11:36:39.266 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.11:37:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:37:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:37:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:37:20.509 [http-nio-8080-exec-3] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.11:37:20.510 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.11:37:20.511 [http-nio-8080-exec-3] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.11:37:20.627 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:37:20.642 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:38:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:38:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:38:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:39:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:39:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:39:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:40:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:40:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:40:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.11:40:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:40:14.200 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:40:14.204 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:41:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:41:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:41:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:42:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:42:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:42:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:43:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:43:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:43:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:44:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:44:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:44:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:45:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:45:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:45:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:45:02.536 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:45:02.538 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:46:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:46:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:46:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:47:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:47:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:47:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:48:00.000 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:48:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:48:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:48:57.749 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.11:48:57.760 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.11:48:59.761 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 428 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.11:48:59.761 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.11:48:59.763 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.11:49:00.564 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.11:49:00.565 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.11:49:00.613 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
-26-08-04.11:49:01.325 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.11:49:01.458 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1661 ms
-26-08-04.11:49:02.171 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.11:49:02.621 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:02.694 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:03.214 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.11:49:03.237 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.11:49:03.251 [main            ] INFO  Application            - Started Application in 3.889 seconds (JVM running for 4.303)
-26-08-04.11:49:07.511 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 17180 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.11:49:07.511 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.11:49:07.515 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.11:49:08.275 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.11:49:08.277 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.11:49:08.324 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
-26-08-04.11:49:09.039 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.11:49:09.054 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.11:49:09.054 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.11:49:09.054 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.11:49:09.176 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.11:49:09.176 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1616 ms
-26-08-04.11:49:09.924 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.11:49:10.407 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:10.480 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:11.133 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.11:49:11.155 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.11:49:11.164 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.11:49:11.177 [main            ] INFO  Application            - Started Application in 4.232 seconds (JVM running for 5.033)
-26-08-04.11:49:12.033 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.11:49:12.243 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.11:49:16.234 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.11:49:16.235 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.11:49:16.236 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.11:49:16.336 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:49:16.348 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:49:40.868 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:49:40.871 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:49:49.860 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.11:49:49.871 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.11:49:52.035 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 38812 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.11:49:52.035 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.11:49:52.038 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.11:49:52.895 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.11:49:52.897 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.11:49:52.943 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
-26-08-04.11:49:53.667 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.11:49:53.684 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.11:49:53.688 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.11:49:53.688 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.11:49:53.812 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.11:49:53.812 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1726 ms
-26-08-04.11:49:54.560 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.11:49:55.029 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:55.106 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.11:49:55.750 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.11:49:55.768 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.11:49:55.778 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.11:49:55.790 [main            ] INFO  Application            - Started Application in 4.299 seconds (JVM running for 4.84)
-26-08-04.11:49:57.022 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.11:49:57.208 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.11:49:58.656 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.11:49:58.657 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.11:49:58.658 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.11:49:58.754 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:49:58.767 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:50:00.001 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.11:50:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:50:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:50:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:50:00.871 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:50:00.873 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:50:09.670 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:50:09.672 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:50:30.787 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:50:30.792 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:51:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:51:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:51:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:52:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:52:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:52:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:53:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:53:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:53:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:53:45.938 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:53:45.940 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:54:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:54:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:54:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:54:59.899 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询商品分类详情开始 id:1
-26-08-04.11:54:59.902 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询商品分类详情完成 id:1
-26-08-04.11:55:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:55:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:55:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:56:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:56:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:56:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:57:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:57:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:57:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:58:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:58:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:58:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.11:59:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.11:59:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.11:59:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.12:00:00.003 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.12:00:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.12:00:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.12:00:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.12:01:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.12:01:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.12:01:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.12:02:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.12:02:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.12:02:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:30:49.312 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:30:49.313 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:30:49.314 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:30:49.315 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.13:31:00.000 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:31:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:31:00.003 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:31:13.841 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h29m16s317ms316µs800ns).
-26-08-04.13:32:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:32:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:32:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:33:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:33:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:33:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:34:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:34:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:34:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:35:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:35:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:35:00.004 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:36:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:36:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:36:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:37:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:37:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:37:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:38:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:38:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:38:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:39:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:39:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:39:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:40:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:40:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:40:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:40:00.010 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.13:41:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:41:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:41:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:41:07.049 [http-nio-8080-exec-4] INFO  MaterialTypeController - 查询原料分类详情开始 id:1
-26-08-04.13:41:07.225 [http-nio-8080-exec-4] INFO  MaterialTypeController - 查询原料分类详情完成 id:1
-26-08-04.13:42:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:42:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:42:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:43:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:43:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:43:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:44:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:44:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:44:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:45:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:45:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:45:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:46:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:46:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:46:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:47:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:47:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:47:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:48:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:48:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:48:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:48:25.335 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xfa3dad70, L:/127.0.0.1:52703 - R:127.0.0.1/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.13:48:25.335 [redisson-netty-1-16] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x6b3d9ab0, L:/127.0.0.1:52706 - R:127.0.0.1/127.0.0.1:6379]
-java.io.IOException: 远程主机强迫关闭了一个现有的连接。
-	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
-	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
-	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
-	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-26-08-04.13:48:25.353 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.13:48:25.363 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.13:55:59.978 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.13:55:59.980 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 32440 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.13:55:59.981 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.13:56:01.019 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.13:56:01.022 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.13:56:01.081 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 0 Redis repository interfaces.
-26-08-04.13:56:01.949 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.13:56:01.963 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.13:56:01.964 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.13:56:01.964 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.13:56:02.165 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.13:56:02.166 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2143 ms
-26-08-04.13:56:03.186 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.13:56:03.734 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.13:56:03.808 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.13:56:04.465 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.13:56:04.482 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.13:56:04.494 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.13:56:04.506 [main            ] INFO  Application            - Started Application in 5.083 seconds (JVM running for 5.522)
-26-08-04.13:56:06.037 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.13:56:06.354 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.13:56:18.620 [http-nio-8080-exec-2] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-08-04.13:56:18.622 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-08-04.13:56:18.623 [http-nio-8080-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-08-04.13:56:18.722 [http-nio-8080-exec-2] INFO  MaterialController     - 查询原料详情开始 id:10086
-26-08-04.13:56:23.225 [http-nio-8080-exec-3] INFO  MaterialController     - 查询原料详情开始 id:1
-26-08-04.13:56:23.355 [http-nio-8080-exec-3] INFO  MaterialController     - 查询原料详情完成 id:1
-26-08-04.13:57:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:57:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:57:00.018 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:58:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.13:58:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:58:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:59:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.13:59:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.13:59:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:00:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:00:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:00:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:00:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.14:00:34.592 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.14:00:34.603 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
-26-08-04.14:00:37.901 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 12056 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
-26-08-04.14:00:37.903 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
-26-08-04.14:00:37.904 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-08-04.14:00:38.716 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-26-08-04.14:00:38.719 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-26-08-04.14:00:38.762 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
-26-08-04.14:00:39.474 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
-26-08-04.14:00:39.482 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
-26-08-04.14:00:39.484 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-08-04.14:00:39.484 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-08-04.14:00:39.602 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
-26-08-04.14:00:39.602 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1666 ms
-26-08-04.14:00:40.397 [main            ] INFO  Version                - Redisson 3.26.0
-26-08-04.14:00:40.859 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.14:00:40.925 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
-26-08-04.14:00:41.495 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
-26-08-04.14:00:41.511 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
-26-08-04.14:00:41.519 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
-26-08-04.14:00:41.531 [main            ] INFO  Application            - Started Application in 4.047 seconds (JVM running for 4.401)
-26-08-04.14:00:42.032 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Starting...
-26-08-04.14:00:42.244 [scheduling-1    ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
-26-08-04.14:01:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:01:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:01:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:02:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:02:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:02:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:03:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:03:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:03:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:04:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:04:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:04:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:05:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:05:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:05:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:06:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:06:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:06:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:07:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:07:00.017 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:07:00.018 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:08:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:08:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:08:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:09:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:09:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:09:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:10:00.018 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.14:10:00.018 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:10:00.019 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:10:00.020 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:11:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:11:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:11:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:12:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:12:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:12:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:13:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:13:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:13:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:14:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:14:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:14:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:15:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:15:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:15:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:16:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:16:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:16:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:17:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:17:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:17:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:18:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:18:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:18:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:19:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:19:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:19:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:20:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:20:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:20:00.016 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
-26-08-04.14:20:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:21:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:21:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:21:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:22:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:22:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:22:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:23:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:23:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:23:00.018 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:24:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:24:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:24:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:25:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:25:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:25:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:26:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:26:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:26:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:27:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:27:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:27:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:28:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:28:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:28:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:29:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
-26-08-04.14:29:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
-26-08-04.14:29:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
-26-08-04.14:29:30.876 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
-26-08-04.14:29:30.890 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:11:48.247 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 30528 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:11:48.247 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:11:48.251 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:11:49.216 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:11:49.218 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:11:49.277 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+26-08-13.10:11:49.785 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:11:49.796 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:11:49.796 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:11:49.797 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:11:49.930 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:11:49.931 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1640 ms
+26-08-13.10:11:50.607 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:11:51.173 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:11:51.241 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:11:52.082 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:11:52.109 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:11:52.121 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:11:52.139 [main            ] INFO  Application            - Started Application in 4.327 seconds (JVM running for 5.197)
+26-08-13.10:11:52.455 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:11:52.646 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:11:52.750 [RMI TCP Connection(3)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:11:52.750 [RMI TCP Connection(3)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:11:52.752 [RMI TCP Connection(3)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-13.10:12:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:12:00.022 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:12:00.025 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:13:00.004 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:13:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:13:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:14:00.000 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:14:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:14:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:14:55.480 [http-nio-8080-exec-2] INFO  LoginController        - 生成微信扫码登录 ticket 开始
+26-08-13.10:14:57.129 [http-nio-8080-exec-2] INFO  LoginController        - 生成微信扫码登录 ticket 完成 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA
+26-08-13.10:14:59.697 [http-nio-8080-exec-5] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587299</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[SCAN]]></Event>
+<EventKey><![CDATA[100601]]></EventKey>
+<Ticket><![CDATA[gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA]]></Ticket>
+</xml>
+26-08-13.10:15:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:15:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:15:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:15:00.278 [http-nio-8080-exec-6] INFO  LoginController        - 扫描检测登录结果开始 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA
+26-08-13.10:15:00.285 [http-nio-8080-exec-6] INFO  LoginController        - 扫描检测登录结果完成 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzLXBheS1tYWxsIiwiaWF0IjoxNzg2NTg3MzAwLCJleHAiOjE3ODcxOTIxMDAsIm9wZW5pZCI6Im94ZjBuM2FacFhfT0E4Y19nOFdhZzJxc3lmMVUifQ.DR1kWrW005CXG7NwyWq3QvQr2j1k4616TanlJWjrfGI
+26-08-13.10:15:01.333 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587300</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4647205433483296769</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-08-13.10:15:01.341 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587300</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4647205433483296769</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-08-13.10:15:35.348 [http-nio-8080-exec-9] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_001, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:15:35.367 [http-nio-8080-exec-9] INFO  CrowdTagsController    - 新增人群标签完成 id:29
+26-08-13.10:16:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:16:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:16:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:17:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:17:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:17:00.019 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:18:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:18:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:18:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:19:00.001 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:19:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:19:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:19:28.246 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:19:28.258 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:19:32.055 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:19:32.058 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 39948 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:19:32.058 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:19:32.918 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:19:32.920 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:19:32.971 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 0 Redis repository interfaces.
+26-08-13.10:19:33.422 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:19:33.429 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:19:33.430 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:19:33.430 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:19:33.546 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:19:33.548 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1452 ms
+26-08-13.10:19:34.135 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:19:34.642 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:19:34.710 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:19:35.547 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:19:35.574 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:19:35.583 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:19:35.599 [main            ] INFO  Application            - Started Application in 3.931 seconds (JVM running for 4.772)
+26-08-13.10:19:35.853 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:19:36.026 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:19:36.931 [RMI TCP Connection(5)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:19:36.931 [RMI TCP Connection(5)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:19:36.932 [RMI TCP Connection(5)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.10:19:39.189 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_002, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:19:39.210 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签完成 id:44
+26-08-13.10:20:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:20:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:20:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:20:00.010 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:21:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:21:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:21:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:22:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:22:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:22:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:23:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:23:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:23:00.019 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:24:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:24:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:24:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:25:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:25:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:25:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:25:25.175 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:25:25.188 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:25:28.956 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:25:28.956 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 7832 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:25:28.958 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:25:29.851 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:25:29.853 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:25:29.903 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 0 Redis repository interfaces.
+26-08-13.10:25:30.335 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:25:30.341 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:25:30.342 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:25:30.342 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:25:30.449 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:25:30.449 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1458 ms
+26-08-13.10:25:31.108 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:25:31.644 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:25:31.718 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:25:32.557 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:25:32.583 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:25:32.593 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:25:32.609 [main            ] INFO  Application            - Started Application in 4.033 seconds (JVM running for 4.837)
+26-08-13.10:25:32.970 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:25:32.970 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:25:32.971 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:25:32.972 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-13.10:25:33.142 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:25:36.667 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_002, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:25:42.137 [http-nio-8080-exec-3] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_003, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:25:42.148 [http-nio-8080-exec-3] INFO  CrowdTagsController    - 新增人群标签完成 id:59
+26-08-13.10:26:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:26:00.023 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:26:00.025 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:26:45.190 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 查询人群标签详情开始 id:1
+26-08-13.10:27:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:27:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:27:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:27:30.057 [http-nio-8080-exec-8] INFO  CrowdTagsController    - 查询人群标签详情开始 id:29
+26-08-13.10:27:30.059 [http-nio-8080-exec-8] INFO  CrowdTagsController    - 查询人群标签详情完成 id:29
+26-08-13.10:27:48.217 [http-nio-8080-exec-10] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_004, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:27:48.224 [http-nio-8080-exec-10] INFO  CrowdTagsController    - 新增人群标签完成 id:60
+26-08-13.10:28:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:28:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:28:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:28:23.506 [http-nio-8080-exec-1] INFO  CrowdTagsController    - 分页查询人群标签开始 request:CrowdTagsPageRequest(tagId=null, tagName=null)
+26-08-13.10:28:23.526 [http-nio-8080-exec-1] INFO  CrowdTagsController    - 分页查询人群标签完成 count:4 total:4
+26-08-13.10:29:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:29:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:29:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:30:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:30:00.006 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:30:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:30:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:30:15.688 [http-nio-8080-exec-4] INFO  CrowdTagsController    - 更新人群标签开始 id:1 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:23.188 [http-nio-8080-exec-5] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:23.195 [http-nio-8080-exec-5] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:30:26.406 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:26.412 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:30:37.395 [http-nio-8080-exec-7] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群修改, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:37.403 [http-nio-8080-exec-7] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:31:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:31:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:31:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:32:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:32:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:32:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:33:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:33:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:33:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:34:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:34:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:34:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:34:58.079 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:34:58.094 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:37:05.448 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:37:05.448 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 26764 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:37:05.451 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:37:06.382 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:37:06.384 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:37:06.439 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 0 Redis repository interfaces.
+26-08-13.10:37:06.926 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:37:06.935 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:37:06.936 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:37:06.936 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:37:07.054 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:37:07.054 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1567 ms
+26-08-13.10:37:07.720 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:37:08.221 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:37:08.297 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:37:09.126 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:37:09.149 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:37:09.159 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:37:09.174 [main            ] INFO  Application            - Started Application in 4.156 seconds (JVM running for 5.001)
+26-08-13.10:37:09.253 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:37:09.255 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:37:09.255 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:37:09.256 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.10:37:09.442 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:37:14.316 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 删除人群标签开始 id:29
+26-08-13.10:37:14.342 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 删除人群标签完成 id:29
+26-08-13.10:38:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:38:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:38:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:39:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:39:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:39:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:40:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:40:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:40:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:40:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:41:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:41:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:41:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:42:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:42:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:42:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:43:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:43:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:43:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:44:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:44:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:44:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:45:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:45:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:45:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:46:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:46:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:46:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务

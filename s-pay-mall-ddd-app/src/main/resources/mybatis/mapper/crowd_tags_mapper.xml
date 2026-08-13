@@ -8,14 +8,104 @@
         <result column="tag_name" property="tagName"/>
         <result column="tag_desc" property="tagDesc"/>
         <result column="statistics" property="statistics"/>
+        <result column="is_del" property="isDel"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into crowd_tags(tag_id, tag_name, tag_desc, statistics, create_time, update_time)
+        values (#{tagId}, #{tagName}, #{tagDesc}, #{statistics}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags">
+        update crowd_tags
+        set tag_name = #{tagName},
+            tag_desc = #{tagDesc},
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update crowd_tags
+        set is_del = 1,
+            update_time = now()
+        where id = #{id}
+          and is_del = 0
+    </update>
+
+    <select id="queryById" parameterType="java.lang.Long" resultMap="dataMap">
+        select id,
+               tag_id,
+               tag_name,
+               tag_desc,
+               statistics,
+               is_del,
+               create_time,
+               update_time
+        from crowd_tags
+        where id = #{id}
+          and is_del = 0
+    </select>
+
+    <select id="queryByTagId" parameterType="java.lang.String" resultMap="dataMap">
+        select id,
+               tag_id,
+               tag_name,
+               tag_desc,
+               statistics,
+               is_del,
+               create_time,
+               update_time
+        from crowd_tags
+        where tag_id = #{tagId}
+          and is_del = 0
+    </select>
+
+    <select id="queryPage" resultMap="dataMap">
+        select id,
+               tag_id,
+               tag_name,
+               tag_desc,
+               statistics,
+               is_del,
+               create_time,
+               update_time
+        from crowd_tags
+        <where>
+            is_del = 0
+            <if test="tagId != null and tagId != ''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="tagName != null and tagName != ''">
+                and tag_name like concat('%', #{tagName}, '%')
+            </if>
+        </where>
+        order by id desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(1)
+        from crowd_tags
+        <where>
+            is_del = 0
+            <if test="tagId != null and tagId != ''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="tagName != null and tagName != ''">
+                and tag_name like concat('%', #{tagName}, '%')
+            </if>
+        </where>
+    </select>
 
     <update id="updateCrowdTagsStatistics" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags">
         update crowd_tags
         set statistics = #{statistics},
             update_time = now()
         where tag_id = #{tagId}
+          and is_del = 0
     </update>
 </mapper>
