@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.WarehouseStock;
+import cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

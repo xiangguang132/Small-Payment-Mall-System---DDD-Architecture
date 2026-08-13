@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
 import cn.bugstack.domain.material.repository.IMaterialRepository;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
-import cn.bugstack.infrastructure.dao.po.Material;
+import cn.bugstack.infrastructure.dao.po.material.Material;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;

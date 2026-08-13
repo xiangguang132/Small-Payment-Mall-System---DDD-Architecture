@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.Supplier;
+import cn.bugstack.infrastructure.dao.po.supplier.Supplier;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

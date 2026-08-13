@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IMaterialStockDao">
 
-    <resultMap id="stockMap" type="cn.bugstack.infrastructure.dao.po.MaterialStock">
+    <resultMap id="stockMap" type="cn.bugstack.infrastructure.dao.po.material.MaterialStock">
         <id column="id" property="id"/>
         <result column="material_id" property="materialId"/>
         <result column="storage_address" property="storageAddress"/>
@@ -15,7 +15,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStock"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialStock"
             useGeneratedKeys="true" keyProperty="id">
         insert into material_stock
         (material_id, storage_address, available_qty, locked_qty, total_qty, is_del, create_time, update_time)
@@ -58,7 +58,7 @@
         order by create_time asc, id asc
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStock">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialStock">
         update material_stock
         set available_qty = #{availableQty},
             locked_qty = #{lockedQty},

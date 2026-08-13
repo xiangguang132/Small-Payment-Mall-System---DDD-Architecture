@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原料入库出库生产适配页</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, "Microsoft YaHei", sans-serif;
+            color: #222;
+            background: #f4f6f8;
+        }
+
+        header {
+            background: #263238;
+            color: #fff;
+            padding: 18px 24px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .top-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #d8e2e7;
+        }
+
+        main {
+            width: min(1180px, calc(100% - 32px));
+            margin: 20px auto 36px;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) auto auto;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #fff;
+            border: 1px solid #dfe5ea;
+            border-radius: 6px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        section {
+            background: #fff;
+            border: 1px solid #dfe5ea;
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        section h2 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .field {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: #4d5963;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            min-height: 36px;
+            padding: 8px 10px;
+            border: 1px solid #cfd8df;
+            border-radius: 4px;
+            background: #fff;
+            color: #222;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 92px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        button {
+            min-height: 36px;
+            padding: 8px 14px;
+            border: 1px solid #1677ff;
+            border-radius: 4px;
+            color: #fff;
+            background: #1677ff;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        button.secondary {
+            border-color: #cfd8df;
+            color: #263238;
+            background: #f7f9fb;
+        }
+
+        button.warn {
+            border-color: #d48806;
+            background: #d48806;
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 16px;
+            background: #101820;
+            color: #d7f7e8;
+            border-radius: 6px;
+            padding: 14px;
+            min-height: 180px;
+            overflow: auto;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.45;
+            white-space: pre-wrap;
+        }
+
+        .table-wrap {
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #e7edf2;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f7f9fb;
+            color: #4d5963;
+        }
+
+        .hint {
+            margin: 8px 0 0;
+            color: #65727e;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .summary {
+            margin: 8px 0 10px;
+            padding: 8px 10px;
+            min-height: 34px;
+            border: 1px solid #dfe5ea;
+            border-radius: 4px;
+            background: #f7f9fb;
+            color: #34424d;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .status-ok {
+            color: #95f0bd;
+        }
+
+        .status-warn {
+            color: #ffd27a;
+        }
+
+        @media (max-width: 900px) {
+            .grid, .toolbar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>原料入库 - 出库 - 生产适配页</h1>
+    <div class="top-bar">
+        <span id="authStatus">鉴权状态检测中</span>
+        <a href="login.html" style="color:#9fd3ff;">登录页</a>
+        <a href="index.html" style="color:#9fd3ff;">商城页</a>
+    </div>
+</header>
+
+<main>
+    <div class="toolbar">
+        <div class="field">
+            <label for="baseUrl">接口地址前缀</label>
+            <input id="baseUrl" placeholder="留空表示当前域名，例如 /api/v1/...">
+        </div>
+        <button class="secondary" id="checkAuthBtn">刷新鉴权状态</button>
+        <button class="secondary" id="clearResultBtn">清空结果</button>
+    </div>
+
+    <div class="grid">
+        <section>
+            <h2>1. 原料入库</h2>
+            <div class="field">
+                <label for="inMaterialId">原料ID materialId</label>
+                <input id="inMaterialId" type="number" value="2">
+            </div>
+            <div class="summary" id="inMaterialSummary">原料名称：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="inMaterialDetailBtn">查询原料名称</button>
+            </div>
+            <div class="field">
+                <label for="storageAddress">库位 storageAddress</label>
+                <input id="storageAddress" value="A-01-01">
+            </div>
+            <div class="field">
+                <label for="inboundQty">入库数量 inboundQty</label>
+                <input id="inboundQty" type="number" min="0" step="0.01" value="100">
+            </div>
+            <div class="field">
+                <label for="inReason">原因 reason</label>
+                <input id="inReason" value="前端测试原料入库">
+            </div>
+            <div class="actions">
+                <button id="inboundBtn">提交入库</button>
+            </div>
+            <div class="field" style="margin-top:14px;">
+                <label for="stockDetailId">库存ID id</label>
+                <input id="stockDetailId" type="number" value="1">
+            </div>
+            <div class="summary" id="stockSummary">库存信息：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="stockDetailBtn">查询库存</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 原料出库</h2>
+            <div class="field">
+                <label for="outStockId">库存ID id</label>
+                <input id="outStockId" type="number" value="1">
+            </div>
+            <div class="summary" id="outStockSummary">出库库存：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="outStockDetailBtn">查询出库库存</button>
+            </div>
+            <div class="field">
+                <label for="outQuantity">出库数量 quantity</label>
+                <input id="outQuantity" type="number" min="1" step="1" value="10">
+            </div>
+            <div class="field">
+                <label for="outReason">原因 reason</label>
+                <input id="outReason" value="前端测试人工出库">
+            </div>
+            <div class="actions">
+                <button id="manualOutboundBtn">人工出库</button>
+            </div>
+
+            <div class="field" style="margin-top:14px;">
+                <label for="allocationNo">分配单号 allocationNo</label>
+                <input id="allocationNo" placeholder="创建分配单后自动填充">
+            </div>
+            <div class="field">
+                <label for="allocMaterialId">分配原料ID materialId</label>
+                <input id="allocMaterialId" type="number" value="2">
+            </div>
+            <div class="summary" id="allocMaterialSummary">分配原料：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="allocMaterialDetailBtn">查询分配原料</button>
+            </div>
+            <div class="field">
+                <label for="allocQuantity">分配数量 quantity</label>
+                <input id="allocQuantity" type="number" min="1" step="1" value="10">
+            </div>
+            <div class="actions">
+                <button class="secondary" id="createAllocationBtn">创建分配单</button>
+                <button class="secondary" id="lockAllocationBtn">锁库</button>
+                <button class="warn" id="autoOutboundBtn">流水线出库</button>
+                <button class="secondary" id="allocationDetailBtn">查询分配单</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 生产需求单</h2>
+            <div class="field">
+                <label for="productId">商品ID productId</label>
+                <input id="productId" type="number" value="2">
+            </div>
+            <div class="summary" id="productSummary">商品名称：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="productDetailBtn">查询商品名称</button>
+            </div>
+            <div class="field">
+                <label for="requestNo">请求号 requestNo</label>
+                <input id="requestNo">
+            </div>
+            <div class="field">
+                <label for="productQuantity">生产数量 productQuantity</label>
+                <input id="productQuantity" type="number" min="1" step="1" value="500">
+            </div>
+            <div class="field">
+                <label for="warehouseId">成品入库仓库ID warehouseId</label>
+                <input id="warehouseId" type="number" value="1">
+            </div>
+            <div class="summary" id="warehouseSummary">成品仓库：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="warehouseDetailBtn">查询仓库名称</button>
+            </div>
+            <div class="field">
+                <label for="materialsText">生产原料，每行 materialId:quantity</label>
+                <textarea id="materialsText">2:20
+3:20</textarea>
+            </div>
+            <div class="summary" id="materialsSummary">生产原料名称：待查询</div>
+            <div class="actions">
+                <button class="secondary" id="materialsDetailBtn">查询生产原料名称</button>
+            </div>
+            <div class="actions">
+                <button id="createProductionBtn">创建生产单</button>
+                <button class="secondary" id="refreshRequestNoBtn">刷新请求号</button>
+            </div>
+            <div class="field" style="margin-top:14px;">
+                <label for="productionOrderId">生产单ID id</label>
+                <input id="productionOrderId" type="number" placeholder="创建后自动填充">
+            </div>
+            <div class="actions">
+                <button class="secondary" id="productionDetailBtn">查询生产单</button>
+                <button class="warn" id="handExecuteBtn">手动执行</button>
+                <button class="secondary" id="handRetryBtn">手动重试</button>
+            </div>
+        </section>
+    </div>
+
+    <section style="margin-top:16px;">
+        <h2>生产单列表</h2>
+        <div class="actions">
+            <select id="listStatus" style="width:160px;">
+                <option value="">全部状态</option>
+                <option value="0">0 待执行</option>
+                <option value="1">1 执行中</option>
+                <option value="2">2 已完成</option>
+                <option value="3">3 已取消</option>
+                <option value="4">4 执行失败</option>
+            </select>
+            <input id="listPageNo" type="number" value="1" min="1" style="width:120px;">
+            <input id="listPageSize" type="number" value="10" min="1" style="width:120px;">
+            <button id="loadProductionListBtn">查询列表</button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>生产单号</th>
+                    <th>请求号</th>
+                    <th>商品</th>
+                    <th>数量</th>
+                    <th>仓库</th>
+                    <th>状态</th>
+                    <th>失败阶段</th>
+                    <th>失败原因</th>
+                </tr>
+                </thead>
+                <tbody id="productionListBody">
+                <tr><td colspan="9">暂无数据</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="hint">状态含义以当前后端枚举为准，本页只做轻量接口适配。</p>
+    </section>
+
+    <div id="result" class="result">等待操作...</div>
+</main>
+
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    function getCookie(name) {
+        const items = document.cookie.split(";");
+        for (let i = 0; i < items.length; i++) {
+            const pair = items[i].split("=");
+            if (pair[0] && pair[0].trim() === name) {
+                return decodeURIComponent(pair[1] || "");
+            }
+        }
+        return "";
+    }
+
+    function getLoginToken() {
+        return localStorage.getItem("loginToken") || getCookie("loginToken") || "";
+    }
+
+    const detailCache = {
+        material: {},
+        product: {},
+        warehouse: {}
+    };
+
+    function setResult(title, data) {
+        $("result").textContent = title + "\n" + JSON.stringify(data, null, 2);
+    }
+
+    function setError(title, error) {
+        $("result").textContent = title + "\n" + (error && error.message ? error.message : String(error));
+    }
+
+    function apiUrl(path) {
+        const baseUrl = $("baseUrl").value.trim().replace(/\/$/, "");
+        return baseUrl + path;
+    }
+
+    function headers() {
+        const token = getLoginToken();
+        const result = {"Content-Type": "application/json"};
+        if (token) {
+            result.Authorization = "Bearer " + token;
+        }
+        return result;
+    }
+
+    async function request(path, options) {
+        const response = await fetch(apiUrl(path), Object.assign({
+            headers: headers()
+        }, options || {}));
+        const text = await response.text();
+        let json;
+        try {
+            json = text ? JSON.parse(text) : {};
+        } catch (e) {
+            json = {raw: text};
+        }
+        if (!response.ok || Number(json.code) !== 200) {
+            const message = json.info || response.statusText || "请求失败";
+            const error = new Error(message);
+            error.payload = json;
+            throw error;
+        }
+        return json;
+    }
+
+    async function getMaterialDetail(id) {
+        if (!id) {
+            return null;
+        }
+        if (detailCache.material[id]) {
+            return detailCache.material[id];
+        }
+        const json = await request("/api/v1/material/" + encodeURIComponent(id), {method: "GET"});
+        detailCache.material[id] = json.data;
+        return json.data;
+    }
+
+    async function getProductDetail(id) {
+        if (!id) {
+            return null;
+        }
+        if (detailCache.product[id]) {
+            return detailCache.product[id];
+        }
+        const json = await request("/api/v1/product/" + encodeURIComponent(id), {method: "GET"});
+        detailCache.product[id] = json.data;
+        return json.data;
+    }
+
+    async function getWarehouseDetail(id) {
+        if (!id) {
+            return null;
+        }
+        if (detailCache.warehouse[id]) {
+            return detailCache.warehouse[id];
+        }
+        const json = await request("/api/v1/warehouse/" + encodeURIComponent(id), {method: "GET"});
+        detailCache.warehouse[id] = json.data;
+        return json.data;
+    }
+
+    function renderMaterialSummary(elId, material) {
+        if (!material) {
+            $(elId).textContent = "原料名称：未查询到";
+            return;
+        }
+        $(elId).textContent = "原料名称：" + safeText(material.name) +
+            "，编码：" + safeText(material.materialCode) +
+            "，单位：" + safeText(material.unit) +
+            "，分类：" + safeText(material.typeName);
+    }
+
+    function renderProductSummary(elId, product) {
+        if (!product) {
+            $(elId).textContent = "商品名称：未查询到";
+            return;
+        }
+        $(elId).textContent = "商品名称：" + safeText(product.name) +
+            "，SKU：" + safeText(product.sku) +
+            "，分类：" + safeText(product.categoryName) +
+            "，价格：" + safeText(product.price);
+    }
+
+    function renderWarehouseSummary(elId, warehouse) {
+        if (!warehouse) {
+            $(elId).textContent = "仓库名称：未查询到";
+            return;
+        }
+        $(elId).textContent = "仓库名称：" + safeText(warehouse.name) +
+            "，编码：" + safeText(warehouse.warehouseCode) +
+            "，地址：" + safeText(warehouse.address);
+    }
+
+    async function renderStockSummary(elId, stock) {
+        if (!stock) {
+            $(elId).textContent = "库存信息：未查询到";
+            return;
+        }
+        let materialName = "未查询";
+        try {
+            const material = await getMaterialDetail(stock.materialId);
+            materialName = material && material.name ? material.name : "未查询到";
+        } catch (e) {
+            materialName = "查询失败";
+        }
+        $(elId).textContent = "原料：" + safeText(materialName) +
+            "（ID " + safeText(stock.materialId) + "），库位：" + safeText(stock.storageAddress) +
+            "，可用：" + safeText(stock.availableQty) +
+            "，锁定：" + safeText(stock.lockedQty) +
+            "，总量：" + safeText(stock.totalQty);
+    }
+
+    async function loadAndRenderMaterial(inputId, summaryId) {
+        const id = Number($(inputId).value);
+        $(summaryId).textContent = "原料名称：查询中...";
+        const material = await getMaterialDetail(id);
+        renderMaterialSummary(summaryId, material);
+        return material;
+    }
+
+    async function loadAndRenderProduct() {
+        $("productSummary").textContent = "商品名称：查询中...";
+        const product = await getProductDetail(Number($("productId").value));
+        renderProductSummary("productSummary", product);
+        return product;
+    }
+
+    async function loadAndRenderWarehouse() {
+        $("warehouseSummary").textContent = "仓库名称：查询中...";
+        const warehouse = await getWarehouseDetail(Number($("warehouseId").value));
+        renderWarehouseSummary("warehouseSummary", warehouse);
+        return warehouse;
+    }
+
+    async function loadAndRenderStock(inputId, summaryId) {
+        const id = $(inputId).value;
+        $(summaryId).textContent = "库存信息：查询中...";
+        const json = await request("/api/v1/material-stock/" + encodeURIComponent(id), {method: "GET"});
+        await renderStockSummary(summaryId, json.data);
+        return json;
+    }
+
+    async function loadAndRenderProductionMaterials() {
+        const materials = parseMaterials();
+        if (!materials.length) {
+            $("materialsSummary").textContent = "生产原料名称：未填写有效原料";
+            return [];
+        }
+        $("materialsSummary").textContent = "生产原料名称：查询中...";
+        const details = await Promise.all(materials.map(async function(item) {
+            try {
+                const material = await getMaterialDetail(item.materialId);
+                return safeText(material && material.name ? material.name : "未查询到") +
+                    "（ID " + item.materialId + "，数量 " + item.quantity + "）";
+            } catch (e) {
+                return "查询失败（ID " + item.materialId + "，数量 " + item.quantity + "）";
+            }
+        }));
+        $("materialsSummary").textContent = "生产原料：" + details.join("；");
+        return details;
+    }
+
+    function refreshAuthStatus() {
+        const token = getLoginToken();
+        $("authStatus").innerHTML = token
+            ? '<span class="status-ok">已读取 loginToken，可请求受保护接口</span>'
+            : '<span class="status-warn">未读取 loginToken，请先登录或确认 cookie/localStorage</span>';
+    }
+
+    function refreshRequestNo() {
+        const now = new Date();
+        const stamp = [
+            now.getFullYear(),
+            String(now.getMonth() + 1).padStart(2, "0"),
+            String(now.getDate()).padStart(2, "0"),
+            String(now.getHours()).padStart(2, "0"),
+            String(now.getMinutes()).padStart(2, "0"),
+            String(now.getSeconds()).padStart(2, "0"),
+            String(now.getMilliseconds()).padStart(3, "0")
+        ].join("");
+        $("requestNo").value = "HTML_PO" + stamp;
+    }
+
+    function parseMaterials() {
+        return $("materialsText").value.split(/\n+/)
+            .map(function(line) {
+                const parts = line.trim().split(/[:：,，\s]+/);
+                return {
+                    materialId: Number(parts[0]),
+                    quantity: Number(parts[1])
+                };
+            })
+            .filter(function(item) {
+                return item.materialId > 0 && item.quantity > 0;
+            });
+    }
+
+    async function run(title, fn) {
+        const buttons = Array.from(document.querySelectorAll("button"));
+        buttons.forEach(function(button) {
+            button.disabled = true;
+        });
+        $("result").textContent = title + "\n请求中...";
+        try {
+            const json = await fn();
+            setResult(title + "成功", json);
+            return json;
+        } catch (error) {
+            setResult(title + "失败", error.payload || {message: error.message});
+            throw error;
+        } finally {
+            buttons.forEach(function(button) {
+                button.disabled = false;
+            });
+            refreshAuthStatus();
+        }
+    }
+
+    function renderProductionList(pageData) {
+        const list = pageData && pageData.list ? pageData.list : [];
+        const body = $("productionListBody");
+        if (!list.length) {
+            body.innerHTML = '<tr><td colspan="9">暂无数据</td></tr>';
+            return;
+        }
+        body.innerHTML = list.map(function(item) {
+            const product = detailCache.product[item.productId];
+            const warehouse = detailCache.warehouse[item.warehouseId];
+            return "<tr>" +
+                "<td>" + safe(item.id) + "</td>" +
+                "<td>" + safe(item.orderNo) + "</td>" +
+                "<td>" + safe(item.requestNo) + "</td>" +
+                "<td>" + safe(formatNameWithId(product && product.name, item.productId)) + "</td>" +
+                "<td>" + safe(item.productQuantity) + "</td>" +
+                "<td>" + safe(formatNameWithId(warehouse && warehouse.name, item.warehouseId)) + "</td>" +
+                "<td>" + safe(item.status) + "</td>" +
+                "<td>" + safe(item.failStage) + "</td>" +
+                "<td>" + safe(item.failReason) + "</td>" +
+                "</tr>";
+        }).join("");
+    }
+
+    async function enrichProductionListNames(pageData) {
+        const list = pageData && pageData.list ? pageData.list : [];
+        const productIds = uniqueIds(list.map(function(item) { return item.productId; }));
+        const warehouseIds = uniqueIds(list.map(function(item) { return item.warehouseId; }));
+        await Promise.all(productIds.map(function(id) {
+            return getProductDetail(id).catch(function() { return null; });
+        }).concat(warehouseIds.map(function(id) {
+            return getWarehouseDetail(id).catch(function() { return null; });
+        })));
+        renderProductionList(pageData);
+    }
+
+    function uniqueIds(values) {
+        const seen = {};
+        return values.filter(function(value) {
+            if (!value || seen[value]) {
+                return false;
+            }
+            seen[value] = true;
+            return true;
+        });
+    }
+
+    function formatNameWithId(name, id) {
+        if (!id) {
+            return "";
+        }
+        return (name ? name : "未查询") + "（ID " + id + "）";
+    }
+
+    function safe(value) {
+        if (value === null || value === undefined) {
+            return "";
+        }
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function safeText(value) {
+        if (value === null || value === undefined || value === "") {
+            return "-";
+        }
+        return String(value);
+    }
+
+    $("checkAuthBtn").addEventListener("click", refreshAuthStatus);
+    $("clearResultBtn").addEventListener("click", function() {
+        $("result").textContent = "等待操作...";
+    });
+    $("refreshRequestNoBtn").addEventListener("click", refreshRequestNo);
+    $("inMaterialDetailBtn").addEventListener("click", function() {
+        run("查询入库原料名称", function() {
+            return loadAndRenderMaterial("inMaterialId", "inMaterialSummary")
+                .then(function(data) { return {code: 200, info: "查询完成", data: data}; });
+        });
+    });
+    $("outStockDetailBtn").addEventListener("click", function() {
+        run("查询出库库存信息", function() {
+            return loadAndRenderStock("outStockId", "outStockSummary");
+        });
+    });
+    $("allocMaterialDetailBtn").addEventListener("click", function() {
+        run("查询分配原料名称", function() {
+            return loadAndRenderMaterial("allocMaterialId", "allocMaterialSummary")
+                .then(function(data) { return {code: 200, info: "查询完成", data: data}; });
+        });
+    });
+    $("productDetailBtn").addEventListener("click", function() {
+        run("查询商品名称", function() {
+            return loadAndRenderProduct()
+                .then(function(data) { return {code: 200, info: "查询完成", data: data}; });
+        });
+    });
+    $("warehouseDetailBtn").addEventListener("click", function() {
+        run("查询仓库名称", function() {
+            return loadAndRenderWarehouse()
+                .then(function(data) { return {code: 200, info: "查询完成", data: data}; });
+        });
+    });
+    $("materialsDetailBtn").addEventListener("click", function() {
+        run("查询生产原料名称", function() {
+            return loadAndRenderProductionMaterials()
+                .then(function(data) { return {code: 200, info: "查询完成", data: data}; });
+        });
+    });
+
+    $("inboundBtn").addEventListener("click", function() {
+        run("原料入库", function() {
+            loadAndRenderMaterial("inMaterialId", "inMaterialSummary").catch(function() {});
+            return request("/api/v1/material-stock/inbound", {
+                method: "POST",
+                body: JSON.stringify({
+                    materialId: Number($("inMaterialId").value),
+                    storageAddress: $("storageAddress").value.trim(),
+                    inboundQty: Number($("inboundQty").value),
+                    reason: $("inReason").value.trim()
+                })
+            });
+        });
+    });
+
+    $("stockDetailBtn").addEventListener("click", function() {
+        run("查询原料库存", function() {
+            return loadAndRenderStock("stockDetailId", "stockSummary").then(async function(json) {
+                return json;
+            });
+        });
+    });
+
+    $("manualOutboundBtn").addEventListener("click", function() {
+        run("人工原料出库", function() {
+            return request("/api/v1/material-stock/manual-outbound/" + encodeURIComponent($("outStockId").value), {
+                method: "POST",
+                body: JSON.stringify({
+                    quantity: Number($("outQuantity").value),
+                    reason: $("outReason").value.trim()
+                })
+            }).then(async function(json) {
+                await renderStockSummary("outStockSummary", json.data);
+                return json;
+            });
+        });
+    });
+
+    $("createAllocationBtn").addEventListener("click", async function() {
+        const json = await run("创建原料库存分配单", function() {
+            loadAndRenderMaterial("allocMaterialId", "allocMaterialSummary").catch(function() {});
+            return request("/api/v1/material-stock-allocation/create", {
+                method: "POST",
+                body: JSON.stringify({
+                    materialId: Number($("allocMaterialId").value),
+                    quantity: Number($("allocQuantity").value),
+                    reason: "前端测试分配单出库"
+                })
+            });
+        });
+        if (json && json.data) {
+            $("allocationNo").value = json.data;
+        }
+    });
+
+    $("lockAllocationBtn").addEventListener("click", function() {
+        run("锁定分配单库存", function() {
+            return request("/api/v1/material-stock-allocation/lock/" + encodeURIComponent($("allocationNo").value.trim()), {
+                method: "POST"
+            });
+        });
+    });
+
+    $("autoOutboundBtn").addEventListener("click", function() {
+        run("分配单流水线出库", function() {
+            return request("/api/v1/material-stock-allocation/auto-outbound/" + encodeURIComponent($("allocationNo").value.trim()), {
+                method: "POST"
+            });
+        });
+    });
+
+    $("allocationDetailBtn").addEventListener("click", function() {
+        run("查询原料库存分配单", function() {
+            return request("/api/v1/material-stock-allocation/" + encodeURIComponent($("allocationNo").value.trim()), {
+                method: "GET"
+            }).then(async function(json) {
+                if (json.data && json.data.materialId) {
+                    const material = await getMaterialDetail(json.data.materialId).catch(function() { return null; });
+                    renderMaterialSummary("allocMaterialSummary", material);
+                }
+                return json;
+            });
+        });
+    });
+
+    $("createProductionBtn").addEventListener("click", async function() {
+        const json = await run("创建生产需求单", function() {
+            loadAndRenderProduct().catch(function() {});
+            loadAndRenderWarehouse().catch(function() {});
+            loadAndRenderProductionMaterials().catch(function() {});
+            return request("/api/v1/production-order/create", {
+                method: "POST",
+                body: JSON.stringify({
+                    productId: Number($("productId").value),
+                    requestNo: $("requestNo").value.trim(),
+                    productQuantity: Number($("productQuantity").value),
+                    warehouseId: Number($("warehouseId").value),
+                    materials: parseMaterials()
+                })
+            });
+        });
+        if (json && json.data) {
+            $("productionOrderId").value = json.data;
+        }
+    });
+
+    $("productionDetailBtn").addEventListener("click", function() {
+        run("查询生产需求单", function() {
+            return request("/api/v1/production-order/" + encodeURIComponent($("productionOrderId").value), {
+                method: "GET"
+            }).then(async function(json) {
+                if (json.data) {
+                    if (json.data.productId) {
+                        const product = await getProductDetail(json.data.productId).catch(function() { return null; });
+                        renderProductSummary("productSummary", product);
+                    }
+                    if (json.data.warehouseId) {
+                        const warehouse = await getWarehouseDetail(json.data.warehouseId).catch(function() { return null; });
+                        renderWarehouseSummary("warehouseSummary", warehouse);
+                    }
+                }
+                return json;
+            });
+        });
+    });
+
+    $("handExecuteBtn").addEventListener("click", function() {
+        run("手动执行生产需求单", function() {
+            return request("/api/v1/production-order/hand-execute/" + encodeURIComponent($("productionOrderId").value), {
+                method: "POST"
+            });
+        });
+    });
+
+    $("handRetryBtn").addEventListener("click", function() {
+        run("手动重试生产需求单", function() {
+            return request("/api/v1/production-order/hand-retry/" + encodeURIComponent($("productionOrderId").value), {
+                method: "POST"
+            });
+        });
+    });
+
+    $("loadProductionListBtn").addEventListener("click", async function() {
+        const status = $("listStatus").value;
+        const params = new URLSearchParams({
+            pageNo: $("listPageNo").value || "1",
+            pageSize: $("listPageSize").value || "10"
+        });
+        if (status !== "") {
+            params.set("status", status);
+        }
+        const json = await run("查询生产需求单列表", function() {
+            return request("/api/v1/production-order/list?" + params.toString(), {
+                method: "GET"
+            });
+        });
+        renderProductionList(json.data);
+        enrichProductionListNames(json.data).catch(function() {});
+    });
+
+    refreshRequestNo();
+    refreshAuthStatus();
+</script>
+</body>
+</html>

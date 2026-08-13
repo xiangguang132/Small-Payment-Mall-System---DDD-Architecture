@@ -699,7 +699,7 @@ public class Supplier {
 ```java
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.Supplier;
+import cn.bugstack.infrastructure.dao.po.supplier.Supplier;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -730,7 +730,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.repository.ISupplierRepository;
 import cn.bugstack.infrastructure.dao.ISupplierDao;
-import cn.bugstack.infrastructure.dao.po.Supplier;
+import cn.bugstack.infrastructure.dao.po.supplier.Supplier;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -834,12 +834,13 @@ public class SupplierRepository implements ISupplierRepository {
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.ISupplierDao">
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.Supplier"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.supplier.Supplier"
             useGeneratedKeys="true" keyProperty="id">
         insert into supplier
         (supplier_code, name, contact_name, contact_phone, address, status, is_del, create_time, update_time)
         values
-        (#{supplierCode}, #{name}, #{contactName}, #{contactPhone}, #{address}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+        (#{supplierCode}, #{name}, #{contactName}, #{contactPhone}, #{address}, #{status}, #{isDel}, #{createTime},
+        #{updateTime})
     </insert>
 
     <update id="deleteById" parameterType="java.lang.Long">
@@ -850,7 +851,8 @@ public class SupplierRepository implements ISupplierRepository {
         and is_del = 0
     </update>
 
-    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Supplier">
+    <select id="queryById" parameterType="java.lang.Long"
+            resultType="cn.bugstack.infrastructure.dao.po.supplier.Supplier">
         select
         id,
         supplier_code,
@@ -867,7 +869,7 @@ public class SupplierRepository implements ISupplierRepository {
         and is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Supplier">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.supplier.Supplier">
         update supplier
         set supplier_code = #{supplierCode},
         name = #{name},

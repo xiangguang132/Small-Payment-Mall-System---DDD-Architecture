@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IMaterialStockAllocationItemDao">
 
-    <resultMap id="allocationItemMap" type="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem">
+    <resultMap id="allocationItemMap" type="cn.bugstack.infrastructure.dao.po.material.MaterialStockAllocationItem">
         <id column="id" property="id"/>
         <result column="allocation_id" property="allocationId"/>
         <result column="stock_id" property="stockId"/>
@@ -20,7 +20,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialStockAllocationItem"
             useGeneratedKeys="true" keyProperty="id">
         insert into material_stock_allocation_item
         (allocation_id, stock_id, material_id, storage_address, allocate_qty, locked_qty, outbound_qty, released_qty, sort_no, status, is_del, create_time, update_time)
@@ -43,7 +43,7 @@
         order by sort_no asc, id asc
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialStockAllocationItem">
         update material_stock_allocation_item
         set locked_qty = #{lockedQty},
             outbound_qty = #{outboundQty},

@@ -1,11 +1,11 @@
 package cn.bugstack.infrastructure.repository;
 
-import cn.bugstack.domain.tag.model.aggregate.CrowdTagsAggregate;
-import cn.bugstack.domain.tag.repository.ICrowdTagsRepository;
+import cn.bugstack.domain.crowdtags.model.aggregate.CrowdTagsAggregate;
+import cn.bugstack.domain.crowdtags.repository.tag.ICrowdTagsRepository;
 import cn.bugstack.infrastructure.dao.ICrowdTagsDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyActivityDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyDiscountDao;
-import cn.bugstack.infrastructure.dao.po.CrowdTags;
+import cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import org.springframework.stereotype.Repository;
 

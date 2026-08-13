@@ -5,8 +5,8 @@ import cn.bugstack.domain.materialstockallocation.model.vo.MaterialStockAllocati
 import cn.bugstack.domain.materialstockallocation.repository.IMaterialStockAllocationRepository;
 import cn.bugstack.infrastructure.dao.IMaterialStockAllocationDao;
 import cn.bugstack.infrastructure.dao.IMaterialStockAllocationItemDao;
-import cn.bugstack.infrastructure.dao.po.MaterialStockAllocation;
-import cn.bugstack.infrastructure.dao.po.MaterialStockAllocationItem;
+import cn.bugstack.infrastructure.dao.po.material.MaterialStockAllocation;
+import cn.bugstack.infrastructure.dao.po.material.MaterialStockAllocationItem;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;

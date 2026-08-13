@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.ICrowdTagsDao">
 
-    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.CrowdTags">
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags">
         <id column="id" property="id"/>
         <result column="tag_id" property="tagId"/>
         <result column="tag_name" property="tagName"/>
@@ -13,13 +13,13 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags"
             useGeneratedKeys="true" keyProperty="id">
         insert into crowd_tags(tag_id, tag_name, tag_desc, statistics, create_time, update_time)
         values (#{tagId}, #{tagName}, #{tagDesc}, #{statistics}, #{createTime}, #{updateTime})
     </insert>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags">
         update crowd_tags
         set tag_name = #{tagName},
             tag_desc = #{tagDesc},
@@ -101,7 +101,7 @@
         </where>
     </select>
 
-    <update id="updateCrowdTagsStatistics" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTags">
+    <update id="updateCrowdTagsStatistics" parameterType="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags">
         update crowd_tags
         set statistics = #{statistics},
             update_time = now()

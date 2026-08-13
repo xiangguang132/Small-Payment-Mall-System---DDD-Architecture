@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.materialstock.model.aggregate.MaterialStockAggregate;
 import cn.bugstack.domain.materialstock.repository.IMaterialStockRepository;
 import cn.bugstack.infrastructure.dao.IMaterialStockDao;
-import cn.bugstack.infrastructure.dao.po.MaterialStock;
+import cn.bugstack.infrastructure.dao.po.material.MaterialStock;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;

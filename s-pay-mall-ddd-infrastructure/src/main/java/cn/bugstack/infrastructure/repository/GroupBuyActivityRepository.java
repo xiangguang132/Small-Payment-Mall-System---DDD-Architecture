@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyActivityDao;
-import cn.bugstack.infrastructure.dao.po.GroupBuyActivity;
+import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyActivity;
 import cn.bugstack.infrastructure.dcc.DCCService;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import org.apache.commons.lang3.StringUtils;

@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.CrowdTagsDetail;
+import cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsDetail;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

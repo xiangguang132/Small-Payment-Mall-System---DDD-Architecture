@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.IGroupBuyDiscountDao">
 
-    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.GroupBuyDiscount">
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyDiscount">
         <id column="id" property="id"/>
         <result column="discount_id" property="discountId"/>
         <result column="discount_name" property="discountName"/>

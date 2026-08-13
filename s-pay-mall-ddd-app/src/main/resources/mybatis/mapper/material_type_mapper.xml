@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.IMaterialTypeDao">
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.MaterialType"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialType"
             useGeneratedKeys="true" keyProperty="id">
         insert into material_type
         (parent_id, name, description, type_code, sort, status, is_del, create_time, update_time)
@@ -18,7 +18,7 @@
           and is_del = 0
     </update>
 
-    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.MaterialType">
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.material.MaterialType">
         select
         id,
         parent_id,
@@ -35,7 +35,7 @@
           and is_del = 0
     </select>
 
-    <select id="queryByTypeCode" parameterType="java.lang.String" resultType="cn.bugstack.infrastructure.dao.po.MaterialType">
+    <select id="queryByTypeCode" parameterType="java.lang.String" resultType="cn.bugstack.infrastructure.dao.po.material.MaterialType">
         select
         id,
         parent_id,
@@ -52,7 +52,7 @@
           and is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.MaterialType">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.material.MaterialType">
         update material_type
         set parent_id = #{parentId},
             name = #{name},

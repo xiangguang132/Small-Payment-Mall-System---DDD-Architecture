@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IProductionOrderMaterialDao">
 
-    <resultMap id="productionOrderMaterialMap" type="cn.bugstack.infrastructure.dao.po.ProductionOrderMaterial">
+    <resultMap id="productionOrderMaterialMap" type="cn.bugstack.infrastructure.dao.po.product.ProductionOrderMaterial">
         <id column="id" property="id"/>
         <result column="production_order_id" property="productionOrderId"/>
         <result column="material_id" property="materialId"/>

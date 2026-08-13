@@ -2,8 +2,8 @@ package cn.bugstack.trigger.assembler;
 
 import cn.bugstack.api.request.crowdtags.CrowdTagsAddRequest;
 import cn.bugstack.api.request.crowdtags.CrowdTagsUpdateRequest;
-import cn.bugstack.api.response.crowdtags.CrowdTagsDetailResponse;
-import cn.bugstack.domain.tag.model.aggregate.CrowdTagsAggregate;
+import cn.bugstack.api.response.crowdtags.detail.CrowdTagsDetailResponse;
+import cn.bugstack.domain.crowdtags.model.aggregate.CrowdTagsAggregate;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

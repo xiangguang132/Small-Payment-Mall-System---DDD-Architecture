@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IProductionOrderDao">
 
-    <resultMap id="productionOrderMap" type="cn.bugstack.infrastructure.dao.po.ProductionOrder">
+    <resultMap id="productionOrderMap" type="cn.bugstack.infrastructure.dao.po.product.ProductionOrder">
         <id column="id" property="id"/>
         <result column="order_no" property="orderNo"/>
         <result column="request_no" property="requestNo"/>
@@ -21,7 +21,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductionOrder" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.product.ProductionOrder" useGeneratedKeys="true" keyProperty="id">
         insert into production_order
         (order_no, request_no, product_id, product_quantity, warehouse_id, retry_count, fail_reason, next_retry_time, fail_stage, need_manual_intervention, status, is_del, create_time, update_time)
         values

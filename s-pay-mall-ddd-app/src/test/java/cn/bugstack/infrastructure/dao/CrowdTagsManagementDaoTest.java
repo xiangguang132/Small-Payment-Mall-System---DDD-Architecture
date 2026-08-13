@@ -1,7 +1,7 @@
 package cn.bugstack.infrastructure.dao;
 
 import cn.bugstack.Application;
-import cn.bugstack.infrastructure.dao.po.CrowdTags;
+import cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTags;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.api.RedissonClient;

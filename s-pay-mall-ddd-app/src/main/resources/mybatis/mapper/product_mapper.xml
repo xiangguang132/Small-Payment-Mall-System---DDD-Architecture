@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IProductDao">
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.Product"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.product.Product"
             useGeneratedKeys="true" keyProperty="id">
         insert into product
         (name, description, sku, category_id, status, price, is_del, create_time, update_time)
@@ -19,7 +19,7 @@
         and is_del = 0
     </update>
 
-    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Product">
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.product.Product">
         select
         p.id,
         p.name,
@@ -40,7 +40,7 @@
         and p.is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Product">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.product.Product">
         update product
         set name = #{name},
         description = #{description},

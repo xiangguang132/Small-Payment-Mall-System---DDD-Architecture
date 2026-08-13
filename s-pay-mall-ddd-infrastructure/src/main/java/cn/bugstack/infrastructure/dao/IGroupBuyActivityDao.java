@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.GroupBuyActivity;
+import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyActivity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

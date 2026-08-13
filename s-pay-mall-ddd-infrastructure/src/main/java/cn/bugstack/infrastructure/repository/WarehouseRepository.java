@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.repository.IWarehouseRepository;
 import cn.bugstack.infrastructure.dao.IWarehouseDao;
-import cn.bugstack.infrastructure.dao.po.Warehouse;
+import cn.bugstack.infrastructure.dao.po.warehouse.Warehouse;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;

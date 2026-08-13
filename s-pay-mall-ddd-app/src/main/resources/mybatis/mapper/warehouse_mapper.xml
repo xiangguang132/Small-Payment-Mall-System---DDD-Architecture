@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.IWarehouseDao">
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.Warehouse"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.warehouse.Warehouse"
             useGeneratedKeys="true" keyProperty="id">
         insert into warehouse
         (warehouse_code, name, type, address, contact_name, contact_phone, status, is_del, create_time, update_time)
@@ -18,7 +18,7 @@
         and is_del = 0
     </update>
 
-    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.Warehouse">
+    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.warehouse.Warehouse">
         select
         id,
         warehouse_code,
@@ -36,7 +36,7 @@
         and is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.Warehouse">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.warehouse.Warehouse">
         update warehouse
         set warehouse_code = #{warehouseCode},
         name = #{name},

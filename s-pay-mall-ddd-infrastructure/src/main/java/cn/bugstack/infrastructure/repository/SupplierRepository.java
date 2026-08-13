@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.repository.ISupplierRepository;
 import cn.bugstack.infrastructure.dao.ISupplierDao;
-import cn.bugstack.infrastructure.dao.po.Supplier;
+import cn.bugstack.infrastructure.dao.po.supplier.Supplier;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;

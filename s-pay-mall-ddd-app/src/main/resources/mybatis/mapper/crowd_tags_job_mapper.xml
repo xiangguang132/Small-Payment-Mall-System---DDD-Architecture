@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.ICrowdTagsJobDao">
 
-    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.CrowdTagsJob">
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsJob">
         <id column="id" property="id"/>
         <result column="tag_id" property="tagId"/>
         <result column="batch_id" property="batchId"/>
@@ -10,12 +10,22 @@
         <result column="tag_rule" property="tagRule"/>
         <result column="stat_start_time" property="statStartTime"/>
         <result column="stat_end_time" property="statEndTime"/>
+        <result column="last_execute_time" property="lastExecuteTime"/>
         <result column="status" property="status"/>
+        <result column="is_del" property="isDel"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <select id="queryCrowdTagsJob" parameterType="cn.bugstack.infrastructure.dao.po.CrowdTagsJob" resultMap="dataMap">
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsJob"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into crowd_tags_job(tag_id, batch_id, tag_type, tag_rule, stat_start_time, stat_end_time,
+                                   last_execute_time, status, is_del, create_time, update_time)
+        values (#{tagId}, #{batchId}, #{tagType}, #{tagRule}, #{statStartTime}, #{statEndTime},
+                #{lastExecuteTime}, #{status}, #{isDel}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="queryCrowdTagsJob" parameterType="cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsJob" resultMap="dataMap">
         select id,
                tag_id,
                batch_id,
@@ -23,11 +33,31 @@
                tag_rule,
                stat_start_time,
                stat_end_time,
+               last_execute_time,
                status,
+               is_del,
                create_time,
                update_time
         from crowd_tags_job
         where tag_id = #{tagId}
           and batch_id = #{batchId}
+    </select>
+
+    <select id="queryById" parameterType="java.lang.Long" resultMap="dataMap">
+        select id,
+               tag_id,
+               batch_id,
+               tag_type,
+               tag_rule,
+               stat_start_time,
+               stat_end_time,
+               last_execute_time,
+               status,
+               is_del,
+               create_time,
+               update_time
+        from crowd_tags_job
+        where id = #{id}
+          and is_del = 0
     </select>
 </mapper>

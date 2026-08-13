@@ -4,7 +4,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.infrastructure.dao.IProductDao;
-import cn.bugstack.infrastructure.dao.po.Product;
+import cn.bugstack.infrastructure.dao.po.product.Product;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;

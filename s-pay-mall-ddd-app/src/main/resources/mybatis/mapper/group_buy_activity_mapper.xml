@@ -4,7 +4,7 @@
 <mapper namespace="cn.bugstack.infrastructure.dao.IGroupBuyActivityDao">
 
     <resultMap id="activityMap"
-               type="cn.bugstack.infrastructure.dao.po.GroupBuyActivity">
+               type="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyActivity">
         <id column="id" property="id"/>
         <result column="activity_id" property="activityId"/>
         <result column="activity_name" property="activityName"/>

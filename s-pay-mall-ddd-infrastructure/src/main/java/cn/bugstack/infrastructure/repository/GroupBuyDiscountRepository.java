@@ -2,7 +2,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyDiscountEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyDiscountRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyDiscountDao;
-import cn.bugstack.infrastructure.dao.po.GroupBuyDiscount;
+import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyDiscount;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

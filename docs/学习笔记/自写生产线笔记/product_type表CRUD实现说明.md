@@ -141,7 +141,7 @@ public class ProductType {
 ```java
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.ProductType;
+import cn.bugstack.infrastructure.dao.po.product.ProductType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -176,7 +176,7 @@ public interface IProductTypeDao {
 
 <mapper namespace="cn.bugstack.infrastructure.dao.IProductTypeDao">
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.ProductType"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.product.ProductType"
             useGeneratedKeys="true" keyProperty="id">
         insert into product_type
         (parent_id, name, description, type_code, sort, status, is_del, create_time, update_time)
@@ -187,32 +187,33 @@ public interface IProductTypeDao {
     <update id="deleteById" parameterType="java.lang.Long">
         update product_type
         set is_del = 1,
-            update_time = now()
+        update_time = now()
         where id = #{id}
-          and is_del = 0
+        and is_del = 0
     </update>
 
-    <select id="queryById" parameterType="java.lang.Long" resultType="cn.bugstack.infrastructure.dao.po.ProductType">
+    <select id="queryById" parameterType="java.lang.Long"
+            resultType="cn.bugstack.infrastructure.dao.po.product.ProductType">
         select id, parent_id, name, description, type_code, sort, status, is_del, create_time, update_time
         from product_type
         where id = #{id}
-          and is_del = 0
+        and is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.ProductType">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.product.ProductType">
         update product_type
         set parent_id = #{parentId},
-            name = #{name},
-            description = #{description},
-            type_code = #{typeCode},
-            sort = #{sort},
-            status = #{status},
-            update_time = now()
+        name = #{name},
+        description = #{description},
+        type_code = #{typeCode},
+        sort = #{sort},
+        status = #{status},
+        update_time = now()
         where id = #{id}
-          and is_del = 0
+        and is_del = 0
     </update>
 
-    <select id="queryList" resultType="cn.bugstack.infrastructure.dao.po.ProductType">
+    <select id="queryList" resultType="cn.bugstack.infrastructure.dao.po.product.ProductType">
         select id, parent_id, name, description, type_code, sort, status, is_del, create_time, update_time
         from product_type
         where is_del = 0
@@ -241,7 +242,7 @@ public interface IProductTypeDao {
 package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
-import cn.bugstack.infrastructure.dao.po.ProductType;
+import cn.bugstack.infrastructure.dao.po.product.ProductType;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

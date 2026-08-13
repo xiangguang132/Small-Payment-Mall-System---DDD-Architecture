@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.ProductionOrderMaterial;
+import cn.bugstack.infrastructure.dao.po.product.ProductionOrderMaterial;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

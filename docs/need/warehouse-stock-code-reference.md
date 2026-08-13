@@ -321,7 +321,7 @@ public class WarehouseStock {
 ```java
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.WarehouseStock;
+import cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock;
 import org.apache.ibatis.annotations.Param;
 
 public interface IWarehouseStockDao {
@@ -345,7 +345,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.stock.model.aggregate.StockAggregate;
 import cn.bugstack.domain.stock.repository.IStockRepository;
 import cn.bugstack.infrastructure.dao.IWarehouseStockDao;
-import cn.bugstack.infrastructure.dao.po.WarehouseStock;
+import cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -551,7 +551,7 @@ public class StockController {
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bugstack.infrastructure.dao.IWarehouseStockDao">
 
-    <resultMap id="stockMap" type="cn.bugstack.infrastructure.dao.po.WarehouseStock">
+    <resultMap id="stockMap" type="cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock">
         <id column="id" property="id"/>
         <result column="warehouse_id" property="warehouseId"/>
         <result column="product_id" property="productId"/>
@@ -563,13 +563,13 @@ public class StockController {
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.WarehouseStock"
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock"
             useGeneratedKeys="true" keyProperty="id">
         insert into warehouse_stock
         (warehouse_id, product_id, available_qty, locked_qty, total_qty, is_del, create_time, update_time)
         values
         (#{warehouseId}, #{productId}, #{availableQty}, #{lockedQty}, #{totalQty},
-         #{isDel}, #{createTime}, #{updateTime})
+        #{isDel}, #{createTime}, #{updateTime})
     </insert>
 
     <select id="queryById" resultMap="stockMap">
@@ -582,16 +582,16 @@ public class StockController {
         select id, warehouse_id, product_id, available_qty, locked_qty, total_qty, is_del, create_time, update_time
         from warehouse_stock
         where warehouse_id = #{warehouseId}
-          and product_id = #{productId}
-          and is_del = 0
+        and product_id = #{productId}
+        and is_del = 0
     </select>
 
-    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.WarehouseStock">
+    <update id="update" parameterType="cn.bugstack.infrastructure.dao.po.warehouse.WarehouseStock">
         update warehouse_stock
         set available_qty = #{availableQty},
-            locked_qty = #{lockedQty},
-            total_qty = #{totalQty},
-            update_time = #{updateTime}
+        locked_qty = #{lockedQty},
+        total_qty = #{totalQty},
+        update_time = #{updateTime}
         where id = #{id} and is_del = 0
     </update>
 

@@ -4,7 +4,7 @@ import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
 import cn.bugstack.domain.materialtype.repository.IMaterialTypeRepository;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.IMaterialTypeDao;
-import cn.bugstack.infrastructure.dao.po.MaterialType;
+import cn.bugstack.infrastructure.dao.po.material.MaterialType;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
