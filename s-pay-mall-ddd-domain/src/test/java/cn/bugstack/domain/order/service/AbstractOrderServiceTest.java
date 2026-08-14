@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -58,7 +59,7 @@ public class AbstractOrderServiceTest {
             }
 
             @Override
-            public void changeOrderPaySuccess(String orderId) {
+            public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
             }
 
             @Override

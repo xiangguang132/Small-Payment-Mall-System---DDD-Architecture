@@ -44,9 +44,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     filters: stat
   redis:
-    host: 127.0.0.1
+    host: 192.144.234.86
     port: 6379
-    database: 0
+    database: 1
     timeout: 3000
     cache-ttl-hours: 5
 

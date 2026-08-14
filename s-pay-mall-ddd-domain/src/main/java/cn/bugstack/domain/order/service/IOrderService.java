@@ -3,6 +3,7 @@ package cn.bugstack.domain.order.service;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,8 +17,8 @@ public interface IOrderService {
     // 通过购物车实体对象创建支付单实体
     PayOrderEntity createOrder(ShopCartEntity shopCartEntity) throws Exception;
 
-    // 依据 orderid 修改订单状态位支付成功
-    void changeOrderPaySuccess(String orderId);
+    // 依据 orderid 修改订单状态为支付成功，并回写外部交易时间
+    void changeOrderPaySuccess(String orderId, Date outTradeTime);
 
     // 查询有效期内，未接收到支付回调的订单
     List<String> queryNoPayNotifyOrderList();

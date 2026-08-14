@@ -35,7 +35,7 @@
         update group_buy_team
         set lock_count = lock_count + 1, update_time = now()
         where team_id = #{teamId}
-          and lock_count < target_count
+          and lock_count &lt; target_count
     </update>
 
 </mapper>

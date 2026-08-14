@@ -48,6 +48,10 @@ public class PayOrder {
      */
     private BigDecimal totalAmount;
     /**
+     * 订单类型；DIRECT普通购买、GROUP_BUY拼团
+     */
+    private String orderType;
+    /**
      * 订单状态；create-创建完成、pay_wait-等待支付、pay_success-支付成功、deal_done-交易完成、close-订单关单
      */
     private String status;
@@ -59,6 +63,10 @@ public class PayOrder {
      * 支付时间
      */
     private Date payTime;
+    /**
+     * 外部交易时间
+     */
+    private Date outTradeTime;
     /**
      * 创建时间
      */

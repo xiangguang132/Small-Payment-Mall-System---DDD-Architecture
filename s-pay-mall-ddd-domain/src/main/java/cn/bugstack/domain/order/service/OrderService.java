@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,8 +70,8 @@ public class OrderService extends AbstractOrderService{
     }
 
     @Override
-    public void changeOrderPaySuccess(String orderId) {
-        orderRepository.changeOrderPaySuccess(orderId);
+    public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
+        orderRepository.changeOrderPaySuccess(orderId, outTradeTime);
     }
 
     @Override

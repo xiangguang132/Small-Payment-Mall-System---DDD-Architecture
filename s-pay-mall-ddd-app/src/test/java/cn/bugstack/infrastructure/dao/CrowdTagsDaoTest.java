@@ -5,10 +5,14 @@ import cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsDetail;
 import cn.bugstack.infrastructure.dao.po.crowdtags.CrowdTagsJob;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.api.RBucket;
+import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +22,8 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -29,10 +35,8 @@ import static org.junit.Assert.assertNotNull;
         }
 )
 @Transactional
+@Import(CrowdTagsDaoTest.RedissonTestConfig.class)
 public class CrowdTagsDaoTest {
-
-    @MockBean
-    private RedissonClient redissonClient;
 
     @Autowired
     private ICrowdTagsJobDao crowdTagsJobDao;
@@ -97,5 +101,24 @@ public class CrowdTagsDaoTest {
         );
 
         assertEquals(1, count.intValue());
+    }
+
+    @TestConfiguration
+    static class RedissonTestConfig {
+
+        @Bean
+        RedissonClient redissonClient() {
+            RedissonClient redissonClient = mock(RedissonClient.class);
+            RBucket<Object> downgradeBucket = mock(RBucket.class);
+            when(downgradeBucket.isExists()).thenReturn(false);
+            when(redissonClient.getBucket("group_buy_market_dcc_downgradeSwitch")).thenReturn(downgradeBucket);
+
+            RBucket<Object> cutRangeBucket = mock(RBucket.class);
+            when(cutRangeBucket.isExists()).thenReturn(false);
+            when(redissonClient.getBucket("group_buy_market_dcc_cutRange")).thenReturn(cutRangeBucket);
+
+            when(redissonClient.getTopic("group_buy_market_dcc")).thenReturn(mock(RTopic.class));
+            return redissonClient;
+        }
     }
 }

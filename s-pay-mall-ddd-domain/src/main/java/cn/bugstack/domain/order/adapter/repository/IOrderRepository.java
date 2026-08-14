@@ -5,6 +5,7 @@ import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +29,9 @@ public interface IOrderRepository {
     /**
      * 修改状态-success
      * @param orderId
+     * @param outTradeTime 外部交易时间
      */
-    void changeOrderPaySuccess(String orderId);
+    void changeOrderPaySuccess(String orderId, Date outTradeTime);
 
     /**
      * 查询有效期内，未接收到支付回调的订单

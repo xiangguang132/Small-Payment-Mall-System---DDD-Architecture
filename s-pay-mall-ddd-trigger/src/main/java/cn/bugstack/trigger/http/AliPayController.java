@@ -16,6 +16,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,7 +100,7 @@ public class AliPayController implements IPayService {
                     log.info("支付回调，买家付款金额: {}", params.get("buyer_pay_amount"));
                     log.info("支付回调，支付回调，更新订单 {}", out_trade_no);
                     // 更新订单已支付
-                    orderService.changeOrderPaySuccess(out_trade_no);
+                    orderService.changeOrderPaySuccess(out_trade_no, parseAlipayTime(params.get("gmt_payment")));
                 }
             }
             log.info("支付回调接口完成 tradeStatus:{}", request.getParameter("trade_status"));
@@ -104,6 +108,20 @@ public class AliPayController implements IPayService {
         } catch (Exception e) {
             log.error("支付回调，处理失败", e);
             return "false";
+        }
+    }
+
+    private Date parseAlipayTime(String alipayTime) {
+        if (alipayTime == null || alipayTime.trim().isEmpty()) {
+            return null;
+        }
+        try {
+            return Date.from(LocalDateTime.parse(alipayTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant());
+        } catch (Exception e) {
+            log.warn("支付回调，支付宝支付时间解析失败 alipayTime:{}", alipayTime, e);
+            return null;
         }
     }
 }

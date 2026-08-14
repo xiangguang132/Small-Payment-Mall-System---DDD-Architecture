@@ -10,12 +10,14 @@ import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
 import cn.bugstack.infrastructure.dao.po.pay.PayOrder;
+import cn.bugstack.types.enums.OrderTypeEnum;
 import cn.bugstack.types.event.BaseEvent;
 import com.alibaba.fastjson2.JSON;
 import com.google.common.eventbus.EventBus;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,6 +49,7 @@ public class OrderRepository implements IOrderRepository {
         order.setOrderId(orderEntity.getOrderId());
         order.setOrderTime(orderEntity.getOrderTime());
         order.setTotalAmount(productEntity.getPrice());
+        order.setOrderType(OrderTypeEnum.DIRECT.getCode());
         order.setStatus(orderEntity.getOrderStatus().getCode());
 
         orderDao.insert(order);
@@ -93,10 +96,11 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public void changeOrderPaySuccess(String orderId) {
+    public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
         PayOrder order = new PayOrder();
         order.setOrderId(orderId);
         order.setStatus(OrderStatusVO.PAY_SUCCESS.getCode());
+        order.setOutTradeTime(outTradeTime);
         orderDao.changeOrderPaySuccess(order);
 
         // todo 发送 mq 消息

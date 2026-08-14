@@ -44,7 +44,7 @@ public class NoPayNotifyOrderJob {
                 String tradeStatus = alipayTradeQueryResponse.getTradeStatus();
                 // 支付宝查询成功且明确已支付，才更新本地订单状态
                 if ("10000".equals(code) && "TRADE_SUCCESS".equals(tradeStatus)) {
-                    orderService.changeOrderPaySuccess(orderId);
+                    orderService.changeOrderPaySuccess(orderId, alipayTradeQueryResponse.getSendPayDate());
                 } else {
                     log.info("检测未接收到或未正确处理的支付回调通知，订单未支付成功 orderId:{} code:{} tradeStatus:{}", orderId, code, tradeStatus);
                 }
