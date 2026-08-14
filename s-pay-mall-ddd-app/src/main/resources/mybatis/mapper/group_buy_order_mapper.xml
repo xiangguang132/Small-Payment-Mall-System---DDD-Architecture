@@ -52,4 +52,13 @@
           and activity_id = #{activityId}
     </select>
 
+    <update id="updateOrderStatus2Complete">
+        update group_buy_order
+        set status = 1,
+            update_time = now()
+        where user_id = #{userId}
+          and out_trade_no = #{outTradeNo}
+          and status = 0
+    </update>
+
 </mapper>

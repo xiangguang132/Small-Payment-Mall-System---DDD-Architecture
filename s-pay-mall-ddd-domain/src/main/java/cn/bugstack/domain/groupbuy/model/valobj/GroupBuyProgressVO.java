@@ -1,4 +1,4 @@
-package cn.bugstack.domain.groupbuy.model.entity;
+package cn.bugstack.domain.groupbuy.model.valobj;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,36 +7,20 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * 团队进度统计值对象
+ */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class GroupBuyTeamEntity {
-
-//    private Long id;
+@NoArgsConstructor
+public class GroupBuyProgressVO {
 
     private String teamId;
-
-    private Long activityId;
-
-    private String initiatorUserId;
-
     private Integer targetCount;
-
     private Integer completeCount;
-
     private Integer lockCount;
-
     private Integer status;
-
-    private LocalDateTime validStartTime;
-
     private LocalDateTime validEndTime;
-
-    private String notifyUrl;
-
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
 
 }

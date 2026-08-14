@@ -12,4 +12,6 @@ public interface IGroupBuyOrderDao {
     GroupBuyOrder queryGroupBuyOrderByOutTradeNo(@Param("userId") String userId, @Param("outTradeNo") String outTradeNo);
 
     int queryOrderCountByUserIdAndActivityId(@Param("userId") String userId, @Param("activityId") Long activityId);
+
+    int updateOrderStatus2Complete(@Param("userId") String userId, @Param("outTradeNo") String outTradeNo);
 }

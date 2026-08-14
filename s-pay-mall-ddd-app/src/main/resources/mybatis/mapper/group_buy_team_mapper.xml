@@ -38,4 +38,30 @@
           and lock_count &lt; target_count
     </update>
 
+    <update id="updateAddCompleteCount" parameterType="java.lang.String">
+        update group_buy_team
+        set complete_count = complete_count + 1,
+            update_time = now()
+        where team_id = #{teamId}
+          and complete_count &lt; target_count
+    </update>
+
+    <update id="updateStatus2Complete" parameterType="java.lang.String">
+        update group_buy_team
+        set status = 1,
+            update_time = now()
+        where team_id = #{teamId}
+          and status = 0
+    </update>
+
+    <select id="queryGroupBuyTeamByTeamId" parameterType="java.lang.String"
+            resultType="cn.bugstack.domain.groupbuy.model.entity.GroupBuyTeamEntity">
+        select id, team_id, activity_id, initiator_user_id, target_count,
+               complete_count, lock_count, status, valid_start_time,
+               valid_end_time, notify_url, create_time, update_time
+        from group_buy_team
+        where team_id = #{teamId}
+        limit 1
+    </select>
+
 </mapper>

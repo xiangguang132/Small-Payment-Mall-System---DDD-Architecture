@@ -1,7 +1,10 @@
 package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
+import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyTeamSettlementAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuySettlementCommandEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTeamEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyOrderDao;
@@ -88,6 +91,36 @@ public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
 
         groupBuyOrderDao.insert(toOrderPo(orderEntity));
         return orderEntity;
+    }
+
+    @Override
+    @Transactional(timeout = 500)
+    public boolean settlementGroupBuyOrder(GroupBuyTeamSettlementAggregate aggregate) {
+        GroupBuySettlementCommandEntity command = aggregate.getSettlementCommand();
+        GroupBuyTeamEntity team = aggregate.getGroupBuyTeamEntity();
+
+        int orderUpdated = groupBuyOrderDao.updateOrderStatus2Complete(
+                command.getUserId(),
+                command.getOutTradeNo()
+        );
+        if (orderUpdated != 1) {
+            throw new AppException(ResponseCode.E0005, "拼团订单结算更新失败");
+        }
+
+        int completeUpdated = groupBuyTeamDao.updateAddCompleteCount(team.getTeamId());
+        if (completeUpdated != 1) {
+            throw new AppException(ResponseCode.E0005, "拼团团队完成人数更新失败");
+        }
+
+        boolean complete = team.getTargetCount() - team.getCompleteCount() == 1;
+        if (complete) {
+            int statusUpdated = groupBuyTeamDao.updateStatus2Complete(team.getTeamId());
+            if (statusUpdated != 1) {
+                throw new AppException(ResponseCode.E0005, "拼团团队状态更新失败");
+            }
+        }
+
+        return complete;
     }
 
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {

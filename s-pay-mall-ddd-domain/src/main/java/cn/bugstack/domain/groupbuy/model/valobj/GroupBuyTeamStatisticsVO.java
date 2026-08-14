@@ -1,42 +1,35 @@
-package cn.bugstack.domain.groupbuy.model.entity;
+package cn.bugstack.domain.groupbuy.model.valobj;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * 团队结算统计值对象
+ */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class GroupBuyTeamEntity {
-
-//    private Long id;
+@NoArgsConstructor
+public class GroupBuyTeamStatisticsVO {
 
     private String teamId;
-
     private Long activityId;
-
-    private String initiatorUserId;
-
     private Integer targetCount;
-
     private Integer completeCount;
-
     private Integer lockCount;
-
     private Integer status;
-
     private LocalDateTime validStartTime;
-
     private LocalDateTime validEndTime;
 
-    private String notifyUrl;
+    private Integer paidOrderCount;
+    private BigDecimal totalOriginalAmount;
+    private BigDecimal totalDeductionAmount;
+    private BigDecimal totalPayAmount;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
 
 }
