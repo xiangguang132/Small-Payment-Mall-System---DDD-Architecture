@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IAlipayNotifyTaskDao">
+
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.payment.AlipayNotifyTask">
+        <id column="id" property="id"/>
+        <result column="out_trade_no" property="outTradeNo"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="order_type" property="orderType"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="parameter_json" property="parameterJson"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.payment.AlipayNotifyTask">
+        insert into alipay_notify_task(
+        out_trade_no, trade_no,
+        <if test="orderType != null">order_type,</if>
+        task_status, retry_count, parameter_json, create_time, update_time
+        ) values (
+        #{outTradeNo}, #{tradeNo},
+        <if test="orderType != null">#{orderType},</if>
+        #{taskStatus}, #{retryCount}, #{parameterJson}, now(), now()
+        )
+    </insert>
+
+    <select id="queryByOutTradeNoAndTradeNo" resultMap="dataMap">
+        select id, out_trade_no, trade_no, order_type, task_status, retry_count, parameter_json, create_time, update_time
+        from alipay_notify_task
+        where out_trade_no = #{outTradeNo}
+          and trade_no = #{tradeNo}
+        limit 1
+    </select>
+
+</mapper>

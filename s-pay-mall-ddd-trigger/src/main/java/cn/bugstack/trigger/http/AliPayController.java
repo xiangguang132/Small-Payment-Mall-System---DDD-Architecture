@@ -6,6 +6,7 @@ import cn.bugstack.api.response.Response;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.service.IOrderService;
+import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
 import cn.bugstack.types.enums.ResponseCode;
 import com.alipay.api.internal.util.AlipaySignature;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,8 @@ public class AliPayController implements IPayService {
     private String alipayPublicKey;
     @Resource
     private IOrderService orderService;
+    @Resource
+    private IAlipayNotifyTaskService alipayNotifyTaskService;
 
     @RequestMapping(value = "create_pay_order", method = RequestMethod.POST)
     public Response<String> createPayOrder(@RequestBody CreatePayRequestDTO createPayRequestDTO) {
@@ -71,42 +74,49 @@ public class AliPayController implements IPayService {
 
     @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
     public String payNotify(HttpServletRequest request) {
-        try {
-            log.info("支付回调接口开始 tradeStatus:{}", request.getParameter("trade_status"));
-            if (request.getParameter("trade_status").equals("TRADE_SUCCESS")) {
-                Map<String, String> params = new HashMap<>();
-                Map<String, String[]>  requestParams = request.getParameterMap();
-                for (String key : requestParams.keySet()) {
-                    params.put(key, request.getParameter(key));
-                }
-
-                String outTradeNo = params.get("out_trade_no");
-                String gmt_create = params.get("gmt_create");
-                String trade_no = params.get("trade_no");
-
-                String sign = request.getParameter("sign");
-                String content = AlipaySignature.getSignCheckContentV1(params);
-                boolean checkSignature = AlipaySignature.rsa256CheckContent(content, sign, alipayPublicKey, "UTF-8"); // 验证签名
-                // 支付宝验签
-                if (checkSignature) {
-                    // 验签通过
-                    log.info("支付回调，交易名称: {}", params.get("subject"));
-                    log.info("支付回调，交易状态: {}", params.get("trade_status"));
-                    log.info("支付回调，支付宝交易凭证号: {}", params.get("trade_no"));
-                    log.info("支付回调，商户订单号: {}", params.get("out_trade_no"));
-                    log.info("支付回调，交易金额: {}", params.get("total_amount"));
-                    log.info("支付回调，买家在支付宝唯一id: {}", params.get("buyer_id"));
-                    log.info("支付回调，买家付款时间: {}", params.get("gmt_payment"));
-                    log.info("支付回调，买家付款金额: {}", params.get("buyer_pay_amount"));
-                    log.info("支付回调，支付回调，更新订单 {}", outTradeNo);
-                    // 更新订单已支付
-                    orderService.changeOrderPaySuccess(outTradeNo, parseAlipayTime(params.get("gmt_payment")));
-                }
+        // 验签操作
+        // 先创建一个map容器
+        Map<String, String> params = new HashMap<>();
+        // 使用map容器接住支付宝 发送过来的http传输的数据
+        request.getParameterMap().forEach((key, values) -> {
+            if (values != null && values.length > 0) {
+                params.put(key, values[0]);
             }
-            log.info("支付回调接口完成 tradeStatus:{}", request.getParameter("trade_status"));
+        });
+
+        // 验签操作开始
+        String sign = params.remove("sign");
+        params.remove("sign_type");
+        String tradeStatus = params.get("trade_status");
+        log.info("支付回调接口开始 tradeStatus:{}", tradeStatus);
+
+        try {
+            // 判空操作
+            if (sign == null || sign.isEmpty()) {
+                log.error("支付回调缺少 sign");
+                return "false";
+            }
+            // 获取签证
+            boolean checkSignature = AlipaySignature.rsa256CheckContent(
+                    AlipaySignature.getSignCheckContentV1(params),
+                    sign,
+                    alipayPublicKey,
+                    "UTF-8");
+            if (!checkSignature) {
+                log.error("支付回调验签失败 outTradeNo:{}", params.get("out_trade_no"));
+                return "false";
+            }
+
+            if (!"TRADE_SUCCESS".equals(tradeStatus)) {
+                return "success";
+            }
+
+            alipayNotifyTaskService.saveNotifyTask(params);
+            log.info("支付回调写入任务完成 outTradeNo:{} tradeNo:{}",
+                    params.get("out_trade_no"), params.get("trade_no"));
             return "success";
         } catch (Exception e) {
-            log.error("支付回调，处理失败", e);
+            log.error("支付回调处理失败 outTradeNo:{}", params.get("out_trade_no"), e);
             return "false";
         }
     }
