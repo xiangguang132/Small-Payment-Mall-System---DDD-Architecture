@@ -5,7 +5,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 
 public interface IGroupBuyRepository {
 
-    GroupBuyOrderEntity queryGroupBuyOrderByBizId(String userId, String bizId);
+    GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo);
 
     Integer countUserGroupBuyOrders(String userId, Long activityId);
 

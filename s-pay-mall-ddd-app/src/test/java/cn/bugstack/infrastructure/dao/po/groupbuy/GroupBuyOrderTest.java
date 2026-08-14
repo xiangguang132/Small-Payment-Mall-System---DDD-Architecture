@@ -28,7 +28,7 @@ public class GroupBuyOrderTest {
                 .deductionAmount(new BigDecimal("9.90"))
                 .payAmount(new BigDecimal("90.00"))
                 .status(0)
-                .bizId("B1")
+                .outTradeNo("B1")
                 .createTime(createTime)
                 .updateTime(createTime)
                 .build();
@@ -47,7 +47,7 @@ public class GroupBuyOrderTest {
         assertEquals(new BigDecimal("9.90"), order.getDeductionAmount());
         assertEquals(new BigDecimal("90.00"), order.getPayAmount());
         assertEquals(Integer.valueOf(0), order.getStatus());
-        assertEquals("B1", order.getBizId());
+        assertEquals("B1", order.getOutTradeNo());
         assertEquals(createTime, order.getCreateTime());
         assertEquals(createTime, order.getUpdateTime());
     }

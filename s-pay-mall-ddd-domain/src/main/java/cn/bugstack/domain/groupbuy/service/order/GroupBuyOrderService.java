@@ -30,7 +30,7 @@ public class GroupBuyOrderService implements IGroupBuyOrderService {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "拼团锁单参数不能为空");
         }
 
-        GroupBuyOrderEntity existing = groupBuyRepository.queryGroupBuyOrderByBizId(
+        GroupBuyOrderEntity existing = groupBuyRepository.queryGroupBuyOrderByOutTradeNo(
                 aggregate.getUserId(),
                 aggregate.getOutTradeNo()
         );

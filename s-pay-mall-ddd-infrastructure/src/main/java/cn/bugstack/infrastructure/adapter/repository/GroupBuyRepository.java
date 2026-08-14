@@ -28,8 +28,8 @@ public class GroupBuyRepository implements IGroupBuyRepository {
     private IGroupBuyOrderDao groupBuyOrderDao;
 
     @Override
-    public GroupBuyOrderEntity queryGroupBuyOrderByBizId(String userId, String bizId) {
-        GroupBuyOrder order = groupBuyOrderDao.queryGroupBuyOrderByBizId(userId, bizId);
+    public GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo) {
+        GroupBuyOrder order = groupBuyOrderDao.queryGroupBuyOrderByOutTradeNo(userId, outTradeNo);
         return order == null ? null : toOrderEntity(order);
     }
 
@@ -83,7 +83,7 @@ public class GroupBuyRepository implements IGroupBuyRepository {
                 .deductionAmount(trialResult.getDeductionPrice())
                 .payAmount(trialResult.getPayPrice())
                 .status(0)
-                .bizId(aggregate.getOutTradeNo())
+                .outTradeNo(aggregate.getOutTradeNo())
                 .build();
 
         groupBuyOrderDao.insert(toOrderPo(orderEntity));
@@ -106,7 +106,7 @@ public class GroupBuyRepository implements IGroupBuyRepository {
                 .deductionAmount(order.getDeductionAmount())
                 .payAmount(order.getPayAmount())
                 .status(order.getStatus())
-                .bizId(order.getBizId())
+                .outTradeNo(order.getOutTradeNo())
                 .createTime(order.getCreateTime())
                 .updateTime(order.getUpdateTime())
                 .build();
@@ -127,7 +127,7 @@ public class GroupBuyRepository implements IGroupBuyRepository {
                 .deductionAmount(entity.getDeductionAmount())
                 .payAmount(entity.getPayAmount())
                 .status(entity.getStatus())
-                .bizId(entity.getBizId())
+                .outTradeNo(entity.getOutTradeNo())
                 .createTime(entity.getCreateTime())
                 .updateTime(entity.getUpdateTime())
                 .build();

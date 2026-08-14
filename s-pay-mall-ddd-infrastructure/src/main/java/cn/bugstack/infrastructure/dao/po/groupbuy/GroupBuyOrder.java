@@ -42,7 +42,7 @@ public class GroupBuyOrder {
 
     private Integer status;
 
-    private String bizId;
+    private String outTradeNo;
 
     private LocalDateTime createTime;
 

@@ -61,7 +61,7 @@ public class GroupBuyRepositoryTest {
 
         ArgumentCaptor<GroupBuyOrder> orderCaptor = ArgumentCaptor.forClass(GroupBuyOrder.class);
         verify(groupBuyOrderDao).insert(orderCaptor.capture());
-        assertEquals("B1", orderCaptor.getValue().getBizId());
+        assertEquals("B1", orderCaptor.getValue().getOutTradeNo());
         assertEquals(result.getOrderId(), orderCaptor.getValue().getOrderId());
     }
 

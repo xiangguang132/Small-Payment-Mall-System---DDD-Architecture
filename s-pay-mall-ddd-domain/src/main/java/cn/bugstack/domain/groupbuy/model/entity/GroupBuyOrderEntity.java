@@ -42,7 +42,7 @@ public class GroupBuyOrderEntity {
 
     private Integer status;
 
-    private String bizId;
+    private String outTradeNo;
 
     private LocalDateTime createTime;
 

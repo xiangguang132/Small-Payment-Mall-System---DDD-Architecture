@@ -9,7 +9,7 @@ public interface IGroupBuyOrderDao {
 
     void insert(GroupBuyOrder order);
 
-    GroupBuyOrder queryGroupBuyOrderByBizId(@Param("userId") String userId, @Param("bizId") String bizId);
+    GroupBuyOrder queryGroupBuyOrderByOutTradeNo(@Param("userId") String userId, @Param("outTradeNo") String outTradeNo);
 
     int queryOrderCountByUserIdAndActivityId(@Param("userId") String userId, @Param("activityId") Long activityId);
 }

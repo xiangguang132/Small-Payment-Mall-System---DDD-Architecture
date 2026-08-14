@@ -46,12 +46,12 @@ public class GroupBuyOrderServiceTest {
     }
 
     @Test
-    public void shouldReturnExistingOrderWhenSameUserAndBizIdAlreadyLocked() throws Exception {
+    public void shouldReturnExistingOrderWhenSameUserAndOutTradeNoAlreadyLocked() throws Exception {
         GroupBuyOrderEntity existing = GroupBuyOrderEntity.builder()
                 .userId("U1")
                 .orderId("O1")
                 .build();
-        when(groupBuyRepository.queryGroupBuyOrderByBizId("U1", "B1"))
+        when(groupBuyRepository.queryGroupBuyOrderByOutTradeNo("U1", "B1"))
                 .thenReturn(existing);
 
         GroupBuyOrderEntity result = groupBuyOrderService.lockGroupBuyOrder(
@@ -64,7 +64,7 @@ public class GroupBuyOrderServiceTest {
 
     @Test
     public void shouldRejectWhenUserTakeLimitExceeded() throws Exception {
-        when(groupBuyRepository.queryGroupBuyOrderByBizId("U1", "B1"))
+        when(groupBuyRepository.queryGroupBuyOrderByOutTradeNo("U1", "B1"))
                 .thenReturn(null);
         when(groupBuyRuleFilter.apply(any(), any()))
                 .thenThrow(new AppException(ResponseCode.E0103));
@@ -85,7 +85,7 @@ public class GroupBuyOrderServiceTest {
                 .userId("U1")
                 .orderId("O2")
                 .build();
-        when(groupBuyRepository.queryGroupBuyOrderByBizId("U1", "B1"))
+        when(groupBuyRepository.queryGroupBuyOrderByOutTradeNo("U1", "B1"))
                 .thenReturn(null);
         when(groupBuyRuleFilter.apply(any(), any()))
                 .thenReturn(GroupBuyRuleFilterFeedBackEntity.builder()

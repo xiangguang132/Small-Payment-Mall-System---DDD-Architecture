@@ -18,7 +18,7 @@
         <result column="deduction_amount" property="deductionAmount"/>
         <result column="pay_amount" property="payAmount"/>
         <result column="status" property="status"/>
-        <result column="biz_id" property="bizId"/>
+        <result column="out_trade_no" property="outTradeNo"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
@@ -27,21 +27,21 @@
         insert into group_buy_order(
         order_id, user_id, team_id, activity_id, product_id,
         product_name, quantity, source, channel, original_amount,
-        deduction_amount, pay_amount, status, biz_id, create_time, update_time
+        deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
         ) values(
         #{orderId}, #{userId}, #{teamId}, #{activityId}, #{productId},
         #{productName}, #{quantity}, #{source}, #{channel}, #{originalAmount},
-        #{deductionAmount}, #{payAmount}, #{status}, #{bizId}, now(), now()
+        #{deductionAmount}, #{payAmount}, #{status}, #{outTradeNo}, now(), now()
         )
     </insert>
 
-    <select id="queryGroupBuyOrderByBizId" resultMap="dataMap">
+    <select id="queryGroupBuyOrderByOutTradeNo" resultMap="dataMap">
         select id, order_id, user_id, team_id, activity_id, product_id,
                product_name, quantity, source, channel, original_amount,
-               deduction_amount, pay_amount, status, biz_id, create_time, update_time
+               deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
         from group_buy_order
         where user_id = #{userId}
-          and biz_id = #{bizId}
+          and out_trade_no = #{outTradeNo}
         limit 1
     </select>
 
