@@ -5,7 +5,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleFilterFeedBackEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
-import cn.bugstack.domain.groupbuy.repository.IGroupBuyRepository;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.service.rule.factory.GroupBuyRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
 import cn.bugstack.types.enums.ResponseCode;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class GroupBuyOrderServiceTest {
 
     @Mock
-    private IGroupBuyRepository groupBuyRepository;
+    private IGroupBuyOrderRepository groupBuyRepository;
 
     @Mock
     private BusinessLinkedList<GroupBuyRuleCommandEntity,

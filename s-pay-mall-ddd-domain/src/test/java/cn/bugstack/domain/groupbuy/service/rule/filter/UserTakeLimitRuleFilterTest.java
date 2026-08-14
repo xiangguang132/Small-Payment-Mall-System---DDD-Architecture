@@ -3,7 +3,7 @@ package cn.bugstack.domain.groupbuy.service.rule.filter;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleFilterFeedBackEntity;
-import cn.bugstack.domain.groupbuy.repository.IGroupBuyRepository;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.service.rule.factory.GroupBuyRuleFilterFactory;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class UserTakeLimitRuleFilterTest {
 
     @Mock
-    private IGroupBuyRepository groupBuyRepository;
+    private IGroupBuyOrderRepository groupBuyRepository;
 
     @InjectMocks
     private UserTakeLimitRuleFilter userTakeLimitRuleFilter;

@@ -4,7 +4,7 @@ import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleFilterFeedBackEntity;
-import cn.bugstack.domain.groupbuy.repository.IGroupBuyRepository;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.service.rule.factory.GroupBuyRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
 import cn.bugstack.types.enums.ResponseCode;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class GroupBuyOrderService implements IGroupBuyOrderService {
 
     @Resource
-    private IGroupBuyRepository groupBuyRepository;
+    private IGroupBuyOrderRepository groupBuyRepository;
     @Resource(name = "groupBuyRuleFilter")
     private BusinessLinkedList<GroupBuyRuleCommandEntity,
                 GroupBuyRuleFilterFactory.DynamicContext,

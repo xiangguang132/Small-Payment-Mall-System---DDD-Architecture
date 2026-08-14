@@ -7,6 +7,7 @@ import cn.bugstack.infrastructure.dao.IGroupBuyOrderDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyTeamDao;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyOrder;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam;
+import cn.bugstack.infrastructure.repository.GroupBuyOrderOrderRepository;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.junit.Before;
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class GroupBuyRepositoryTest {
+public class GroupBuyOrderRepositoryTest {
 
     @Mock
     private IGroupBuyTeamDao groupBuyTeamDao;
@@ -35,7 +36,7 @@ public class GroupBuyRepositoryTest {
     private IGroupBuyOrderDao groupBuyOrderDao;
 
     @InjectMocks
-    private GroupBuyRepository groupBuyRepository;
+    private GroupBuyOrderOrderRepository groupBuyOrderRepository;
 
     @Before
     public void setUp() {
@@ -44,7 +45,7 @@ public class GroupBuyRepositoryTest {
 
     @Test
     public void shouldCreateNewTeamAndOrderWhenTeamIdBlank() {
-        GroupBuyOrderEntity result = groupBuyRepository.lockGroupBuyOrder(
+        GroupBuyOrderEntity result = groupBuyOrderRepository.lockGroupBuyOrder(
                 aggregate(null, "B1")
         );
 
@@ -70,7 +71,7 @@ public class GroupBuyRepositoryTest {
         when(groupBuyTeamDao.updateAddLockCount("T1")).thenReturn(0);
 
         try {
-            groupBuyRepository.lockGroupBuyOrder(aggregate("T1", "B2"));
+            groupBuyOrderRepository.lockGroupBuyOrder(aggregate("T1", "B2"));
             fail("should throw AppException");
         } catch (AppException e) {
             assertEquals(ResponseCode.E0005.getCode(), e.getCode());

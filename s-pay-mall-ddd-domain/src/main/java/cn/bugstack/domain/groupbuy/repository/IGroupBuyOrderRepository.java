@@ -3,7 +3,7 @@ package cn.bugstack.domain.groupbuy.repository;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 
-public interface IGroupBuyRepository {
+public interface IGroupBuyOrderRepository {
 
     GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo);
 

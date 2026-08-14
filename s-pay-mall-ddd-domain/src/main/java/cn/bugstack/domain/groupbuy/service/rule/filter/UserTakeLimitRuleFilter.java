@@ -3,7 +3,7 @@ package cn.bugstack.domain.groupbuy.service.rule.filter;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRuleFilterFeedBackEntity;
-import cn.bugstack.domain.groupbuy.repository.IGroupBuyRepository;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.service.rule.factory.GroupBuyRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.handler.ILogicHandler;
 import cn.bugstack.types.enums.ResponseCode;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 public class UserTakeLimitRuleFilter implements ILogicHandler<GroupBuyRuleCommandEntity, GroupBuyRuleFilterFactory.DynamicContext, GroupBuyRuleFilterFeedBackEntity> {
 
     @Resource
-    private IGroupBuyRepository groupBuyRepository;
+    private IGroupBuyOrderRepository groupBuyRepository;
 
     @Override
     public GroupBuyRuleFilterFeedBackEntity apply(GroupBuyRuleCommandEntity requestParameter, GroupBuyRuleFilterFactory.DynamicContext dynamicContext) throws Exception {
