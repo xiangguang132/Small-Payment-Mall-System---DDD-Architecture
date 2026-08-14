@@ -6,7 +6,7 @@ import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.ProductEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
-import cn.bugstack.infrastructure.dao.po.pay.PayOrder;
+import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
 import cn.bugstack.types.enums.OrderTypeEnum;
 import cn.bugstack.types.event.BaseEvent;
 import com.google.common.eventbus.EventBus;
