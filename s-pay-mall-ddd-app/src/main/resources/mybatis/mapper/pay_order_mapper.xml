@@ -7,7 +7,7 @@
         <result column="user_id" property="userId"/>
         <result column="product_id" property="productId"/>
         <result column="product_name" property="productName"/>
-        <result column="order_id" property="orderId"/>
+        <result column="out_trade_no" property="outTradeNo"/>
         <result column="order_time" property="orderTime"/>
         <result column="total_amount" property="totalAmount"/>
         <result column="order_type" property="orderType"/>
@@ -20,45 +20,52 @@
     </resultMap>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder">
-        insert into pay_order(user_id, product_id, product_name, order_id, order_time,
+        insert into pay_order(user_id, product_id, product_name, out_trade_no, order_time,
         total_amount, order_type, status, out_trade_time, create_time, update_time)
-        values(#{userId}, #{productId}, #{productName}, #{orderId}, #{orderTime},
+        values(#{userId}, #{productId}, #{productName}, #{outTradeNo}, #{orderTime},
         #{totalAmount}, #{orderType}, #{status}, #{outTradeTime, jdbcType=TIMESTAMP}, now(), now())
     </insert>
 
     <update id="updateOrderPayInfo" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder">
         update pay_order set pay_url = #{payUrl}, status = #{status}, update_time = now()
-        where order_id = #{orderId}
+        where out_trade_no = #{outTradeNo}
     </update>
 
     <update id="changeOrderPaySuccess" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder">
         update pay_order set status = #{status}, pay_time = now(),
         out_trade_time = COALESCE(#{outTradeTime, jdbcType=TIMESTAMP}, out_trade_time), update_time = now()
-        where order_id = #{orderId}
+        where out_trade_no = #{outTradeNo}
     </update>
 
     <update id="changeOrderClose" parameterType="java.lang.String">
         update pay_order set status = 'CLOSE', pay_time = now(), update_time = now()
-        where order_id = #{orderId}
+        where out_trade_no = #{outTradeNo}
     </update>
 
     <select id="queryUnPayOrder" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder" resultMap="dataMap">
-        select product_id, product_name, order_id, order_time, total_amount, order_type, status, pay_url
+        select product_id, product_name, out_trade_no, order_time, total_amount, order_type, status, pay_url
         from pay_order
         where user_id = #{userId} and product_id = #{productId}
         order by id desc
         limit 1
     </select>
 
+    <select id="queryPayOrderByOutTradeNo" resultMap="dataMap">
+        select user_id, out_trade_no, order_type, status
+        from pay_order
+        where out_trade_no = #{outTradeNo}
+        limit 1
+    </select>
+
     <select id="queryNoPayNotifyOrder" resultType="java.lang.String">
-        SELECT order_id as orderId FROM pay_order
+        SELECT out_trade_no as outTradeNo FROM pay_order
         WHERE status = 'PAY_WAIT' AND NOW() >= order_time + INTERVAL 1 MINUTE
         ORDER BY id ASC
         LIMIT 10
     </select>
 
     <select id="queryTimeoutCloseOrderList" resultType="java.lang.String">
-        SELECT order_id as orderId FROM pay_order
+        SELECT out_trade_no as outTradeNo FROM pay_order
         WHERE status = 'PAY_WAIT' AND NOW() >= order_time + INTERVAL 30 MINUTE
         ORDER BY id ASC
         LIMIT 50

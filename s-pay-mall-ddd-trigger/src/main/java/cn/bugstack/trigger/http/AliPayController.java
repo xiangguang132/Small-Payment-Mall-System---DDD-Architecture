@@ -53,7 +53,7 @@ public class AliPayController implements IPayService {
                     .userId(userId)
                     .productId(productId)
                     .build());
-            log.info("商品下单，根据商品ID创建支付单完成 userId:{} productId:{} orderId:{}", userId, productId, payOrderEntity.getOrderId());
+            log.info("商品下单，根据商品ID创建支付单完成 userId:{} productId:{} outTradeNo:{}", userId, productId, payOrderEntity.getOutTradeNo());
             return Response.<String>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
@@ -80,7 +80,7 @@ public class AliPayController implements IPayService {
                     params.put(key, request.getParameter(key));
                 }
 
-                String out_trade_no = params.get("out_trade_no");
+                String outTradeNo = params.get("out_trade_no");
                 String gmt_create = params.get("gmt_create");
                 String trade_no = params.get("trade_no");
 
@@ -98,9 +98,9 @@ public class AliPayController implements IPayService {
                     log.info("支付回调，买家在支付宝唯一id: {}", params.get("buyer_id"));
                     log.info("支付回调，买家付款时间: {}", params.get("gmt_payment"));
                     log.info("支付回调，买家付款金额: {}", params.get("buyer_pay_amount"));
-                    log.info("支付回调，支付回调，更新订单 {}", out_trade_no);
+                    log.info("支付回调，支付回调，更新订单 {}", outTradeNo);
                     // 更新订单已支付
-                    orderService.changeOrderPaySuccess(out_trade_no, parseAlipayTime(params.get("gmt_payment")));
+                    orderService.changeOrderPaySuccess(outTradeNo, parseAlipayTime(params.get("gmt_payment")));
                 }
             }
             log.info("支付回调接口完成 tradeStatus:{}", request.getParameter("trade_status"));

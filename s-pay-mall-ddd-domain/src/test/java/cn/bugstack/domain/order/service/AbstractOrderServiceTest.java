@@ -48,18 +48,18 @@ public class AbstractOrderServiceTest {
                     String userId,
                     String productId,
                     String productName,
-                    String orderId,
+                    String outTradeNo,
                     BigDecimal totalAmount
             ) {
                 return PayOrderEntity.builder()
-                        .orderId(orderId)
+                        .outTradeNo(outTradeNo)
                         .payUrl("pay://" + productName)
                         .orderStatus(OrderStatusVO.PAY_WAIT)
                         .build();
             }
 
             @Override
-            public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
+            public void changeOrderPaySuccess(String outTradeNo, Date outTradeTime) {
             }
 
             @Override
@@ -73,7 +73,7 @@ public class AbstractOrderServiceTest {
             }
 
             @Override
-            public boolean changeOrderPayClose(String orderId) {
+            public boolean changeOrderPayClose(String outTradeNo) {
                 return false;
             }
         };
@@ -84,7 +84,7 @@ public class AbstractOrderServiceTest {
         ShopCartEntity cart = cart("u1", "P001");
         when(orderRepository.queryUnPayOrder(cart)).thenReturn(
                 OrderEntity.builder()
-                        .orderId("O001")
+                        .outTradeNo("O001")
                         .payUrl("pay://existing")
                         .orderStatus(OrderStatusVO.PAY_WAIT)
                         .build()
@@ -92,7 +92,7 @@ public class AbstractOrderServiceTest {
 
         PayOrderEntity result = orderService.createOrder(cart);
 
-        assertEquals("O001", result.getOrderId());
+        assertEquals("O001", result.getOutTradeNo());
         assertEquals("pay://existing", result.getPayUrl());
     }
 
@@ -101,7 +101,7 @@ public class AbstractOrderServiceTest {
         ShopCartEntity cart = cart("u1", "P001");
         when(orderRepository.queryUnPayOrder(cart)).thenReturn(
                 OrderEntity.builder()
-                        .orderId("O002")
+                        .outTradeNo("O002")
                         .productName("demo")
                         .totalAmount(new BigDecimal("88.00"))
                         .orderStatus(OrderStatusVO.CREATE)
@@ -110,7 +110,7 @@ public class AbstractOrderServiceTest {
 
         PayOrderEntity result = orderService.createOrder(cart);
 
-        assertEquals("O002", result.getOrderId());
+        assertEquals("O002", result.getOutTradeNo());
         assertEquals("pay://demo", result.getPayUrl());
     }
 
@@ -131,7 +131,7 @@ public class AbstractOrderServiceTest {
         assertNotNull(savedAggregate);
         assertEquals("u1", savedAggregate.getUserId());
         assertEquals("P001", savedAggregate.getProductEntity().getProductId());
-        assertNotNull(savedAggregate.getOrderEntity().getOrderId());
+        assertNotNull(savedAggregate.getOrderEntity().getOutTradeNo());
         assertEquals("pay://demo", result.getPayUrl());
         verify(orderRepository).doSaveOrder(savedAggregate);
     }

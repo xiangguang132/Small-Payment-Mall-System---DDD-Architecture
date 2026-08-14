@@ -46,7 +46,7 @@ public class OrderRepository implements IOrderRepository {
         order.setUserId(userId);
         order.setProductId(productEntity.getProductId());
         order.setProductName(productEntity.getProductName());
-        order.setOrderId(orderEntity.getOrderId());
+        order.setOutTradeNo(orderEntity.getOutTradeNo());
         order.setOrderTime(orderEntity.getOrderTime());
         order.setTotalAmount(productEntity.getPrice());
         order.setOrderType(OrderTypeEnum.DIRECT.getCode());
@@ -55,7 +55,7 @@ public class OrderRepository implements IOrderRepository {
         orderDao.insert(order);
 
         // todo 存入缓存；缓存key聚合到对象中提供
-//        redisService.setValue(PayOrder.cacheKey(userId, orderEntity.getOrderId()), order);
+//        redisService.setValue(PayOrder.cacheKey(userId, orderEntity.getOutTradeNo()), order);
 
     }
 
@@ -76,7 +76,7 @@ public class OrderRepository implements IOrderRepository {
         return OrderEntity.builder()
                 .productId(order.getProductId())
                 .productName(order.getProductName())
-                .orderId(order.getOrderId())
+                .outTradeNo(order.getOutTradeNo())
                 .orderStatus(OrderStatusVO.valueOf(order.getStatus()))
                 .orderTime(order.getOrderTime())
                 .totalAmount(order.getTotalAmount())
@@ -86,25 +86,39 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
+    public PayOrderEntity queryPayOrderByOutTradeNo(String outTradeNo) {
+        PayOrder order = orderDao.queryPayOrderByOutTradeNo(outTradeNo);
+        if (order == null) {
+            return null;
+        }
+        return PayOrderEntity.builder()
+                .userId(order.getUserId())
+                .outTradeNo(order.getOutTradeNo())
+                .orderStatus(order.getStatus() == null ? null : OrderStatusVO.valueOf(order.getStatus()))
+                .orderType(order.getOrderType() == null ? null : OrderTypeEnum.valueOf(order.getOrderType()))
+                .build();
+    }
+
+    @Override
     public void updateOrderPayInfo(PayOrderEntity payOrderEntity) {
         PayOrder order = new PayOrder();
         order.setUserId(payOrderEntity.getUserId());
-        order.setOrderId(payOrderEntity.getOrderId());
+        order.setOutTradeNo(payOrderEntity.getOutTradeNo());
         order.setPayUrl(payOrderEntity.getPayUrl());
         order.setStatus(payOrderEntity.getOrderStatus().getCode());
         orderDao.updateOrderPayInfo(order);
     }
 
     @Override
-    public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
+    public void changeOrderPaySuccess(String outTradeNo, Date outTradeTime) {
         PayOrder order = new PayOrder();
-        order.setOrderId(orderId);
+        order.setOutTradeNo(outTradeNo);
         order.setStatus(OrderStatusVO.PAY_SUCCESS.getCode());
         order.setOutTradeTime(outTradeTime);
         orderDao.changeOrderPaySuccess(order);
 
         // todo 发送 mq 消息
-        BaseEvent.EventMessage<PaySuccessMessageEvent.PaySuccessMessage> eventMessage = paySuccessMessageEvent.buildEventMessage(PaySuccessMessageEvent.PaySuccessMessage.builder().tradeNo(orderId).build());
+        BaseEvent.EventMessage<PaySuccessMessageEvent.PaySuccessMessage> eventMessage = paySuccessMessageEvent.buildEventMessage(PaySuccessMessageEvent.PaySuccessMessage.builder().tradeNo(outTradeNo).build());
         PaySuccessMessageEvent.PaySuccessMessage paySuccessMessage = eventMessage.getData();
 
         eventBus.post(JSON.toJSONString(paySuccessMessage));
@@ -121,8 +135,8 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public boolean changeOrderPayClose(String orderId) {
-        return orderDao.changeOrderClose(orderId);
+    public boolean changeOrderPayClose(String outTradeNo) {
+        return orderDao.changeOrderClose(outTradeNo);
     }
 
 }

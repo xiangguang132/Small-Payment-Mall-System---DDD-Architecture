@@ -36,9 +36,9 @@ public class PayOrder {
      */
     private String productName;
     /**
-     * 订单ID
+     * 商户订单号/支付宝 out_trade_no
      */
-    private String orderId;
+    private String outTradeNo;
     /**
      * 下单时间
      */
@@ -76,8 +76,8 @@ public class PayOrder {
      */
     private Date updateTime;
 
-    public static String cacheKey(String userId, String orderId) {
-        return "small_" + userId + "_" + orderId;
+    public static String cacheKey(String userId, String outTradeNo) {
+        return "small_" + userId + "_" + outTradeNo;
     }
 
 }

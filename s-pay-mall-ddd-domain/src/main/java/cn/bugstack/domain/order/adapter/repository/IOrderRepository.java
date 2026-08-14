@@ -21,6 +21,13 @@ public interface IOrderRepository {
     OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity);
 
     /**
+     * 根据商户订单号查询支付单
+     * @param outTradeNo 商户订单号/支付宝 out_trade_no
+     * @return 支付单
+     */
+    PayOrderEntity queryPayOrderByOutTradeNo(String outTradeNo);
+
+    /**
      * 更新订单支付信息
      * @param payOrderEntity
      */
@@ -28,10 +35,10 @@ public interface IOrderRepository {
 
     /**
      * 修改状态-success
-     * @param orderId
+     * @param outTradeNo
      * @param outTradeTime 外部交易时间
      */
-    void changeOrderPaySuccess(String orderId, Date outTradeTime);
+    void changeOrderPaySuccess(String outTradeNo, Date outTradeTime);
 
     /**
      * 查询有效期内，未接收到支付回调的订单
@@ -49,5 +56,5 @@ public interface IOrderRepository {
      * 修改状态为关单状态
      * @return
      */
-    boolean changeOrderPayClose(String orderId);
+    boolean changeOrderPayClose(String outTradeNo);
 }

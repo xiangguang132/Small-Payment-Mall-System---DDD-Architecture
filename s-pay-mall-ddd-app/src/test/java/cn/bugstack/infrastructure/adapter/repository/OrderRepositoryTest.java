@@ -3,6 +3,7 @@ package cn.bugstack.infrastructure.adapter.repository;
 import cn.bugstack.domain.order.event.PaySuccessMessageEvent;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.OrderEntity;
+import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ProductEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
@@ -52,7 +53,7 @@ public class OrderRepositoryTest {
                         .price(new BigDecimal("9.90"))
                         .build())
                 .orderEntity(OrderEntity.builder()
-                        .orderId("O001")
+                        .outTradeNo("O001")
                         .orderTime(new Date())
                         .orderStatus(OrderStatusVO.CREATE)
                         .build())
@@ -63,6 +64,25 @@ public class OrderRepositoryTest {
         ArgumentCaptor<PayOrder> captor = ArgumentCaptor.forClass(PayOrder.class);
         verify(orderDao).insert(captor.capture());
         assertEquals(OrderTypeEnum.DIRECT.getCode(), captor.getValue().getOrderType());
+    }
+
+    @Test
+    public void shouldQueryPayOrderByOutTradeNo() {
+        when(orderDao.queryPayOrderByOutTradeNo("O001")).thenReturn(
+                PayOrder.builder()
+                        .userId("u1")
+                        .outTradeNo("O001")
+                        .orderType(OrderTypeEnum.GROUP_BUY.getCode())
+                        .status(OrderStatusVO.PAY_WAIT.getCode())
+                        .build()
+        );
+
+        PayOrderEntity result = orderRepository.queryPayOrderByOutTradeNo("O001");
+
+        assertEquals("u1", result.getUserId());
+        assertEquals("O001", result.getOutTradeNo());
+        assertEquals(OrderTypeEnum.GROUP_BUY, result.getOrderType());
+        assertEquals(OrderStatusVO.PAY_WAIT, result.getOrderStatus());
     }
 
     @Test

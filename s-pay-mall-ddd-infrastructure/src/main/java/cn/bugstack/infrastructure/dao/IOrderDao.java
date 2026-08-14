@@ -17,10 +17,12 @@ public interface IOrderDao {
 
     void changeOrderPaySuccess(PayOrder order);
 
+    PayOrder queryPayOrderByOutTradeNo(@Param("outTradeNo") String outTradeNo);
+
     List<String> queryNoPayNotifyOrder();
 
     List<String> queryTimeoutCloseOrderList();
 
-    boolean changeOrderClose(@Param("orderId") String orderId);
+    boolean changeOrderClose(@Param("outTradeNo") String outTradeNo);
 
 }

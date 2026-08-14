@@ -45,13 +45,13 @@ public class OrderService extends AbstractOrderService{
     }
 
     @Override
-    protected PayOrderEntity doPrepayOrder(String userId, String productId, String productName, String orderId, BigDecimal totalAmount) throws AlipayApiException {
+    protected PayOrderEntity doPrepayOrder(String userId, String productId, String productName, String outTradeNo, BigDecimal totalAmount) throws AlipayApiException {
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setReturnUrl(returnUrl);
         request.setNotifyUrl(notifyUrl);
 
         JSONObject bizContent = new JSONObject();
-        bizContent.put("out_trade_no", orderId);
+        bizContent.put("out_trade_no", outTradeNo);
         bizContent.put("total_amount", totalAmount.toString());
         bizContent.put("subject", productName);
         bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
@@ -60,7 +60,7 @@ public class OrderService extends AbstractOrderService{
         String form = alipayClient.pageExecute(request).getBody();
 
         PayOrderEntity payOrderEntity = new PayOrderEntity();
-        payOrderEntity.setOrderId(orderId);
+        payOrderEntity.setOutTradeNo(outTradeNo);
         payOrderEntity.setPayUrl(form);
         payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
 
@@ -70,8 +70,8 @@ public class OrderService extends AbstractOrderService{
     }
 
     @Override
-    public void changeOrderPaySuccess(String orderId, Date outTradeTime) {
-        orderRepository.changeOrderPaySuccess(orderId, outTradeTime);
+    public void changeOrderPaySuccess(String outTradeNo, Date outTradeTime) {
+        orderRepository.changeOrderPaySuccess(outTradeNo, outTradeTime);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class OrderService extends AbstractOrderService{
     }
 
     @Override
-    public boolean changeOrderPayClose(String orderId) {
-        return orderRepository.changeOrderPayClose(orderId);
+    public boolean changeOrderPayClose(String outTradeNo) {
+        return orderRepository.changeOrderPayClose(outTradeNo);
     }
 }

@@ -31,23 +31,23 @@ public abstract class AbstractOrderService implements IOrderService {
         OrderEntity unpaidOrderEntity = orderRepository.queryUnPayOrder(shopCartEntity);
         // 2. 如果存在未支付订单并且是payweit状态->即掉单
         if(unpaidOrderEntity != null && OrderStatusVO.PAY_WAIT.equals(unpaidOrderEntity.getOrderStatus())){
-            log.info("创建订单-已存在未支付订单，userId:{}, productId:{}, orderId:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOrderId());
+            log.info("创建订单-已存在未支付订单，userId:{}, productId:{}, outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
             return PayOrderEntity.builder()
-                    .orderId(unpaidOrderEntity.getOrderId())
+                    .outTradeNo(unpaidOrderEntity.getOutTradeNo())
                     .payUrl(unpaidOrderEntity.getPayUrl())
                     .build();
         } else if (unpaidOrderEntity != null && OrderStatusVO.CREATE.equals(unpaidOrderEntity.getOrderStatus())) {
-            log.info("创建订单-存在，存在未创建支付单订单，创建支付单开始 userId:{} productId:{} orderId:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOrderId());
-            // 构建需要 userId productId productName orderId totalamount
+            log.info("创建订单-存在，存在未创建支付单订单，创建支付单开始 userId:{} productId:{} outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
+            // 构建需要 userId productId productName outTradeNo totalAmount
             PayOrderEntity payOrderEntity = this.doPrepayOrder(
                     shopCartEntity.getUserId(),
                     shopCartEntity.getProductId(),
                     unpaidOrderEntity.getProductName(),
-                    unpaidOrderEntity.getOrderId(),
+                    unpaidOrderEntity.getOutTradeNo(),
                     unpaidOrderEntity.getTotalAmount()
             );
             return PayOrderEntity.builder()
-                    .orderId(payOrderEntity.getOrderId())
+                    .outTradeNo(payOrderEntity.getOutTradeNo())
                     .payUrl(payOrderEntity.getPayUrl())
                     .build();
         }
@@ -70,10 +70,10 @@ public abstract class AbstractOrderService implements IOrderService {
         this.doSaveOrder(orderAggregate);
 
         // 5. 创建支付单
-        PayOrderEntity payOrderEntity = this.doPrepayOrder(shopCartEntity.getUserId(), productEntity.getProductId(), productEntity.getProductName(), orderEntity.getOrderId(), productEntity.getPrice());
+        PayOrderEntity payOrderEntity = this.doPrepayOrder(shopCartEntity.getUserId(), productEntity.getProductId(), productEntity.getProductName(), orderEntity.getOutTradeNo(), productEntity.getPrice());
 
         return PayOrderEntity.builder()
-                .orderId(payOrderEntity.getOrderId())
+                .outTradeNo(payOrderEntity.getOutTradeNo())
                 .payUrl(payOrderEntity.getPayUrl())
                 .build();
     }
@@ -81,6 +81,6 @@ public abstract class AbstractOrderService implements IOrderService {
 
     protected abstract void doSaveOrder(CreateOrderAggregate orderAggregate);
 
-    protected abstract PayOrderEntity doPrepayOrder(String userId, String productId, String productName, String orderId, BigDecimal totalAmount) throws AlipayApiException;
+    protected abstract PayOrderEntity doPrepayOrder(String userId, String productId, String productName, String outTradeNo, BigDecimal totalAmount) throws AlipayApiException;
 
 }

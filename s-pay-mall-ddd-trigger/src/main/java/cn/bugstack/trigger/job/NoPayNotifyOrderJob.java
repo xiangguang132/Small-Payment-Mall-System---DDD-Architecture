@@ -29,13 +29,13 @@ public class NoPayNotifyOrderJob {
     @Scheduled(cron = "0/3 * * * * ?")
     public void exec() {
         try {
-            List<String> orderIds = orderService.queryNoPayNotifyOrderList();
-            if (null == orderIds || orderIds.isEmpty()) return;
+            List<String> outTradeNos = orderService.queryNoPayNotifyOrderList();
+            if (null == outTradeNos || outTradeNos.isEmpty()) return;
 
-            for (String orderId : orderIds) {
+            for (String outTradeNo : outTradeNos) {
                 AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
                 AlipayTradeQueryModel bizModel = new AlipayTradeQueryModel();
-                bizModel.setOutTradeNo(orderId);
+                bizModel.setOutTradeNo(outTradeNo);
                 request.setBizModel(bizModel);
 
 
@@ -44,9 +44,9 @@ public class NoPayNotifyOrderJob {
                 String tradeStatus = alipayTradeQueryResponse.getTradeStatus();
                 // 支付宝查询成功且明确已支付，才更新本地订单状态
                 if ("10000".equals(code) && "TRADE_SUCCESS".equals(tradeStatus)) {
-                    orderService.changeOrderPaySuccess(orderId, alipayTradeQueryResponse.getSendPayDate());
+                    orderService.changeOrderPaySuccess(outTradeNo, alipayTradeQueryResponse.getSendPayDate());
                 } else {
-                    log.info("检测未接收到或未正确处理的支付回调通知，订单未支付成功 orderId:{} code:{} tradeStatus:{}", orderId, code, tradeStatus);
+                    log.info("检测未接收到或未正确处理的支付回调通知，订单未支付成功 outTradeNo:{} code:{} tradeStatus:{}", outTradeNo, code, tradeStatus);
                 }
 
             }

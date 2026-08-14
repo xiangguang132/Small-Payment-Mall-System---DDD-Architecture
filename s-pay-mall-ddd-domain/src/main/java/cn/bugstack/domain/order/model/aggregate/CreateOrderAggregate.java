@@ -31,7 +31,7 @@ public class CreateOrderAggregate {
         return OrderEntity.builder()
                 .productId(productId)
                 .productName(productName)
-                .orderId(RandomStringUtils.randomNumeric(14))
+                .outTradeNo(RandomStringUtils.randomNumeric(14))
                 .orderTime(new Date())
                 .orderStatus(OrderStatusVO.CREATE)
                 .build();
