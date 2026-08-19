@@ -1,7 +1,7 @@
 package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.payment.model.entity.AlipayNotifyTaskEntity;
-import cn.bugstack.domain.payment.repository.IAlipayNotifyTaskRepository;
+import cn.bugstack.domain.payment.adapter.repository.IAlipayNotifyTaskRepository;
 import cn.bugstack.infrastructure.dao.IAlipayNotifyTaskDao;
 import cn.bugstack.infrastructure.dao.po.payment.AlipayNotifyTask;
 import cn.bugstack.types.enums.ResponseCode;

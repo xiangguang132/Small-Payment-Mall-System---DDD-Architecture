@@ -1,4 +1,4 @@
-package cn.bugstack.domain.payment.repository;
+package cn.bugstack.domain.payment.adapter.repository;
 
 import cn.bugstack.domain.payment.model.entity.AlipayNotifyTaskEntity;
 
