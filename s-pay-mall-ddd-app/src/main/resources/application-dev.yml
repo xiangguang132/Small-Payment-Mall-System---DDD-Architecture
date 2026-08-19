@@ -49,7 +49,34 @@ spring:
     database: 1
     timeout: 3000
     cache-ttl-hours: 5
-
+  # RabbitMQ
+  rabbitmq:
+    host: 192.144.234.86
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        prefetch: 1 # 每次投递n个消息，消费完在投递n个
+    template:
+      delivery-mode: persistent # 确保全局默认设置为持久化（可选）
+    # 消息配置
+    config:
+      # 生产者
+      producer:
+        # 绑定交换机，统一一套交换机
+        exchange: s_pay_mall_exchange
+        # 消息主题配置；路由key、队列
+        topic_alipay_notify:
+          # 消息主题
+          routing_key: topic.alipay_notify
+          # 消费队列
+          queue: s_pay_mall_queue_alipay_notify
+        topic_team_refund:
+          # 消息主题
+          routing_key: topic.team_refund
+          # 消费队列
+          queue: s_pay_mall_queue_team_refund
 
 # 微信公众号对接
 weixin:
