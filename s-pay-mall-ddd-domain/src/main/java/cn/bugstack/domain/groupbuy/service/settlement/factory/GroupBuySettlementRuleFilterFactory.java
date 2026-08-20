@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 /**
- * 结算规则链工厂
+ * 结算-规则链工厂
  */
 @Service
 public class GroupBuySettlementRuleFilterFactory {
