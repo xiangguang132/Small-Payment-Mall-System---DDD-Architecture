@@ -8,10 +8,14 @@ import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ProductEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
+import cn.bugstack.types.enums.OrderTypeEnum;
 import com.alipay.api.AlipayApiException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Slf4j
 public abstract class AbstractOrderService implements IOrderService {
@@ -33,7 +37,14 @@ public abstract class AbstractOrderService implements IOrderService {
         if(unpaidOrderEntity != null && OrderStatusVO.PAY_WAIT.equals(unpaidOrderEntity.getOrderStatus())){
             log.info("创建订单-已存在未支付订单，userId:{}, productId:{}, outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
             return PayOrderEntity.builder()
+                    .userId(shopCartEntity.getUserId())
+                    .productId(shopCartEntity.getProductId())
+                    .productName(unpaidOrderEntity.getProductName())
                     .outTradeNo(unpaidOrderEntity.getOutTradeNo())
+                    .orderTime(toLocalDateTime(unpaidOrderEntity.getOrderTime()))
+                    .totalAmount(unpaidOrderEntity.getTotalAmount())
+                    .orderType(OrderTypeEnum.DIRECT)
+                    .orderStatus(OrderStatusVO.PAY_WAIT)
                     .payUrl(unpaidOrderEntity.getPayUrl())
                     .build();
         } else if (unpaidOrderEntity != null && OrderStatusVO.CREATE.equals(unpaidOrderEntity.getOrderStatus())) {
@@ -46,10 +57,7 @@ public abstract class AbstractOrderService implements IOrderService {
                     unpaidOrderEntity.getOutTradeNo(),
                     unpaidOrderEntity.getTotalAmount()
             );
-            return PayOrderEntity.builder()
-                    .outTradeNo(payOrderEntity.getOutTradeNo())
-                    .payUrl(payOrderEntity.getPayUrl())
-                    .build();
+            return payOrderEntity;
         }
 
         // 3.查询商品-聚合订单
@@ -72,12 +80,15 @@ public abstract class AbstractOrderService implements IOrderService {
         // 5. 创建支付单
         PayOrderEntity payOrderEntity = this.doPrepayOrder(shopCartEntity.getUserId(), productEntity.getProductId(), productEntity.getProductName(), orderEntity.getOutTradeNo(), productEntity.getPrice());
 
-        return PayOrderEntity.builder()
-                .outTradeNo(payOrderEntity.getOutTradeNo())
-                .payUrl(payOrderEntity.getPayUrl())
-                .build();
+        return payOrderEntity;
     }
 
+    private LocalDateTime toLocalDateTime(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 
     protected abstract void doSaveOrder(CreateOrderAggregate orderAggregate);
 

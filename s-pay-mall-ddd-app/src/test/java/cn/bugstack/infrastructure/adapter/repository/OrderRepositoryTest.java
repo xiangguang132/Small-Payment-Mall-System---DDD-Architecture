@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.time.ZoneId;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -68,21 +69,38 @@ public class OrderRepositoryTest {
 
     @Test
     public void shouldQueryPayOrderByOutTradeNo() {
+        Date orderTime = new Date(1700000000000L);
+        Date payTime = new Date(1700003600000L);
+        Date outTradeTime = new Date(1700003600000L);
         when(orderDao.queryPayOrderByOutTradeNo("O001")).thenReturn(
                 PayOrder.builder()
                         .userId("u1")
+                        .productId("P001")
+                        .productName("demo")
                         .outTradeNo("O001")
+                        .orderTime(orderTime)
+                        .totalAmount(new BigDecimal("88.00"))
                         .orderType(OrderTypeEnum.GROUP_BUY.getCode())
                         .status(OrderStatusVO.PAY_WAIT.getCode())
+                        .payUrl("pay://test")
+                        .payTime(payTime)
+                        .outTradeTime(outTradeTime)
                         .build()
         );
 
         PayOrderEntity result = orderRepository.queryPayOrderByOutTradeNo("O001");
 
         assertEquals("u1", result.getUserId());
+        assertEquals("P001", result.getProductId());
+        assertEquals("demo", result.getProductName());
         assertEquals("O001", result.getOutTradeNo());
+        assertEquals(orderTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getOrderTime());
+        assertEquals(new BigDecimal("88.00"), result.getTotalAmount());
         assertEquals(OrderTypeEnum.GROUP_BUY, result.getOrderType());
         assertEquals(OrderStatusVO.PAY_WAIT, result.getOrderStatus());
+        assertEquals("pay://test", result.getPayUrl());
+        assertEquals(payTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getPayTime());
+        assertEquals(outTradeTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getOutTradeTime());
     }
 
     @Test

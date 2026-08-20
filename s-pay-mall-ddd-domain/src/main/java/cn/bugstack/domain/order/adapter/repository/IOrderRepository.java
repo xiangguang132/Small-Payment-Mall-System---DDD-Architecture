@@ -57,4 +57,16 @@ public interface IOrderRepository {
      * @return
      */
     boolean changeOrderPayClose(String outTradeNo);
+
+    /**
+     * 原子占锁：置为退款中，抢到处理权返回 true。
+     * @return true=本轮应执行支付宝退款；false=已有人在退/已退，直接返回
+     */
+    boolean changeOrderRefunding(String outTradeNo);
+
+    /**
+     * 退款成功
+     * @return 是否更新成功
+     */
+    boolean changeOrderRefundResult(String outTradeNo, String fromStatus, String toStatus);
 }

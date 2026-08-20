@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,8 +17,14 @@ import lombok.NoArgsConstructor;
 public class PayOrderEntity {
 
     private String userId;
+    private String productId;
+    private String productName;
     private String outTradeNo;
-    private String payUrl;
-    private OrderStatusVO orderStatus;
+    private LocalDateTime orderTime;
+    private BigDecimal totalAmount;
     private OrderTypeEnum orderType;
+    private OrderStatusVO orderStatus;
+    private String payUrl;
+    private LocalDateTime payTime;
+    private LocalDateTime outTradeTime;
 }

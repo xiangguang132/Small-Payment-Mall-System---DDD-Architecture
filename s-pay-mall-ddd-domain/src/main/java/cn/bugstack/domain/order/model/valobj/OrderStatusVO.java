@@ -10,8 +10,10 @@ public enum OrderStatusVO {
     CREATE("CREATE", "创建完成 - 如果调单了，也会从创建记录重新发起创建支付单"),
     PAY_WAIT("PAY_WAIT", "等待支付 - 订单创建完成后，创建支付单"),
     PAY_SUCCESS("PAY_SUCCESS", "支付成功 - 接收到支付回调消息"),
+    REFUNDING("REFUNDING", "退款中 - 已发起支付宝退款，等待结果"),
+    REFUND("REFUND", "已退款 - 已支付的订单退款成功"),
     DEAL_DONE("DEAL_DONE", "交易完成 - 商品发货完成"),
-    CLOSE("CLOSE", "超时关单 - 超市未支付"),
+    CLOSE("CLOSE", "超时关单 - 超时未支付"),
     ;
 
     private final String code;

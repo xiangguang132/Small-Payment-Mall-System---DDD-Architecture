@@ -17,6 +17,8 @@ import com.google.common.eventbus.EventBus;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -93,10 +95,24 @@ public class OrderRepository implements IOrderRepository {
         }
         return PayOrderEntity.builder()
                 .userId(order.getUserId())
+                .productId(order.getProductId())
+                .productName(order.getProductName())
                 .outTradeNo(order.getOutTradeNo())
+                .orderTime(toLocalDateTime(order.getOrderTime()))
+                .totalAmount(order.getTotalAmount())
                 .orderStatus(order.getStatus() == null ? null : OrderStatusVO.valueOf(order.getStatus()))
                 .orderType(order.getOrderType() == null ? null : OrderTypeEnum.valueOf(order.getOrderType()))
+                .payUrl(order.getPayUrl())
+                .payTime(toLocalDateTime(order.getPayTime()))
+                .outTradeTime(toLocalDateTime(order.getOutTradeTime()))
                 .build();
+    }
+
+    private LocalDateTime toLocalDateTime(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     @Override
@@ -139,4 +155,13 @@ public class OrderRepository implements IOrderRepository {
         return orderDao.changeOrderClose(outTradeNo);
     }
 
+    @Override
+    public boolean changeOrderRefunding(String outTradeNo) {
+        return orderDao.changeOrderRefunding(outTradeNo);
+    }
+
+    @Override
+    public boolean changeOrderRefundResult(String outTradeNo, String fromStatus, String toStatus) {
+        return orderDao.changeOrderRefundResult(outTradeNo, fromStatus, toStatus);
+    }
 }

@@ -20834,3 +20834,1248 @@ cn.bugstack.types.exception.AppException: 支付宝通知任务处理失败
 26-08-20.10:16:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
 26-08-20.10:17:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
 26-08-20.10:18:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:19:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:20:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:20:00.008 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.10:21:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:22:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:23:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:24:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:25:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:26:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:27:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:32:21.889 [AMQP Connection 192.144.234.86:5672] WARN  ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
+26-08-20.10:32:21.932 [redisson-netty-1-6] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x78bd047e, L:/10.70.138.66:65325 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.932 [redisson-netty-1-12] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x3cc1a3b9, L:/10.70.138.66:65310 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.932 [redisson-netty-1-22] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x0739b979, L:/10.70.138.66:65317 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.933 [redisson-netty-1-1] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x746fcaf3, L:/10.70.138.66:65322 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.buffer.WrappedByteBuf.writeBytes(WrappedByteBuf.java:821)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.933 [redisson-netty-1-20] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x32e95090, L:/10.70.138.66:65314 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-28] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x3cd33b9f, L:/10.70.138.66:65320 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-3] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x99a413d1, L:/10.70.138.66:65306 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-16] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x8fa37540, L:/10.70.138.66:65312 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-30] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x48911345, L:/10.70.138.66:65321 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x7b939cb3, L:/10.70.138.66:65309 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-24] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x8bce5bdd, L:/10.70.138.66:65318 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xcc83335e, L:/10.70.138.66:65311 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-26] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x2d15a793, L:/10.70.138.66:65319 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-5] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x58852c38, L:/10.70.138.66:65307 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-8] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xf2066441, L:/10.70.138.66:65308 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.935 [redisson-netty-1-2] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xc6bfd0c2, L:/10.70.138.66:65305 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.934 [redisson-netty-1-18] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xff5708fb, L:/10.70.138.66:65313 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:21.935 [redisson-netty-1-4] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x9177464f, L:/10.70.138.66:65324 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.016 [redisson-netty-1-2] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xf5cbe71d, L:/10.70.138.66:65323 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.017 [redisson-netty-1-8] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x57f08a25, L:/10.70.138.66:65326 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.017 [redisson-netty-1-18] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xec54288c, L:/10.70.138.66:65331 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.017 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x36bc085f, L:/10.70.138.66:65327 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.017 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x74c91fd0, L:/10.70.138.66:65329 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.10:32:22.020 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:32:22.037 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.10:32:22.731 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] INFO  SimpleMessageListenerContainer - Restarting Consumer@1d9bd4d6: tags=[[amq.ctag-VLv41zZSe-iD1JaA8NJCPg]], channel=Cached Rabbit Channel: AMQChannel(amqp://admin@192.144.234.86:5672/,1), conn: Proxy@1477d4e6 Shared Rabbit Connection: SimpleConnection@1ba98508 [delegate=amqp://admin@192.144.234.86:5672/, localPort= 51054], acknowledgeMode=AUTO local queue size=0
+26-08-20.10:32:22.735 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.10:32:22.759 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createBareChannel(CachingConnectionFactory.java:676)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getCachedChannelProxy(CachingConnectionFactory.java:650)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getChannel(CachingConnectionFactory.java:540)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.access$1600(CachingConnectionFactory.java:100)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$ChannelCachingConnectionProxy.createChannel(CachingConnectionFactory.java:1418)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2216)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 16 common frames omitted
+26-08-20.10:32:22.759 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.10:32:22.854 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SimpleMessageListenerContainer - Restarting Consumer@c3ca482: tags=[[amq.ctag-DW6bo-6FAh2YDi0QBUkfbA]], channel=Cached Rabbit Channel: AMQChannel(amqp://admin@192.144.234.86:5672/,2), conn: Proxy@1477d4e6 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0
+26-08-20.10:32:22.856 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.10:32:22.870 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+26-08-20.10:32:22.870 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.10:32:27.916 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Restarting Consumer@7b8fb589: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+26-08-20.10:32:27.918 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-3] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.10:32:27.962 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Restarting Consumer@a2e1ce7: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+26-08-20.10:32:28.626 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-3] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#8b1202a:5/SimpleConnection@bbef9af [delegate=amqp://admin@192.144.234.86:5672/, localPort= 63562]
+26-08-20.10:32:33.335 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m58s614ms383µs800ns).
+26-08-20.10:33:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:34:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:35:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:36:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:37:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:38:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:39:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:40:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:40:00.017 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.10:41:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:42:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:43:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:44:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:45:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:46:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:47:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:48:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:49:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:50:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:50:00.017 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.10:51:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:52:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:53:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:54:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:55:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:56:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:57:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:58:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.10:58:04.810 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-20.10:58:04.809 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 49960 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-20.10:58:04.813 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-20.10:58:05.970 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-20.10:58:05.972 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-20.10:58:06.034 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 0 Redis repository interfaces.
+26-08-20.10:58:06.366 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.10:58:06.373 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.10:58:06.374 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.10:58:06.539 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-20.10:58:08.043 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-20.10:58:14.913 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-20.10:58:14.975 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.10:58:15.202 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-20.10:58:15.209 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-20.10:58:15.211 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-20.10:58:15.211 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-20.10:58:15.336 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-20.10:58:15.336 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10487 ms
+26-08-20.10:58:17.992 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-20.10:58:18.099 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-20.10:58:18.101 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+26-08-20.10:58:18.460 [main            ] INFO  Http11NioProtocol      - Pausing ProtocolHandler ["http-nio-8080"]
+26-08-20.10:58:18.460 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-08-20.10:58:18.465 [main            ] INFO  Http11NioProtocol      - Stopping ProtocolHandler ["http-nio-8080"]
+26-08-20.10:58:18.465 [main            ] INFO  Http11NioProtocol      - Destroying ProtocolHandler ["http-nio-8080"]
+26-08-20.10:58:18.476 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-08-20.10:58:18.489 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+26-08-20.10:59:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:00:00.002 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:00:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:00:00.967 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-20.11:00:01.082 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-4] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-20.11:00:01.323 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-20.11:00:02.042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-4] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-20.11:00:02.401 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-20.11:00:02.402 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-20.11:00:02.620 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-20.11:00:02.633 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-20.11:00:41.513 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 37884 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-20.11:00:41.513 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-20.11:00:41.515 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-20.11:00:42.441 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-20.11:00:42.442 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-20.11:00:42.503 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 0 Redis repository interfaces.
+26-08-20.11:00:42.768 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.11:00:42.773 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.11:00:42.774 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.11:00:42.903 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-20.11:00:43.894 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-20.11:00:52.415 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-20.11:00:52.462 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-20.11:00:52.623 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-20.11:00:52.630 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-20.11:00:52.631 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-20.11:00:52.631 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-20.11:00:52.729 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-20.11:00:52.730 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 11182 ms
+26-08-20.11:00:55.020 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-20.11:00:55.103 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-20.11:00:55.117 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-20.11:00:55.120 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.11:00:55.702 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#270b8c2a:0/SimpleConnection@510bd87a [delegate=amqp://admin@192.144.234.86:5672/, localPort= 61322]
+26-08-20.11:00:58.186 [main            ] INFO  Application            - Started Application in 17.049 seconds (JVM running for 17.908)
+26-08-20.11:00:58.475 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-20.11:00:58.475 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-20.11:00:58.477 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-20.11:00:58.549 [RMI TCP Connection(3)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-20.11:00:58.743 [RMI TCP Connection(3)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-20.11:01:00.049 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:02:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:03:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:04:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:05:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:06:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:07:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:08:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:09:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:10:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:10:00.015 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:11:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:12:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:13:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:14:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:15:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:16:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:17:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:18:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:19:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:20:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:20:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:21:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:22:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:23:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:24:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:25:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:26:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:27:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:28:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:29:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:30:00.010 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:30:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:31:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:32:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:33:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:34:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:35:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:36:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:37:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:38:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:39:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:40:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:40:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:41:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:42:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:43:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:44:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:45:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:46:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:47:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:48:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:49:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:50:00.007 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.11:50:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:51:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:52:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:53:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:54:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:55:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:56:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:57:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:58:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.11:59:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.12:00:00.002 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.12:00:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:27:58.782 [AMQP Connection 192.144.234.86:5672] WARN  ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
+26-08-20.13:27:58.864 [redisson-netty-1-30] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x6e0b1e8e, L:/10.70.138.66:61291 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-26] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xe1a72b1f, L:/10.70.138.66:61261 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.865 [redisson-netty-1-18] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x72337dfb, L:/10.70.138.66:61257 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-20] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xb6441d30, L:/10.70.138.66:61258 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-8] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xd7e3177e, L:/10.70.138.66:61309 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-22] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xc2d4c6fd, L:/10.70.138.66:61259 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-1] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x2f0a8d90, L:/10.70.138.66:61297 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-16] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x452a18b7, L:/10.70.138.66:61256 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x509be7a1, L:/10.70.138.66:61255 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xe60b596d, L:/10.70.138.66:61310 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-3] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x2798a20a, L:/10.70.138.66:61250 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-12] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x8c9d4355, L:/10.70.138.66:61311 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.865 [redisson-netty-1-4] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xc210a8b7, L:/10.70.138.66:61302 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-2] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x81ce5109, L:/10.70.138.66:61301 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-28] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xbf625eb5, L:/10.70.138.66:61290 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-24] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x78e3748b, L:/10.70.138.66:61260 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-6] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xdd3366ae, L:/10.70.138.66:61304 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:58.864 [redisson-netty-1-5] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xa456e5c0, L:/10.70.138.66:61251 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.buffer.WrappedByteBuf.writeBytes(WrappedByteBuf.java:821)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-20.13:27:59.271 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SimpleMessageListenerContainer - Restarting Consumer@786cc1df: tags=[[amq.ctag-O7ppV9OFAFjIUUgJzk_8Hw]], channel=Cached Rabbit Channel: AMQChannel(amqp://admin@192.144.234.86:5672/,2), conn: Proxy@4ef277ef Shared Rabbit Connection: SimpleConnection@510bd87a [delegate=amqp://admin@192.144.234.86:5672/, localPort= 61322], acknowledgeMode=AUTO local queue size=0
+26-08-20.13:27:59.315 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.13:27:59.319 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createBareChannel(CachingConnectionFactory.java:676)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getCachedChannelProxy(CachingConnectionFactory.java:650)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getChannel(CachingConnectionFactory.java:540)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.access$1600(CachingConnectionFactory.java:100)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$ChannelCachingConnectionProxy.createChannel(CachingConnectionFactory.java:1418)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2216)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 16 common frames omitted
+26-08-20.13:27:59.319 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.13:27:59.766 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] INFO  SimpleMessageListenerContainer - Restarting Consumer@53b7f08: tags=[[amq.ctag--NxXrXSXdeVF_pBWuHArpA]], channel=Cached Rabbit Channel: AMQChannel(amqp://admin@192.144.234.86:5672/,1), conn: Proxy@4ef277ef Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0
+26-08-20.13:27:59.768 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.13:27:59.782 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+26-08-20.13:27:59.782 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.13:28:00.650 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:28:00.657 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.13:28:03.374 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h27m33s642ms414µs400ns).
+26-08-20.13:28:04.387 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Restarting Consumer@6e6e74e3: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+26-08-20.13:28:04.389 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-3] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-20.13:28:04.481 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-3] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#270b8c2a:5/SimpleConnection@1be1ed4d [delegate=amqp://admin@192.144.234.86:5672/, localPort= 63182]
+26-08-20.13:28:04.870 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Restarting Consumer@19ec64b2: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+26-08-20.13:29:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:30:00.011 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.13:30:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:31:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:32:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:33:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:34:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:35:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:36:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:37:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:38:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:39:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:40:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:40:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.13:41:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:42:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:43:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:44:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:45:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:46:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:47:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:48:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:49:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:50:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:50:00.012 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.13:51:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:52:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:53:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:54:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:55:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:56:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:57:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:58:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.13:59:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:00:00.005 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.14:00:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:01:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:02:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:03:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:04:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:05:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:06:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:07:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:08:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:09:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:10:00.007 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.14:10:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:11:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:12:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:13:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:14:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:15:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:16:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:17:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:18:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:19:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:20:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:20:00.017 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.14:21:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:22:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:23:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:24:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:25:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:26:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:27:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:28:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:29:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:30:00.012 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 outTradeNos is null
+26-08-20.14:30:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:31:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:32:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:33:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:34:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:35:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-20.14:36:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务

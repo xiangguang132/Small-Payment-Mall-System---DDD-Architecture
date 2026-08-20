@@ -42,6 +42,18 @@
         where out_trade_no = #{outTradeNo}
     </update>
 
+    <update id="changeOrderRefunding" parameterType="java.lang.String">
+        update pay_order set status = 'REFUNDING', update_time = now()
+        where out_trade_no = #{outTradeNo}
+          and status in ('PAY_SUCCESS', 'DEAL_DONE')
+    </update>
+
+    <update id="changeOrderRefundResult" parameterType="java.lang.String">
+        update pay_order set status = #{toStatus}, update_time = now()
+        where out_trade_no = #{outTradeNo}
+          and status = #{fromStatus}
+    </update>
+
     <select id="queryUnPayOrder" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder" resultMap="dataMap">
         select product_id, product_name, out_trade_no, order_time, total_amount, order_type, status, pay_url
         from pay_order
@@ -51,7 +63,8 @@
     </select>
 
     <select id="queryPayOrderByOutTradeNo" resultMap="dataMap">
-        select user_id, out_trade_no, order_type, status
+        select user_id, product_id, product_name, out_trade_no, order_time, total_amount,
+        order_type, status, pay_url, pay_time, out_trade_time
         from pay_order
         where out_trade_no = #{outTradeNo}
         limit 1

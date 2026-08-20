@@ -28,4 +28,6 @@ public interface IOrderService {
 
     // 修改订单状态为关单
     boolean changeOrderPayClose(String outTradeNo);
+
+    boolean refundOrder(String userId, String outTradeNo);
 }
