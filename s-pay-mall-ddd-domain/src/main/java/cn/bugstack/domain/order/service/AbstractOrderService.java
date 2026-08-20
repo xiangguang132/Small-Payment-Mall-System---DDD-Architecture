@@ -33,7 +33,7 @@ public abstract class AbstractOrderService implements IOrderService {
 
         // 1. 查询掉单和未支付订单
         OrderEntity unpaidOrderEntity = orderRepository.queryUnPayOrder(shopCartEntity);
-        // 2. 如果存在未支付订单并且是payweit状态->即掉单
+        // 2. 如果存在未支付订单并且是payWait状态->即掉单
         if(unpaidOrderEntity != null && OrderStatusVO.PAY_WAIT.equals(unpaidOrderEntity.getOrderStatus())){
             log.info("创建订单-已存在未支付订单，userId:{}, productId:{}, outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
             return PayOrderEntity.builder()
