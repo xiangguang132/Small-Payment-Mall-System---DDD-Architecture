@@ -30,8 +30,9 @@ public class AlipayNotifyListener {
         try {
             alipayNotifyTaskService.processTask(message);
         } catch (Exception e) {
-            log.error("处理支付宝异步通知失败 message:{}", message, e);
-            throw e;
+            // 处理失败的消息直接确认（ack），不 requeue 死循环；
+            // 重试节奏交由 AlipayNotifyJob 定时扫描 task_status=0 的任务补偿。
+            log.error("处理支付宝异步通知失败，交由定时任务补偿 message:{}", message, e);
         }
     }
 

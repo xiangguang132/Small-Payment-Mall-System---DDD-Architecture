@@ -59,31 +59,37 @@ public class AlipayNotifyTaskDaoTest {
     }
 
     @Test
-    public void shouldReturnOnlyPendingTasks() {
-        String pendingA = insertTask("PENDING_A_" + System.nanoTime(), 0, 0);
-        String pendingB = insertTask("PENDING_B_" + System.nanoTime(), 0, 3);
+    public void shouldReturnPendingAndRetryTasksWithinRetryLimit() {
+        String pending = insertTask("PENDING_" + System.nanoTime(), 0, 0);
+        String retryable = insertTask("RETRY_" + System.nanoTime(), 2, 3);
         String success = insertTask("SUCCESS_" + System.nanoTime(), 1, 0);
-        String failed = insertTask("FAILED_" + System.nanoTime(), 2, 5);
+        String dead = insertTask("DEAD_" + System.nanoTime(), 3, 5);
+        String overLimit = insertTask("OVERLIMIT_" + System.nanoTime(), 0, 5);
 
         List<String> outTradeNos = alipayNotifyTaskDao.queryRetryOutTradeNoList();
 
         assertNotNull(outTradeNos);
-        assertTrue(outTradeNos.contains(pendingA));
-        assertTrue(outTradeNos.contains(pendingB));
-        // 已成功 / 已失败（status 1/2）的任务不应被重新投递
+        // 待处理(status=0) 与 重试(status=2) 且 retry_count<5 应被重投
+        assertTrue(outTradeNos.contains(pending));
+        assertTrue(outTradeNos.contains(retryable));
+        // 成功(status=1)、失败(status=3)、retry_count 达上限 5 的不应被重投
         assertTrue(!outTradeNos.contains(success));
-        assertTrue(!outTradeNos.contains(failed));
+        assertTrue(!outTradeNos.contains(dead));
+        assertTrue(!outTradeNos.contains(overLimit));
     }
 
     @Test
-    public void shouldReturnEmptyWhenNoPendingTask() {
-        insertTask("SUCCESS_ONLY_" + System.nanoTime(), 1, 0);
-        insertTask("FAILED_ONLY_" + System.nanoTime(), 2, 5);
+    public void shouldNotRepublishSuccessDeadOrOverLimitTasks() {
+        String success = insertTask("SUCCESS_ONLY_" + System.nanoTime(), 1, 0);
+        String dead = insertTask("DEAD_ONLY_" + System.nanoTime(), 3, 5);
+        String overLimit = insertTask("OVERLIMIT_ONLY_" + System.nanoTime(), 2, 5);
 
         List<String> outTradeNos = alipayNotifyTaskDao.queryRetryOutTradeNoList();
 
         assertNotNull(outTradeNos);
-        assertTrue(outTradeNos.isEmpty());
+        assertTrue(!outTradeNos.contains(success));
+        assertTrue(!outTradeNos.contains(dead));
+        assertTrue(!outTradeNos.contains(overLimit));
     }
 
     @TestConfiguration

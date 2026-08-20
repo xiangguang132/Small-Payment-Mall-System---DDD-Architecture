@@ -50,14 +50,15 @@
 
     <update id="updatedAlipayNotifyTaskFailed">
         update alipay_notify_task
-        set task_status = 2,
+        set task_status = 3,
             update_time = now()
         where out_trade_no = #{outTradeNo}
     </update>
 
     <update id="updatedAlipayNotifyTaskRetry">
         update alipay_notify_task
-        set retry_count = retry_count + 1,
+        set task_status = 2,
+            retry_count = retry_count + 1,
             update_time = now()
         where out_trade_no = #{outTradeNo}
     </update>
@@ -65,7 +66,8 @@
     <select id="queryRetryOutTradeNoList" resultType="java.lang.String">
         select out_trade_no
         from alipay_notify_task
-        where task_status = 0
+        where task_status in (0, 2)
+          and retry_count &lt; 5
     </select>
 
 </mapper>

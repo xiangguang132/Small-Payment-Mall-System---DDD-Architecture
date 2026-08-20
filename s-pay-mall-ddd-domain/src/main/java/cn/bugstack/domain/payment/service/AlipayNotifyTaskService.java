@@ -120,8 +120,9 @@ public class AlipayNotifyTaskService implements IAlipayNotifyTaskService {
             return;
         }
 
+        AlipayNotifyTaskEntity alipayNotifyTaskEntity = null;
         try {
-            AlipayNotifyTaskEntity alipayNotifyTaskEntity = alipayNotifyTaskRepository.queryByOutTradeNo(outTradeNo);
+            alipayNotifyTaskEntity = alipayNotifyTaskRepository.queryByOutTradeNo(outTradeNo);
             // 判断
             if (alipayNotifyTaskEntity == null) {
                 log.warn("支付宝通知任务不存在 outTradeNo:{}", outTradeNo);
@@ -131,6 +132,7 @@ public class AlipayNotifyTaskService implements IAlipayNotifyTaskService {
             }
             if (alipayNotifyTaskEntity.getRetryCount() != null && alipayNotifyTaskEntity.getRetryCount() >= MAX_RETRY_COUNT) {
                 alipayNotifyTaskRepository.updatedAlipayNotifyTaskFailed(outTradeNo);
+                throw new AppException(ResponseCode.UN_ERROR, "支付宝通知任务重试次数已达上限");
             }
             PayOrderEntity payOrderEntity = orderRepository.queryPayOrderByOutTradeNo(outTradeNo);
             if (payOrderEntity == null) {
@@ -158,7 +160,13 @@ public class AlipayNotifyTaskService implements IAlipayNotifyTaskService {
             }
         } catch (Exception e) {
             log.error("支付宝通知任务处理失败 outTradeNo:{}", outTradeNo, e);
-            alipayNotifyTaskRepository.updatedAlipayNotifyTaskRetry(outTradeNo);
+            int retryCount = alipayNotifyTaskEntity == null ? 0 : (alipayNotifyTaskEntity.getRetryCount() == null ? 0 : alipayNotifyTaskEntity.getRetryCount());
+            if (retryCount >= MAX_RETRY_COUNT) {
+                // 重试次数达上限，标记失败停止重投
+                alipayNotifyTaskRepository.updatedAlipayNotifyTaskFailed(outTradeNo);
+            } else {
+                alipayNotifyTaskRepository.updatedAlipayNotifyTaskRetry(outTradeNo);
+            }
             throw new AppException(ResponseCode.UN_ERROR, "支付宝通知任务处理失败");
         } finally {
             alipayPort.unlock(outTradeNo);
