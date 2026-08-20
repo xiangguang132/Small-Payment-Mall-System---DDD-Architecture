@@ -53,10 +53,10 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
 
         materialTypeDao.deleteById(id);
 
-        redisService.delete(
-                cacheKeyById(id),
-                current == null ? null : cacheKeyByTypeCode(current.getTypeCode())
-        );
+        redisService.remove(cacheKeyById(id));
+        if (current != null) {
+            redisService.remove(cacheKeyByTypeCode(current.getTypeCode()));
+        }
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        MaterialTypeAggregate cached = redisService.get(cacheKey, MaterialTypeAggregate.class);
+        MaterialTypeAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -85,7 +85,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .createTime(materialType.getCreateTime())
                 .updateTime(materialType.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -95,7 +95,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类编码不能为空");
         }
         String cacheKey = cacheKeyByTypeCode(typeCode);
-        MaterialTypeAggregate cached = redisService.get(cacheKey, MaterialTypeAggregate.class);
+        MaterialTypeAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -118,7 +118,7 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .updateTime(materialType.getUpdateTime())
                 .build();
 
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -144,10 +144,10 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
                 .build();
         materialTypeDao.update(materialType);
 
-        redisService.delete(
-                cacheKeyById(materialTypeAggregate.getId()),
-                materialTypeAggregate.getTypeCode() == null ? null : cacheKeyByTypeCode(materialTypeAggregate.getTypeCode())
-        );
+        redisService.remove(cacheKeyById(materialTypeAggregate.getId()));
+        if (materialTypeAggregate.getTypeCode() != null) {
+            redisService.remove(cacheKeyByTypeCode(materialTypeAggregate.getTypeCode()));
+        }
     }
 
     @Override

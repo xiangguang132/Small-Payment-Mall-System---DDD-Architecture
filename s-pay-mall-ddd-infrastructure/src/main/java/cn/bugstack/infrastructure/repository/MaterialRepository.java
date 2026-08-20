@@ -16,7 +16,6 @@ public class MaterialRepository implements IMaterialRepository {
 
     @Resource
     private IMaterialDao materialDao;
-
     @Resource
     private IRedisService redisService;
 
@@ -47,10 +46,10 @@ public class MaterialRepository implements IMaterialRepository {
         }
         MaterialAggregate current = queryById(id);
         materialDao.deleteById(id);
-        redisService.delete(
-                cacheKeyById(id),
-                current == null ? null : cacheKeyByMaterialCode(current.getMaterialCode())
-        );
+        redisService.remove(cacheKeyById(id));
+        if (current != null) {
+            redisService.remove(cacheKeyByMaterialCode(current.getMaterialCode()));
+        }
     }
 
     @Override
@@ -59,7 +58,7 @@ public class MaterialRepository implements IMaterialRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        MaterialAggregate cached = redisService.get(cacheKey, MaterialAggregate.class);
+        MaterialAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -68,7 +67,7 @@ public class MaterialRepository implements IMaterialRepository {
             return null;
         }
         MaterialAggregate  aggregate = toAggregate(material);
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -78,7 +77,7 @@ public class MaterialRepository implements IMaterialRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料编码不能为空");
         }
         String cacheKey = cacheKeyByMaterialCode(materialCode);
-        MaterialAggregate cached = redisService.get(cacheKey, MaterialAggregate.class);
+        MaterialAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -88,7 +87,7 @@ public class MaterialRepository implements IMaterialRepository {
         }
 
         MaterialAggregate  aggregate = toAggregate(material);
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -114,11 +113,13 @@ public class MaterialRepository implements IMaterialRepository {
                 .updateTime(materialAggregate.getUpdateTime())
                 .build();
         materialDao.update(material);
-        redisService.delete(
-                cacheKeyById(materialAggregate.getId()),
-                current == null ? null : cacheKeyByMaterialCode(current.getMaterialCode()),
-                materialAggregate.getMaterialCode() == null ? null : cacheKeyByMaterialCode(materialAggregate.getMaterialCode())
-        );
+        redisService.remove(cacheKeyById(materialAggregate.getId()));
+        if (current != null) {
+            redisService.remove(cacheKeyByMaterialCode(current.getMaterialCode()));
+        }
+        if (materialAggregate.getMaterialCode() != null) {
+            redisService.remove(cacheKeyByMaterialCode(materialAggregate.getMaterialCode()));
+        }
     }
 
     @Override

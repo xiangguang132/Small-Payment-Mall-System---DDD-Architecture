@@ -47,7 +47,7 @@ public class WarehouseRepository implements IWarehouseRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         warehouseDao.deleteById(id);
-        redisService.delete(cacheKeyById(id));
+        redisService.remove(cacheKeyById(id));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class WarehouseRepository implements IWarehouseRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        WarehouseAggregate cached = redisService.get(cacheKey, WarehouseAggregate.class);
+        WarehouseAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -77,7 +77,7 @@ public class WarehouseRepository implements IWarehouseRepository {
                 .createTime(warehouse.getCreateTime())
                 .updateTime(warehouse.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -103,7 +103,7 @@ public class WarehouseRepository implements IWarehouseRepository {
                 .updateTime(warehouseAggregate.getUpdateTime())
                 .build();
         warehouseDao.update(warehouse);
-        redisService.delete(cacheKeyById(warehouseAggregate.getId()));
+        redisService.remove(cacheKeyById(warehouseAggregate.getId()));
     }
 
     private String cacheKeyById(Long id) {

@@ -1,7 +1,5 @@
 package cn.bugstack.infrastructure.redis;
 
-import com.alibaba.fastjson.JSON;
-import org.redisson.client.codec.StringCodec;
 import org.redisson.api.RBitSet;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RBloomFilter;
@@ -18,7 +16,6 @@ import org.redisson.api.RSemaphore;
 import org.redisson.api.RSet;
 import org.redisson.api.RSortedSet;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,9 +27,6 @@ public class RedissonService implements IRedisService {
 
     @Resource
     private RedissonClient redissonClient;
-
-    @Value("${spring.redis.cache-ttl-hours:5}")
-    private long cacheTtlHours = 5L;
 
     public <T> void setValue(String key, T value) {
         redissonClient.<T>getBucket(key).set(value);
@@ -46,32 +40,6 @@ public class RedissonService implements IRedisService {
 
     public <T> T getValue(String key) {
         return redissonClient.<T>getBucket(key).get();
-    }
-
-    @Override
-    public <T> void set(String key, T value) {
-        redissonClient.<String>getBucket(key, StringCodec.INSTANCE).set(
-                JSON.toJSONString(value),
-                Duration.ofMillis(TimeUnit.HOURS.toMillis(cacheTtlHours))
-        );
-    }
-
-    @Override
-    public <T> T get(String key, Class<T> clazz) {
-        String cacheValue = redissonClient.<String>getBucket(key, StringCodec.INSTANCE).get();
-        if (cacheValue == null) {
-            return null;
-        }
-        return JSON.parseObject(cacheValue, clazz);
-    }
-
-    @Override
-    public void delete(String... keys) {
-        for (String key : keys) {
-            if (key != null) {
-                redissonClient.getBucket(key, StringCodec.INSTANCE).delete();
-            }
-        }
     }
 
     @Override

@@ -60,7 +60,7 @@ public class CrowdTagsRepository implements ICrowdTagsRepository {
             return;
         }
         crowdTagsDao.deleteById(id);
-        redisService.delete(current.getTagId());
+        redisService.remove(current.getTagId());
     }
 
     @Override

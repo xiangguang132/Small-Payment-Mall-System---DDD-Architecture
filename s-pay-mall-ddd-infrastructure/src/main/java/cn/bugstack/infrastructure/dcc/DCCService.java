@@ -32,6 +32,12 @@ public class DCCService {
     private String cutRange;
 
     /**
+     * 缓存开关
+     */
+    @DCCValue("cacheSwitch:0")
+    private String cacheOpenSwitch;
+
+    /**
      * 降级开关逻辑
      * 作用：用于故障应急
      * 逻辑：判断 配置项downgradeSwitch =？ 1
@@ -59,5 +65,13 @@ public class DCCService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 缓存开启开关，默认 开=0 关=1
+     * @return
+     */
+    public boolean isCacheOpenSwitch() {
+        return "0".equals(cacheOpenSwitch);
     }
 }

@@ -46,7 +46,7 @@ public class SupplierRepository implements ISupplierRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         supplierDao.deleteById(id);
-        redisService.delete(cacheKeyById(id));
+        redisService.remove(cacheKeyById(id));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class SupplierRepository implements ISupplierRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        SupplierAggregate cached = redisService.get(cacheKey, SupplierAggregate.class);
+        SupplierAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -75,7 +75,7 @@ public class SupplierRepository implements ISupplierRepository {
                 .createTime(supplier.getCreateTime())
                 .updateTime(supplier.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -100,7 +100,7 @@ public class SupplierRepository implements ISupplierRepository {
                 .updateTime(supplierAggregate.getUpdateTime())
                 .build();
         supplierDao.update(supplier);
-        redisService.delete(cacheKeyById(supplierAggregate.getId()));
+        redisService.remove(cacheKeyById(supplierAggregate.getId()));
     }
 
     private String cacheKeyById(Long id) {

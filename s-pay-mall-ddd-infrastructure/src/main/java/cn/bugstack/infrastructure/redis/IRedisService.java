@@ -38,31 +38,6 @@ public interface IRedisService {
     <T> void setValue(String key, T value, long expired);
 
     /**
-     * 设置指定 key 的缓存值
-     *
-     * @param key   键
-     * @param value 值
-     */
-    <T> void set(String key, T value);
-
-    /**
-     * 获取指定 key 的缓存值
-     *
-     * @param key   键
-     * @param clazz 目标类型
-     * @param <T>   泛型
-     * @return 值
-     */
-    <T> T get(String key, Class<T> clazz);
-
-    /**
-     * 移除指定 key 的缓存值
-     *
-     * @param keys 键集合
-     */
-    void delete(String... keys);
-
-    /**
      * 获取指定 key 的值
      *
      * @param key 键

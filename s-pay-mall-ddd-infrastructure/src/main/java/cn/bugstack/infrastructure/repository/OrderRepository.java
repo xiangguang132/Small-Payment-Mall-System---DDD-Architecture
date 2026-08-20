@@ -1,4 +1,4 @@
-package cn.bugstack.infrastructure.adapter.repository;
+package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.event.PaySuccessMessageEvent;

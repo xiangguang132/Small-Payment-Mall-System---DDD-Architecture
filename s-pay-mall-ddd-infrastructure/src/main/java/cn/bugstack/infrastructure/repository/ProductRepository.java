@@ -48,7 +48,7 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         productDao.deleteById(id);
-        redisService.delete(cacheKeyById(id));
+        redisService.remove(cacheKeyById(id));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ProductRepository implements IProductRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        ProductAggregate cached = redisService.get(cacheKey, ProductAggregate.class);
+        ProductAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -79,7 +79,7 @@ public class ProductRepository implements IProductRepository {
                 .createTime(product.getCreateTime())
                 .updateTime(product.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -106,7 +106,7 @@ public class ProductRepository implements IProductRepository {
                 .updateTime(updated.getUpdateTime())
                 .build();
         productDao.update(product);
-        redisService.delete(cacheKeyById(updated.getId()));
+        redisService.remove(cacheKeyById(updated.getId()));
     }
 
     @Override

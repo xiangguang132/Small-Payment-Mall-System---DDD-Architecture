@@ -52,10 +52,10 @@ public class ProductTypeRepository implements IProductTypeRepository {
         }
         ProductTypeAggregate current = queryById(id);
         productTypeDao.deleteById(id);
-        redisService.delete(
-                cacheKeyById(id),
-                current == null ? null : cacheKeyByTypeCode(current.getTypeCode())
-        );
+        redisService.remove(cacheKeyById(id));
+        if (current != null) {
+            redisService.remove(cacheKeyByTypeCode(current.getTypeCode()));
+        }
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
         String cacheKey = cacheKeyById(id);
-        ProductTypeAggregate cached = redisService.get(cacheKey, ProductTypeAggregate.class);
+        ProductTypeAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -85,7 +85,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -95,7 +95,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类编码不能为空");
         }
         String cacheKey = cacheKeyByTypeCode(typeCode);
-        ProductTypeAggregate cached = redisService.get(cacheKey, ProductTypeAggregate.class);
+        ProductTypeAggregate cached = redisService.getValue(cacheKey);
         if (cached != null) {
             return cached;
         }
@@ -116,7 +116,7 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .createTime(productType.getCreateTime())
                 .updateTime(productType.getUpdateTime())
                 .build();
-        redisService.set(cacheKey, aggregate);
+        redisService.setValue(cacheKey, aggregate);
         return aggregate;
     }
 
@@ -140,11 +140,13 @@ public class ProductTypeRepository implements IProductTypeRepository {
                 .build();
 
         productTypeDao.update(productType);
-        redisService.delete(
-                cacheKeyById(productTypeAggregate.getId()),
-                current == null ? null : cacheKeyByTypeCode(current.getTypeCode()),
-                productTypeAggregate.getTypeCode() == null ? null : cacheKeyByTypeCode(productTypeAggregate.getTypeCode())
-        );
+        redisService.remove(cacheKeyById(productTypeAggregate.getId()));
+        if (current != null) {
+            redisService.remove(cacheKeyByTypeCode(current.getTypeCode()));
+        }
+        if (productTypeAggregate.getTypeCode() != null) {
+            redisService.remove(cacheKeyByTypeCode(productTypeAggregate.getTypeCode()));
+        }
     }
 
     @Override
