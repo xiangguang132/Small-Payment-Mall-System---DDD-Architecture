@@ -8,7 +8,7 @@ public interface IMaterialRepository {
 
     void deleteById(Long id);
 
-    MaterialAggregate queryById(Long id);
+    MaterialAggregate queryById(Long materialId);
 
     MaterialAggregate queryByMaterialCode(String materialCode);
 

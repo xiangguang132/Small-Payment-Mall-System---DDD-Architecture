@@ -3,9 +3,9 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.product.repository.IProductRepository;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.repository.IProductTypeRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IProductTypeDao;
 import cn.bugstack.infrastructure.dao.po.product.ProductType;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -13,16 +13,13 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class ProductTypeRepository implements IProductTypeRepository {
+public class ProductTypeRepository extends AbstractRepository implements IProductTypeRepository {
 
     @Resource
     private IProductRepository productRepository;
 
     @Resource
     private IProductTypeDao productTypeDao;
-
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(ProductTypeAggregate productTypeAggregate) {
@@ -63,30 +60,27 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        ProductTypeAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        ProductType productType = productTypeDao.queryById(id);
-        if (productType == null) {
-            return null;
-        }
-
-        ProductTypeAggregate aggregate = ProductTypeAggregate.builder()
-                .id(productType.getId())
-                .parentId(productType.getParentId())
-                .name(productType.getName())
-                .description(productType.getDescription())
-                .typeCode(productType.getTypeCode())
-                .sort(productType.getSort())
-                .status(productType.getStatus())
-                .isDel(productType.getIsDel())
-                .createTime(productType.getCreateTime())
-                .updateTime(productType.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(id),
+                () -> {
+                    ProductType productType = productTypeDao.queryById(id);
+                    if (productType == null) {
+                        return null;
+                    }
+                    return ProductTypeAggregate.builder()
+                            .id(productType.getId())
+                            .parentId(productType.getParentId())
+                            .name(productType.getName())
+                            .description(productType.getDescription())
+                            .typeCode(productType.getTypeCode())
+                            .sort(productType.getSort())
+                            .status(productType.getStatus())
+                            .isDel(productType.getIsDel())
+                            .createTime(productType.getCreateTime())
+                            .updateTime(productType.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override
@@ -94,30 +88,27 @@ public class ProductTypeRepository implements IProductTypeRepository {
         if (typeCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类编码不能为空");
         }
-        String cacheKey = cacheKeyByTypeCode(typeCode);
-        ProductTypeAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        ProductType productType = productTypeDao.queryByTypeCode(typeCode);
-        if (productType == null) {
-            return null;
-        }
-
-        ProductTypeAggregate aggregate = ProductTypeAggregate.builder()
-                .id(productType.getId())
-                .parentId(productType.getParentId())
-                .name(productType.getName())
-                .description(productType.getDescription())
-                .typeCode(productType.getTypeCode())
-                .sort(productType.getSort())
-                .status(productType.getStatus())
-                .isDel(productType.getIsDel())
-                .createTime(productType.getCreateTime())
-                .updateTime(productType.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyByTypeCode(typeCode),
+                () -> {
+                    ProductType productType = productTypeDao.queryByTypeCode(typeCode);
+                    if (productType == null) {
+                        return null;
+                    }
+                    return ProductTypeAggregate.builder()
+                            .id(productType.getId())
+                            .parentId(productType.getParentId())
+                            .name(productType.getName())
+                            .description(productType.getDescription())
+                            .typeCode(productType.getTypeCode())
+                            .sort(productType.getSort())
+                            .status(productType.getStatus())
+                            .isDel(productType.getIsDel())
+                            .createTime(productType.getCreateTime())
+                            .updateTime(productType.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override

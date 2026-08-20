@@ -2,9 +2,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.material.model.aggregate.MaterialAggregate;
 import cn.bugstack.domain.material.repository.IMaterialRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.po.material.Material;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -12,12 +12,10 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class MaterialRepository implements IMaterialRepository {
+public class MaterialRepository extends AbstractRepository implements IMaterialRepository {
 
     @Resource
     private IMaterialDao materialDao;
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(MaterialAggregate materialAggregate) {
@@ -47,28 +45,27 @@ public class MaterialRepository implements IMaterialRepository {
         MaterialAggregate current = queryById(id);
         materialDao.deleteById(id);
         redisService.remove(cacheKeyById(id));
+
         if (current != null) {
             redisService.remove(cacheKeyByMaterialCode(current.getMaterialCode()));
         }
     }
 
     @Override
-    public MaterialAggregate queryById(Long id) {
-        if (id == null) {
+    public MaterialAggregate queryById(Long materialId) {
+        if (materialId == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        MaterialAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        Material material = materialDao.queryById(id);
-        if (material == null) {
-            return null;
-        }
-        MaterialAggregate  aggregate = toAggregate(material);
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(materialId),
+                () -> {
+                    Material material = materialDao.queryById(materialId);
+                    if (material == null) {
+                        return null;
+                    }
+                    return toAggregate(material);
+                }
+        );
     }
 
     @Override
@@ -76,19 +73,16 @@ public class MaterialRepository implements IMaterialRepository {
         if (materialCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料编码不能为空");
         }
-        String cacheKey = cacheKeyByMaterialCode(materialCode);
-        MaterialAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        Material material = materialDao.queryByMaterialCode(materialCode);
-        if (material == null) {
-            return null;
-        }
-
-        MaterialAggregate  aggregate = toAggregate(material);
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyByMaterialCode(materialCode),
+                () -> {
+                    Material material = materialDao.queryByMaterialCode(materialCode);
+                    if (material == null) {
+                        return null;
+                    }
+                    return toAggregate(material);
+                }
+        );
     }
 
     @Override

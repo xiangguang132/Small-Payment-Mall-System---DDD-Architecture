@@ -2,10 +2,10 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
 import cn.bugstack.domain.materialtype.repository.IMaterialTypeRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IMaterialDao;
 import cn.bugstack.infrastructure.dao.IMaterialTypeDao;
 import cn.bugstack.infrastructure.dao.po.material.MaterialType;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -13,16 +13,13 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class MaterialTypeRepository implements IMaterialTypeRepository {
+public class MaterialTypeRepository extends AbstractRepository implements IMaterialTypeRepository {
 
     @Resource
     private IMaterialDao materialDao;
 
     @Resource
     private IMaterialTypeDao materialTypeDao;
-
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(MaterialTypeAggregate materialTypeAggregate) {
@@ -64,29 +61,27 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        MaterialTypeAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        MaterialType materialType = materialTypeDao.queryById(id);
-        if (materialType == null) {
-            return null;
-        }
-        MaterialTypeAggregate aggregate = MaterialTypeAggregate.builder()
-                .id(materialType.getId())
-                .parentId(materialType.getParentId())
-                .name(materialType.getName())
-                .description(materialType.getDescription())
-                .typeCode(materialType.getTypeCode())
-                .sort(materialType.getSort())
-                .status(materialType.getStatus())
-                .isDel(materialType.getIsDel())
-                .createTime(materialType.getCreateTime())
-                .updateTime(materialType.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(id),
+                () -> {
+                    MaterialType materialType = materialTypeDao.queryById(id);
+                    if (materialType == null) {
+                        return null;
+                    }
+                    return MaterialTypeAggregate.builder()
+                            .id(materialType.getId())
+                            .parentId(materialType.getParentId())
+                            .name(materialType.getName())
+                            .description(materialType.getDescription())
+                            .typeCode(materialType.getTypeCode())
+                            .sort(materialType.getSort())
+                            .status(materialType.getStatus())
+                            .isDel(materialType.getIsDel())
+                            .createTime(materialType.getCreateTime())
+                            .updateTime(materialType.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override
@@ -94,32 +89,27 @@ public class MaterialTypeRepository implements IMaterialTypeRepository {
         if (typeCode == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "原料分类编码不能为空");
         }
-        String cacheKey = cacheKeyByTypeCode(typeCode);
-        MaterialTypeAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-
-        MaterialType materialType = materialTypeDao.queryByTypeCode(typeCode);
-        if (materialType == null) {
-            return null;
-        }
-
-        MaterialTypeAggregate aggregate = MaterialTypeAggregate.builder()
-                .id(materialType.getId())
-                .parentId(materialType.getParentId())
-                .name(materialType.getName())
-                .description(materialType.getDescription())
-                .typeCode(materialType.getTypeCode())
-                .sort(materialType.getSort())
-                .status(materialType.getStatus())
-                .isDel(materialType.getIsDel())
-                .createTime(materialType.getCreateTime())
-                .updateTime(materialType.getUpdateTime())
-                .build();
-
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyByTypeCode(typeCode),
+                () -> {
+                    MaterialType materialType = materialTypeDao.queryByTypeCode(typeCode);
+                    if (materialType == null) {
+                        return null;
+                    }
+                    return MaterialTypeAggregate.builder()
+                            .id(materialType.getId())
+                            .parentId(materialType.getParentId())
+                            .name(materialType.getName())
+                            .description(materialType.getDescription())
+                            .typeCode(materialType.getTypeCode())
+                            .sort(materialType.getSort())
+                            .status(materialType.getStatus())
+                            .isDel(materialType.getIsDel())
+                            .createTime(materialType.getCreateTime())
+                            .updateTime(materialType.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override

@@ -2,9 +2,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.supplier.model.aggregate.SupplierAggregate;
 import cn.bugstack.domain.supplier.repository.ISupplierRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.ISupplierDao;
 import cn.bugstack.infrastructure.dao.po.supplier.Supplier;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -12,13 +12,10 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class SupplierRepository implements ISupplierRepository {
+public class SupplierRepository extends AbstractRepository implements ISupplierRepository {
 
     @Resource
     private ISupplierDao supplierDao;
-
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(SupplierAggregate supplierAggregate) {
@@ -54,29 +51,27 @@ public class SupplierRepository implements ISupplierRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "供应商id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        SupplierAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        Supplier supplier = supplierDao.queryById(id);
-        if (supplier == null) {
-            return null;
-        }
-        SupplierAggregate aggregate = SupplierAggregate.builder()
-                .id(supplier.getId())
-                .supplierCode(supplier.getSupplierCode())
-                .name(supplier.getName())
-                .contactName(supplier.getContactName())
-                .contactPhone(supplier.getContactPhone())
-                .address(supplier.getAddress())
-                .status(supplier.getStatus())
-                .isDel(supplier.getIsDel())
-                .createTime(supplier.getCreateTime())
-                .updateTime(supplier.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(id),
+                () -> {
+                    Supplier supplier = supplierDao.queryById(id);
+                    if (supplier == null) {
+                        return null;
+                    }
+                    return SupplierAggregate.builder()
+                            .id(supplier.getId())
+                            .supplierCode(supplier.getSupplierCode())
+                            .name(supplier.getName())
+                            .contactName(supplier.getContactName())
+                            .contactPhone(supplier.getContactPhone())
+                            .address(supplier.getAddress())
+                            .status(supplier.getStatus())
+                            .isDel(supplier.getIsDel())
+                            .createTime(supplier.getCreateTime())
+                            .updateTime(supplier.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override

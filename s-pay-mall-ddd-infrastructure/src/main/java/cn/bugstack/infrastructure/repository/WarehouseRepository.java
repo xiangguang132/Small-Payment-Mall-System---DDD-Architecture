@@ -2,9 +2,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.repository.IWarehouseRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IWarehouseDao;
 import cn.bugstack.infrastructure.dao.po.warehouse.Warehouse;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -12,13 +12,10 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class WarehouseRepository implements IWarehouseRepository {
+public class WarehouseRepository extends AbstractRepository implements IWarehouseRepository {
 
     @Resource
     private IWarehouseDao warehouseDao;
-
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(WarehouseAggregate warehouseAggregate) {
@@ -55,30 +52,28 @@ public class WarehouseRepository implements IWarehouseRepository {
         if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "仓库id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        WarehouseAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        Warehouse warehouse = warehouseDao.queryById(id);
-        if (warehouse == null) {
-            return null;
-        }
-        WarehouseAggregate aggregate = WarehouseAggregate.builder()
-                .id(warehouse.getId())
-                .warehouseCode(warehouse.getWarehouseCode())
-                .name(warehouse.getName())
-                .type(warehouse.getType())
-                .address(warehouse.getAddress())
-                .contactName(warehouse.getContactName())
-                .contactPhone(warehouse.getContactPhone())
-                .status(warehouse.getStatus())
-                .isDel(warehouse.getIsDel())
-                .createTime(warehouse.getCreateTime())
-                .updateTime(warehouse.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(id),
+                () -> {
+                    Warehouse warehouse = warehouseDao.queryById(id);
+                    if (warehouse == null) {
+                        return null;
+                    }
+                    return WarehouseAggregate.builder()
+                            .id(warehouse.getId())
+                            .warehouseCode(warehouse.getWarehouseCode())
+                            .name(warehouse.getName())
+                            .type(warehouse.getType())
+                            .address(warehouse.getAddress())
+                            .contactName(warehouse.getContactName())
+                            .contactPhone(warehouse.getContactPhone())
+                            .status(warehouse.getStatus())
+                            .isDel(warehouse.getIsDel())
+                            .createTime(warehouse.getCreateTime())
+                            .updateTime(warehouse.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override

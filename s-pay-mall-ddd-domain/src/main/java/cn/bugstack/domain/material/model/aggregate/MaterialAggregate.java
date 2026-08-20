@@ -28,6 +28,7 @@ public class MaterialAggregate {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 
+
     public static MaterialAggregate create(String materialCode, String name, Long typeId,
                                            String unit, String description, Integer status) {
         LocalDateTime now = LocalDateTime.now();

@@ -3,9 +3,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.repository.IProductRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IProductDao;
 import cn.bugstack.infrastructure.dao.po.product.Product;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
@@ -13,13 +13,10 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 @Repository
-public class ProductRepository implements IProductRepository {
+public class ProductRepository extends AbstractRepository implements IProductRepository {
 
     @Resource
     private IProductDao productDao;
-
-    @Resource
-    private IRedisService redisService;
 
     @Override
     public Long save(ProductAggregate productAggregate) {
@@ -53,34 +50,32 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public ProductAggregate queryById(Long id) {
-        if  (id == null) {
+        if (id == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品id不能为空");
         }
-        String cacheKey = cacheKeyById(id);
-        ProductAggregate cached = redisService.getValue(cacheKey);
-        if (cached != null) {
-            return cached;
-        }
-        Product product = productDao.queryById(id);
-        if  (product == null) {
-            return null;
-        }
-        ProductAggregate aggregate = ProductAggregate.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .description(product.getDescription())
-                .sku(product.getSku())
-                .categoryId(product.getCategoryId())
-                .categoryName(product.getCategoryName())
-                .categoryDescription(product.getCategoryDescription())
-                .status(product.getStatus())
-                .price(product.getPrice())
-                .isDel(product.getIsDel())
-                .createTime(product.getCreateTime())
-                .updateTime(product.getUpdateTime())
-                .build();
-        redisService.setValue(cacheKey, aggregate);
-        return aggregate;
+        return getFromCacheOrDb(
+                cacheKeyById(id),
+                () -> {
+                    Product product = productDao.queryById(id);
+                    if (product == null) {
+                        return null;
+                    }
+                    return ProductAggregate.builder()
+                            .id(product.getId())
+                            .name(product.getName())
+                            .description(product.getDescription())
+                            .sku(product.getSku())
+                            .categoryId(product.getCategoryId())
+                            .categoryName(product.getCategoryName())
+                            .categoryDescription(product.getCategoryDescription())
+                            .status(product.getStatus())
+                            .price(product.getPrice())
+                            .isDel(product.getIsDel())
+                            .createTime(product.getCreateTime())
+                            .updateTime(product.getUpdateTime())
+                            .build();
+                }
+        );
     }
 
     @Override
