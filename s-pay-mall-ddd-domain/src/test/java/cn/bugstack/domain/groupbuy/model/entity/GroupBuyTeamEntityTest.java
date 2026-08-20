@@ -14,7 +14,6 @@ public class GroupBuyTeamEntityTest {
         LocalDateTime validEndTime = LocalDateTime.of(2026, 8, 13, 10, 15);
 
         GroupBuyTeamEntity team = GroupBuyTeamEntity.builder()
-                .id(1L)
                 .teamId("T1")
                 .activityId(100L)
                 .initiatorUserId("U1")
@@ -29,7 +28,6 @@ public class GroupBuyTeamEntityTest {
                 .updateTime(validStartTime)
                 .build();
 
-        assertEquals(Long.valueOf(1L), team.getId());
         assertEquals("T1", team.getTeamId());
         assertEquals(Long.valueOf(100L), team.getActivityId());
         assertEquals("U1", team.getInitiatorUserId());

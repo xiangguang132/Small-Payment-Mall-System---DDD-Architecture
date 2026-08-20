@@ -71,6 +71,10 @@
             <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>cn.bugstack</groupId>
+            <artifactId>s-pay-mall-ddd-infrastructure</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

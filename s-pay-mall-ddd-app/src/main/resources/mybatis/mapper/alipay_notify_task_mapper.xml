@@ -34,4 +34,38 @@
         limit 1
     </select>
 
+    <select id="queryByOutTradeNo" resultMap="dataMap">
+        select id, out_trade_no, trade_no, order_type, task_status, retry_count, parameter_json, create_time, update_time
+        from alipay_notify_task
+        where out_trade_no = #{outTradeNo}
+        limit 1
+    </select>
+
+    <update id="updatedAlipayNotifyTaskSuccess">
+        update alipay_notify_task
+        set task_status = 1,
+            update_time = now()
+        where out_trade_no = #{outTradeNo}
+    </update>
+
+    <update id="updatedAlipayNotifyTaskFailed">
+        update alipay_notify_task
+        set task_status = 2,
+            update_time = now()
+        where out_trade_no = #{outTradeNo}
+    </update>
+
+    <update id="updatedAlipayNotifyTaskRetry">
+        update alipay_notify_task
+        set retry_count = retry_count + 1,
+            update_time = now()
+        where out_trade_no = #{outTradeNo}
+    </update>
+
+    <select id="queryRetryOutTradeNoList" resultType="java.lang.String">
+        select out_trade_no
+        from alipay_notify_task
+        where task_status = 0
+    </select>
+
 </mapper>

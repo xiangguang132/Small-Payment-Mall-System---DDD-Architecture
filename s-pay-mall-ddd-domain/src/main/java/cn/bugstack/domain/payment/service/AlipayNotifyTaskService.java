@@ -84,10 +84,7 @@ public class AlipayNotifyTaskService implements IAlipayNotifyTaskService {
      */
     /*
     也就是说流程其实是：校验参数合法-加锁-获取支付宝回调任务-判断幂等-查询订单（为了获取订单类型）-执行任务（依据订单类型）-更新任务状态-释放锁？
-
-
 • 对，你总结的流程是对的。
-
   1. 校验参数合法
   2. 加锁
   3. 获取支付宝回调任务
@@ -96,17 +93,12 @@ public class AlipayNotifyTaskService implements IAlipayNotifyTaskService {
   6. 依据订单类型执行业务
   7. 更新任务状态
   8. 释放锁
-
   其中第 7 步根据结果分三种：
-
   - 业务成功 -> updateTaskSuccess
   - 业务异常 -> updateTaskRetry，然后抛出异常让 MQ 重试
   - 重试次数达到上限 -> updateTaskDead
-
   第 8 步 finally 释放锁，无论成功还是异常都会执行。
-
   所以更准确一点是：
-
   校验参数
   -> 加锁
   -> 查任务

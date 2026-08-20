@@ -1,0 +1,626 @@
+26-08-13.10:11:48.247 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 30528 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:11:48.247 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:11:48.251 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:11:49.216 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:11:49.218 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:11:49.277 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+26-08-13.10:11:49.785 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:11:49.796 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:11:49.796 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:11:49.797 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:11:49.930 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:11:49.931 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1640 ms
+26-08-13.10:11:50.607 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:11:51.173 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:11:51.241 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:11:52.082 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:11:52.109 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:11:52.121 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:11:52.139 [main            ] INFO  Application            - Started Application in 4.327 seconds (JVM running for 5.197)
+26-08-13.10:11:52.455 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:11:52.646 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:11:52.750 [RMI TCP Connection(3)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:11:52.750 [RMI TCP Connection(3)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:11:52.752 [RMI TCP Connection(3)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-13.10:12:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:12:00.022 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:12:00.025 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:13:00.004 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:13:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:13:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:14:00.000 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:14:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:14:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:14:55.480 [http-nio-8080-exec-2] INFO  LoginController        - 生成微信扫码登录 ticket 开始
+26-08-13.10:14:57.129 [http-nio-8080-exec-2] INFO  LoginController        - 生成微信扫码登录 ticket 完成 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA
+26-08-13.10:14:59.697 [http-nio-8080-exec-5] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587299</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[SCAN]]></Event>
+<EventKey><![CDATA[100601]]></EventKey>
+<Ticket><![CDATA[gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA]]></Ticket>
+</xml>
+26-08-13.10:15:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:15:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:15:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:15:00.278 [http-nio-8080-exec-6] INFO  LoginController        - 扫描检测登录结果开始 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA
+26-08-13.10:15:00.285 [http-nio-8080-exec-6] INFO  LoginController        - 扫描检测登录结果完成 ticket:gQFA8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYTlWa1ptNVpjRHQxR3dSQWhHMVgAAgSgKH1qAwQAjScA token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzLXBheS1tYWxsIiwiaWF0IjoxNzg2NTg3MzAwLCJleHAiOjE3ODcxOTIxMDAsIm9wZW5pZCI6Im94ZjBuM2FacFhfT0E4Y19nOFdhZzJxc3lmMVUifQ.DR1kWrW005CXG7NwyWq3QvQr2j1k4616TanlJWjrfGI
+26-08-13.10:15:01.333 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U开始 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587300</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4647205433483296769</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-08-13.10:15:01.341 [http-nio-8080-exec-7] INFO  WeixinPortalController - 接收微信公众号信息请求oxf0n3aZpX_OA8c_g8Wag2qsyf1U完成 <xml><ToUserName><![CDATA[gh_85b4345936d4]]></ToUserName>
+<FromUserName><![CDATA[oxf0n3aZpX_OA8c_g8Wag2qsyf1U]]></FromUserName>
+<CreateTime>1786587300</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>4647205433483296769</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+26-08-13.10:15:35.348 [http-nio-8080-exec-9] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_001, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:15:35.367 [http-nio-8080-exec-9] INFO  CrowdTagsController    - 新增人群标签完成 id:29
+26-08-13.10:16:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:16:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:16:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:17:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:17:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:17:00.019 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:18:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:18:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:18:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:19:00.001 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:19:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:19:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:19:28.246 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:19:28.258 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:19:32.055 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:19:32.058 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 39948 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:19:32.058 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:19:32.918 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:19:32.920 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:19:32.971 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 0 Redis repository interfaces.
+26-08-13.10:19:33.422 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:19:33.429 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:19:33.430 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:19:33.430 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:19:33.546 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:19:33.548 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1452 ms
+26-08-13.10:19:34.135 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:19:34.642 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:19:34.710 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:19:35.547 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:19:35.574 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:19:35.583 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:19:35.599 [main            ] INFO  Application            - Started Application in 3.931 seconds (JVM running for 4.772)
+26-08-13.10:19:35.853 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:19:36.026 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:19:36.931 [RMI TCP Connection(5)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:19:36.931 [RMI TCP Connection(5)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:19:36.932 [RMI TCP Connection(5)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.10:19:39.189 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_002, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:19:39.210 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签完成 id:44
+26-08-13.10:20:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:20:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:20:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:20:00.010 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:21:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:21:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:21:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:22:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:22:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:22:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:23:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:23:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:23:00.019 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:24:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:24:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:24:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:25:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:25:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:25:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:25:25.175 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:25:25.188 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:25:28.956 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:25:28.956 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 7832 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:25:28.958 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:25:29.851 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:25:29.853 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:25:29.903 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 0 Redis repository interfaces.
+26-08-13.10:25:30.335 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:25:30.341 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:25:30.342 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:25:30.342 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:25:30.449 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:25:30.449 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1458 ms
+26-08-13.10:25:31.108 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:25:31.644 [redisson-netty-1-5] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:25:31.718 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:25:32.557 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:25:32.583 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:25:32.593 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:25:32.609 [main            ] INFO  Application            - Started Application in 4.033 seconds (JVM running for 4.837)
+26-08-13.10:25:32.970 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:25:32.970 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:25:32.971 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:25:32.972 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-13.10:25:33.142 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:25:36.667 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_002, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:25:42.137 [http-nio-8080-exec-3] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_003, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:25:42.148 [http-nio-8080-exec-3] INFO  CrowdTagsController    - 新增人群标签完成 id:59
+26-08-13.10:26:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:26:00.023 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:26:00.025 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:26:45.190 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 查询人群标签详情开始 id:1
+26-08-13.10:27:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:27:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:27:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:27:30.057 [http-nio-8080-exec-8] INFO  CrowdTagsController    - 查询人群标签详情开始 id:29
+26-08-13.10:27:30.059 [http-nio-8080-exec-8] INFO  CrowdTagsController    - 查询人群标签详情完成 id:29
+26-08-13.10:27:48.217 [http-nio-8080-exec-10] INFO  CrowdTagsController    - 新增人群标签开始 request:CrowdTagsAddRequest(tagId=TAG_TEST_004, tagName=测试人群, tagDesc=用于验证CRUD)
+26-08-13.10:27:48.224 [http-nio-8080-exec-10] INFO  CrowdTagsController    - 新增人群标签完成 id:60
+26-08-13.10:28:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:28:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:28:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:28:23.506 [http-nio-8080-exec-1] INFO  CrowdTagsController    - 分页查询人群标签开始 request:CrowdTagsPageRequest(tagId=null, tagName=null)
+26-08-13.10:28:23.526 [http-nio-8080-exec-1] INFO  CrowdTagsController    - 分页查询人群标签完成 count:4 total:4
+26-08-13.10:29:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:29:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:29:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:30:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:30:00.006 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:30:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:30:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:30:15.688 [http-nio-8080-exec-4] INFO  CrowdTagsController    - 更新人群标签开始 id:1 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:23.188 [http-nio-8080-exec-5] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:23.195 [http-nio-8080-exec-5] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:30:26.406 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:26.412 [http-nio-8080-exec-6] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:30:37.395 [http-nio-8080-exec-7] INFO  CrowdTagsController    - 更新人群标签开始 id:29 request:CrowdTagsUpdateRequest(tagName=测试人群修改, tagDesc=用于验证CRUD修改)
+26-08-13.10:30:37.403 [http-nio-8080-exec-7] INFO  CrowdTagsController    - 更新人群标签完成 id:29
+26-08-13.10:31:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:31:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:31:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:32:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:32:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:32:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:33:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:33:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:33:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:34:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:34:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:34:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:34:58.079 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.10:34:58.094 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.10:37:05.448 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.10:37:05.448 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 26764 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.10:37:05.451 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.10:37:06.382 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.10:37:06.384 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.10:37:06.439 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 0 Redis repository interfaces.
+26-08-13.10:37:06.926 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.10:37:06.935 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.10:37:06.936 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.10:37:06.936 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.10:37:07.054 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.10:37:07.054 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1567 ms
+26-08-13.10:37:07.720 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.10:37:08.221 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:37:08.297 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.10:37:09.126 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.10:37:09.149 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.10:37:09.159 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.10:37:09.174 [main            ] INFO  Application            - Started Application in 4.156 seconds (JVM running for 5.001)
+26-08-13.10:37:09.253 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.10:37:09.255 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.10:37:09.255 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.10:37:09.256 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.10:37:09.442 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.10:37:14.316 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 删除人群标签开始 id:29
+26-08-13.10:37:14.342 [http-nio-8080-exec-2] INFO  CrowdTagsController    - 删除人群标签完成 id:29
+26-08-13.10:38:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:38:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:38:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:39:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:39:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:39:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:40:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:40:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:40:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:40:00.014 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:41:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:41:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:41:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:42:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:42:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:42:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:43:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:43:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:43:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:44:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:44:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:44:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:45:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:45:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:45:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:46:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:46:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:46:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:47:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:47:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:47:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:48:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:48:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:48:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:49:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:49:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:49:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:50:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:50:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:50:00.013 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.10:50:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:51:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:51:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:51:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:52:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:52:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:52:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:53:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:53:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:53:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:54:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:54:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:54:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:55:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:55:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:55:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:56:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:56:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:56:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:57:00.004 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:57:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:57:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:58:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:58:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.10:58:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:59:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.10:59:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.10:59:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:00:00.003 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:00:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:00:00.003 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:00:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:01:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:01:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:01:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:02:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:02:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:02:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:03:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:03:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:03:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:04:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:04:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:04:00.019 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:05:00.002 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:05:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:05:00.004 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:06:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:06:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:06:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:07:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:07:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:07:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:08:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:08:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:08:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:09:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:09:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:09:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:10:00.007 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:10:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:10:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:10:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:11:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:11:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:11:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:12:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:12:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:12:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:13:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:13:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:13:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:14:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:14:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:14:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:15:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:15:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:15:00.008 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:16:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:16:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:16:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:17:00.000 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:17:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:17:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:18:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:18:00.010 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:18:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:19:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:19:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:19:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:20:00.004 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:20:00.005 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:20:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:20:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:21:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:21:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:21:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:22:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:22:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:22:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:23:00.014 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:23:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:23:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:24:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:24:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:24:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:25:00.000 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:25:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:25:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:26:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:26:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:26:00.017 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:27:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:27:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:27:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:28:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:28:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:28:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:29:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:29:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:29:00.017 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:30:00.005 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:30:00.006 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:30:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:30:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:31:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:31:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:31:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:32:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:32:00.015 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:32:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:33:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:33:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:33:00.013 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:34:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:34:00.017 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:34:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:35:00.009 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:35:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:35:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:36:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:36:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:36:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:37:00.007 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:37:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:37:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:37:14.989 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.11:37:14.995 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.11:37:23.987 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 35272 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.11:37:23.987 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.11:37:23.989 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.11:37:24.978 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.11:37:24.979 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.11:37:25.041 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 0 Redis repository interfaces.
+26-08-13.11:37:25.366 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:37:25.375 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:37:25.376 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:37:25.537 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.11:37:26.069 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.11:37:26.133 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.11:37:26.189 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:37:26.383 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.11:37:26.393 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.11:37:26.393 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.11:37:26.393 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.11:37:26.518 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.11:37:26.519 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2488 ms
+26-08-13.11:37:27.919 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.11:37:27.942 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.11:37:27.951 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.11:37:27.966 [main            ] INFO  Application            - Started Application in 4.42 seconds (JVM running for 5.278)
+26-08-13.11:37:28.281 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.11:37:28.282 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.11:37:28.282 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.11:37:28.283 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.11:37:28.456 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.11:38:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:38:00.024 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:38:00.026 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:39:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:39:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:39:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:39:24.752 [http-nio-8080-exec-5] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch value:1
+26-08-13.11:40:00.004 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:40:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:40:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:40:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:40:25.995 [http-nio-8080-exec-8] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch value:0
+26-08-13.11:41:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:41:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:41:00.007 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:42:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:42:00.013 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:42:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:43:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:43:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:43:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:44:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:44:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:44:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:45:00.016 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:45:00.016 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:45:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:46:00.003 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:46:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:46:00.006 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:47:00.010 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:47:00.012 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:47:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:48:00.008 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:48:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:48:00.011 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:49:00.001 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:49:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:49:00.005 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:49:34.990 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.11:49:35.005 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.11:49:38.980 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.11:49:38.982 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 14244 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.11:49:38.983 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.11:49:39.888 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.11:49:39.890 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.11:49:39.943 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 Redis repository interfaces.
+26-08-13.11:49:40.225 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:49:40.232 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:49:40.233 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:49:40.386 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.11:49:40.894 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.11:49:40.960 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.11:49:41.016 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.11:49:41.201 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.11:49:41.209 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.11:49:41.209 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.11:49:41.209 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.11:49:41.310 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.11:49:41.310 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2293 ms
+26-08-13.11:49:42.666 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.11:49:42.691 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.11:49:42.701 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.11:49:42.718 [main            ] INFO  Application            - Started Application in 4.161 seconds (JVM running for 5.025)
+26-08-13.11:49:43.505 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.11:49:43.715 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.11:49:43.778 [RMI TCP Connection(4)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.11:49:43.779 [RMI TCP Connection(4)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.11:49:43.780 [RMI TCP Connection(4)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.11:49:47.901 [http-nio-8080-exec-2] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch value:1
+26-08-13.11:49:52.150 [http-nio-8080-exec-3] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch value:0
+26-08-13.11:50:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:50:00.012 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:50:00.014 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:50:00.018 [scheduling-1    ] INFO  TimeoutCloseOrderJob   - 定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null
+26-08-13.11:51:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:51:00.015 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:51:00.017 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:51:16.383 [http-nio-8080-exec-6] INFO  DCCController          - DCC 动态配置值变更 key:,cutRange value:50
+26-08-13.11:51:20.644 [http-nio-8080-exec-7] INFO  DCCController          - DCC 动态配置值变更 key:,cutRange value:500
+26-08-13.11:51:24.810 [http-nio-8080-exec-8] INFO  DCCController          - DCC 动态配置值变更 key:,cutRange value:100
+26-08-13.11:51:26.266 [http-nio-8080-exec-9] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch,cutRange value:100
+26-08-13.11:51:30.889 [http-nio-8080-exec-10] INFO  DCCController          - DCC 动态配置值变更 key:downgradeSwitch, value:100
+26-08-13.11:51:46.341 [http-nio-8080-exec-1] INFO  DCCController          - DCC 动态配置值变更 key:cutRange value:50
+26-08-13.11:51:52.114 [http-nio-8080-exec-2] INFO  DCCController          - DCC 动态配置值变更 key:cutRange value:100
+26-08-13.11:51:54.198 [http-nio-8080-exec-3] INFO  DCCController          - DCC 动态配置值变更 key:cutRange value:10
+26-08-13.11:51:56.431 [http-nio-8080-exec-5] INFO  DCCController          - DCC 动态配置值变更 key:cutRange value:100
+26-08-13.11:52:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:52:00.002 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:52:00.004 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:53:00.009 [scheduling-1    ] INFO  ProductionOrderJob2    - 开始执行生产需求单任务
+26-08-13.11:53:00.011 [scheduling-1    ] INFO  ProductionOrderJob3    - 开始执行生产需求单任务
+26-08-13.11:53:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.11:53:07.381 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.11:53:07.400 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.15:31:05.724 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.15:31:05.726 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 10780 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.15:31:05.727 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.15:31:06.731 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.15:31:06.733 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.15:31:06.796 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 0 Redis repository interfaces.
+26-08-13.15:31:07.094 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:31:07.101 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:31:07.102 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:31:07.268 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.15:31:07.882 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:31:07.952 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:31:08.009 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:31:08.221 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.15:31:08.229 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.15:31:08.230 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.15:31:08.230 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.15:31:08.342 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.15:31:08.342 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2576 ms
+26-08-13.15:31:09.740 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.15:31:09.763 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.15:31:09.772 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.15:31:09.787 [main            ] INFO  Application            - Started Application in 4.541 seconds (JVM running for 5.439)
+26-08-13.15:31:09.942 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.15:31:09.942 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.15:31:09.944 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-13.15:31:10.724 [RMI TCP Connection(5)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.15:31:10.966 [RMI TCP Connection(5)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.15:31:15.680 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.15:31:15.694 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.15:33:27.770 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.15:33:27.771 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 25112 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.15:33:27.773 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.15:33:28.654 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.15:33:28.656 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.15:33:28.710 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 0 Redis repository interfaces.
+26-08-13.15:33:28.969 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:33:28.973 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:33:28.975 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:33:29.110 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.15:33:29.662 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:33:29.743 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:33:29.794 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:33:29.961 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.15:33:29.967 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.15:33:29.967 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.15:33:29.967 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.15:33:30.062 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.15:33:30.063 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2251 ms
+26-08-13.15:33:31.327 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.15:33:31.349 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.15:33:31.357 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.15:33:31.371 [main            ] INFO  Application            - Started Application in 4.013 seconds (JVM running for 4.851)
+26-08-13.15:33:31.581 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.15:33:31.581 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.15:33:31.582 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.15:33:31.584 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 3 ms
+26-08-13.15:33:31.762 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.15:33:36.659 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.15:33:36.674 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-13.15:36:51.292 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-13.15:36:51.292 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 6548 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-13.15:36:51.294 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-13.15:36:52.250 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-13.15:36:52.252 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-13.15:36:52.310 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 0 Redis repository interfaces.
+26-08-13.15:36:52.627 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:36:52.634 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:36:52.636 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:36:52.780 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-13.15:36:53.302 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:36:53.374 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+26-08-13.15:36:53.429 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-13.15:36:53.613 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-13.15:36:53.620 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-13.15:36:53.620 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-13.15:36:53.620 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-13.15:36:53.723 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-13.15:36:53.723 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2392 ms
+26-08-13.15:36:55.006 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-13.15:36:55.029 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-13.15:36:55.038 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-13.15:36:55.054 [main            ] INFO  Application            - Started Application in 4.167 seconds (JVM running for 4.97)
+26-08-13.15:36:55.842 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-13.15:36:55.842 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-13.15:36:55.843 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-13.15:36:55.843 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-13.15:36:56.019 [RMI TCP Connection(1)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-13.15:37:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-13.15:37:00.110 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-13.15:37:00.124 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.

@@ -10,6 +10,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class AlipayNotifyTaskRepository implements IAlipayNotifyTaskRepository {
@@ -35,6 +36,43 @@ public class AlipayNotifyTaskRepository implements IAlipayNotifyTaskRepository {
         } catch (DuplicateKeyException ignore) {
             // 并发重复回调由唯一键拦截，按已接收处理
         }
+    }
+
+    @Override
+    public AlipayNotifyTaskEntity queryByOutTradeNo(String outTradeNo) {
+        if (outTradeNo == null) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "外部订单号不能为空");
+        }
+        return toEntity(alipayNotifyTaskDao.queryByOutTradeNo(outTradeNo));
+    }
+
+    @Override
+    public void updatedAlipayNotifyTaskFailed(String outTradeNo) {
+        if (outTradeNo == null) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "外部订单号不能为空");
+        }
+        alipayNotifyTaskDao.updatedAlipayNotifyTaskFailed(outTradeNo);
+    }
+
+    @Override
+    public void updatedAlipayNotifyTaskSuccess(String outTradeNo) {
+        if (outTradeNo == null) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "外部订单号不能为空");
+        }
+        alipayNotifyTaskDao.updatedAlipayNotifyTaskSuccess(outTradeNo);
+    }
+
+    @Override
+    public void updatedAlipayNotifyTaskRetry(String outTradeNo) {
+        if (outTradeNo == null) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "外部订单号不能为空");
+        }
+        alipayNotifyTaskDao.updatedAlipayNotifyTaskRetry(outTradeNo);
+    }
+
+    @Override
+    public List<String> queryRetryOutTradeNoList() {
+        return alipayNotifyTaskDao.queryRetryOutTradeNoList();
     }
 
     private AlipayNotifyTask toPo(AlipayNotifyTaskEntity entity) {
@@ -67,4 +105,6 @@ public class AlipayNotifyTaskRepository implements IAlipayNotifyTaskRepository {
                 .updateTime(po.getUpdateTime())
                 .build();
     }
+
+
 }

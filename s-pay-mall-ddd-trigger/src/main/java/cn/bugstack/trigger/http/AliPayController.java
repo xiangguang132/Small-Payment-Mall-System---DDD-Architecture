@@ -7,6 +7,7 @@ import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
+import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.ResponseCode;
 import com.alipay.api.internal.util.AlipaySignature;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +33,14 @@ public class AliPayController implements IPayService {
 
     @Value("${alipay.alipay_public_key}")
     private String alipayPublicKey;
+    @Value("${spring.rabbitmq.config.producer.topic_alipay_notify.routing_key}")
+    private String alipayNotifyRoutingKey;
     @Resource
     private IOrderService orderService;
     @Resource
     private IAlipayNotifyTaskService alipayNotifyTaskService;
+    @Resource
+    private EventPublisher eventPublisher;
 
     @RequestMapping(value = "create_pay_order", method = RequestMethod.POST)
     public Response<String> createPayOrder(@RequestBody CreatePayRequestDTO createPayRequestDTO) {
