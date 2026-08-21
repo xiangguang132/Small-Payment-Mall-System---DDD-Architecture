@@ -1,14 +1,17 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.IPayService;
-import cn.bugstack.api.dto.CreatePayRequestDTO;
+import cn.bugstack.api.request.trade.LockPayOrderRequest;
+import cn.bugstack.api.request.trade.RefundOrderRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.trade.LockPayOrderResponse;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
 import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import com.alipay.api.internal.util.AlipaySignature;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,34 +45,80 @@ public class AliPayController implements IPayService {
     @Resource
     private EventPublisher eventPublisher;
 
-    @RequestMapping(value = "create_pay_order", method = RequestMethod.POST)
-    public Response<String> createPayOrder(@RequestBody CreatePayRequestDTO createPayRequestDTO) {
-        log.info("创建支付单接口开始 request:{}", createPayRequestDTO);
-        HttpServletRequest request = null;
+    /**
+     * 普通下单锁单：复用 createOrder 的幂等锁单语义，
+     * 返回结构化 LockPayOrderResponse 而非裸 payUrl 字符串。
+     */
+    @RequestMapping(value = "lock_pay_order", method = RequestMethod.POST)
+    public Response<LockPayOrderResponse> lockPayOrder(@RequestBody LockPayOrderRequest request) {
+        log.info("普通下单锁单开始 request:{}", request);
         String openid = null;
         try {
-            request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) request.getAttribute("openid");
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
             openid = userId;
             if (userId == null) {
-                userId = createPayRequestDTO.getUserId();
+                userId = request.getUserId();
             }
-            String productId = createPayRequestDTO.getProductId();
-            log.info("商品下单，根据商品ID创建支付单开始 userId:{} productId:{}", userId, productId);
-            // 下单逻辑
+            String productId = request.getProductId();
+            log.info("普通下单锁单，userId:{} productId:{}", userId, productId);
+
             PayOrderEntity payOrderEntity = orderService.createOrder(ShopCartEntity.builder()
                     .userId(userId)
                     .productId(productId)
                     .build());
-            log.info("商品下单，根据商品ID创建支付单完成 userId:{} productId:{} outTradeNo:{}", userId, productId, payOrderEntity.getOutTradeNo());
+
+            LockPayOrderResponse lockPayOrderResponse = LockPayOrderResponse.builder()
+                    .outTradeNo(payOrderEntity.getOutTradeNo())
+                    .payUrl(payOrderEntity.getPayUrl())
+                    .build();
+
+            log.info("普通下单锁单完成 userId:{} productId:{} outTradeNo:{}", userId, productId, payOrderEntity.getOutTradeNo());
+            return Response.<LockPayOrderResponse>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(lockPayOrderResponse)
+                    .build();
+        } catch (Exception e) {
+            log.error("普通下单锁单失败 userId:{} productId:{}", openid, request.getProductId(), e);
+            return Response.<LockPayOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 退单（支持已支付退回到支付宝、未支付直接关单）。
+     * 归属校验在 service 层完成，防止越权退他人的单。
+     */
+    @RequestMapping(value = "refund_order", method = RequestMethod.POST)
+    public Response<String> refundOrder(@RequestBody RefundOrderRequest request) {
+        log.info("退单接口开始 request:{}", request);
+        String openid = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
+            openid = userId;
+            if (userId == null) {
+                userId = request.getUserId();
+            }
+            String outTradeNo = request.getOutTradeNo();
+            log.info("退单开始 userId:{} outTradeNo:{}", userId, outTradeNo);
+
+            orderService.refundOrder(userId, outTradeNo);
+
+            log.info("退单完成 userId:{} outTradeNo:{}", userId, outTradeNo);
             return Response.<String>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
-                    .data(payOrderEntity.getPayUrl())
+                    .data("success")
                     .build();
+        } catch (AppException e) {
+            // 归属校验失败(403)、订单不存在(404)等业务异常交由全局异常处理器返回对应语义
+            throw e;
         } catch (Exception e) {
-            log.error("商品下单，根据商品ID创建支付单失败 userId:{} productId:{}",
-                    openid, createPayRequestDTO.getProductId(), e);
+            log.error("退单失败 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
             return Response.<String>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())

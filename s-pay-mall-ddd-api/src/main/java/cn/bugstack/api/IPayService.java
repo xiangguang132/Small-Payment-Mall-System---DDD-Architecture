@@ -1,10 +1,20 @@
 package cn.bugstack.api;
 
-import cn.bugstack.api.dto.CreatePayRequestDTO;
+import cn.bugstack.api.request.trade.LockPayOrderRequest;
+import cn.bugstack.api.request.trade.RefundOrderRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.trade.LockPayOrderResponse;
 
+/**
+ * IPayService 放在 api 层就是为了方便其他后端项目调用，这是 DDD 分层架构中常见的设计模式
+ *   - 方便其他微服务调用
+ *   - 统一管理对外暴露的接口
+ *   - 为将来微服务拆分做准备
+ */
 public interface IPayService {
 
-    Response<String> createPayOrder(CreatePayRequestDTO createPayRequestDTO);
+    Response<LockPayOrderResponse> lockPayOrder(LockPayOrderRequest request);
+
+    Response<String> refundOrder(RefundOrderRequest request);
 
 }

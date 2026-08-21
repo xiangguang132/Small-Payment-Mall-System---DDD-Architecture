@@ -10,10 +10,10 @@ import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
 import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
+import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.OrderTypeEnum;
-import cn.bugstack.types.event.BaseEvent;
-import com.alibaba.fastjson2.JSON;
-import com.google.common.eventbus.EventBus;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -28,15 +28,16 @@ import java.util.List;
  * 下沉到数据库 dao层
  */
 
+@Slf4j
 @Repository
 public class OrderRepository implements IOrderRepository {
 
     @Resource
     private IOrderDao orderDao;
     @Resource
-    private EventBus eventBus;
-    @Resource
-    private PaySuccessMessageEvent paySuccessMessageEvent;
+    private EventPublisher eventPublisher;
+    @Value("${spring.rabbitmq.config.producer.topic_order_pay_success.routing_key}")
+    private String routingKey;
 
     @Override
     public void doSaveOrder(CreateOrderAggregate orderAggregate) {
@@ -133,11 +134,9 @@ public class OrderRepository implements IOrderRepository {
         order.setOutTradeTime(outTradeTime);
         orderDao.changeOrderPaySuccess(order);
 
-        // todo 发送 mq 消息
-        BaseEvent.EventMessage<PaySuccessMessageEvent.PaySuccessMessage> eventMessage = paySuccessMessageEvent.buildEventMessage(PaySuccessMessageEvent.PaySuccessMessage.builder().tradeNo(outTradeNo).build());
-        PaySuccessMessageEvent.PaySuccessMessage paySuccessMessage = eventMessage.getData();
-
-        eventBus.post(JSON.toJSONString(paySuccessMessage));
+        // 发送 MQ 消息，通知支付成功
+        eventPublisher.publish(routingKey, outTradeNo);
+        log.info("支付成功消息已发送 outTradeNo:{}", outTradeNo);
     }
 
     @Override

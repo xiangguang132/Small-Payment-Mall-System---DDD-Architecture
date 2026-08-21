@@ -152,7 +152,7 @@ document.getElementById('orderButton').addEventListener('click', function() {
     console.log("loginToken ready:", loginToken);
 
     var productId = "100010090091";
-    var url = '/api/v1/alipay/create_pay_order';
+    var url = '/api/v1/alipay/lock_pay_order';
 
     var requestBody = {
         productId: productId
@@ -173,7 +173,7 @@ document.getElementById('orderButton').addEventListener('click', function() {
     .then(response => response.json()) // 解析JSON格式的响应
     .then(json => {
         if (Number(json.code) === 200) {
-            var formHtml = json.data; // 获取data字段中的HTML表单字符串
+            var formHtml = json.data.payUrl; // 新接口返回结构化响应，payUrl 在 data 对象里
             document.body.innerHTML += formHtml; // 将表单添加到页面上
             document.forms[0].submit(); // 自动提交表单
         } else {

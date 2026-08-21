@@ -71,6 +71,11 @@ spring:
           routing_key: topic.alipay_notify
           # 消费队列
           queue: s_pay_mall_queue_alipay_notify
+        topic_order_pay_success:
+          # 消息主题
+          routing_key: topic.order_pay_success
+          # 消费队列
+          queue: s_pay_mall_queue_order_pay_success
         topic_team_refund:
           # 消息主题
           routing_key: topic.team_refund
