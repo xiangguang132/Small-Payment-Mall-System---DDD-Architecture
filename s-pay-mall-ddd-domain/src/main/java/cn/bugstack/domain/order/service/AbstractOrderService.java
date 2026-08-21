@@ -1,14 +1,14 @@
 package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.adapter.port.IProductPort;
+import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
-import cn.bugstack.domain.order.model.entity.OrderEntity;
-import cn.bugstack.domain.order.model.entity.PayOrderEntity;
-import cn.bugstack.domain.order.model.entity.ProductEntity;
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.model.entity.*;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.types.enums.OrderTypeEnum;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import com.alipay.api.AlipayApiException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,65 +21,54 @@ import java.util.Date;
 public abstract class AbstractOrderService implements IOrderService {
 
     protected final IOrderRepository orderRepository;
+    protected final IOrderLockRepository orderLockRepository;
     protected final IProductPort productPort;
 
-    public AbstractOrderService(IOrderRepository orderRepository, IProductPort productPort) {
+    public AbstractOrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository, IProductPort productPort) {
         this.orderRepository = orderRepository;
+        this.orderLockRepository = orderLockRepository;
         this.productPort = productPort;
     }
 
     @Override
-    public PayOrderEntity createOrder(ShopCartEntity shopCartEntity) throws Exception {
-
-        // 1. 查询掉单和未支付订单
-        OrderEntity unpaidOrderEntity = orderRepository.queryUnPayOrder(shopCartEntity);
-        // 2. 如果存在未支付订单并且是payWait状态->即掉单
-        if(unpaidOrderEntity != null && OrderStatusVO.PAY_WAIT.equals(unpaidOrderEntity.getOrderStatus())){
-            log.info("创建订单-已存在未支付订单，userId:{}, productId:{}, outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
-            return PayOrderEntity.builder()
-                    .userId(shopCartEntity.getUserId())
-                    .productId(shopCartEntity.getProductId())
-                    .productName(unpaidOrderEntity.getProductName())
-                    .outTradeNo(unpaidOrderEntity.getOutTradeNo())
-                    .orderTime(toLocalDateTime(unpaidOrderEntity.getOrderTime()))
-                    .totalAmount(unpaidOrderEntity.getTotalAmount())
-                    .orderType(OrderTypeEnum.DIRECT)
-                    .orderStatus(OrderStatusVO.PAY_WAIT)
-                    .payUrl(unpaidOrderEntity.getPayUrl())
-                    .build();
-        } else if (unpaidOrderEntity != null && OrderStatusVO.CREATE.equals(unpaidOrderEntity.getOrderStatus())) {
-            log.info("创建订单-存在，存在未创建支付单订单，创建支付单开始 userId:{} productId:{} outTradeNo:{}", shopCartEntity.getUserId(), shopCartEntity.getProductId(), unpaidOrderEntity.getOutTradeNo());
-            // 构建需要 userId productId productName outTradeNo totalAmount
-            PayOrderEntity payOrderEntity = this.doPrepayOrder(
-                    shopCartEntity.getUserId(),
-                    shopCartEntity.getProductId(),
-                    unpaidOrderEntity.getProductName(),
-                    unpaidOrderEntity.getOutTradeNo(),
-                    unpaidOrderEntity.getTotalAmount()
-            );
-            return payOrderEntity;
+    public PayOrderEntity createOrder(String lockId) throws Exception {
+        // 1. 根据 lockId 查询锁单记录
+        OrderLockEntity orderLockEntity = orderLockRepository.queryLockByLockId(lockId);
+        if (orderLockEntity == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "锁单的订单不存在");
         }
-
-        // 3.查询商品-聚合订单
-        ProductEntity productEntity = productPort.queryProductByProductId(shopCartEntity.getProductId());
-
+        if (!orderLockEntity.getLockStatus().equals("LOCKED")) {
+            throw new AppException(ResponseCode.UN_ERROR, "锁单状态异常，当前状态是：{}" + orderLockEntity.getLockStatus());
+        }
+        if (orderLockEntity.isExpired()) {
+            orderLockRepository.updateLockStatus(lockId, "EXPIRED");
+            throw new AppException(ResponseCode.UN_ERROR, "锁单已过期，请重新锁单");
+        }
+        // 2. 基于锁单快照构建订单
         OrderEntity orderEntity = CreateOrderAggregate.buildOrderEntity(
-                productEntity.getProductId(),
-                productEntity.getProductName()
+                orderLockEntity.getProductId(), orderLockEntity.getProductName()
         );
-
         CreateOrderAggregate orderAggregate = CreateOrderAggregate.builder()
-                .userId(shopCartEntity.getUserId())
-                .productEntity(productEntity)
+                .userId(orderLockEntity.getUserId())
+                .productEntity(ProductEntity.builder()
+                        .productId(orderLockEntity.getProductId())
+                        .productName(orderLockEntity.getProductName())
+                        .price(orderLockEntity.getTotalAmount())
+                        .build())
                 .orderEntity(orderEntity)
                 .build();
-
-        // 4. 保存订单
-        this.doSaveOrder(orderAggregate);
-
-        // 5. 创建支付单
-        PayOrderEntity payOrderEntity = this.doPrepayOrder(shopCartEntity.getUserId(), productEntity.getProductId(), productEntity.getProductName(), orderEntity.getOutTradeNo(), productEntity.getPrice());
-
+        // 3. 保存订单
+        orderRepository.doSaveOrder(orderAggregate);
+        // 4. 创建支付单
+        PayOrderEntity payOrderEntity = this.doPrepayOrder(
+                orderLockEntity.getUserId(),
+                orderLockEntity.getProductId(),
+                orderLockEntity.getProductName(),
+                orderEntity.getOutTradeNo(),
+                orderLockEntity.getTotalAmount()
+        );
+        // 5. 确认锁单
+        orderLockRepository.updateLockStatus(lockId, "CONFIRMED");
         return payOrderEntity;
     }
 

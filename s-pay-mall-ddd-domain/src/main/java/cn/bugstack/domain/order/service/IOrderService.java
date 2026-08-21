@@ -14,8 +14,8 @@ import java.util.List;
  */
 public interface IOrderService {
 
-    // 通过购物车实体对象创建支付单实体
-    PayOrderEntity createOrder(ShopCartEntity shopCartEntity) throws Exception;
+    // 通过锁单id创建支付单实体
+    PayOrderEntity createOrder(String lockId) throws Exception;
 
     // 依据 out_trade_no 修改订单状态为支付成功，并回写外部交易时间
     void changeOrderPaySuccess(String outTradeNo, Date outTradeTime);

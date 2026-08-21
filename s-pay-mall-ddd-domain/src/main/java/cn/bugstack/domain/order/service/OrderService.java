@@ -1,6 +1,7 @@
 package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.adapter.port.IProductPort;
+import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
@@ -47,8 +48,8 @@ public class OrderService extends AbstractOrderService{
     @Autowired
     private IAlipayPort alipayPort;
 
-    public OrderService(IOrderRepository orderRepository, IProductPort productPort) {
-        super(orderRepository, productPort);
+    public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository, IProductPort productPort) {
+        super(orderRepository, orderLockRepository, productPort);
     }
 
     /**

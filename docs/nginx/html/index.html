@@ -152,12 +152,6 @@ document.getElementById('orderButton').addEventListener('click', function() {
     console.log("loginToken ready:", loginToken);
 
     var productId = "100010090091";
-    var url = '/api/v1/alipay/lock_pay_order';
-
-    var requestBody = {
-        productId: productId
-    };
-
     var headers = {
         'Content-Type': 'application/json'
     };
@@ -165,19 +159,36 @@ document.getElementById('orderButton').addEventListener('click', function() {
         headers['Authorization'] = 'Bearer ' + loginToken;
     }
 
-    fetch(url, {
+    // 阶段1：锁单 → 获取 lockId
+    fetch('/api/v1/alipay/lock_order', {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(requestBody) // 将请求体转换为JSON字符串
+        body: JSON.stringify({ productId: productId })
     })
-    .then(response => response.json()) // 解析JSON格式的响应
+    .then(response => response.json())
     .then(json => {
         if (Number(json.code) === 200) {
-            var formHtml = json.data.payUrl; // 新接口返回结构化响应，payUrl 在 data 对象里
-            document.body.innerHTML += formHtml; // 将表单添加到页面上
-            document.forms[0].submit(); // 自动提交表单
+            var lockId = json.data.lockId;
+            console.log("锁单成功 lockId:", lockId);
+
+            // 阶段2：确认下单 → 获取 payUrl 并提交
+            return fetch('/api/v1/alipay/confirm_order', {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ lockId: lockId })
+            });
         } else {
-            console.error('Error:', json.info, json); // 输出错误信息和完整响应
+            throw new Error(json.info || '锁单失败');
+        }
+    })
+    .then(response => response.json())
+    .then(json => {
+        if (Number(json.code) === 200) {
+            var formHtml = json.data.payUrl;
+            document.body.innerHTML += formHtml;
+            document.forms[0].submit();
+        } else {
+            console.error('确认下单失败:', json.info, json);
         }
     })
     .catch(error => console.error('Error:', error));

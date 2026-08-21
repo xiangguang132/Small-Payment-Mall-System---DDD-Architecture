@@ -1,12 +1,16 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.IPayService;
-import cn.bugstack.api.request.trade.LockPayOrderRequest;
+import cn.bugstack.api.request.trade.ConfirmOrderRequest;
+import cn.bugstack.api.request.trade.LockOrderRequest;
 import cn.bugstack.api.request.trade.RefundOrderRequest;
 import cn.bugstack.api.response.Response;
-import cn.bugstack.api.response.trade.LockPayOrderResponse;
+import cn.bugstack.api.response.trade.ConfirmOrderResponse;
+import cn.bugstack.api.response.trade.LockOrderResponse;
+import cn.bugstack.domain.order.model.entity.OrderLockEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.service.IOrderLockService;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
 import cn.bugstack.infrastructure.event.EventPublisher;
@@ -41,47 +45,70 @@ public class AliPayController implements IPayService {
     @Resource
     private IOrderService orderService;
     @Resource
+    private IOrderLockService orderLockService;
+    @Resource
     private IAlipayNotifyTaskService alipayNotifyTaskService;
     @Resource
     private EventPublisher eventPublisher;
 
     /**
-     * 普通下单锁单：复用 createOrder 的幂等锁单语义，
-     * 返回结构化 LockPayOrderResponse 而非裸 payUrl 字符串。
+     * 锁单接口：校验商品 → 构建聚合体 → 创建锁记录 → 返回 lockId
      */
-    @RequestMapping(value = "lock_pay_order", method = RequestMethod.POST)
-    public Response<LockPayOrderResponse> lockPayOrder(@RequestBody LockPayOrderRequest request) {
-        log.info("普通下单锁单开始 request:{}", request);
+    @RequestMapping(value = "lock_order", method = RequestMethod.POST)
+    public Response<LockOrderResponse> lockOrder(@RequestBody LockOrderRequest request) {
+        log.info("锁单开始 request:{}", request);
         String openid = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String userId = (String) httpRequest.getAttribute("openid");
             openid = userId;
-            if (userId == null) {
-                userId = request.getUserId();
-            }
-            String productId = request.getProductId();
-            log.info("普通下单锁单，userId:{} productId:{}", userId, productId);
+            if (userId == null) userId = request.getUserId();
 
-            PayOrderEntity payOrderEntity = orderService.createOrder(ShopCartEntity.builder()
-                    .userId(userId)
-                    .productId(productId)
-                    .build());
+            OrderLockEntity lockEntity = orderLockService.lockOrder(userId, request.getProductId());
 
-            LockPayOrderResponse lockPayOrderResponse = LockPayOrderResponse.builder()
-                    .outTradeNo(payOrderEntity.getOutTradeNo())
-                    .payUrl(payOrderEntity.getPayUrl())
-                    .build();
-
-            log.info("普通下单锁单完成 userId:{} productId:{} outTradeNo:{}", userId, productId, payOrderEntity.getOutTradeNo());
-            return Response.<LockPayOrderResponse>builder()
+            return Response.<LockOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
-                    .data(lockPayOrderResponse)
+                    .data(LockOrderResponse.builder()
+                            .lockId(lockEntity.getLockId())
+                            .expireTime(lockEntity.getExpireTime())
+                            .build())
                     .build();
         } catch (Exception e) {
-            log.error("普通下单锁单失败 userId:{} productId:{}", openid, request.getProductId(), e);
-            return Response.<LockPayOrderResponse>builder()
+            log.error("锁单失败 userId:{} productId:{}", openid, request.getProductId(), e);
+            return Response.<LockOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 确认下单：携带 lockId → 创建订单 → 返回 payUrl
+     */
+    @RequestMapping(value = "confirm_order", method = RequestMethod.POST)
+    public Response<ConfirmOrderResponse> confirmOrder(@RequestBody ConfirmOrderRequest request) {
+        log.info("确认下单开始 request:{}", request);
+        String openid = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
+            openid = userId;
+            if (userId == null) userId = request.getUserId();
+
+            PayOrderEntity payOrderEntity = orderService.createOrder(request.getLockId());
+
+            return Response.<ConfirmOrderResponse>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(ConfirmOrderResponse.builder()
+                            .outTradeNo(payOrderEntity.getOutTradeNo())
+                            .payUrl(payOrderEntity.getPayUrl())
+                            .build())
+                    .build();
+        } catch (Exception e) {
+            log.error("确认下单失败 userId:{}", openid, e);
+            return Response.<ConfirmOrderResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

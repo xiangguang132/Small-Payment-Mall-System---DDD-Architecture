@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IOrderLockDao">
+
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.OrderLock">
+        <id column="id" property="id"/>
+        <result column="lock_id" property="lockId"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="lock_status" property="lockStatus"/>
+        <result column="lock_time" property="lockTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.OrderLock">
+        INSERT INTO order_lock(lock_id, user_id, product_id, product_name,
+                               total_amount, lock_status, lock_time, expire_time,
+                               create_time, update_time)
+        VALUES(#{lockId}, #{userId}, #{productId}, #{productName},
+               #{totalAmount}, #{lockStatus}, #{lockTime}, #{expireTime},
+               NOW(), NOW())
+    </insert>
+
+    <select id="queryByLockId" parameterType="java.lang.String" resultMap="dataMap">
+        SELECT lock_id, user_id, product_id, product_name, total_amount,
+               lock_status, lock_time, expire_time
+        FROM order_lock
+        WHERE lock_id = #{lockId}
+    </select>
+
+    <update id="updateLockStatus" parameterType="java.lang.String">
+        UPDATE order_lock
+        SET lock_status = #{lockStatus}, update_time = NOW()
+        WHERE lock_id = #{lockId}
+    </update>
+
+    <select id="queryLockedByUserProduct" resultMap="dataMap">
+        SELECT lock_id, user_id, product_id, product_name, total_amount,
+               lock_status, lock_time, expire_time
+        FROM order_lock
+        WHERE user_id = #{userId}
+          AND product_id = #{productId}
+          AND lock_status = 'LOCKED'
+        ORDER BY create_time DESC
+        LIMIT 1
+    </select>
+
+</mapper>

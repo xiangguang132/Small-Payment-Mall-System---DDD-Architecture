@@ -1,0 +1,19 @@
+package cn.bugstack.infrastructure.dao;
+
+import cn.bugstack.infrastructure.dao.po.OrderLock;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
+public interface IOrderLockDao {
+
+    void insert(OrderLock orderLock);
+
+    OrderLock queryByLockId(@Param("lockId") String lockId);
+
+    void updateLockStatus(@Param("lockId") String lockId, @Param("lockStatus") String lockStatus);
+
+    OrderLock queryLockedByUserProduct(@Param("userId") String userId,
+                                       @Param("productId") String productId);
+
+}
