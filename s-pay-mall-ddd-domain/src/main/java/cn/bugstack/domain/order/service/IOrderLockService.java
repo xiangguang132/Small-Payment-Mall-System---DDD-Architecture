@@ -11,7 +11,7 @@ public interface IOrderLockService {
      * @return
      * @throws Exception
      */
-    OrderLockEntity lockOrder(String userId, String productId) throws Exception;
+    OrderLockEntity lockOrder(String userId, String productId);
 
     /**
      * 查询锁单状态

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -21,11 +20,9 @@ public class OrderLock {
     private String lockId;
     private String userId;
     private String productId;
-    private String productName;
-    private BigDecimal totalAmount;
+    private String orderId;
     private String lockStatus;
     private Date lockTime;
-    private Date expireTime;
     private Date createTime;
     private Date updateTime;
 

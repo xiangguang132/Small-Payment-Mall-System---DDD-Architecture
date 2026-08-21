@@ -10,10 +10,10 @@ public interface IOrderLockRepository {
     /** 根据 lockId 查询 */
     OrderLockEntity queryLockByLockId(String lockId);
 
-    /** 更新锁单状态 */
-    void updateLockStatus(String lockId, String status);
+    /** 确认锁单：回写 orderId 并更新状态为 CONFIRMED */
+    void updateOrderId(String lockId, String orderId);
 
-    /** 查询用户当前有效锁单（防重复锁） */
-    OrderLockEntity queryLockedByUserProduct(String userId, String productId);
+    /** 更新锁单状态（如过期 EXPIRED） */
+    void updateLockStatus(String lockId, String status);
 
 }

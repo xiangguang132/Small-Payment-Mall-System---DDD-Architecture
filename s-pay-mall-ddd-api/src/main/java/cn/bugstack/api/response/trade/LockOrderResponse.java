@@ -16,7 +16,7 @@ public class LockOrderResponse {
     // 锁单号
     private String lockId;
 
-    // 过期时间
-    private LocalDateTime expireTime;
+    // 锁单时间
+    private LocalDateTime lockTime;
 
 }

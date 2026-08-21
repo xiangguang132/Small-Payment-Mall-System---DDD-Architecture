@@ -5,11 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 锁单实体
+ * 锁单实体 —— 映射 order_lock 表
+ * 仅记录锁单号、商品ID、关联订单ID、状态、时间
  */
 @Data
 @Builder
@@ -17,20 +17,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrderLockEntity {
 
+    private Long id;
     private String lockId;
     private String userId;
     private String productId;
-    private String productName;
-    private BigDecimal totalAmount;
+    private String orderId;
     private String lockStatus;  // LOCKED / CONFIRMED / EXPIRED
     private LocalDateTime lockTime;
-    private LocalDateTime expireTime;
 
     /**
-     * 判断是否过期
-     * @return
+     * 判断是否过期（默认15分钟）
      */
     public boolean isExpired() {
-        return LocalDateTime.now().isAfter(this.expireTime);
+        return LocalDateTime.now().isAfter(this.lockTime.plusMinutes(15));
     }
 }

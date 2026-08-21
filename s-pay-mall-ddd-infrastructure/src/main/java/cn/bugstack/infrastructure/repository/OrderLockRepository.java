@@ -23,19 +23,21 @@ public class OrderLockRepository implements IOrderLockRepository {
                 .lockId(lockEntity.getLockId())
                 .userId(lockEntity.getUserId())
                 .productId(lockEntity.getProductId())
-                .productName(lockEntity.getProductName())
-                .totalAmount(lockEntity.getTotalAmount())
+                .orderId(lockEntity.getOrderId())
                 .lockStatus(lockEntity.getLockStatus())
                 .lockTime(toDate(lockEntity.getLockTime()))
-                .expireTime(toDate(lockEntity.getExpireTime()))
                 .build();
         orderLockDao.insert(orderLock);
     }
 
     @Override
     public OrderLockEntity queryLockByLockId(String lockId) {
-        OrderLock orderLock = orderLockDao.queryByLockId(lockId);
-        return toEntity(orderLock);
+        return toEntity(orderLockDao.queryByLockId(lockId));
+    }
+
+    @Override
+    public void updateOrderId(String lockId, String orderId) {
+        orderLockDao.updateOrderId(lockId, orderId);
     }
 
     @Override
@@ -43,27 +45,18 @@ public class OrderLockRepository implements IOrderLockRepository {
         orderLockDao.updateLockStatus(lockId, status);
     }
 
-    @Override
-    public OrderLockEntity queryLockedByUserProduct(String userId, String productId) {
-        OrderLock orderLock = orderLockDao.queryLockedByUserProduct(userId, productId);
-        return toEntity(orderLock);
-    }
-
     // ---- PO ↔ Entity 转换 ----
 
     private OrderLockEntity toEntity(OrderLock orderLock) {
-        if (orderLock == null) {
-            return null;
-        }
+        if (orderLock == null) return null;
         return OrderLockEntity.builder()
+                .id(orderLock.getId())
                 .lockId(orderLock.getLockId())
                 .userId(orderLock.getUserId())
                 .productId(orderLock.getProductId())
-                .productName(orderLock.getProductName())
-                .totalAmount(orderLock.getTotalAmount())
+                .orderId(orderLock.getOrderId())
                 .lockStatus(orderLock.getLockStatus())
                 .lockTime(toLocalDateTime(orderLock.getLockTime()))
-                .expireTime(toLocalDateTime(orderLock.getExpireTime()))
                 .build();
     }
 

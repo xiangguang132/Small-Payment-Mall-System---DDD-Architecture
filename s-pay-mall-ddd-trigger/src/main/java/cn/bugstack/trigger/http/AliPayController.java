@@ -9,7 +9,6 @@ import cn.bugstack.api.response.trade.ConfirmOrderResponse;
 import cn.bugstack.api.response.trade.LockOrderResponse;
 import cn.bugstack.domain.order.model.entity.OrderLockEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.service.IOrderLockService;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
@@ -71,7 +70,7 @@ public class AliPayController implements IPayService {
                     .info(ResponseCode.SUCCESS.getInfo())
                     .data(LockOrderResponse.builder()
                             .lockId(lockEntity.getLockId())
-                            .expireTime(lockEntity.getExpireTime())
+                            .lockTime(lockEntity.getLockTime())
                             .build())
                     .build();
         } catch (Exception e) {
@@ -89,13 +88,7 @@ public class AliPayController implements IPayService {
     @RequestMapping(value = "confirm_order", method = RequestMethod.POST)
     public Response<ConfirmOrderResponse> confirmOrder(@RequestBody ConfirmOrderRequest request) {
         log.info("确认下单开始 request:{}", request);
-        String openid = null;
         try {
-            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
-            if (userId == null) userId = request.getUserId();
-
             PayOrderEntity payOrderEntity = orderService.createOrder(request.getLockId());
 
             return Response.<ConfirmOrderResponse>builder()
@@ -107,7 +100,7 @@ public class AliPayController implements IPayService {
                             .build())
                     .build();
         } catch (Exception e) {
-            log.error("确认下单失败 userId:{}", openid, e);
+            log.error("确认下单失败 lockId:{}", request.getLockId(), e);
             return Response.<ConfirmOrderResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())

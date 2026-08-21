@@ -11,9 +11,8 @@ public interface IOrderLockDao {
 
     OrderLock queryByLockId(@Param("lockId") String lockId);
 
-    void updateLockStatus(@Param("lockId") String lockId, @Param("lockStatus") String lockStatus);
+    void updateOrderId(@Param("lockId") String lockId, @Param("orderId") String orderId);
 
-    OrderLock queryLockedByUserProduct(@Param("userId") String userId,
-                                       @Param("productId") String productId);
+    void updateLockStatus(@Param("lockId") String lockId, @Param("lockStatus") String lockStatus);
 
 }
