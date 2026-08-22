@@ -19,13 +19,6 @@ public interface IOrderRepository {
 
     void doSaveOrder(CreateOrderAggregate orderAggregate);
 
-    /**
-     * 保存拼团支付单（GROUP_BUY 类型）
-     * 与 doSaveOrder 区别：金额取自 payOrderEntity（拼团实付价），orderType 固定 GROUP_BUY
-     * @param payOrderEntity 拼团支付单
-     */
-    void saveGroupBuyPayOrder(PayOrderEntity payOrderEntity);
-
     OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity);
 
     /**

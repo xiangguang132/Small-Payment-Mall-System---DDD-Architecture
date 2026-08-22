@@ -2,9 +2,7 @@ package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
-import com.alipay.api.AlipayApiException;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +16,6 @@ public interface IOrderService {
 
     // 通过锁单id创建支付单实体
     PayOrderEntity createOrder(String lockId) throws Exception;
-
-    // 创建拼团支付单（GROUP_BUY 类型），金额为拼团实付价
-    PayOrderEntity createGroupBuyPayOrder(String userId, String productId,
-                                          String productName, String outTradeNo,
-                                          BigDecimal totalAmount) throws AlipayApiException;
 
     // 依据 out_trade_no 修改订单状态为支付成功，并回写外部交易时间
     void changeOrderPaySuccess(String outTradeNo, Date outTradeTime);
