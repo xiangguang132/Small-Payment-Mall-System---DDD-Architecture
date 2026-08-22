@@ -103,6 +103,51 @@ public class OrderService extends AbstractOrderService{
     }
 
     /**
+     * 创建拼团支付单（GROUP_BUY 类型）
+     * 与 doPrepayOrder 的区别：orderType=GROUP_BUY，金额为拼团实付价（而非商品原价）
+     * @param userId 用户ID
+     * @param productId 商品ID
+     * @param productName 商品名称
+     * @param outTradeNo 商户订单号，需与 group_buy_order.out_trade_no 一致，回调结算按此反查
+     * @param totalAmount 拼团实付金额 payAmount
+     * @return 拼团支付单（含支付宝支付表单 payUrl）
+     */
+    public PayOrderEntity createGroupBuyPayOrder(String userId, String productId,
+                                                 String productName, String outTradeNo,
+                                                 BigDecimal totalAmount) throws AlipayApiException {
+        AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
+        request.setReturnUrl(returnUrl);
+        request.setNotifyUrl(notifyUrl);
+
+        JSONObject bizContent = new JSONObject();
+        bizContent.put("out_trade_no", outTradeNo);
+        bizContent.put("total_amount", totalAmount.toString());
+        bizContent.put("subject", productName);
+        bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
+        request.setBizContent(bizContent.toString());
+
+        String form = alipayClient.pageExecute(request).getBody();
+
+        PayOrderEntity payOrderEntity = new PayOrderEntity();
+        payOrderEntity.setUserId(userId);
+        payOrderEntity.setProductId(productId);
+        payOrderEntity.setProductName(productName);
+        payOrderEntity.setOutTradeNo(outTradeNo);
+        payOrderEntity.setOrderTime(LocalDateTime.now());
+        payOrderEntity.setTotalAmount(totalAmount);
+        payOrderEntity.setOrderType(OrderTypeEnum.GROUP_BUY);
+        payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
+        payOrderEntity.setPayUrl(form);
+
+        // 落库 GROUP_BUY 支付单（status=CREATE）
+        orderRepository.saveGroupBuyPayOrder(payOrderEntity);
+        // 回写支付表单 + 置为 PAY_WAIT
+        orderRepository.updateOrderPayInfo(payOrderEntity);
+
+        return payOrderEntity;
+    }
+
+    /**
      * 修改订单状态-成功
      * @param outTradeNo
      * @param outTradeTime
