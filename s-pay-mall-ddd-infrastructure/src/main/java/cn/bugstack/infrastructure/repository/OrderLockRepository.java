@@ -3,7 +3,7 @@ package cn.bugstack.infrastructure.repository;
 import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.order.model.entity.OrderLockEntity;
 import cn.bugstack.infrastructure.dao.IOrderLockDao;
-import cn.bugstack.infrastructure.dao.po.OrderLock;
+import cn.bugstack.infrastructure.dao.po.payment.OrderLock;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

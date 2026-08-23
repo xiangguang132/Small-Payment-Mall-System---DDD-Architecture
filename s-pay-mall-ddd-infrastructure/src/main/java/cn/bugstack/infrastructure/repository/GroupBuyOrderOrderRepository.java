@@ -2,17 +2,17 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyTeamSettlementAggregate;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuySettlementCommandEntity;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTeamEntity;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
+import cn.bugstack.domain.groupbuy.model.entity.*;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
+import cn.bugstack.infrastructure.dao.IGroupBuyNotifyTaskDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyOrderDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyTeamDao;
+import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyOrder;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -20,15 +20,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
 
     @Resource
     private IGroupBuyTeamDao groupBuyTeamDao;
-
     @Resource
     private IGroupBuyOrderDao groupBuyOrderDao;
+    @Resource
+    private IGroupBuyNotifyTaskDao groupBuyNotifyTaskDao;
 
     @Override
     public GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo) {
@@ -95,10 +98,11 @@ public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
 
     @Override
     @Transactional(timeout = 500)
-    public boolean settlementGroupBuyOrder(GroupBuyTeamSettlementAggregate aggregate) {
+    public GroupBuyNotifyTaskEntity settlementGroupBuyOrder(GroupBuyTeamSettlementAggregate aggregate) {
         GroupBuySettlementCommandEntity command = aggregate.getSettlementCommand();
         GroupBuyTeamEntity team = aggregate.getGroupBuyTeamEntity();
 
+        // 首先-更新 “订单” 状态为已完成
         int orderUpdated = groupBuyOrderDao.updateOrderStatus2Complete(
                 command.getUserId(),
                 command.getOutTradeNo()
@@ -107,20 +111,51 @@ public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
             throw new AppException(ResponseCode.E0005, "拼团订单结算更新失败");
         }
 
+        // 其次-更新 “拼团” complete_count +1
         int completeUpdated = groupBuyTeamDao.updateAddCompleteCount(team.getTeamId());
         if (completeUpdated != 1) {
             throw new AppException(ResponseCode.E0005, "拼团团队完成人数更新失败");
         }
 
+        // 未成团-返回空
         boolean complete = team.getTargetCount() - team.getCompleteCount() == 1;
-        if (complete) {
-            int statusUpdated = groupBuyTeamDao.updateStatus2Complete(team.getTeamId());
-            if (statusUpdated != 1) {
-                throw new AppException(ResponseCode.E0005, "拼团团队状态更新失败");
-            }
+        if (!complete) {
+            return null;
+        }
+        // 成团
+        int statusUpdated = groupBuyTeamDao.updateStatus2Complete(team.getTeamId());
+        if (statusUpdated != 1) {
+            throw new AppException(ResponseCode.E0005, "拼团团队状态更新失败");
         }
 
-        return complete;
+        // 查询已成团的所有订单号，组装通知任务
+        List<String> outTradeNoList = groupBuyOrderDao.queryCompleteOutTradeNoListByTeamId(team.getTeamId());
+        String parameterJson = JSON.toJSONString(new HashMap<String, Object>() {{
+            put("teamId", team.getTeamId());
+            put("outTradeNoList", outTradeNoList);
+        }});
+
+        // 创建回调任务
+        groupBuyNotifyTaskDao.insert(GroupBuyNotifyTask.builder()
+                .teamId(team.getTeamId())
+                .activityId(team.getActivityId())
+                .notifyMq("topic.team_success")
+                .notifyStatus(0)     // 待发
+                .notifyCount(0)
+                .parameterJson(parameterJson)
+                .build());
+
+        // 返回领域对象
+        return GroupBuyNotifyTaskEntity.builder()
+                .teamId(team.getTeamId())
+                .activityId(team.getActivityId())
+                .notifyType("MQ")
+                .notifyMQ("topic.team_success")
+                .notifyCount(0)
+                .notifyStatus(0)
+                .parameterJson(parameterJson)
+                .uuid(team.getTeamId() + "_trade_settlement_" + command.getOutTradeNo())
+                .build();
     }
 
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {

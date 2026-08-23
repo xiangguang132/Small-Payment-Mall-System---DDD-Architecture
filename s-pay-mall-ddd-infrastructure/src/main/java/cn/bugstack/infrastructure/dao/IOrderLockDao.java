@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.dao;
 
-import cn.bugstack.infrastructure.dao.po.OrderLock;
+import cn.bugstack.infrastructure.dao.po.payment.OrderLock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IGroupBuyDiscountDao">
+
+    <select id="queryUnExecutedNotifyTaskList" resultMap="dataMap">
+        select team_id, activity_id, notify_mq, notify_status, notify_count, parameter_json
+        from group_buy_notify_task
+        where notify_status in (0, 2)
+        limit 50
+    </select>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask">
+        insert into group_buy_notify_task(team_id, activity_id, notify_mq, notify_status, notify_count, parameter_json, create_time, update_time)
+        values(#{teamId}, #{activityId}, #{notifyMq}, #{notifyStatus}, #{notifyCount}, #{parameterJson}, now(), now())
+    </insert>
+
+    <update id="updateNotifyTaskStatusSuccess" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask">
+        update group_buy_notify_task
+        set notify_status = 1, update_time = now()
+        where team_id = #{teamId} and notify_status = 0
+    </update>
+
+    <update id="updateNotifyTaskStatusRetry" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask">
+        update group_buy_notify_task
+        set notify_count = notify_count + 1, notify_status = 2, update_time = now()
+        where team_id = #{teamId} and notify_status = 0
+    </update>
+
+    <update id="updateNotifyTaskStatusError" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask">
+        update group_buy_notify_task
+        set notify_count = notify_count + 1, notify_status = 3, update_time = now()
+        where team_id = #{teamId} and notify_status = 0
+    </update>
+
+</mapper>
