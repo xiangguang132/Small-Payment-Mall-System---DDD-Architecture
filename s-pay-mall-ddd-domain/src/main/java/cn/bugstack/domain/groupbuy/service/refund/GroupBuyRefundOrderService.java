@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
 
-    @Resource(name = "groupBuyRefundOrderRuleFilterFactory")
+    @Resource(name = "groupBuyOrderRefundFilter")
     private BusinessLinkedList<GroupBuyRefundOrderCommandEntity, GroupBuyRefundOrderRuleFilterFactory.DynamicContext, GroupBuyRefundOrderBehaviorEntity> groupBuyRefundOrderRuleFilter;
 
     @Resource

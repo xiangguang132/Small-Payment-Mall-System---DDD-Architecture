@@ -54,6 +54,9 @@ public class DCCService {
      * 场景：假设你上线了一个新功能，不敢直接给所有人用。你在配置中心把 cutRange 设置为 "10"。那么，只有哈希值尾数在 0-10 之间的用户（约 10% 的用户）会返回 true，看到新功能。其他 90% 的用户返回 false，维持旧逻辑。如果你想全量发布，只需要把 cutRange 改为 "100"，所有用户都会命中
      */
     public boolean isCutRange(String userId) {
+        if (userId == null) {
+            return true;
+        }
         // 计算哈希码的绝对值
         int hashCode = Math.abs(userId.hashCode());
 

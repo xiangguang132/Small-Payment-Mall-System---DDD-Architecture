@@ -22,6 +22,16 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 放行 OPTIONS 预检请求（CORS 浏览器自动发送），手动补充 CORS 头
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            response.setHeader("Access-Control-Allow-Headers", "*");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setStatus(HttpServletResponse.SC_OK);
+            return false;
+        }
+
         String path = request.getServletPath();
 
         if (path.contains("/api/v1/login") || path.contains("/api/v1/weixin/portal")) {

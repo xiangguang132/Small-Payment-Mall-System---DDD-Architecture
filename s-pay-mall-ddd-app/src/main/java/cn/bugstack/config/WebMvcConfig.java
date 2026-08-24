@@ -19,7 +19,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/v1/**")
                 .excludePathPatterns(
                         "/api/v1/login/**",
-                        "/api/v1/weixin/portal/**"
+                        "/api/v1/weixin/portal/**",
+                        "/api/v1/groupbuy/**"
                 );
     }
 }
