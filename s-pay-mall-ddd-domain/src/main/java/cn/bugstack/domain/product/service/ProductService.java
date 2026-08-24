@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ProductService implements IProductService {
@@ -92,6 +93,20 @@ public class ProductService implements IProductService {
 
         productRepository.updateById(updated);
         return updated;
+    }
+
+    @Override
+    public long countProductPage(String name, String sku, Long categoryId, Integer status) {
+        return productRepository.countPage(name, sku, categoryId, status);
+    }
+
+    @Override
+    public List<ProductAggregate> queryProductPage(String name, String sku, Long categoryId, Integer status,
+                                                   Integer pageNo, Integer pageSize) {
+        int safePageNo = (pageNo == null || pageNo <= 0) ? 1 : pageNo;
+        int safePageSize = (pageSize == null || pageSize <= 0) ? 10 : Math.min(pageSize, 100);
+        int offset = (safePageNo - 1) * safePageSize;
+        return productRepository.queryPage(name, sku, categoryId, status, offset, safePageSize);
     }
 
     private void validateCategoryEnabled(Long categoryId) {

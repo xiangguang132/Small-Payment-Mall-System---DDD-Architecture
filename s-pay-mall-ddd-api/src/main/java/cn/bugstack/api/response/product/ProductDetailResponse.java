@@ -20,4 +20,5 @@ public class ProductDetailResponse {
 
     private String categoryName;
     private String categoryDescription;
+    private Long activityId;
 }

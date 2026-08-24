@@ -465,3 +465,335 @@ java.lang.NullPointerException: null
 26-08-24.21:27:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
 26-08-24.21:28:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
 26-08-24.21:28:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:29:00.004 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:29:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:30:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:30:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:31:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:31:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:32:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:32:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:33:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:33:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:34:00.003 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:34:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:35:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:35:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:36:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:36:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:37:00.016 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:37:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:38:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:38:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:39:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:39:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:40:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:40:00.008 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:41:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:41:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:42:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:42:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:43:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:43:00.015 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:44:00.003 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:44:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:45:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:45:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:46:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:46:00.010 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:47:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:47:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:48:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:48:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:49:00.016 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:49:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:50:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:50:00.008 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:51:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:51:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:52:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:52:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:53:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:53:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:54:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:54:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:55:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:55:00.010 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:56:00.004 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:56:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:57:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:57:00.008 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:57:24.739 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.21:57:24.783 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.21:57:24.847 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.21:57:24.948 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.21:57:24.952 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.21:57:25.058 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.21:57:25.275 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.21:57:25.382 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.21:57:25.660 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.21:57:25.660 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.21:57:25.660 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.21:57:25.660 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.21:57:25.734 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-24.21:57:25.739 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-24.21:57:27.817 [redisson-netty-1-3] ERROR rejectedExecution      - Failed to submit a listener notification task. Event loop shut down?
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:351)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:344)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817)
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:862)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:500)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:97)
+	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200)
+	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1164)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:755)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:731)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:620)
+	at io.netty.channel.nio.NioEventLoop.closeAll(NioEventLoop.java:838)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:595)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-24.21:57:32.115 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-24.21:57:32.119 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 36240 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-24.21:57:32.120 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-24.21:57:33.436 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-24.21:57:33.439 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-24.21:57:33.525 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69 ms. Found 0 Redis repository interfaces.
+26-08-24.21:57:33.919 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.21:57:33.925 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.21:57:33.926 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.21:57:34.107 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-24.21:57:34.812 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-24.21:57:36.381 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-24.21:57:36.437 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.21:57:36.638 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-24.21:57:36.647 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-24.21:57:36.647 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-24.21:57:36.647 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-24.21:57:36.763 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-24.21:57:36.763 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4596 ms
+26-08-24.21:57:38.715 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-24.21:57:38.807 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-24.21:57:38.819 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-24.21:57:38.821 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-24.21:57:39.013 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#4b50c21:0/SimpleConnection@4542af89 [delegate=amqp://admin@192.144.234.86:5672/, localPort= 55286]
+26-08-24.21:57:40.090 [main            ] INFO  Application            - Started Application in 8.439 seconds (JVM running for 9.339)
+26-08-24.21:57:40.556 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-24.21:57:40.556 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-24.21:57:40.557 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 0 ms
+26-08-24.21:57:40.837 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-24.21:57:41.101 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-24.21:57:43.918 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.21:57:43.957 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.21:57:43.987 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.21:57:43.990 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.21:58:00.091 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.21:58:00.091 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:58:02.353 [http-nio-8080-exec-3] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.21:58:02.431 [http-nio-8080-exec-3] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.21:58:02.435 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.21:58:02.475 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.21:59:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.21:59:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:00:00.000 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:00:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:01:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:01:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:02:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:02:00.010 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:03:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:03:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:03:04.589 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:03:04.594 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:03:04.599 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:03:04.603 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:04:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:04:00.010 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:05:00.016 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:05:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:06:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:06:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:07:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:07:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:08:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:08:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:08:29.981 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:08:29.986 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:08:29.991 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:08:29.995 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:09:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:09:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:10:00.002 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:10:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:11:00.003 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:11:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:12:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:12:00.015 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:12:53.713 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:12:53.718 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:12:53.726 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:12:53.730 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:12:54.322 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:12:54.357 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:12:54.361 [http-nio-8080-exec-6] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:12:54.390 [http-nio-8080-exec-6] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:12:58.383 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:12:58.386 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:12:58.390 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:12:58.393 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:13:00.020 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:13:00.022 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:14:00.004 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:14:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:14:47.908 [http-nio-8080-exec-2] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:14:47.935 [http-nio-8080-exec-2] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:14:47.940 [http-nio-8080-exec-1] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:14:47.971 [http-nio-8080-exec-1] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:14:49.556 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:14:49.560 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:14:49.564 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:14:49.566 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:15:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:15:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:16:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:16:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-24.22:16:27.339 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:16:27.344 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:16:27.350 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:16:27.353 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:16:47.547 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.22:16:47.576 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.22:16:47.610 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.22:16:47.639 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-24.22:16:47.747 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.22:16:47.750 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.22:16:48.464 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.22:16:48.465 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-24.22:16:48.739 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.22:16:48.739 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.22:16:48.739 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.22:16:48.740 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-24.22:16:48.902 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-24.22:16:48.925 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-24.22:16:50.966 [redisson-netty-1-3] ERROR rejectedExecution      - Failed to submit a listener notification task. Event loop shut down?
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:351)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:344)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817)
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:862)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:500)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:97)
+	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200)
+	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1164)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:755)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:731)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:620)
+	at io.netty.channel.nio.NioEventLoop.closeAll(NioEventLoop.java:838)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:595)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-24.22:16:56.957 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-24.22:16:56.968 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 37372 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-24.22:16:56.969 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-24.22:16:58.330 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-24.22:16:58.332 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-24.22:16:58.408 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 0 Redis repository interfaces.
+26-08-24.22:16:58.739 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.22:16:58.745 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.22:16:58.746 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.22:16:58.916 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-24.22:16:59.778 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-24.22:17:01.514 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-24.22:17:01.565 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-24.22:17:01.750 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-24.22:17:01.758 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-24.22:17:01.758 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-24.22:17:01.759 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-24.22:17:01.867 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-24.22:17:01.867 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4843 ms
+26-08-24.22:17:03.833 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-24.22:17:03.905 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-24.22:17:03.916 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-24.22:17:03.918 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-24.22:17:04.237 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#2e0fdc83:0/SimpleConnection@6aa18912 [delegate=amqp://admin@192.144.234.86:5672/, localPort= 53061]
+26-08-24.22:17:05.530 [main            ] INFO  Application            - Started Application in 9.207 seconds (JVM running for 10.265)
+26-08-24.22:17:05.918 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-24.22:17:05.919 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-24.22:17:05.920 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-24.22:17:05.942 [RMI TCP Connection(3)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-24.22:17:06.198 [RMI TCP Connection(3)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-24.22:17:10.138 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:17:10.172 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:17:10.197 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:17:10.201 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:17:10.221 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-24.22:17:10.221 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-24.22:17:10.335 [http-nio-8080-exec-5] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:10.335 [http-nio-8080-exec-4] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:10.372 [http-nio-8080-exec-5] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-24.22:17:10.372 [http-nio-8080-exec-4] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-24.22:17:10.410 [http-nio-8080-exec-5] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-24.22:17:10.410 [http-nio-8080-exec-4] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-24.22:17:10.410 [http-nio-8080-exec-4] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:10.410 [http-nio-8080-exec-5] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:10.412 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-24.22:17:10.412 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-24.22:17:11.054 [http-nio-8080-exec-6] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:17:11.083 [http-nio-8080-exec-6] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:17:11.086 [http-nio-8080-exec-7] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-24.22:17:11.115 [http-nio-8080-exec-7] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-24.22:17:16.374 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:17:16.381 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:17:16.385 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=20, name=null, sku=null, categoryId=null, status=null)
+26-08-24.22:17:16.385 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-24.22:17:16.386 [http-nio-8080-exec-9] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:16.394 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-24.22:17:16.399 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-24.22:17:16.399 [http-nio-8080-exec-1] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:16.418 [http-nio-8080-exec-9] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-24.22:17:16.427 [http-nio-8080-exec-1] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-24.22:17:16.450 [http-nio-8080-exec-9] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-24.22:17:16.451 [http-nio-8080-exec-9] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:16.451 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-24.22:17:16.463 [http-nio-8080-exec-1] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-24.22:17:16.464 [http-nio-8080-exec-1] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-24.22:17:16.464 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-24.22:18:00.008 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-24.22:18:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务

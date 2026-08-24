@@ -4,6 +4,8 @@ import cn.bugstack.infrastructure.dao.po.product.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface IProductDao {
 
@@ -16,4 +18,16 @@ public interface IProductDao {
     void update(Product product);
 
     long countByCategoryId(@Param("categoryId") Long categoryId);
+
+    long countPage(@Param("name") String name,
+                   @Param("sku") String sku,
+                   @Param("categoryId") Long categoryId,
+                   @Param("status") Integer status);
+
+    List<Product> queryPage(@Param("name") String name,
+                            @Param("sku") String sku,
+                            @Param("categoryId") Long categoryId,
+                            @Param("status") Integer status,
+                            @Param("offset") Integer offset,
+                            @Param("limit") Integer limit);
 }

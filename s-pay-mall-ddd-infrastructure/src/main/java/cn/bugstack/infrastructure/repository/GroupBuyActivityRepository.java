@@ -50,6 +50,33 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
                 .updateTime(activity.getUpdateTime())
                 .build();
     }
+
+    @Override
+    public GroupBuyActivityEntity queryGroupBuyActivityByProductId(Long productId) {
+        GroupBuyActivity activity = groupBuyActivityDao.queryByProductId(productId);
+        if (activity == null) {
+            return null;
+        }
+        return GroupBuyActivityEntity.builder()
+                .id(activity.getId())
+                .activityId(activity.getActivityId())
+                .activityName(activity.getActivityName())
+                .productId(activity.getProductId())
+                .discountId(activity.getDiscountId())
+                .groupType(activity.getGroupType())
+                .takeLimitCount(activity.getTakeLimitCount())
+                .targetCount(activity.getTargetCount())
+                .validTime(activity.getValidTime())
+                .status(activity.getStatus())
+                .startTime(activity.getStartTime())
+                .endTime(activity.getEndTime())
+                .tagId(activity.getTagId())
+                .tagScope(activity.getTagScope())
+                .createTime(activity.getCreateTime())
+                .updateTime(activity.getUpdateTime())
+                .build();
+    }
+
     @Override
     public boolean withinTagCrowdRange(String tagId, String userId) {
         if (StringUtils.isBlank(tagId)) {

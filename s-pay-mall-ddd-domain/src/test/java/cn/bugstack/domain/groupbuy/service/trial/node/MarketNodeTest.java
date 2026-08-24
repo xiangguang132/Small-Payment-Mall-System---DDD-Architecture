@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -183,6 +184,17 @@ public class MarketNodeTest {
             @Override
             public long countByCategoryId(Long categoryId) {
                 return 0L;
+            }
+
+            @Override
+            public long countPage(String name, String sku, Long categoryId, Integer status) {
+                return 0L;
+            }
+
+            @Override
+            public List<ProductAggregate> queryPage(String name, String sku, Long categoryId, Integer status,
+                                                    Integer offset, Integer limit) {
+                return java.util.Collections.emptyList();
             }
         };
     }

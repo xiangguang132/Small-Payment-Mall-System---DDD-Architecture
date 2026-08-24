@@ -33,6 +33,17 @@
         where activity_id = #{activityId}
     </select>
 
+    <select id="queryByProductId" parameterType="java.lang.Long" resultMap="activityMap">
+        select id, activity_id, activity_name, product_id, discount_id,
+               group_type, take_limit_count, target_count, valid_time,
+               status, start_time, end_time, tag_id, tag_scope,
+               create_time, update_time
+        from group_buy_activity
+        where product_id = #{productId}
+          and status = 1
+        limit 1
+    </select>
+
     <select id="queryGroupBuyActivityList" resultMap="activityMap">
         select id, activity_id, activity_name, product_id, discount_id,
                group_type, take_limit_count, target_count, valid_time,

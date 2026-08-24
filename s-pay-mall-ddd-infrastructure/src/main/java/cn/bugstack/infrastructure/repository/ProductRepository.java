@@ -11,6 +11,8 @@ import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductRepository extends AbstractRepository implements IProductRepository {
@@ -110,6 +112,40 @@ public class ProductRepository extends AbstractRepository implements IProductRep
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "分类id不能为空");
         }
         return productDao.countByCategoryId(categoryId);
+    }
+
+    @Override
+    public long countPage(String name, String sku, Long categoryId, Integer status) {
+        return productDao.countPage(name, sku, categoryId, status);
+    }
+
+    @Override
+    public List<ProductAggregate> queryPage(String name, String sku, Long categoryId, Integer status,
+                                            Integer offset, Integer limit) {
+        return productDao.queryPage(name, sku, categoryId, status, offset, limit)
+                .stream()
+                .map(this::toAggregate)
+                .collect(Collectors.toList());
+    }
+
+    private ProductAggregate toAggregate(Product product) {
+        if (product == null) {
+            return null;
+        }
+        return ProductAggregate.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .sku(product.getSku())
+                .categoryId(product.getCategoryId())
+                .categoryName(product.getCategoryName())
+                .categoryDescription(product.getCategoryDescription())
+                .status(product.getStatus())
+                .price(product.getPrice())
+                .isDel(product.getIsDel())
+                .createTime(product.getCreateTime())
+                .updateTime(product.getUpdateTime())
+                .build();
     }
 
     private String cacheKeyById(Long id) {

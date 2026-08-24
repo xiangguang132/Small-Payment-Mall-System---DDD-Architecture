@@ -1,10 +1,14 @@
 package cn.bugstack.trigger.assembler;
 
 import cn.bugstack.api.request.product.ProductAddRequest;
+import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductAssembler {
 
@@ -46,5 +50,19 @@ public class ProductAssembler {
         response.setCreateTime(product.getCreateTime());
         response.setUpdateTime(product.getUpdateTime());
         return response;
+    }
+
+    public static PageResponse<ProductDetailResponse> toPageResponse(List<ProductAggregate> products, long total,
+                                                                     Integer pageNo, Integer pageSize) {
+        List<ProductDetailResponse> list = products == null ? java.util.Collections.emptyList()
+                : products.stream()
+                .map(ProductAssembler::toDetailResponse)
+                .collect(Collectors.toList());
+        return PageResponse.<ProductDetailResponse>builder()
+                .total(total)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .list(list)
+                .build();
     }
 }

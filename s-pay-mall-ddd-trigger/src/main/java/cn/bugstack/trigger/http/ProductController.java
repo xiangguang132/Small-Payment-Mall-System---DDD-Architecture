@@ -1,8 +1,12 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.product.ProductAddRequest;
+import cn.bugstack.api.request.product.ProductPageRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.product.ProductDetailResponse;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.trigger.assembler.ProductAssembler;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -25,6 +30,54 @@ public class ProductController {
 
     @Resource
     private IProductService productService;
+    @Resource
+    private IGroupBuyActivityRepository groupBuyActivityRepository;
+
+    /**
+     * 分页查询商品列表
+     * @param request
+     * @return
+     */
+    @GetMapping("page")
+    public Response<PageResponse<ProductDetailResponse>> page(@Valid ProductPageRequest request) {
+        log.info("分页查询商品列表开始 request:{}", request);
+        List<ProductAggregate> products = productService.queryProductPage(
+                request.getName(),
+                request.getSku(),
+                request.getCategoryId(),
+                request.getStatus(),
+                request.getPageNo(),
+                request.getPageSize()
+        );
+        Long total = productService.countProductPage(
+                request.getName(),
+                request.getSku(),
+                request.getCategoryId(),
+                request.getStatus()
+        );
+        // 为每个商品查询关联的拼团活动，填充 activityId
+        List<ProductDetailResponse> detailList = new java.util.ArrayList<>();
+        for (ProductAggregate product : products) {
+            ProductDetailResponse resp = ProductAssembler.toDetailResponse(product);
+            GroupBuyActivityEntity activity = groupBuyActivityRepository.queryGroupBuyActivityByProductId(product.getId());
+            if (activity != null) {
+                resp.setActivityId(activity.getActivityId());
+            }
+            detailList.add(resp);
+        }
+        PageResponse<ProductDetailResponse> pageResponse = PageResponse.<ProductDetailResponse>builder()
+                .total(total)
+                .pageNo(request.getPageNo())
+                .pageSize(request.getPageSize())
+                .list(detailList)
+                .build();
+        log.info("分页查询商品列表完成 total:{}", total);
+        return Response.<PageResponse<ProductDetailResponse>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(pageResponse)
+                .build();
+    }
 
     /**
      * 添加单个商品

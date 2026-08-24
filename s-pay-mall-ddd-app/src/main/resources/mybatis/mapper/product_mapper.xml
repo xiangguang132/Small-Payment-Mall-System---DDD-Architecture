@@ -60,4 +60,48 @@
         and is_del = 0
     </select>
 
+    <sql id="pageWhere">
+        where p.is_del = 0
+        <if test="name != null and name != ''">
+            and p.name like concat('%', #{name}, '%')
+        </if>
+        <if test="sku != null and sku != ''">
+            and p.sku like concat('%', #{sku}, '%')
+        </if>
+        <if test="categoryId != null">
+            and p.category_id = #{categoryId}
+        </if>
+        <if test="status != null">
+            and p.status = #{status}
+        </if>
+    </sql>
+
+    <select id="countPage" resultType="java.lang.Long">
+        select count(1)
+        from product p
+        <include refid="pageWhere"/>
+    </select>
+
+    <select id="queryPage" resultType="cn.bugstack.infrastructure.dao.po.product.Product">
+        select
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.category_id,
+        pt.name as category_name,
+        pt.description as category_description,
+        pt.type_code as category_code,
+        p.status,
+        p.price,
+        p.is_del,
+        p.create_time,
+        p.update_time
+        from product p
+        left join product_type pt on p.category_id = pt.id
+        <include refid="pageWhere"/>
+        order by p.id desc
+        limit #{offset}, #{limit}
+    </select>
+
 </mapper>
