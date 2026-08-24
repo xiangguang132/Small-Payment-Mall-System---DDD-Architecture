@@ -14,8 +14,9 @@ public interface IGroupBuyNotifyTaskDao {
     /**
      * 创建拼团回调任务
      * @param task
+     * @return 影响行数
      */
-    void insert(GroupBuyNotifyTask task);
+    int insert(GroupBuyNotifyTask task);
 
     /**
      * 查询未执行的回调任务-列表

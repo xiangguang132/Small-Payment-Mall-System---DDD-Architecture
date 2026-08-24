@@ -1,6 +1,7 @@
 package cn.bugstack.domain.groupbuy.service.refund.business;
 
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
 
 /**
  * 退单策略接口

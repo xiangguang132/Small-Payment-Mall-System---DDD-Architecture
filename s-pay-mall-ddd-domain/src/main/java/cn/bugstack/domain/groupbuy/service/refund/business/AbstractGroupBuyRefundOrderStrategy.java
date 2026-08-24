@@ -3,6 +3,8 @@ package cn.bugstack.domain.groupbuy.service.refund.business;
 import cn.bugstack.domain.groupbuy.adapter.IGroupBuyRefundPort;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyTeamRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -13,6 +15,9 @@ public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRe
 
     @Resource
     protected IGroupBuyRefundPort groupBuyRefundPort;
+
+    @Resource
+    protected IGroupBuyTeamRepository groupBuyTeamRepository;
 
     /**
      * 统一退单后回调钩子（无需退款金额的场景，如未支付退单）。
@@ -58,6 +63,13 @@ public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRe
     }
 
     /**
+     * 统一退单后回调钩子（带退单类型，无需退款金额，如未支付退单）。
+     */
+    protected void sendRefundNotifyMessage(GroupBuyRefundOrderEntity groupBuyRefundOrderEntity, String refundType, boolean success, String message) {
+        sendRefundNotifyMessage(groupBuyRefundOrderEntity, refundType, success, message, null);
+    }
+
+    /**
      * 统一退单后回调钩子（带退单类型，供 MQ 消息记录 type）。
      */
     protected void sendRefundNotifyMessage(GroupBuyRefundOrderEntity groupBuyRefundOrderEntity, String refundType, boolean success, String message, BigDecimal payAmount) {
@@ -72,6 +84,7 @@ public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRe
                 .success(success)
                 .message(message)
                 .build();
+        sendRefundNotifyMessage(groupBuyRefundOrderBehaviorEntity);
     }
 
     /**

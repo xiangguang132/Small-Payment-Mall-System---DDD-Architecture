@@ -5,13 +5,11 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyNotifyTaskEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyNotifyTaskRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
-import cn.bugstack.domain.groupbuy.repository.IGroupBuyTeamRepository;
 import cn.bugstack.domain.groupbuy.service.task.IGroupBuyNotifyTaskService;
 import cn.bugstack.domain.payment.adapter.port.IAlipayRefundPort;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -34,7 +32,6 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
     private IGroupBuyNotifyTaskService groupBuyNotifyTaskService;
 
     @Override
-    @Transactional
     public void groupBuyRefundNotify(GroupBuyRefundOrderBehaviorEntity behaviorEntity) throws Exception {
         String outTradeNo = behaviorEntity.getOutTradeNo();
         String teamId = behaviorEntity.getTeamId();
@@ -85,9 +82,10 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
         int inserted = groupBuyNotifyTaskRepository.insertNotifyTask(task);
         if (inserted != 1) {
             log.warn("拼团退单写本地消息表失败 teamId:{}", teamId);
+            return;
         }
 
-        // 4. 异步发 MQ（失败也由 GroupBuyNotifyJob 兜底重发）
+        // 4. 立即发 MQ（失败也由 GroupBuyNotifyJob 兜底重发 status=0）
         groupBuyNotifyTaskService.execNotifyJob(task);
     }
 

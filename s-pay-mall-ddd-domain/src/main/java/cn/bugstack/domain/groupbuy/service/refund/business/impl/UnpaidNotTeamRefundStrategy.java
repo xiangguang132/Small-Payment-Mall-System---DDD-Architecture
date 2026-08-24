@@ -1,6 +1,7 @@
 package cn.bugstack.domain.groupbuy.service.refund.business.impl;
 
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
 import cn.bugstack.domain.groupbuy.service.refund.business.AbstractGroupBuyRefundOrderStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

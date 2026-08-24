@@ -7,6 +7,8 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
 import cn.bugstack.domain.groupbuy.service.refund.business.IGroupBuyRefundOrderStrategy;
 import cn.bugstack.domain.groupbuy.service.refund.factory.GroupBuyRefundOrderRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -88,9 +90,9 @@ public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
         log.info("逆向流程，恢复锁单量 userId:{} activityId:{} teamId:{} refundType:{}",
                 restoreEntity.getUserId(), restoreEntity.getActivityId(), restoreEntity.getTeamId(), restoreEntity.getRefundType());
         IGroupBuyRefundOrderStrategy strategy = refundGroupBuyOrderStrategyMap.get(restoreEntity.getRefundType());
-        if (strategy == null ) {
-            log.info("逆向流程，恢复锁单量 userId:{} activityId:{} teamId:{} refundType:{}",
-                    restoreEntity.getUserId(), restoreEntity.getActivityId(), restoreEntity.getTeamId(), restoreEntity.getRefundType());
+        if (strategy == null) {
+            log.warn("未找到恢复锁单量策略 refundType:{}", restoreEntity.getRefundType());
+            throw new AppException(ResponseCode.UN_ERROR, "未找到恢复锁单量策略:" + restoreEntity.getRefundType());
         }
         strategy.reverseStock(restoreEntity);
     }
