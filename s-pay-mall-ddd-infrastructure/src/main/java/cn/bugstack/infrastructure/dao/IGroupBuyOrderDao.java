@@ -20,4 +20,6 @@ public interface IGroupBuyOrderDao {
     List<String> queryCompleteOutTradeNoListByTeamId(String teamId);
 
     List<String> queryUserIdListByTeamId(@Param("teamId") String teamId);
+
+    List<String> queryTimeOutRefundOrderList();
 }

@@ -29,4 +29,9 @@ public interface IGroupBuyOrderRepository {
      */
     List<String> queryUserIdListByTeamId(String teamId);
 
+    /**
+     * 查询超时订单
+     * @return
+     */
+    List<String> queryTimeOutRefundOrderList();
 }

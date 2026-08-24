@@ -102,7 +102,6 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
         GroupBuySettlementCommandEntity command = aggregate.getSettlementCommand();
         GroupBuyTeamEntity team = aggregate.getGroupBuyTeamEntity();
 
-        // 首先-更新 “订单” 状态为已完成
         int orderUpdated = groupBuyOrderDao.updateOrderStatus2Complete(
                 command.getUserId(),
                 command.getOutTradeNo()
@@ -111,41 +110,36 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
             throw new AppException(ResponseCode.E0005, "拼团订单结算更新失败");
         }
 
-        // 其次-更新 “拼团” complete_count +1
         int completeUpdated = groupBuyTeamDao.updateAddCompleteCount(team.getTeamId());
         if (completeUpdated != 1) {
             throw new AppException(ResponseCode.E0005, "拼团团队完成人数更新失败");
         }
 
-        // 未成团-返回空
         boolean complete = team.getTargetCount() - team.getCompleteCount() == 1;
         if (!complete) {
             return null;
         }
-        // 成团
+
         int statusUpdated = groupBuyTeamDao.updateStatus2Complete(team.getTeamId());
         if (statusUpdated != 1) {
             throw new AppException(ResponseCode.E0005, "拼团团队状态更新失败");
         }
 
-        // 查询已成团的所有订单号，组装通知任务
         List<String> outTradeNoList = groupBuyOrderDao.queryCompleteOutTradeNoListByTeamId(team.getTeamId());
         String parameterJson = JSON.toJSONString(new HashMap<String, Object>() {{
             put("teamId", team.getTeamId());
             put("outTradeNoList", outTradeNoList);
         }});
 
-        // 创建回调任务
         groupBuyNotifyTaskDao.insert(GroupBuyNotifyTask.builder()
                 .teamId(team.getTeamId())
                 .activityId(team.getActivityId())
                 .notifyMq("topic.team_success")
-                .notifyStatus(0)     // 待发
+                .notifyStatus(0)
                 .notifyCount(0)
                 .parameterJson(parameterJson)
                 .build());
 
-        // 返回领域对象
         return GroupBuyNotifyTaskEntity.builder()
                 .teamId(team.getTeamId())
                 .activityId(team.getActivityId())
@@ -161,6 +155,11 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
     @Override
     public List<String> queryUserIdListByTeamId(String teamId) {
         return groupBuyOrderDao.queryUserIdListByTeamId(teamId);
+    }
+
+    @Override
+    public List<String> queryTimeOutRefundOrderList() {
+        return groupBuyOrderDao.queryTimeOutRefundOrderList();
     }
 
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {
