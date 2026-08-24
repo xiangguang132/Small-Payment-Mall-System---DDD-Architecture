@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F7FB"/>
+      <stop offset="1" stop-color="#EEF2F8"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1E293B" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font: 700 34px "Segoe UI", Arial, sans-serif; fill: #0F172A; }
+      .subtitle { font: 400 16px "Segoe UI", Arial, sans-serif; fill: #475569; }
+      .section { font: 700 20px "Segoe UI", Arial, sans-serif; fill: #0F172A; }
+      .boxTitle { font: 700 18px "Segoe UI", Arial, sans-serif; fill: #0F172A; }
+      .boxText { font: 400 15px "Segoe UI", Arial, sans-serif; fill: #334155; }
+      .small { font: 400 13px "Segoe UI", Arial, sans-serif; fill: #475569; }
+      .chip { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #0F172A; letter-spacing: 0.4px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="980" fill="url(#bg)"/>
+  <rect x="36" y="28" width="1528" height="924" rx="28" fill="url(#panel)" filter="url(#shadow)"/>
+
+  <text x="72" y="82" class="title">订单分层与请求流转图</text>
+  <text x="72" y="114" class="subtitle">左边看职责边界，右边看普通下单 / 退单 / 退款的调用路径</text>
+
+  <rect x="72" y="146" width="660" height="726" rx="22" fill="#FFFFFF" stroke="#D8E1EC"/>
+  <rect x="868" y="146" width="660" height="726" rx="22" fill="#FFFFFF" stroke="#D8E1EC"/>
+
+  <text x="104" y="186" class="section">分层职责</text>
+  <text x="900" y="186" class="section">请求流转</text>
+
+  <rect x="104" y="224" width="596" height="110" rx="18" fill="#E0F2FE" stroke="#7DD3FC"/>
+  <text x="130" y="258" class="boxTitle">API 层</text>
+  <text x="130" y="286" class="boxText">定义对外契约：`IPayService`、`request`、`response`</text>
+  <text x="130" y="312" class="small">作用：给 Controller / 外部调用方一个稳定入口</text>
+
+  <rect x="104" y="360" width="596" height="122" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="130" y="394" class="boxTitle">Trigger 层</text>
+  <text x="130" y="422" class="boxText">Controller、Job、Listener、Assembler</text>
+  <text x="130" y="448" class="small">作用：接 HTTP / MQ / 定时任务，把 DTO 转成领域对象，再组装返回值</text>
+
+  <rect x="104" y="508" width="596" height="136" rx="18" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="130" y="542" class="boxTitle">Domain 层</text>
+  <text x="130" y="570" class="boxText">Service、Aggregate、Entity、VO、Repository 接口</text>
+  <text x="130" y="596" class="small">作用：承载业务规则。这里应该处理订单状态、退款条件、拼团结算等核心逻辑</text>
+  <text x="130" y="622" class="small">典型对象：`PayOrderEntity`、`OrderStatusVO`、`GroupBuyOrderAggregate`</text>
+
+  <rect x="104" y="670" width="596" height="160" rx="18" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="130" y="704" class="boxTitle">Infrastructure 层</text>
+  <text x="130" y="732" class="boxText">Repository 实现、DAO、MyBatis Mapper、消息适配、外部系统适配</text>
+  <text x="130" y="758" class="small">作用：把领域对象落库 / 读库 / 发消息 / 调外部 API</text>
+  <text x="130" y="784" class="small">这里会看到 PO、DAO、XML 映射，但不应该放业务规则</text>
+
+  <line x1="360" y1="334" x2="360" y2="356" stroke="#94A3B8" stroke-width="2"/>
+  <polygon points="360,356 352,344 368,344" fill="#94A3B8"/>
+  <line x1="360" y1="482" x2="360" y2="504" stroke="#94A3B8" stroke-width="2"/>
+  <polygon points="360,504 352,492 368,492" fill="#94A3B8"/>
+  <line x1="360" y1="644" x2="360" y2="666" stroke="#94A3B8" stroke-width="2"/>
+  <polygon points="360,666 352,654 368,654" fill="#94A3B8"/>
+
+  <rect x="900" y="224" width="596" height="92" rx="18" fill="#E0F2FE" stroke="#7DD3FC"/>
+  <text x="926" y="258" class="boxTitle">1. HTTP 请求进入 Controller</text>
+  <text x="926" y="286" class="boxText">例如 `refund_order`、`confirm_order`、`lock_order`</text>
+
+  <rect x="900" y="346" width="596" height="92" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="926" y="380" class="boxTitle">2. Controller 调用 Domain Service</text>
+  <text x="926" y="408" class="boxText">Controller 只做参数接收、鉴权上下文读取、结果包装</text>
+
+  <rect x="900" y="468" width="596" height="92" rx="18" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="926" y="502" class="boxTitle">3. Domain Service 执行业务规则</text>
+  <text x="926" y="530" class="boxText">使用 `Entity` / `Aggregate` / `VO` 判断状态并做状态迁移</text>
+
+  <rect x="900" y="590" width="596" height="92" rx="18" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="926" y="624" class="boxTitle">4. Repository / DAO 落库或调外部系统</text>
+  <text x="926" y="652" class="boxText">例如更新订单状态、写退款记录、发 MQ 消息</text>
+
+  <rect x="900" y="712" width="596" height="122" rx="18" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="926" y="746" class="boxTitle">5. 返回 Response</text>
+  <text x="926" y="774" class="boxText">Controller 再把领域结果映射成 `Response<T>` 返回给调用方</text>
+  <text x="926" y="800" class="small">所以：Controller 用 request / response，Domain Service 用 entity / aggregate / vo</text>
+
+  <line x1="1198" y1="316" x2="1198" y2="342" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <line x1="1198" y1="438" x2="1198" y2="464" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <line x1="1198" y1="560" x2="1198" y2="586" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <line x1="1198" y1="682" x2="1198" y2="708" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <rect x="104" y="852" width="286" height="34" rx="17" fill="#DBEAFE"/>
+  <text x="124" y="874" class="chip">请求 DTO: request</text>
+
+  <rect x="400" y="852" width="286" height="34" rx="17" fill="#DCFCE7"/>
+  <text x="420" y="874" class="chip">业务对象: entity / aggregate / vo</text>
+
+  <rect x="900" y="852" width="286" height="34" rx="17" fill="#FDE68A"/>
+  <text x="920" y="874" class="chip">返回 DTO: response</text>
+
+  <rect x="1204" y="852" width="292" height="34" rx="17" fill="#E2E8F0"/>
+  <text x="1224" y="874" class="chip">持久化 / 适配: repository / dao</text>
+</svg>
