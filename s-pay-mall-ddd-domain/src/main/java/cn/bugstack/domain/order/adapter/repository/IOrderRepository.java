@@ -17,15 +17,23 @@ import java.util.List;
 
 public interface IOrderRepository {
 
+    // 普通下单
+    /**
+     * 创建普通订单
+     * @param orderAggregate
+     */
     void doSaveOrder(CreateOrderAggregate orderAggregate);
 
     /**
-     * 保存拼团支付单（GROUP_BUY 类型）
-     * 与 doSaveOrder 区别：金额取自 payOrderEntity（拼团实付价），orderType 固定 GROUP_BUY
-     * @param payOrderEntity 拼团支付单
+     * 查询当前是否存在同等商品或者单子未支付的订单
+     * ----------------------------------
+     - 用户刚要下单时
+     - 系统先查一下
+     - 看这个购物车/用户/商品组合下
+     - 有没有已经存在的“未支付订单”
+     * @param shopCartEntity
+     * @return
      */
-    void saveGroupBuyPayOrder(PayOrderEntity payOrderEntity);
-
     OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity);
 
     /**
@@ -50,12 +58,14 @@ public interface IOrderRepository {
 
     /**
      * 查询有效期内，未接收到支付回调的订单
+     * 用于 NoPayNotifyOrderJob 这种补偿任务
+     * 重点是“没收到通知”，不是“没支付”
      * @return
      */
     List<String> queryNoPayNotifyOrderList();
 
     /**
-     * 查询超时15min的订单进行关单
+     * 查询超时 15 分钟需要关单的订单列表
      * @return
      */
     List<String> queryTimeOutCloseOrderList();
@@ -78,3 +88,8 @@ public interface IOrderRepository {
      */
     boolean changeOrderRefundResult(String outTradeNo, String fromStatus, String toStatus);
 }
+
+
+
+
+

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 拼团退单
+ * 拼团订单-超时退款
  */
 @Component
 public class GroupBuyRefundTimeoutTaskProvider implements ITimeoutOrderTaskProvider {
@@ -21,11 +21,6 @@ public class GroupBuyRefundTimeoutTaskProvider implements ITimeoutOrderTaskProvi
 
     @Resource
     private IGroupBuyRefundOrderService groupBuyRefundOrderService;
-
-    @Override
-    public String taskName() {
-        return "group-buy-refund";
-    }
 
     @Override
     public List<String> queryTimeoutOutTradeNoList() {
@@ -43,4 +38,5 @@ public class GroupBuyRefundTimeoutTaskProvider implements ITimeoutOrderTaskProvi
                 groupBuyRefundOrderService.refundGroupBuyOrder(command);
         return result != null && result.isSuccess();
     }
+
 }

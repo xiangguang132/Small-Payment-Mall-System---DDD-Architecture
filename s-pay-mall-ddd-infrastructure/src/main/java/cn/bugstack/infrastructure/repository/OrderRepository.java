@@ -63,21 +63,6 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public void saveGroupBuyPayOrder(PayOrderEntity payOrderEntity) {
-        PayOrder order = new PayOrder();
-        order.setUserId(payOrderEntity.getUserId());
-        order.setProductId(payOrderEntity.getProductId());
-        order.setProductName(payOrderEntity.getProductName());
-        order.setOutTradeNo(payOrderEntity.getOutTradeNo());
-        order.setOrderTime(toDate(payOrderEntity.getOrderTime()));
-        order.setTotalAmount(payOrderEntity.getTotalAmount());
-        order.setOrderType(OrderTypeEnum.GROUP_BUY.getCode());
-        order.setStatus(OrderStatusVO.CREATE.getCode());
-
-        orderDao.insert(order);
-    }
-
-    @Override
     public OrderEntity queryUnPayOrder(ShopCartEntity shopCartEntity) {
         // 1. 封装参数
         PayOrder orderReq = new  PayOrder();
@@ -186,3 +171,4 @@ public class OrderRepository implements IOrderRepository {
         return orderDao.changeOrderRefundResult(outTradeNo, fromStatus, toStatus);
     }
 }
+

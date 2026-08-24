@@ -17,4 +17,6 @@ public interface IGroupBuyTeamDao {
     int updateStatus2Complete(@Param("teamId") String teamId);
 
     GroupBuyTeamEntity queryGroupBuyTeamByTeamId(@Param("teamId") String teamId);
+
+    int updateSubtractLockCount(@Param("teamId") String teamId);
 }

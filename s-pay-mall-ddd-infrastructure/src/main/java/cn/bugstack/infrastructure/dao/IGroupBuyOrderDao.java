@@ -22,4 +22,6 @@ public interface IGroupBuyOrderDao {
     List<String> queryUserIdListByTeamId(@Param("teamId") String teamId);
 
     List<String> queryTimeOutRefundOrderList();
+
+    int updateOrderStatus2Refund(@Param("outTradeNo") String outTradeNo);
 }

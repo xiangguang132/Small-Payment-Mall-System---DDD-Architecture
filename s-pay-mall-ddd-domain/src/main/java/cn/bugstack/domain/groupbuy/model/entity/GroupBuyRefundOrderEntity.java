@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 /**
  * 拼团退单实体
  */
@@ -38,5 +40,10 @@ public class GroupBuyRefundOrderEntity {
      * 外部交易单号
      */
     private String outTradeNo;
+
+    /**
+     * 实付金额（已支付场景需要，用于调用支付宝退款）
+     */
+    private BigDecimal payAmount;
 
 }

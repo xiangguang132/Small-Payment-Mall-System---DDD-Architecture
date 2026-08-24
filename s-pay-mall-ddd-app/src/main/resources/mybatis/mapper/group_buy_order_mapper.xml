@@ -75,4 +75,12 @@
         where status = 0
           and create_time <![CDATA[<]]> date_sub(now(), interval 15 minute)
     </select>
+
+    <update id="updateOrderStatus2Refund">
+        update group_buy_order
+        set status = 2,
+            update_time = now()
+        where out_trade_no = #{outTradeNo}
+          and status in (0, 1)
+    </update>
 </mapper>

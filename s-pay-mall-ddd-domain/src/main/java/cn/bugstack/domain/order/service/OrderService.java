@@ -2,6 +2,7 @@ package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.adapter.port.IProductPort;
 import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
@@ -48,8 +49,10 @@ public class OrderService extends AbstractOrderService{
     @Autowired
     private IAlipayPort alipayPort;
 
-    public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository, IProductPort productPort) {
-        super(orderRepository, orderLockRepository, productPort);
+    private final IGroupBuyOrderRepository groupBuyOrderRepository;
+
+    public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository, IProductPort productPort, IGroupBuyOrderRepository groupBuyOrderRepository) {        super(orderRepository, orderLockRepository, productPort);
+        this.groupBuyOrderRepository = groupBuyOrderRepository;
     }
 
     /**
@@ -139,8 +142,6 @@ public class OrderService extends AbstractOrderService{
         payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
         payOrderEntity.setPayUrl(form);
 
-        // 落库 GROUP_BUY 支付单（status=CREATE）
-        orderRepository.saveGroupBuyPayOrder(payOrderEntity);
         // 回写支付表单 + 置为 PAY_WAIT
         orderRepository.updateOrderPayInfo(payOrderEntity);
 
@@ -243,3 +244,6 @@ public class OrderService extends AbstractOrderService{
     }
 
 }
+
+
+

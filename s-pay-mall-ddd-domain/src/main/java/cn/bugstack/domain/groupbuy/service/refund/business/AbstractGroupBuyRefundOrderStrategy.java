@@ -6,6 +6,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 @Slf4j
 public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRefundOrderStrategy {
@@ -14,15 +15,23 @@ public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRe
     protected IGroupBuyRefundPort groupBuyRefundPort;
 
     /**
-     * 统一退单后回调钩子。
-     * 子类完成各自退款/关单逻辑后，构造行为结果并调用这里即可。
+     * 统一退单后回调钩子（无需退款金额的场景，如未支付退单）。
      */
     protected void sendRefundNotifyMessage(GroupBuyRefundOrderEntity refundOrderEntity, boolean success, String message) {
+        sendRefundNotifyMessage(refundOrderEntity, success, message, null);
+    }
+
+    /**
+     * 统一退单后回调钩子（需要退款金额的场景，如已支付退单）。
+     */
+    protected void sendRefundNotifyMessage(GroupBuyRefundOrderEntity refundOrderEntity, boolean success, String message, BigDecimal payAmount) {
         GroupBuyRefundOrderBehaviorEntity behaviorEntity = GroupBuyRefundOrderBehaviorEntity.builder()
                 .userId(refundOrderEntity.getUserId())
                 .teamId(refundOrderEntity.getTeamId())
                 .activityId(refundOrderEntity.getActivityId())
                 .orderId(refundOrderEntity.getOrderId())
+                .outTradeNo(refundOrderEntity.getOutTradeNo())
+                .payAmount(payAmount)
                 .success(success)
                 .message(message)
                 .build();

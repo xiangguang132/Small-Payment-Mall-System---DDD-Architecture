@@ -151,7 +151,6 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .uuid(team.getTeamId() + "_trade_settlement_" + command.getOutTradeNo())
                 .build();
     }
-
     @Override
     public List<String> queryUserIdListByTeamId(String teamId) {
         return groupBuyOrderDao.queryUserIdListByTeamId(teamId);
@@ -160,6 +159,11 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
     @Override
     public List<String> queryTimeOutRefundOrderList() {
         return groupBuyOrderDao.queryTimeOutRefundOrderList();
+    }
+
+    @Override
+    public int updateOrderStatus2Refund(String outTradeNo) {
+        return groupBuyOrderDao.updateOrderStatus2Refund(outTradeNo);
     }
 
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {
@@ -205,3 +209,5 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .build();
     }
 }
+
+

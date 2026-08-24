@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 普通退单
+ * 普通订单-超时关单
  */
 @Component
 public class CloseOrderTimeoutTaskProvider implements ITimeoutOrderTaskProvider {
@@ -22,12 +22,8 @@ public class CloseOrderTimeoutTaskProvider implements ITimeoutOrderTaskProvider 
     }
 
     @Override
-    public String taskName() {
-        return "close-order";
-    }
-
-    @Override
     public boolean handle(String outTradeNo) {
         return orderService.changeOrderPayClose(outTradeNo);
     }
+
 }

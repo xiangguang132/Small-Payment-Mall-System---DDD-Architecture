@@ -21,6 +21,10 @@ public class GroupBuyTeamRepository implements IGroupBuyTeamRepository {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "拼团队伍id不能为空");
         }
         return groupBuyTeamDao.queryGroupBuyTeamByTeamId(teamId);
+    }
 
+    @Override
+    public int updateSubtractLockCount(String teamId) {
+        return groupBuyTeamDao.updateSubtractLockCount(teamId);
     }
 }

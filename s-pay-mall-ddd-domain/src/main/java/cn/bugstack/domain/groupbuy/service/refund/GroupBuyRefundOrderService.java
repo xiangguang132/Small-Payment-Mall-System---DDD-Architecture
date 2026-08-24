@@ -74,6 +74,8 @@ public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
                 .teamId(behaviorEntity.getTeamId())
                 .activityId(behaviorEntity.getActivityId())
                 .orderId(behaviorEntity.getOrderId())
+                .outTradeNo(behaviorEntity.getOutTradeNo())
+                .payAmount(behaviorEntity.getPayAmount())
                 .build();
         strategy.refundGroupBuyOrder(refundOrderEntity);
         behaviorEntity.setStrategyName(null);

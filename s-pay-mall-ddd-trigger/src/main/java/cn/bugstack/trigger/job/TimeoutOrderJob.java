@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 通用-处理超时订单任务
+ * 只保留调度-只负责触发
+ */
 @Slf4j
 @Component
 public class TimeoutOrderJob {
@@ -15,27 +19,21 @@ public class TimeoutOrderJob {
     @Resource
     private List<ITimeoutOrderTaskProvider> timeoutOrderTaskProviders;
 
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void exec() {
-        if (timeoutOrderTaskProviders == null || timeoutOrderTaskProviders.isEmpty()) {
-            log.info("定时任务，暂无超时任务 provider");
-            return ;
-        }
         for (ITimeoutOrderTaskProvider provider : timeoutOrderTaskProviders) {
-            try {
-                List<String> outTradeNos = provider.queryTimeoutOutTradeNoList();
-                if (outTradeNos == null || outTradeNos.isEmpty()) {
-                    log.info("定时任务[{}]，暂无超时单据", provider.taskName());
-                    continue;
+            List<String> outTradeNoList = provider.queryTimeoutOutTradeNoList();
+            for (String outTradeNo : outTradeNoList) {
+                try {
+                    boolean success = provider.handle(outTradeNo);
+                    if (!success) {
+                        log.info("超时任务：处理失败，跳过 outTradeNo={}", outTradeNo);
+                        continue;
+                    }
+                    log.info("超时任务：处理成功 outTradeNo={}", outTradeNo);
+                } catch (Exception e) {
+                    log.error("超时任务：处理异常 outTradeNo={}", outTradeNo, e);
                 }
-
-                for (String outTradeNo : outTradeNos) {
-                    boolean status = provider.handle(outTradeNo);
-                    log.info("定时任务[{}] outTradeNo:{} status:{}",
-                            provider.taskName(), outTradeNo, status);
-                }
-            } catch (Exception e) {
-                log.error("定时任务[{}]执行失败", provider.taskName(), e);
             }
         }
     }

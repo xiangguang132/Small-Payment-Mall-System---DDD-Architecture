@@ -11,12 +11,14 @@ public class PaidTeamRefundStrategy extends AbstractGroupBuyRefundOrderStrategy 
 
     @Override
     public void refundGroupBuyOrder(GroupBuyRefundOrderEntity groupBuyRefundOrderEntity) {
-        log.info("退单：已支付成已团 userId:{} teamId:{} orderId:{} ", groupBuyRefundOrderEntity.getUserId(), groupBuyRefundOrderEntity.getTeamId(), groupBuyRefundOrderEntity.getOutTradeNo());
+        log.info("退单：已支付已成团 userId:{} teamId:{} outTradeNo:{}",
+                groupBuyRefundOrderEntity.getUserId(),
+                groupBuyRefundOrderEntity.getTeamId(),
+                groupBuyRefundOrderEntity.getOutTradeNo());
 
-        // todo已支付成已团
-
-        sendRefundNotifyMessage(groupBuyRefundOrderEntity, true, "已支付已成团退单成功");
+        // 传入 payAmount，由 Port 层调用支付宝退款并处理库存恢复与状态更新
+        sendRefundNotifyMessage(groupBuyRefundOrderEntity, true,
+                "已支付已成团退单成功", groupBuyRefundOrderEntity.getPayAmount());
     }
 
-    // todo 恢复库存
 }
