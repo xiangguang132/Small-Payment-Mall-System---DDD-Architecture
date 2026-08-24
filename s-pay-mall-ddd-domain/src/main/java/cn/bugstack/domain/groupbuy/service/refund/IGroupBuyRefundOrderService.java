@@ -2,6 +2,7 @@ package cn.bugstack.domain.groupbuy.service.refund;
 
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderCommandEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
 
 public interface IGroupBuyRefundOrderService {
 
@@ -12,6 +13,8 @@ public interface IGroupBuyRefundOrderService {
      */
     GroupBuyRefundOrderBehaviorEntity refundGroupBuyOrder(GroupBuyRefundOrderCommandEntity groupBuyRefundOrderCommandEntity);
 
-//    void restoreGroupBuyLockStock()
-
+    /**
+     * 恢复锁单量（MQ 消费端调用）
+     */
+    void restoreTeamLockStock(GroupBuyRefundRestoreEntity restoreEntity) throws Exception;
 }

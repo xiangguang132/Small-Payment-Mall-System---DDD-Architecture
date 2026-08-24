@@ -3,6 +3,7 @@ package cn.bugstack.domain.groupbuy.service.refund;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
 import cn.bugstack.domain.groupbuy.service.refund.business.IGroupBuyRefundOrderStrategy;
 import cn.bugstack.domain.groupbuy.service.refund.factory.GroupBuyRefundOrderRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
@@ -80,5 +81,17 @@ public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
         strategy.refundGroupBuyOrder(refundOrderEntity);
         behaviorEntity.setStrategyName(null);
         return behaviorEntity;
+    }
+
+    @Override
+    public void restoreTeamLockStock(GroupBuyRefundRestoreEntity restoreEntity) throws Exception {
+        log.info("逆向流程，恢复锁单量 userId:{} activityId:{} teamId:{} refundType:{}",
+                restoreEntity.getUserId(), restoreEntity.getActivityId(), restoreEntity.getTeamId(), restoreEntity.getRefundType());
+        IGroupBuyRefundOrderStrategy strategy = refundGroupBuyOrderStrategyMap.get(restoreEntity.getRefundType());
+        if (strategy == null ) {
+            log.info("逆向流程，恢复锁单量 userId:{} activityId:{} teamId:{} refundType:{}",
+                    restoreEntity.getUserId(), restoreEntity.getActivityId(), restoreEntity.getTeamId(), restoreEntity.getRefundType());
+        }
+        strategy.reverseStock(restoreEntity);
     }
 }

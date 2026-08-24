@@ -13,4 +13,9 @@ public interface IGroupBuyNotifyTaskRepository {
     int updateNotifyTaskStatusError(GroupBuyNotifyTaskEntity task);
 
     int updateNotifyTaskStatusRetry(GroupBuyNotifyTaskEntity task);
+
+    /**
+     * 创建回调任务
+     */
+    int insertNotifyTask(GroupBuyNotifyTaskEntity task);
 }

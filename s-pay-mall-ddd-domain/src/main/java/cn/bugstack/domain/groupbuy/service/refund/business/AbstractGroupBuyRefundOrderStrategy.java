@@ -56,4 +56,33 @@ public abstract class AbstractGroupBuyRefundOrderStrategy implements IGroupBuyRe
                     e);
         }
     }
+
+    /**
+     * 统一退单后回调钩子（带退单类型，供 MQ 消息记录 type）。
+     */
+    protected void sendRefundNotifyMessage(GroupBuyRefundOrderEntity groupBuyRefundOrderEntity, String refundType, boolean success, String message, BigDecimal payAmount) {
+        GroupBuyRefundOrderBehaviorEntity groupBuyRefundOrderBehaviorEntity = GroupBuyRefundOrderBehaviorEntity.builder()
+                .userId(groupBuyRefundOrderEntity.getUserId())
+                .teamId(groupBuyRefundOrderEntity.getTeamId())
+                .activityId(groupBuyRefundOrderEntity.getActivityId())
+                .orderId(groupBuyRefundOrderEntity.getOrderId())
+                .outTradeNo(groupBuyRefundOrderEntity.getOutTradeNo())
+                .payAmount(payAmount)
+                .refundType(refundType)
+                .success(success)
+                .message(message)
+                .build();
+    }
+
+    /**
+     * 消费端恢复锁单量（对标参考 doReverseStock；本地无 Redis，直接扣 DB team.lock_count）。
+     */
+    protected void doReverseStock(GroupBuyRefundRestoreEntity restoreEntity) {
+        log.info("退单；恢复锁单量 activityId:{} teamId:{}",
+                restoreEntity.getActivityId(), restoreEntity.getTeamId());
+        int updated = groupBuyTeamRepository.updateSubtractLockCount(restoreEntity.getTeamId());
+        if (updated != 1) {
+            log.warn("退单；恢复锁单量失败或已恢复 teamId:{}", restoreEntity.getTeamId());
+        }
+    }
 }

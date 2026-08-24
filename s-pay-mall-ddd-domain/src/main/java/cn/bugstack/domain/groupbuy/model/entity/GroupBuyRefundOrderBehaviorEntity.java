@@ -56,9 +56,14 @@ public class GroupBuyRefundOrderBehaviorEntity {
      */
     private String message;
 
+//    /**
+//     * 退单策略名
+//     * 仅在需要继续路由策略时使用，避免和 message 语义混用
+//     */
+//    private String strategyName;
+
     /**
-     * 退单策略名
-     * 仅在需要继续路由策略时使用，避免和 message 语义混用
+     * 退单类型（恢复库存时分派策略用，值 = 策略 bean 名）
      */
-    private String strategyName;
+    private String refundType;
 }

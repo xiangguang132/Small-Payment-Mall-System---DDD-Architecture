@@ -1,13 +1,17 @@
 package cn.bugstack.infrastructure.adapter.port;
 
 import cn.bugstack.domain.groupbuy.adapter.IGroupBuyRefundPort;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyNotifyTaskEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyNotifyTaskRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyTeamRepository;
+import cn.bugstack.domain.groupbuy.service.task.IGroupBuyNotifyTaskService;
 import cn.bugstack.domain.payment.adapter.port.IAlipayRefundPort;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -22,25 +26,22 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
 
     @Resource
     private IAlipayRefundPort alipayRefundPort;
-
     @Resource
     private IGroupBuyOrderRepository groupBuyOrderRepository;
-
     @Resource
-    private IGroupBuyTeamRepository groupBuyTeamRepository;
+    private IGroupBuyNotifyTaskRepository groupBuyNotifyTaskRepository;
+    @Resource
+    private IGroupBuyNotifyTaskService groupBuyNotifyTaskService;
 
     @Override
+    @Transactional
     public void groupBuyRefundNotify(GroupBuyRefundOrderBehaviorEntity behaviorEntity) throws Exception {
         String outTradeNo = behaviorEntity.getOutTradeNo();
         String teamId = behaviorEntity.getTeamId();
         boolean success = behaviorEntity.isSuccess();
 
         log.info("拼团退单回调 userId:{} teamId:{} outTradeNo:{} success:{} message:{}",
-                behaviorEntity.getUserId(),
-                teamId,
-                outTradeNo,
-                success,
-                behaviorEntity.getMessage());
+                behaviorEntity.getUserId(), teamId, outTradeNo, success, behaviorEntity.getMessage());
 
         if (!success) {
             log.warn("拼团退单失败，跳过后续处理 outTradeNo:{} message:{}", outTradeNo, behaviorEntity.getMessage());
@@ -52,8 +53,7 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
             boolean alipayRefundSuccess = alipayRefundPort.refund(outTradeNo, null, behaviorEntity.getPayAmount());
             if (!alipayRefundSuccess) {
                 log.error("拼团退单支付宝退款失败 outTradeNo:{}", outTradeNo);
-                // 支付宝退款失败，不继续更新状态，等待重试
-                return;
+                return;   // 退款失败，不落消息表，等待重试
             }
             log.info("拼团退单支付宝退款成功 outTradeNo:{}", outTradeNo);
         }
@@ -64,27 +64,31 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
             log.warn("拼团退单更新订单状态失败（可能已处理） outTradeNo:{}", outTradeNo);
         }
 
-        // 3. 恢复团队库存：锁定人数 -1
-        int teamUpdated = groupBuyTeamRepository.updateSubtractLockCount(teamId);
-        if (teamUpdated != 1) {
-            log.warn("拼团退单恢复团队库存失败 teamId:{}", teamId);
-        }
-
-        // 4. 写入 notify_task，等待 MQ Job 发送退款成功通知
+        // 3. 落库本地消息表（notifyStatus=0，等待发 MQ；兜底由 GroupBuyNotifyJob 扫）
         String parameterJson = JSON.toJSONString(new HashMap<String, Object>() {{
+            put("refundType", behaviorEntity.getRefundType());
+            put("userId", behaviorEntity.getUserId());
             put("teamId", teamId);
+            put("orderId", behaviorEntity.getOrderId());
             put("outTradeNo", outTradeNo);
             put("activityId", behaviorEntity.getActivityId());
         }});
-        log.info("拼团退单写入MQ通知 outTradeNo:{} parameterJson:{}", outTradeNo, parameterJson);
-        // TODO: 当 group_buy_notify_task 表和 GroupBuyNotifyJob 补全后，取消注释写入逻辑
-        // groupBuyNotifyTaskDao.insert(GroupBuyNotifyTask.builder()
-        //         .teamId(teamId)
-        //         .activityId(behaviorEntity.getActivityId())
-        //         .notifyMq("topic.order_refund_success")
-        //         .notifyStatus(0)
-        //         .notifyCount(0)
-        //         .parameterJson(parameterJson)
-        //         .build());
+        GroupBuyNotifyTaskEntity task = GroupBuyNotifyTaskEntity.builder()
+                .teamId(teamId)
+                .activityId(behaviorEntity.getActivityId())
+                .notifyType("MQ")
+                .notifyMQ("topic.team_refund")          // 必须用 topic.team_refund，和消费者绑定一致
+                .notifyStatus(0)
+                .notifyCount(0)
+                .parameterJson(parameterJson)
+                .build();
+        int inserted = groupBuyNotifyTaskRepository.insertNotifyTask(task);
+        if (inserted != 1) {
+            log.warn("拼团退单写本地消息表失败 teamId:{}", teamId);
+        }
+
+        // 4. 异步发 MQ（失败也由 GroupBuyNotifyJob 兜底重发）
+        groupBuyNotifyTaskService.execNotifyJob(task);
     }
+
 }

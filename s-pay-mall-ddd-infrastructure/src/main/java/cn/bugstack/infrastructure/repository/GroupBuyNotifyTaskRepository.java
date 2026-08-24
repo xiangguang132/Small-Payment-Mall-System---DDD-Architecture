@@ -38,6 +38,11 @@ public class GroupBuyNotifyTaskRepository implements IGroupBuyNotifyTaskReposito
         return groupBuyNotifyTaskDao.updateNotifyTaskStatusRetry(toPo(task));
     }
 
+    @Override
+    public int insertNotifyTask(GroupBuyNotifyTaskEntity task) {
+        return groupBuyNotifyTaskDao.insert(toPo(task));
+    }
+
     private GroupBuyNotifyTask toPo(GroupBuyNotifyTaskEntity entity) {
         return GroupBuyNotifyTask.builder()
                 .teamId(entity.getTeamId())
