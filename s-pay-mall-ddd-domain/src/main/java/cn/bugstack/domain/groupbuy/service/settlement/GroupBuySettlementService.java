@@ -1,5 +1,6 @@
 package cn.bugstack.domain.groupbuy.service.settlement;
 
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyNotifyTaskEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuySettlementCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuySettlementFeedBackEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTeamEntity;
@@ -8,27 +9,35 @@ import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyTeamRepository;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyProgressVO;
 import cn.bugstack.domain.groupbuy.service.settlement.factory.GroupBuySettlementRuleFilterFactory;
+import cn.bugstack.domain.groupbuy.service.task.IGroupBuyNotifyTaskService;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 结算服务实现
  */
+@Slf4j
 @Service
 public class GroupBuySettlementService implements IGroupBuySettlementService {
 
     @Resource(name = "groupBuySettlementRuleFilter")
     private BusinessLinkedList<GroupBuySettlementCommandEntity, GroupBuySettlementRuleFilterFactory.DynamicContext, GroupBuySettlementFeedBackEntity> groupBuySettlementRuleFilter;
-
     @Resource
     private IGroupBuyOrderRepository groupBuyOrderRepository;
-
     @Resource
     private IGroupBuyTeamRepository groupBuyTeamRepository;
+    @Resource
+    private ThreadPoolExecutor threadPoolExecutor;
+    @Resource
+    private IGroupBuyNotifyTaskService groupBuyNotifyTaskService;
 
     /**
      * 结算订单
@@ -65,8 +74,21 @@ public class GroupBuySettlementService implements IGroupBuySettlementService {
                 .groupBuyTeamEntity(team)
                 .build();
 
-        boolean complete = groupBuyOrderRepository.settlementGroupBuyOrder(aggregate);
-        feedBackEntity.setComplete(complete);
+        GroupBuyNotifyTaskEntity groupBuyNotifyTaskEntity = groupBuyOrderRepository.settlementGroupBuyOrder(aggregate);
+        feedBackEntity.setComplete(groupBuyNotifyTaskEntity != null);
+
+        // 立即执行任务
+        if (groupBuyNotifyTaskEntity != null) {
+            threadPoolExecutor.execute(() -> {
+                try {
+                    Map<String, Integer> result = groupBuyNotifyTaskService.execNotifyJob(groupBuyNotifyTaskEntity);
+                    log.info("成团通知即时投递 result:{}", JSON.toJSONString(result));
+                } catch (Exception e) {
+                    log.error("成团通知即时投递失败，交由兜底Job补偿 teamId:{}", groupBuyNotifyTaskEntity.getTeamId(), e);
+                }
+            });
+        }
+
         return feedBackEntity;
     }
 

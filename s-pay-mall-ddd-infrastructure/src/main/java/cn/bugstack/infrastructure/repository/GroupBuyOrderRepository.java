@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
+public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
 
     @Resource
     private IGroupBuyTeamDao groupBuyTeamDao;
@@ -156,6 +156,11 @@ public class GroupBuyOrderOrderRepository implements IGroupBuyOrderRepository {
                 .parameterJson(parameterJson)
                 .uuid(team.getTeamId() + "_trade_settlement_" + command.getOutTradeNo())
                 .build();
+    }
+
+    @Override
+    public List<String> queryUserIdListByTeamId(String teamId) {
+        return groupBuyOrderDao.queryUserIdListByTeamId(teamId);
     }
 
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {

@@ -1,12 +1,14 @@
 package cn.bugstack.infrastructure.dao;
 
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyNotifyTask;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * 拼团成功回调任务
  */
+@Mapper
 public interface IGroupBuyNotifyTaskDao {
 
     /**
@@ -26,7 +28,7 @@ public interface IGroupBuyNotifyTaskDao {
      * @param task
      * @return
      */
-    int updateNotifyTaskStatusSuccess(GroupBuyNotifyTask task);          // where team_id + notify_status=0
+    int updateNotifyTaskStatusSuccess(GroupBuyNotifyTask task);          // where team_id + notify_status in (0,2)
     int updateNotifyTaskStatusRetry(GroupBuyNotifyTask task);            // notify_count+1, status=2
     int updateNotifyTaskStatusError(GroupBuyNotifyTask task);            // status=3
 

@@ -1,7 +1,6 @@
 package cn.bugstack.trigger.listener;
 
-import cn.bugstack.domain.groupbuy.repository.IUserNotifyRepository;
-import cn.bugstack.infrastructure.dao.IGroupBuyOrderDao;
+import cn.bugstack.domain.groupbuy.service.user.IUserNotifyTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -17,9 +16,7 @@ import javax.annotation.Resource;
 public class GroupBuySuccessTopicListener {
 
     @Resource
-    private IGroupBuyOrderDao groupBuyOrderDao;
-    @Resource
-    private IUserNotifyRepository userNotifyRepository;
+    private IUserNotifyTaskService userNotifyTaskService;
 
     @RabbitListener(
             bindings = @QueueBinding(
@@ -28,15 +25,14 @@ public class GroupBuySuccessTopicListener {
                     key = "${spring.rabbitmq.config.producer.topic_team_success.routing_key}"
             )
     )
-
     public void listener(String message) {
-        log.info("接收消息（支付宝异步通知）:{}", message);
+        log.info("接收消息（站内信异步通知）:{}", message);
         try {
-            // todo IUserNotifyTaskService 实现
+            userNotifyTaskService.writeTeamSuccessNotify(message);
         } catch (Exception e) {
             // 处理失败的消息直接确认（ack），不 requeue 死循环；
             // 重试节奏交由 GroupBuyNotifyJob 定时扫描 task_status=0 的任务补偿。
-            log.error("处理支付宝异步通知失败，交由定时任务补偿 message:{}", message, e);
+            log.error("成团站内信写入失败，交由定时任务补偿 message:{}", message, e);
         }
     }
 

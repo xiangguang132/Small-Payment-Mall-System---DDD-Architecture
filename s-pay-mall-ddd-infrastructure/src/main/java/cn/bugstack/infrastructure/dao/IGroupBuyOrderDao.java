@@ -18,4 +18,6 @@ public interface IGroupBuyOrderDao {
     int updateOrderStatus2Complete(@Param("userId") String userId, @Param("outTradeNo") String outTradeNo);
 
     List<String> queryCompleteOutTradeNoListByTeamId(String teamId);
+
+    List<String> queryUserIdListByTeamId(@Param("teamId") String teamId);
 }

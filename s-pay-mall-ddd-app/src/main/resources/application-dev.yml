@@ -82,6 +82,11 @@ spring:
           routing_key: topic.team_refund
           # 消费队列
           queue: s_pay_mall_queue_team_refund
+        topic_team_success:
+          # 消息主题
+          routing_key: topic.team_success
+          # 消费队列
+          queue: s_pay_mall_queue_team_success
 
 # 微信公众号对接
 weixin:

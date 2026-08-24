@@ -7,7 +7,7 @@ import cn.bugstack.infrastructure.dao.IGroupBuyOrderDao;
 import cn.bugstack.infrastructure.dao.IGroupBuyTeamDao;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyOrder;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam;
-import cn.bugstack.infrastructure.repository.GroupBuyOrderOrderRepository;
+import cn.bugstack.infrastructure.repository.GroupBuyOrderRepository;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class GroupBuyOrderRepositoryTest {
     private IGroupBuyOrderDao groupBuyOrderDao;
 
     @InjectMocks
-    private GroupBuyOrderOrderRepository groupBuyOrderRepository;
+    private GroupBuyOrderRepository groupBuyOrderRepository;
 
     @Before
     public void setUp() {
