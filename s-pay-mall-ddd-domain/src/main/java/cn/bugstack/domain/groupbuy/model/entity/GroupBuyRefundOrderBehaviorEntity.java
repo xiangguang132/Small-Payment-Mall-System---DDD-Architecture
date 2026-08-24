@@ -43,4 +43,10 @@ public class GroupBuyRefundOrderBehaviorEntity {
      * 退单结果描述
      */
     private String message;
+
+    /**
+     * 退单策略名
+     * 仅在需要继续路由策略时使用，避免和 message 语义混用
+     */
+    private String strategyName;
 }

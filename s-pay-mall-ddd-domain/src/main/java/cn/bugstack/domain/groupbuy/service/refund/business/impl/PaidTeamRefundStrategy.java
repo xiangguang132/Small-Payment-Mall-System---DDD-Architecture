@@ -15,7 +15,7 @@ public class PaidTeamRefundStrategy extends AbstractGroupBuyRefundOrderStrategy 
 
         // todo已支付成已团
 
-        // todo mq消息
+        sendRefundNotifyMessage(groupBuyRefundOrderEntity, true, "已支付已成团退单成功");
     }
 
     // todo 恢复库存

@@ -13,6 +13,7 @@ public class PaidRefundStrategy extends AbstractGroupBuyRefundOrderStrategy {
     public void refundGroupBuyOrder(GroupBuyRefundOrderEntity groupBuyRefundOrderEntity) {
         log.info("退单：已支付未成团 userId:{} teamId:{} orderId:{} ", groupBuyRefundOrderEntity.getUserId(), groupBuyRefundOrderEntity.getTeamId(), groupBuyRefundOrderEntity.getOutTradeNo());
         // todo 退单与发送mq
+        sendRefundNotifyMessage(groupBuyRefundOrderEntity, true, "已支付未成团退单成功");
     }
 
     // todo 恢复库存
