@@ -18,7 +18,6 @@ public class OrderLock {
 
     private Long id;
     private String lockId;
-    private String productId;
     private String orderId;
     private String lockStatus;
     private Date lockTime;

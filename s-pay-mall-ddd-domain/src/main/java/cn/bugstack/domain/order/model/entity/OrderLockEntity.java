@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * 锁单实体 —— 映射 order_lock 表
- * 仅记录锁单号、商品ID、关联订单ID、状态、时间
+ * 仅记录锁单号、关联订单ID、状态、时间；商品与用户信息由确认下单请求提供
  */
 @Data
 @Builder
@@ -19,7 +19,6 @@ public class OrderLockEntity {
 
     private Long id;
     private String lockId;
-    private String productId;
     private String orderId;
     private String lockStatus;  // LOCKED / CONFIRMED / EXPIRED
     private LocalDateTime lockTime;

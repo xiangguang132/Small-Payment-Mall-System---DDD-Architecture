@@ -17,15 +17,15 @@ public class OrderLockService implements IOrderLockService {
     }
 
     @Override
-    public OrderLockEntity lockOrder(String productId) {
-        // 构建锁单聚合体（锁单只关心商品与订单，不关心归属用户）
-        LockOrderAggregate aggregate = LockOrderAggregate.build(productId);
+    public OrderLockEntity lockOrder() {
+        // 构建锁单聚合体（锁单只生成锁单号与状态，不涉及商品与用户）
+        LockOrderAggregate aggregate = LockOrderAggregate.build();
         OrderLockEntity lockEntity = aggregate.getOrderLockEntity();
 
         // 持久化
         orderLockRepository.saveLock(lockEntity);
 
-        log.info("锁单成功 lockId:{} productId:{}", lockEntity.getLockId(), productId);
+        log.info("锁单成功 lockId:{}", lockEntity.getLockId());
         return lockEntity;
     }
 

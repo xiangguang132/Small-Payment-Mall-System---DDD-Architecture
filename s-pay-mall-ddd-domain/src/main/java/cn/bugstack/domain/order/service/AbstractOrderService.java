@@ -26,8 +26,8 @@ public abstract class AbstractOrderService implements IOrderService {
     }
 
     @Override
-    public PayOrderEntity createOrder(String userId, String lockId) throws Exception {
-        // 1. 查询锁单记录
+    public PayOrderEntity createOrder(String userId, String productId, String lockId) throws Exception {
+        // 1. 查询锁单记录（锁单仅校验有效性，商品与用户由创单请求提供）
         OrderLockEntity lockEntity = orderLockRepository.queryLockByLockId(lockId);
         if (lockEntity == null) {
             throw new AppException(ResponseCode.NOT_FOUND, "锁单不存在");
@@ -41,14 +41,14 @@ public abstract class AbstractOrderService implements IOrderService {
         }
 
         // 2. 通过 productId 查询商品信息
-        ProductEntity productEntity = productPort.queryProductByProductId(lockEntity.getProductId());
+        ProductEntity productEntity = productPort.queryProductByProductId(productId);
         if (productEntity == null) {
             throw new AppException(ResponseCode.NOT_FOUND, "商品不存在");
         }
 
-        // 3. 基于锁单 + 商品信息构建订单（订单归属用户由创单请求显式传入）
+        // 3. 基于商品信息构建订单
         OrderEntity orderEntity = CreateOrderAggregate.buildOrderEntity(
-                lockEntity.getProductId(), productEntity.getProductName()
+                productId, productEntity.getProductName()
         );
         CreateOrderAggregate orderAggregate = CreateOrderAggregate.builder()
                 .userId(userId)
@@ -62,7 +62,7 @@ public abstract class AbstractOrderService implements IOrderService {
         // 5. 创建支付单
         PayOrderEntity payOrderEntity = this.doPrepayOrder(
                 userId,
-                lockEntity.getProductId(),
+                productId,
                 productEntity.getProductName(),
                 orderEntity.getOutTradeNo(),
                 productEntity.getPrice()

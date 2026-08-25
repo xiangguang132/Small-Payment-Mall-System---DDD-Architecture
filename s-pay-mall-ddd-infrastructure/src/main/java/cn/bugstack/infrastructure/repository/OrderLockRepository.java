@@ -21,7 +21,6 @@ public class OrderLockRepository implements IOrderLockRepository {
     public void saveLock(OrderLockEntity lockEntity) {
         OrderLock orderLock = OrderLock.builder()
                 .lockId(lockEntity.getLockId())
-                .productId(lockEntity.getProductId())
                 .orderId(lockEntity.getOrderId())
                 .lockStatus(lockEntity.getLockStatus())
                 .lockTime(toDate(lockEntity.getLockTime()))
@@ -51,7 +50,6 @@ public class OrderLockRepository implements IOrderLockRepository {
         return OrderLockEntity.builder()
                 .id(orderLock.getId())
                 .lockId(orderLock.getLockId())
-                .productId(orderLock.getProductId())
                 .orderId(orderLock.getOrderId())
                 .lockStatus(orderLock.getLockStatus())
                 .lockTime(toLocalDateTime(orderLock.getLockTime()))

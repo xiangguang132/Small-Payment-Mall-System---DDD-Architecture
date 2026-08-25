@@ -16,8 +16,8 @@ import java.util.List;
  */
 public interface IOrderService {
 
-    // 通过锁单id创建支付单实体（userId 来自登录态，订单归属以创单请求为准）
-    PayOrderEntity createOrder(String userId, String lockId) throws Exception;
+    // 通过锁单id创建支付单实体（userId/productId 来自确认下单请求，锁单仅校验有效性）
+    PayOrderEntity createOrder(String userId, String productId, String lockId) throws Exception;
 
     // 创建拼团支付单（GROUP_BUY 类型），金额为拼团实付价
     PayOrderEntity createGroupBuyPayOrder(String userId, String productId,

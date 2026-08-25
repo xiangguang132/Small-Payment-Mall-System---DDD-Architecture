@@ -52,7 +52,7 @@ public class AliPayController implements IPayService {
 
     /**
      * 锁单接口：构建聚合体 → 创建锁记录 → 返回 lockId
-     * 锁单只关心商品与订单，不记录归属用户；用户信息在确认下单时由登录态提供
+     * 锁单仅生成锁单号与状态；商品与用户信息在确认下单时由请求提供
      */
     @RequestMapping(value = "lock_order", method = RequestMethod.POST)
     public Response<LockOrderResponse> lockOrder(@RequestBody LockOrderRequest request) {
@@ -62,7 +62,7 @@ public class AliPayController implements IPayService {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             openid = (String) httpRequest.getAttribute("openid");
 
-            OrderLockEntity lockEntity = orderLockService.lockOrder(request.getProductId());
+            OrderLockEntity lockEntity = orderLockService.lockOrder();
 
             return Response.<LockOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())
@@ -82,7 +82,7 @@ public class AliPayController implements IPayService {
     }
 
     /**
-     * 确认下单：携带 lockId → 创建订单 → 返回 payUrl
+     * 确认下单：携带 lockId + productId → 创建订单 → 返回 payUrl
      * 订单归属用户取自登录态 openid（兼容请求体 userId 兜底）
      */
     @RequestMapping(value = "confirm_order", method = RequestMethod.POST)
@@ -95,9 +95,12 @@ public class AliPayController implements IPayService {
             if (userId == null || userId.trim().isEmpty()) {
                 throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "无法识别用户身份，请重新登录");
             }
-            log.info("确认下单开始 userId:{} lockId:{}", userId, request.getLockId());
+            if (request.getProductId() == null || request.getProductId().trim().isEmpty()) {
+                throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品编号不能为空");
+            }
+            log.info("确认下单开始 userId:{} productId:{} lockId:{}", userId, request.getProductId(), request.getLockId());
 
-            PayOrderEntity payOrderEntity = orderService.createOrder(userId, request.getLockId());
+            PayOrderEntity payOrderEntity = orderService.createOrder(userId, request.getProductId(), request.getLockId());
 
             return Response.<ConfirmOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())

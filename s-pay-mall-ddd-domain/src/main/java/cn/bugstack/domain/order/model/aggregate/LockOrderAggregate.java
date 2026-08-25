@@ -23,10 +23,9 @@ public class LockOrderAggregate {
     /**
      * 构建锁单聚合体：生成 lockId，设置默认状态 LOCKED
      */
-    public static LockOrderAggregate build(String productId) {
+    public static LockOrderAggregate build() {
         OrderLockEntity lockEntity = OrderLockEntity.builder()
                 .lockId(RandomStringUtils.randomNumeric(14))
-                .productId(productId)
                 .orderId("")
                 .lockStatus("LOCKED")
                 .lockTime(LocalDateTime.now())
