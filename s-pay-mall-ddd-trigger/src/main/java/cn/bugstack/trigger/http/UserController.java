@@ -134,6 +134,11 @@ public class UserController {
     @RequestMapping(value = "profile/update", method = RequestMethod.POST)
     public Response<Boolean> updateProfile(@RequestBody UpdateProfileRequest request, HttpServletRequest httpRequest) {
         try {
+            // 修改密码时校验两次输入一致性（前端已校验，此处兜底）
+            if (StringUtils.isNotBlank(request.getPassword())
+                    && !StringUtils.equals(request.getPassword(), request.getConfirmPassword())) {
+                throw new AppException(Constants.ResponseCode.ILLEGAL_PARAMETER.getCode(), "两次输入的密码不一致");
+            }
             String userId = (String) httpRequest.getAttribute("openid");
             log.info("修改用户信息开始 userId:{} nickname:{} avatar:{} 修改密码:{}",
                     userId, request.getNickname(), request.getAvatar(), StringUtils.isNotBlank(request.getPassword()));

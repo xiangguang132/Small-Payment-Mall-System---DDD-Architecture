@@ -21,9 +21,33 @@
         <result column="out_trade_no" property="outTradeNo"/>
         <result column="valid_start_time" property="validStartTime"/>
         <result column="valid_end_time" property="validEndTime"/>
+        <result column="team_status" property="teamStatus"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
+
+    <!-- 展示态筛选：10待付款 20拼团中(已支付未成团) 30已成团 40已退款；null=全部 -->
+    <sql id="pageWhere">
+        <where>
+            <if test="userId != null and userId != ''">
+                and o.user_id = #{userId}
+            </if>
+            <choose>
+                <when test="status != null and status == 10">
+                    and o.status = 0
+                </when>
+                <when test="status != null and status == 20">
+                    and o.status = 1 and (t.status = 0 or t.status is null)
+                </when>
+                <when test="status != null and status == 30">
+                    and o.status = 1 and t.status = 1
+                </when>
+                <when test="status != null and status == 40">
+                    and o.status = 2
+                </when>
+            </choose>
+        </where>
+    </sql>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyOrder">
         insert into group_buy_order(
@@ -49,6 +73,19 @@
                 and user_id = #{userId}
             </if>
         </where>
+        limit 1
+    </select>
+
+    <!-- 用户在该活动下进行中(待付款 status=0)的订单，业务防重用 -->
+    <select id="queryUserActiveOrder" resultMap="dataMap">
+        select id, order_id, user_id, team_id, activity_id, product_id,
+               product_name, quantity, source, channel, original_amount,
+               deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
+        from group_buy_order
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and status = 0
+        order by id desc
         limit 1
     </select>
 
@@ -92,16 +129,10 @@
     </update>
 
     <select id="countByStatusAndUserId" resultType="long">
-        select count(id)
-        from group_buy_order
-        <where>
-            <if test="status != null">
-                and status = #{status}
-            </if>
-            <if test="userId != null and userId != ''">
-                and user_id = #{userId}
-            </if>
-        </where>
+        select count(o.id)
+        from group_buy_order o
+        left join group_buy_team t on o.team_id = t.team_id
+        <include refid="pageWhere"/>
     </select>
 
     <select id="queryPageByStatusAndUserId" resultMap="dataMap">
@@ -109,17 +140,11 @@
                o.product_name, o.quantity, o.source, o.channel, o.original_amount,
                o.deduction_amount, o.pay_amount, o.status, o.out_trade_no,
                t.valid_start_time, t.valid_end_time,
+               t.status as team_status,
                o.create_time, o.update_time
         from group_buy_order o
         left join group_buy_team t on o.team_id = t.team_id
-        <where>
-            <if test="status != null">
-                and o.status = #{status}
-            </if>
-            <if test="userId != null and userId != ''">
-                and o.user_id = #{userId}
-            </if>
-        </where>
+        <include refid="pageWhere"/>
         order by o.create_time desc
         limit #{offset}, #{limit}
     </select>

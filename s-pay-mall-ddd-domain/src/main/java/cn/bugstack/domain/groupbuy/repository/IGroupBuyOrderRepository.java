@@ -18,6 +18,14 @@ public interface IGroupBuyOrderRepository {
     GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo);
 
     /**
+     * 查询用户在该活动下进行中（待付款 status=0）的拼团订单，业务防重用
+     * @param userId 用户ID
+     * @param activityId 活动ID
+     * @return 进行中的订单；不存在返回 null
+     */
+    GroupBuyOrderEntity queryUserActiveOrder(String userId, Long activityId);
+
+    /**
      * 统计该用户的拼团订单数量
      * @param userId
      * @param activityId

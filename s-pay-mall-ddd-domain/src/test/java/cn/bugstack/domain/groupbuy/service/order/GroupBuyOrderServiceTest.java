@@ -80,6 +80,28 @@ public class GroupBuyOrderServiceTest {
     }
 
     @Test
+    public void shouldReturnActiveUnpaidOrderWhenDuplicateLockForSameActivity() throws Exception {
+        GroupBuyOrderEntity active = GroupBuyOrderEntity.builder()
+                .userId("U1")
+                .orderId("O0")
+                .outTradeNo("B0")
+                .build();
+        when(groupBuyRepository.queryGroupBuyOrderByOutTradeNo("U1", "B1"))
+                .thenReturn(null);
+        when(groupBuyRepository.queryUserActiveOrder("U1", 100L))
+                .thenReturn(active);
+
+        GroupBuyOrderEntity result = groupBuyOrderService.lockGroupBuyOrder(
+                aggregate("U1", "B1", 3)
+        );
+
+        assertEquals("O0", result.getOrderId());
+        verify(groupBuyRepository, never()).lockGroupBuyOrder(any());
+        // 防重命中时不再走规则链，避免限购计数误伤
+        verify(groupBuyRuleFilter, never()).apply(any(), any());
+    }
+
+    @Test
     public void shouldLockWhenNoExistingOrderAndUnderLimit() throws Exception {
         GroupBuyOrderEntity created = GroupBuyOrderEntity.builder()
                 .userId("U1")

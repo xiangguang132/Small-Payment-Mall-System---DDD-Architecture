@@ -17,4 +17,7 @@ public class UpdateProfileRequest {
     // 密码，可选（明文，服务端加密存储）
     private String password;
 
+    // 确认密码，可选；传入 password 时必须与其一致
+    private String confirmPassword;
+
 }

@@ -11,6 +11,7 @@ import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
+import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderDisplayStatusVO;
 import cn.bugstack.domain.groupbuy.service.order.IGroupBuyOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
 import cn.bugstack.domain.auth.service.IUserProfileService;
@@ -134,7 +135,10 @@ public class GroupBuyController {
             );
 
             // 2. 组装锁单聚合；outTradeNo 与支付单共用（回调结算按此反查拼团订单）
-            String outTradeNo = RandomStringUtils.randomNumeric(14);
+            // 幂等号：优先使用前端透传的 outTradeNo（重试传同一值），为空则服务端生成
+            String outTradeNo = StringUtils.isBlank(request.getOutTradeNo())
+                    ? RandomStringUtils.randomNumeric(14)
+                    : request.getOutTradeNo().trim();
             GroupBuyOrderAggregate aggregate = GroupBuyOrderAggregate.builder()
                     .userId(userId)
                     .trialResult(trialResult)
@@ -144,17 +148,18 @@ public class GroupBuyController {
                     .outTradeNo(outTradeNo)
                     .build();
 
-            // 3. 幂等锁单，返回拼团订单（含 teamId/payAmount）
+            // 3. 幂等锁单，返回拼团订单（含 teamId/payAmount）；复用已有订单时 outTradeNo 以订单为准
             GroupBuyOrderEntity groupBuyOrderEntity = groupBuyOrderService.lockGroupBuyOrder(aggregate);
 
-            // 4. 创建 GROUP_BUY 支付单，金额为拼团实付价
+            // 4. 创建 GROUP_BUY 支付单，金额为拼团实付价；outTradeNo 必须与拼团订单一致，否则回调无法反查结算
             PayOrderEntity payOrderEntity = orderService.createGroupBuyPayOrder(
                     userId,
                     String.valueOf(groupBuyOrderEntity.getProductId()),
                     groupBuyOrderEntity.getProductName(),
-                    outTradeNo,
+                    groupBuyOrderEntity.getOutTradeNo(),
                     groupBuyOrderEntity.getPayAmount()
             );
+            outTradeNo = groupBuyOrderEntity.getOutTradeNo();
 
             log.info("拼团锁单完成 userId:{} teamId:{} outTradeNo:{} payAmount:{}", openid,
                     groupBuyOrderEntity.getTeamId(), outTradeNo, groupBuyOrderEntity.getPayAmount());
@@ -177,7 +182,7 @@ public class GroupBuyController {
     }
 
     /**
-     * 分页查询拼团订单列表，支持按 status 和 userId 筛选，默认 status=0
+     * 分页查询拼团订单列表，支持按展示态 status（10/20/30/40）和 userId 筛选，null=全部
      */
     @RequestMapping(value = "queryGroupBuyOrderPage", method = RequestMethod.POST)
     public Response<PageResponse<GroupBuyOrderDetailResponse>> queryGroupBuyOrderPage(@RequestBody GroupBuyOrderPageRequest request) {
@@ -218,6 +223,9 @@ public class GroupBuyController {
                             .deductionAmount(order.getDeductionAmount())
                             .payAmount(order.getPayAmount())
                             .status(order.getStatus())
+                            .teamStatus(order.getTeamStatus())
+                            .displayStatus(GroupBuyOrderDisplayStatusVO
+                                    .resolve(order.getStatus(), order.getTeamStatus()).getCode())
                             .outTradeNo(order.getOutTradeNo())
                             .validStartTime(order.getValidStartTime())
                             .validEndTime(order.getValidEndTime())

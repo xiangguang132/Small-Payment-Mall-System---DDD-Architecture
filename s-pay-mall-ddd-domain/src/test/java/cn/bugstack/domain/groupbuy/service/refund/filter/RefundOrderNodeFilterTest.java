@@ -57,14 +57,14 @@ public class RefundOrderNodeFilterTest {
     @Test
     public void shouldReturnNoRouteResultWhenOrderCompleted() throws Exception {
         GroupBuyRefundOrderRuleFilterFactory.DynamicContext context = newContext(
-                order(GroupBuyOrderStatusEnumVO.COMPLETE.getCode()),
+                order(GroupBuyOrderStatusEnumVO.REFUNDED.getCode()),
                 team(3, 3)
         );
 
         GroupBuyRefundOrderBehaviorEntity result = refundOrderNodeFilter.apply(command(), context);
 
         assertNull(result.getStrategyName());
-        assertEquals("当前订单状态无需退单处理: 已完成", result.getMessage());
+        assertEquals("当前订单状态无需退单处理: 已退款", result.getMessage());
     }
 
     private GroupBuyRefundOrderCommandEntity command() {

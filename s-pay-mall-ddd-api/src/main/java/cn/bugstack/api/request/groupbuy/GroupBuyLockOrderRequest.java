@@ -17,6 +17,9 @@ public class GroupBuyLockOrderRequest {
     // 团队ID；开团为空、参团传参
     private String teamId;
 
+    // 商户订单号（幂等号）；同一笔锁单重试/重复点击时传同一个值以复用已创建订单，为空则服务端生成
+    private String outTradeNo;
+
     // 来源
     private String source;
 

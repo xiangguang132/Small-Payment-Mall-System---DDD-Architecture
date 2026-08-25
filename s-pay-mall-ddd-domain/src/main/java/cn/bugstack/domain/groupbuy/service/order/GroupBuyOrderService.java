@@ -39,6 +39,15 @@ public class GroupBuyOrderService implements IGroupBuyOrderService {
             return existing;
         }
 
+        // 业务防重：同一用户同一活动已有待付款订单时直接复用，不再重复开团/参团
+        GroupBuyOrderEntity active = groupBuyRepository.queryUserActiveOrder(
+                aggregate.getUserId(),
+                aggregate.getTrialResult().getActivityId()
+        );
+        if (active != null) {
+            return active;
+        }
+
         GroupBuyRuleFilterFeedBackEntity filterFeedBackEntity = applyRule(
                 GroupBuyRuleCommandEntity.builder()
                         .userId(aggregate.getUserId())

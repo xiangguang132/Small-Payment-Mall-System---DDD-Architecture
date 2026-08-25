@@ -40,8 +40,14 @@ public class GroupBuyOrderDetailResponse {
 
     private BigDecimal payAmount;
 
-    /** 0已锁定、1已支付、2已完成、3已取消/退单 */
+    /** 订单状态：0已锁定(待付款)、1已支付、2已退款 */
     private Integer status;
+
+    /** 团队状态（来自 group_buy_team）：0拼团中、1已成团；可能为 null */
+    private Integer teamStatus;
+
+    /** 展示态（组合 status 与 teamStatus）：10待付款、20拼团中、30已成团、40已退款 */
+    private Integer displayStatus;
 
     private String outTradeNo;
 

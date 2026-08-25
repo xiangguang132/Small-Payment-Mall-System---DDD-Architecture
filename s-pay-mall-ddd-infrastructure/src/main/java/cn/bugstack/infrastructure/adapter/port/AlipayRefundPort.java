@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Slf4j
 @Component
@@ -25,7 +26,7 @@ public class AlipayRefundPort implements IAlipayRefundPort {
         JSONObject bizContent = new JSONObject();
         // 存入 商户订单号、退款金额、部分退款的流水号（全退可省略）
         bizContent.put("out_trade_no", outTradeNo);   // 商户订单号
-        bizContent.put("refund_amount", refundAmount); // 退款金额
+        bizContent.put("refund_amount", refundAmount.setScale(2, RoundingMode.HALF_UP).toPlainString()); // 退款金额
         bizContent.put("out_request_no", outRequestNo); // 部分退款流水号，全退可省略
         alipayTradeRefundRequest.setBizContent(bizContent.toString());
         try {

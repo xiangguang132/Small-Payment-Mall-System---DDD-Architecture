@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -82,7 +83,7 @@ public class OrderService extends AbstractOrderService{
 
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", outTradeNo);
-        bizContent.put("total_amount", totalAmount.toString());
+        bizContent.put("total_amount", formatAmount(totalAmount));
         bizContent.put("subject", productName);
         bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
         request.setBizContent(bizContent.toString());
@@ -124,7 +125,7 @@ public class OrderService extends AbstractOrderService{
 
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", outTradeNo);
-        bizContent.put("total_amount", totalAmount.toString());
+        bizContent.put("total_amount", formatAmount(totalAmount));
         bizContent.put("subject", productName);
         bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
         request.setBizContent(bizContent.toString());
@@ -142,7 +143,10 @@ public class OrderService extends AbstractOrderService{
         payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
         payOrderEntity.setPayUrl(form);
 
-        // 回写支付表单 + 置为 PAY_WAIT
+        // 幂等落库：首次锁单插入 GROUP_BUY 支付单，复用/重试时仅回写支付表单 + 置为 PAY_WAIT
+        if (orderRepository.queryPayOrderByOutTradeNo(outTradeNo) == null) {
+            orderRepository.saveGroupBuyPayOrder(payOrderEntity);
+        }
         orderRepository.updateOrderPayInfo(payOrderEntity);
 
         return payOrderEntity;
@@ -213,6 +217,14 @@ public class OrderService extends AbstractOrderService{
             return doCloseUnpaidOrder(outTradeNo);
         }
         throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "当前订单状态不可退单");
+    }
+
+    /**
+     * 支付宝 total_amount 仅允许最多两位小数；折扣试算的 BigDecimal 乘法可能产生 3 位以上小数（如 90.000），
+     * 必须归一化，否则网关校验失败跳 /error
+     */
+    private static String formatAmount(BigDecimal amount) {
+        return amount.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     // 已支付退单

@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class GroupBuyOrderPageRequest extends PageRequest {
 
-    /** 拼团订单状态；0已锁定、1已支付、2已完成、3已取消/退单（默认0） */
-    private Integer status = 0;
+    /** 拼团订单展示态；10待付款、20拼团中、30已成团、40已退款（null=全部） */
+    private Integer status;
 
     /** 用户ID（可选，不过滤则查询所有用户） */
     private String userId;

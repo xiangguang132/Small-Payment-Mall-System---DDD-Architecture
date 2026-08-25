@@ -40,6 +40,12 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
     }
 
     @Override
+    public GroupBuyOrderEntity queryUserActiveOrder(String userId, Long activityId) {
+        GroupBuyOrder order = groupBuyOrderDao.queryUserActiveOrder(userId, activityId);
+        return order == null ? null : toOrderEntity(order);
+    }
+
+    @Override
     public Integer countUserGroupBuyOrders(String userId, Long activityId) {
         return groupBuyOrderDao.queryOrderCountByUserIdAndActivityId(userId, activityId);
     }
@@ -198,6 +204,7 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
               .outTradeNo(order.getOutTradeNo())
               .validStartTime(order.getValidStartTime())
               .validEndTime(order.getValidEndTime())
+              .teamStatus(order.getTeamStatus())
               .createTime(order.getCreateTime())
               .updateTime(order.getUpdateTime())
               .build();

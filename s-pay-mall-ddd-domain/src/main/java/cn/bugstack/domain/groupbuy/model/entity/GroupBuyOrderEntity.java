@@ -50,6 +50,9 @@ public class GroupBuyOrderEntity {
     /** 拼团有效期结束（联表 group_buy_team） */
     private LocalDateTime validEndTime;
 
+    /** 团队状态（联表 group_buy_team）：0拼团中 1已成团 */
+    private Integer teamStatus;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

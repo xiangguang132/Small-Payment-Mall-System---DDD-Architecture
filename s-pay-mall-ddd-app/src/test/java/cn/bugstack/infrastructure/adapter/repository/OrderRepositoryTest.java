@@ -9,6 +9,7 @@ import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
 import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
 import cn.bugstack.infrastructure.repository.OrderRepository;
+import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.OrderTypeEnum;
 import cn.bugstack.types.event.BaseEvent;
 import com.google.common.eventbus.EventBus;
@@ -37,6 +38,8 @@ public class OrderRepositoryTest {
     private EventBus eventBus;
     @Mock
     private PaySuccessMessageEvent paySuccessMessageEvent;
+    @Mock
+    private EventPublisher eventPublisher;
     @InjectMocks
     private OrderRepository orderRepository;
 
@@ -66,6 +69,26 @@ public class OrderRepositoryTest {
         ArgumentCaptor<PayOrder> captor = ArgumentCaptor.forClass(PayOrder.class);
         verify(orderDao).insert(captor.capture());
         assertEquals(OrderTypeEnum.DIRECT.getCode(), captor.getValue().getOrderType());
+    }
+
+    @Test
+    public void shouldSaveGroupBuyOrderTypeWhenSavingGroupBuyPayOrder() {
+        orderRepository.saveGroupBuyPayOrder(PayOrderEntity.builder()
+                .userId("u1")
+                .productId("P001")
+                .productName("demo")
+                .outTradeNo("O001")
+                .orderTime(java.time.LocalDateTime.now())
+                .totalAmount(new BigDecimal("90.00"))
+                .orderType(OrderTypeEnum.GROUP_BUY)
+                .orderStatus(OrderStatusVO.PAY_WAIT)
+                .build());
+
+        ArgumentCaptor<PayOrder> captor = ArgumentCaptor.forClass(PayOrder.class);
+        verify(orderDao).insert(captor.capture());
+        assertEquals(OrderTypeEnum.GROUP_BUY.getCode(), captor.getValue().getOrderType());
+        assertEquals(OrderStatusVO.CREATE.getCode(), captor.getValue().getStatus());
+        assertEquals("O001", captor.getValue().getOutTradeNo());
     }
 
     @Test

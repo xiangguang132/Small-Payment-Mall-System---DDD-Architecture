@@ -14,7 +14,7 @@ public enum GroupBuyOrderStatusEnumVO {
 
     LOCKED(0, "已锁定"),
     PAID(1, "已支付"),
-    COMPLETE(2, "已完成"),
+    REFUNDED(2, "已退款"),
     CANCELED(3, "已取消/退单");
 
     private Integer code;
@@ -30,7 +30,7 @@ public enum GroupBuyOrderStatusEnumVO {
             case 1:
                 return PAID;
             case 2:
-                return COMPLETE;
+                return REFUNDED;
             case 3:
                 return CANCELED;
             default:
