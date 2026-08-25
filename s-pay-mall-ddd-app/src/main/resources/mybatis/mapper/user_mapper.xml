@@ -35,4 +35,15 @@
         where user_id = #{userId}
     </update>
 
+    <update id="updateInfo" parameterType="cn.bugstack.infrastructure.dao.po.user.User">
+        update user
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="password != null">password = #{password},</if>
+            update_time = now()
+        </set>
+        where user_id = #{userId}
+    </update>
+
 </mapper>

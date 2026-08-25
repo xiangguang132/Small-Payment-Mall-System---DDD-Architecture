@@ -12132,3 +12132,776 @@ Caused by: java.net.SocketTimeoutException: Read timed out
 26-08-25.17:26:22.134 [RMI TCP Connection(4)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
 26-08-25.17:26:22.135 [RMI TCP Connection(4)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
 26-08-25.17:26:22.206 [RMI TCP Connection(3)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-25.17:27:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.17:27:00.024 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.17:27:00.024 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.17:27:00.141 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.17:28:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.17:28:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.17:28:00.021 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.17:28:00.024 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.17:28:14.196 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.17:28:14.238 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.17:28:15.777 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询开始 status:3 pageNo:1 pageSize:5
+26-08-25.17:28:15.784 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.17:28:19.537 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.17:28:19.552 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.17:28:20.437 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询开始 status:3 pageNo:1 pageSize:5
+26-08-25.17:28:20.441 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.17:28:21.292 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.17:28:21.296 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.17:28:30.206 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.17:28:30.209 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.17:28:31.030 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.17:28:31.034 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.17:28:51.944 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.17:28:51.947 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.17:28:54.178 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.17:28:54.181 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.17:29:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.17:29:00.016 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.17:29:00.018 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.17:29:00.020 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.17:30:00.013 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.17:30:00.015 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.17:30:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.17:30:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.17:30:35.757 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.17:30:35.814 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.17:30:35.877 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.17:30:35.902 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.17:30:35.975 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.17:30:36.257 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.17:30:36.288 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.20:47:04.933 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-25.20:47:04.939 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 12388 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-25.20:47:04.939 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-25.20:47:06.359 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-25.20:47:06.361 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-25.20:47:06.437 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 62 ms. Found 0 Redis repository interfaces.
+26-08-25.20:47:06.767 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.20:47:06.774 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.20:47:06.774 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.20:47:06.950 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-25.20:47:07.581 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.20:47:08.969 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.20:47:09.031 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.20:47:09.243 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-25.20:47:09.252 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-25.20:47:09.252 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-25.20:47:09.252 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-25.20:47:09.372 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-25.20:47:09.372 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4379 ms
+26-08-25.20:47:11.340 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-25.20:47:11.415 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-25.20:47:11.427 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-25.20:47:11.429 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-25.20:47:11.825 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#1d556461:0/SimpleConnection@468646ea [delegate=amqp://admin@192.144.234.86:5672/, localPort= 52483]
+26-08-25.20:47:13.382 [main            ] INFO  Application            - Started Application in 8.961 seconds (JVM running for 10.025)
+26-08-25.20:47:13.959 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-25.20:47:13.959 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-25.20:47:13.960 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-25.20:47:14.069 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-25.20:47:14.375 [RMI TCP Connection(2)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-25.20:48:00.105 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:48:00.105 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:48:00.125 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:48:00.132 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:48:08.135 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.20:48:08.151 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.20:48:08.156 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.20:48:08.193 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.20:48:08.310 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.20:48:08.312 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.20:48:08.334 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.20:48:08.346 [http-nio-8080-exec-5] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:08.385 [http-nio-8080-exec-5] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.20:48:08.428 [http-nio-8080-exec-5] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.20:48:08.428 [http-nio-8080-exec-5] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:08.431 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.20:48:17.809 [http-nio-8080-exec-3] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.20:48:17.842 [http-nio-8080-exec-3] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.20:48:17.937 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.20:48:17.939 [http-nio-8080-exec-6] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:17.941 [http-nio-8080-exec-7] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.20:48:17.972 [http-nio-8080-exec-6] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.20:48:17.974 [http-nio-8080-exec-7] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.20:48:18.010 [http-nio-8080-exec-6] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.20:48:18.010 [http-nio-8080-exec-6] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:18.010 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.20:48:18.080 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.20:48:18.080 [http-nio-8080-exec-8] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:18.113 [http-nio-8080-exec-8] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.20:48:18.143 [http-nio-8080-exec-8] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.20:48:18.143 [http-nio-8080-exec-8] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:48:18.143 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.20:48:21.910 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.20:48:21.928 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.20:48:23.259 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.20:48:23.264 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.20:48:23.561 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.20:48:23.564 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.20:48:23.905 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询开始 status:3 pageNo:1 pageSize:5
+26-08-25.20:48:23.907 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.20:48:24.271 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.20:48:24.275 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.20:48:24.524 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.20:48:24.528 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.20:49:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:49:00.021 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:49:00.023 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:49:00.027 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:50:00.010 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:50:00.012 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:50:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:50:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:50:01.142 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.20:50:01.149 [http-nio-8080-exec-3] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.20:50:01.154 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.20:50:01.156 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.20:50:01.245 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.20:50:01.245 [http-nio-8080-exec-6] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:50:01.252 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.20:50:01.254 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.20:50:01.277 [http-nio-8080-exec-6] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.20:50:01.314 [http-nio-8080-exec-6] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.20:50:01.314 [http-nio-8080-exec-6] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.20:50:01.315 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.20:51:00.004 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:51:00.005 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:51:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:51:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:52:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:52:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:52:00.012 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:52:00.013 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:52:31.417 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x1dbfe32a, L:/10.184.242.240:52477 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-25.20:53:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:53:00.004 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:53:00.009 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:53:00.010 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:54:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:54:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:54:00.015 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:54:00.017 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:55:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:55:00.016 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:55:00.017 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:55:00.020 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:56:00.006 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:56:00.009 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:56:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:56:00.012 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:57:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:57:00.013 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:57:00.016 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:57:00.017 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:58:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:58:00.010 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:58:00.011 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:58:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.20:59:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.20:59:00.023 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.20:59:00.025 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.20:59:00.026 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:00:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:00:00.007 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:00:00.008 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:00:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:01:00.002 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:01:00.004 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:01:00.005 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:01:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:02:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:02:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:02:00.015 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:02:00.016 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:03:00.005 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:03:00.006 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:03:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:03:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:04:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:04:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:04:00.011 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:04:00.013 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:05:00.010 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:05:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:05:00.016 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:05:00.017 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:06:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:06:00.014 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:06:00.016 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:06:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:07:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:07:00.010 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:07:00.012 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:07:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:07:22.720 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:07:22.723 [http-nio-8080-exec-9] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:07:22.728 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:07:22.747 [http-nio-8080-exec-9] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:07:22.870 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:07:22.871 [http-nio-8080-exec-1] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:07:22.901 [http-nio-8080-exec-1] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:07:22.904 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:07:22.906 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:07:22.933 [http-nio-8080-exec-1] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:07:22.933 [http-nio-8080-exec-1] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:07:22.933 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:08:00.014 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:08:00.015 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:08:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:08:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:08:31.471 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:31.473 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:31.537 [http-nio-8080-exec-5] INFO  ProductController      - 商品全局搜索开始 keyword:测试 pageNo:1 pageSize:12
+26-08-25.21:08:31.554 [http-nio-8080-exec-5] INFO  ProductController      - 商品全局搜索完成 keyword:测试 total:1
+26-08-25.21:08:31.618 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:31.621 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:31.668 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:08:31.668 [http-nio-8080-exec-7] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:31.715 [http-nio-8080-exec-7] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:08:31.747 [http-nio-8080-exec-7] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:08:31.747 [http-nio-8080-exec-7] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:31.747 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:08:37.420 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:08:37.426 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:08:37.428 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:37.433 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:37.668 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:37.668 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:08:37.668 [http-nio-8080-exec-9] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:37.670 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:37.696 [http-nio-8080-exec-9] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:08:37.814 [http-nio-8080-exec-9] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:08:37.814 [http-nio-8080-exec-9] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:37.814 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:08:40.557 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:40.558 [http-nio-8080-exec-2] INFO  ProductController      - 商品全局搜索开始 keyword:111 pageNo:1 pageSize:12
+26-08-25.21:08:40.559 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:40.561 [http-nio-8080-exec-2] INFO  ProductController      - 商品全局搜索完成 keyword:111 total:0
+26-08-25.21:08:40.660 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:40.662 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:42.969 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:42.971 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:42.975 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:08:42.978 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:08:43.070 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:08:43.072 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:08:43.084 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:08:43.084 [http-nio-8080-exec-6] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:43.113 [http-nio-8080-exec-6] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:08:43.146 [http-nio-8080-exec-6] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:08:43.146 [http-nio-8080-exec-6] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:08:43.146 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:09:00.002 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:09:00.007 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:09:00.007 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:09:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:10:00.004 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:10:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:10:00.007 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:10:00.007 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:10:32.613 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:10:32.618 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:10:33.824 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:10:33.829 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:10:34.218 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:10:34.221 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:10:47.430 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:10:47.434 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:10:48.120 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:10:48.122 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:10:48.801 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询开始 status:3 pageNo:1 pageSize:5
+26-08-25.21:10:48.803 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:10:49.163 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:10:49.165 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:10:49.519 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:10:49.521 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:10:51.977 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:10:51.979 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:10:53.538 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:10:53.540 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:10:53.581 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:10:53.585 [http-nio-8080-exec-10] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:10:53.644 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:10:53.648 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:10:53.702 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:10:53.702 [http-nio-8080-exec-1] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:10:53.753 [http-nio-8080-exec-1] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:10:53.809 [http-nio-8080-exec-1] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:10:53.809 [http-nio-8080-exec-1] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:10:53.811 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:11:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:11:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:11:00.011 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:11:00.013 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:12:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:12:00.009 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:12:00.010 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:12:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:13:00.001 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:13:00.003 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:13:00.004 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:13:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:14:00.006 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:14:00.007 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:14:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:14:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:15:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:15:00.010 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:15:00.011 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:15:00.012 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:16:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:16:00.065 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:16:00.075 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:16:00.078 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:17:00.009 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:17:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:17:00.020 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:17:00.021 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:18:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:18:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:18:00.019 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:18:00.019 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:19:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:19:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:19:00.012 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:19:00.014 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:20:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:20:00.015 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:20:00.016 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:20:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:21:00.018 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:21:00.019 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:21:00.019 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:21:00.022 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:22:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:22:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:22:00.012 [scheduling-1    ] INFO  DataNodeFilter         - 逆向流程-退单操作，数据加载节点 userId:null outTradeNo:79141035727346
+26-08-25.21:22:00.013 [scheduling-1    ] INFO  TimeoutOrderJob        - 超时任务：处理失败，跳过 outTradeNo=79141035727346
+26-08-25.21:27:47.161 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-25.21:27:47.163 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 7312 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-25.21:27:47.164 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-25.21:27:48.441 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-25.21:27:48.443 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-25.21:27:48.515 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 0 Redis repository interfaces.
+26-08-25.21:27:48.881 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:27:48.888 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:27:48.890 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:27:49.070 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-25.21:27:49.754 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:27:51.169 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:27:51.260 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:27:51.616 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-25.21:27:51.631 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-25.21:27:51.631 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-25.21:27:51.631 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-25.21:27:51.784 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-25.21:27:51.784 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4578 ms
+26-08-25.21:27:54.259 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-25.21:27:54.369 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-25.21:27:54.371 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+26-08-25.21:27:54.430 [main            ] INFO  Http11NioProtocol      - Pausing ProtocolHandler ["http-nio-8080"]
+26-08-25.21:27:54.431 [main            ] INFO  StandardService        - Stopping service [Tomcat]
+26-08-25.21:27:54.437 [main            ] INFO  Http11NioProtocol      - Stopping ProtocolHandler ["http-nio-8080"]
+26-08-25.21:27:54.438 [main            ] INFO  Http11NioProtocol      - Destroying ProtocolHandler ["http-nio-8080"]
+26-08-25.21:27:54.448 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+26-08-25.21:27:54.463 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+26-08-25.21:29:03.472 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-25.21:29:03.472 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 17056 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-25.21:29:03.475 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-25.21:29:04.847 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-25.21:29:04.849 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-25.21:29:04.955 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 91 ms. Found 0 Redis repository interfaces.
+26-08-25.21:29:05.386 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:29:05.394 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:29:05.396 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:29:05.584 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-25.21:29:06.312 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:29:07.824 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:29:07.885 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:29:08.098 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-25.21:29:08.108 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-25.21:29:08.108 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-25.21:29:08.108 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-25.21:29:08.233 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-25.21:29:08.234 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4719 ms
+26-08-25.21:29:10.055 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-25.21:29:10.130 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-25.21:29:10.139 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-25.21:29:10.141 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-25.21:29:10.279 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6f65aa58:0/SimpleConnection@384f0e32 [delegate=amqp://admin@192.144.234.86:5672/, localPort= 59706]
+26-08-25.21:29:11.328 [main            ] INFO  Application            - Started Application in 8.336 seconds (JVM running for 9.323)
+26-08-25.21:29:11.456 [RMI TCP Connection(2)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-25.21:29:11.458 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-25.21:29:11.459 [RMI TCP Connection(2)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-08-25.21:29:12.117 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-25.21:29:12.310 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-25.21:30:00.002 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:00.023 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:00.043 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:30:00.094 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:30:00.145 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:30:00.146 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:30:00.208 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:00.211 [http-nio-8080-exec-4] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:00.238 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:30:00.258 [http-nio-8080-exec-3] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:00.300 [http-nio-8080-exec-3] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:30:00.346 [http-nio-8080-exec-3] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:30:00.346 [http-nio-8080-exec-3] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:00.349 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:30:01.953 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:01.954 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=2, status=null)
+26-08-25.21:30:01.956 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:01.961 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表完成 total:0
+26-08-25.21:30:02.051 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:02.054 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:03.635 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:03.640 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:03.642 [http-nio-8080-exec-9] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:30:03.647 [http-nio-8080-exec-9] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:30:03.766 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:03.768 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:03.778 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:30:03.778 [http-nio-8080-exec-2] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:03.812 [http-nio-8080-exec-2] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:30:03.849 [http-nio-8080-exec-2] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:30:03.849 [http-nio-8080-exec-2] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:03.849 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:30:07.174 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:30:07.183 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:30:08.125 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:30:08.132 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:30:08.624 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:30:08.633 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:30:32.766 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:30:32.770 [http-nio-8080-exec-5] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:30:33.427 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:33.429 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:30:33.430 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:33.436 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:30:33.537 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:30:33.540 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:30:33.540 [http-nio-8080-exec-9] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:33.542 [http-nio-8080-exec-8] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:30:33.570 [http-nio-8080-exec-9] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:30:33.608 [http-nio-8080-exec-9] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:30:33.608 [http-nio-8080-exec-9] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:30:33.608 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:31:00.002 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:31:00.003 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:32:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:32:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:32:11.001 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.21:32:11.035 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.21:32:11.092 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.21:32:11.123 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-08-25.21:32:11.208 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.21:32:11.730 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.21:32:11.914 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.21:32:12.018 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-08-25.21:32:12.309 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-25.21:32:12.309 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-25.21:32:12.309 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-25.21:32:12.309 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-08-25.21:32:12.382 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-08-25.21:32:12.395 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-08-25.21:32:15.085 [main            ] INFO  Application            - Starting Application using Java 11.0.31 on ASUS with PID 40324 (D:\code\s-pay-mall-ddd-cc\s-pay-mall-ddd-app\target\classes started by 13267 in D:\code\s-pay-mall-ddd-cc)
+26-08-25.21:32:15.083 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+26-08-25.21:32:15.088 [main            ] INFO  Application            - The following 1 profile is active: "test"
+26-08-25.21:32:16.280 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-08-25.21:32:16.283 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-08-25.21:32:16.353 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 0 Redis repository interfaces.
+26-08-25.21:32:16.675 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties' of type [org.redisson.spring.starter.RedissonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:32:16.682 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:32:16.685 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.redisson.spring.starter.RedissonAutoConfigurationV2' of type [org.redisson.spring.starter.RedissonAutoConfigurationV2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:32:16.869 [main            ] INFO  Version                - Redisson 3.26.0
+26-08-25.21:32:17.451 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:32:18.945 [redisson-netty-1-19] INFO  ConnectionsHolder      - 24 connections initialized for 192.144.234.86/192.144.234.86:6379
+26-08-25.21:32:19.000 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisson' of type [org.redisson.Redisson] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+26-08-25.21:32:19.186 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8080 (http)
+26-08-25.21:32:19.194 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8080"]
+26-08-25.21:32:19.195 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-08-25.21:32:19.195 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-08-25.21:32:19.307 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-08-25.21:32:19.308 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4178 ms
+26-08-25.21:32:21.146 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-08-25.21:32:21.222 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8080"]
+26-08-25.21:32:21.230 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8080 (http) with context path ''
+26-08-25.21:32:21.233 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [192.144.234.86:5672]
+26-08-25.21:32:21.377 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6b3b2c34:0/SimpleConnection@69926b6e [delegate=amqp://admin@192.144.234.86:5672/, localPort= 62506]
+26-08-25.21:32:22.490 [main            ] INFO  Application            - Started Application in 7.842 seconds (JVM running for 8.734)
+26-08-25.21:32:23.119 [RMI TCP Connection(1)-192.168.73.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-08-25.21:32:23.119 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-08-25.21:32:23.121 [RMI TCP Connection(1)-192.168.73.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-08-25.21:32:23.403 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-08-25.21:32:23.644 [RMI TCP Connection(4)-192.168.73.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-08-25.21:33:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:33:00.100 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:33:07.270 [redisson-netty-1-22] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xd56aa23a, L:/10.184.242.240:49684 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-25.21:33:07.270 [redisson-netty-1-20] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x65d8b2ca, L:/10.184.242.240:49680 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-08-25.21:34:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:34:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:35:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:35:00.018 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:36:00.018 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:36:00.022 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:37:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:37:00.019 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:38:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:38:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:38:34.952 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:34.963 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:38:34.969 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:35.004 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:38:35.144 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:35.151 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:35.222 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:38:35.304 [http-nio-8080-exec-3] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:35.381 [http-nio-8080-exec-3] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:38:35.420 [http-nio-8080-exec-3] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:38:35.420 [http-nio-8080-exec-3] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:35.426 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:38:37.365 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:37.367 [http-nio-8080-exec-5] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:37.373 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=2, status=null)
+26-08-25.21:38:37.376 [http-nio-8080-exec-4] INFO  ProductController      - 分页查询商品列表完成 total:0
+26-08-25.21:38:37.471 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:37.473 [http-nio-8080-exec-7] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:38.473 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:38.473 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:38:38.475 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:38.483 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:38:38.602 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:38.603 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:38:38.604 [http-nio-8080-exec-1] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:38.605 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:38.633 [http-nio-8080-exec-1] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:38:38.675 [http-nio-8080-exec-1] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:38:38.676 [http-nio-8080-exec-1] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:38.676 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:38:49.516 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:49.516 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=2, status=null)
+26-08-25.21:38:49.518 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:49.520 [http-nio-8080-exec-6] INFO  ProductController      - 分页查询商品列表完成 total:0
+26-08-25.21:38:49.611 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:49.617 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:51.195 [http-nio-8080-exec-5] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=1, status=null)
+26-08-25.21:38:51.200 [http-nio-8080-exec-5] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:38:51.302 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:38:51.303 [http-nio-8080-exec-4] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:51.334 [http-nio-8080-exec-4] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:38:51.369 [http-nio-8080-exec-4] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:38:51.369 [http-nio-8080-exec-4] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:51.369 [http-nio-8080-exec-4] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:38:52.180 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=2, status=null)
+26-08-25.21:38:52.185 [http-nio-8080-exec-7] INFO  ProductController      - 分页查询商品列表完成 total:0
+26-08-25.21:38:53.930 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:53.933 [http-nio-8080-exec-9] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:53.939 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:38:53.946 [http-nio-8080-exec-8] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:38:54.029 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:38:54.032 [http-nio-8080-exec-10] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:38:54.052 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:38:54.052 [http-nio-8080-exec-1] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:54.089 [http-nio-8080-exec-1] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:38:54.128 [http-nio-8080-exec-1] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:38:54.128 [http-nio-8080-exec-1] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:38:54.128 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:39:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:39:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:40:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:40:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:41:00.007 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:41:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:42:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:42:00.016 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:42:33.205 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:42:33.227 [http-nio-8080-exec-2] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:42:33.783 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:42:33.790 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:42:34.234 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:42:34.242 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:43:00.003 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:43:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:44:00.015 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:44:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:45:00.005 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:45:00.007 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:45:03.210 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:45:03.214 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:45:03.833 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:45:03.837 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:45:19.208 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:45:19.211 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:45:20.815 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:45:20.818 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:45:36.724 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:45:36.727 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:45:37.355 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:45:37.356 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:45:37.838 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:45:37.842 [http-nio-8080-exec-10] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:46:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:46:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:47:00.005 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:47:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:48:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:48:00.014 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:49:00.011 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:49:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:49:58.263 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:49:58.265 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:49:58.267 [http-nio-8080-exec-2] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:49:58.269 [http-nio-8080-exec-1] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:49:58.386 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:49:58.387 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:49:58.387 [http-nio-8080-exec-3] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:49:58.389 [http-nio-8080-exec-6] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:49:58.419 [http-nio-8080-exec-3] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:49:58.452 [http-nio-8080-exec-3] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:49:58.452 [http-nio-8080-exec-3] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:49:58.452 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:50:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:50:00.009 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:50:08.318 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.21:50:08.366 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.21:50:08.501 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.21:50:08.501 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:50:08.503 [http-nio-8080-exec-7] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:50:08.560 [http-nio-8080-exec-7] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:50:08.561 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.21:50:08.595 [http-nio-8080-exec-7] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:50:08.595 [http-nio-8080-exec-7] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:50:08.595 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:50:08.667 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:50:08.668 [http-nio-8080-exec-9] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:50:08.757 [http-nio-8080-exec-9] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:50:08.791 [http-nio-8080-exec-9] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:50:08.791 [http-nio-8080-exec-9] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:50:08.791 [http-nio-8080-exec-9] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:51:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:51:00.016 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:52:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:52:00.017 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:52:21.986 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表开始 request:ProductPageRequest(pageNo=1, pageSize=12, name=null, sku=null, categoryId=null, status=null)
+26-08-25.21:52:21.992 [http-nio-8080-exec-2] INFO  ProductController      - 分页查询商品列表完成 total:1
+26-08-25.21:52:22.013 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:52:22.016 [http-nio-8080-exec-1] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:52:22.094 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:52:22.094 [http-nio-8080-exec-6] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:52:22.128 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表开始
+26-08-25.21:52:22.131 [http-nio-8080-exec-3] INFO  ProductTypeController  - 查询有效商品分类列表完成 count:1
+26-08-25.21:52:22.136 [http-nio-8080-exec-6] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:52:22.182 [http-nio-8080-exec-6] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:52:22.183 [http-nio-8080-exec-6] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:52:22.183 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:53:00.010 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:53:00.013 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:53:51.914 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.21:53:51.957 [http-nio-8080-exec-5] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.21:53:52.061 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情开始 id:1
+26-08-25.21:53:52.095 [http-nio-8080-exec-4] INFO  ProductController      - 查询商品详情完成 id:1
+26-08-25.21:53:52.096 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:53:52.096 [http-nio-8080-exec-7] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:53:52.125 [http-nio-8080-exec-7] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:53:52.160 [http-nio-8080-exec-7] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:53:52.160 [http-nio-8080-exec-7] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:53:52.161 [http-nio-8080-exec-7] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:53:52.204 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团试算开始 request:GroupBuyTrialRequest(userId=null, activityId=10001, productId=1)
+26-08-25.21:53:52.204 [http-nio-8080-exec-8] INFO  SwitchNode             - 拼团商品查询试算服务-SwitchNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:53:52.236 [http-nio-8080-exec-8] INFO  MarketNode             - 拼团商品查询 活动配置、商品 试算服务-MarketNode userId:null 异步线程加载数据「GroupBuyActivityEntity、ProductAggregate」完成
+26-08-25.21:53:52.267 [http-nio-8080-exec-8] INFO  ZKCalculateService     - 优惠策略折扣计算:0
+26-08-25.21:53:52.267 [http-nio-8080-exec-8] INFO  EndNode                - 拼团商品查询试算服务-EndNode userId:null requestParameter:{"activityId":10001,"productId":1}
+26-08-25.21:53:52.268 [http-nio-8080-exec-8] INFO  GroupBuyController     - 拼团试算完成 userId:null activityId:10001 payPrice:90.000
+26-08-25.21:54:00.001 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:54:00.006 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:55:00.008 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:55:00.011 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:55:42.207 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询开始 status:0 pageNo:1 pageSize:5
+26-08-25.21:55:42.211 [http-nio-8080-exec-1] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:55:43.088 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询开始 status:1 pageNo:1 pageSize:5
+26-08-25.21:55:43.091 [http-nio-8080-exec-3] INFO  GroupBuyController     - 拼团订单分页查询完成 total:0
+26-08-25.21:55:43.555 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询开始 status:2 pageNo:1 pageSize:5
+26-08-25.21:55:43.559 [http-nio-8080-exec-6] INFO  GroupBuyController     - 拼团订单分页查询完成 total:1
+26-08-25.21:55:50.972 [http-nio-8080-exec-5] INFO  UserController         - 修改用户信息开始 userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U nickname:test1 avatar:null 修改密码:false
+26-08-25.21:56:00.014 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:56:00.015 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:57:00.006 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务
+26-08-25.21:57:00.008 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:58:00.015 [scheduling-1    ] INFO  GroupBuyNotifyJob      - 成团通知兜底任务完成 result:{"retryCount":0,"successCount":0,"waitCount":0,"errorCount":0}
+26-08-25.21:58:00.017 [scheduling-1    ] INFO  ProductionOrderJob     - 开始执行生产需求单任务

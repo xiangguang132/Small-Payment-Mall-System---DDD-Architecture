@@ -56,6 +56,20 @@ public class UserRepository implements IUserRepository {
         }
     }
 
+    @Override
+    public void updateInfo(UserEntity userEntity) {
+        try {
+            userDao.updateInfo(User.builder()
+                    .userId(userEntity.getUserId())
+                    .password(userEntity.getPassword())
+                    .nickname(userEntity.getNickname())
+                    .avatar(userEntity.getAvatar())
+                    .build());
+        } catch (Exception e) {
+            throw new AppException(ResponseCode.UN_ERROR, "修改用户信息失败", e);
+        }
+    }
+
     private UserEntity toEntity(User user) {
         if (user == null) {
             return null;

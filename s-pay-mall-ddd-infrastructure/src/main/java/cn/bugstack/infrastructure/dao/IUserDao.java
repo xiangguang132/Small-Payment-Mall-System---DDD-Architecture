@@ -17,4 +17,7 @@ public interface IUserDao {
     /** 完善资料：绑定手机号、设置密码、更新昵称 */
     int updateProfile(User user);
 
+    /** 修改用户信息：仅更新非空字段，手机号不可修改 */
+    int updateInfo(User user);
+
 }

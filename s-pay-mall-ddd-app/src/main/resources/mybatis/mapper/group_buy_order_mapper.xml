@@ -42,8 +42,13 @@
                product_name, quantity, source, channel, original_amount,
                deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
         from group_buy_order
-        where user_id = #{userId}
-          and out_trade_no = #{outTradeNo}
+        <where>
+            out_trade_no = #{outTradeNo}
+            <!-- userId 由登录态传入；超时任务等内部链路不传 userId，仅按 out_trade_no 定位 -->
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+        </where>
         limit 1
     </select>
 

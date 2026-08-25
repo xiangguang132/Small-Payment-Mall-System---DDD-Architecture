@@ -15,4 +15,9 @@ public interface IUserProfileService {
      */
     void completeProfile(String userId, String phone, String password, String nickname);
 
+    /**
+     * 修改用户信息：仅更新传入的非空字段（昵称/头像/密码），手机号不可修改
+     */
+    void updateInfo(String userId, String nickname, String avatar, String password);
+
 }

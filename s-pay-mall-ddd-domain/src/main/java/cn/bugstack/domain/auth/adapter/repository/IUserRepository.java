@@ -14,4 +14,7 @@ public interface IUserRepository {
     /** 完善资料：绑定手机号、设置密码、更新昵称 */
     void updateProfile(UserEntity userEntity);
 
+    /** 修改用户信息：仅更新实体中非空的字段，手机号不可修改 */
+    void updateInfo(UserEntity userEntity);
+
 }

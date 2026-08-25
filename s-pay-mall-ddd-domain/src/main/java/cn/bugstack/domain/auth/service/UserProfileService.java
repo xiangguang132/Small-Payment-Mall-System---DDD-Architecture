@@ -76,6 +76,31 @@ public class UserProfileService implements IUserProfileService {
                 .build());
     }
 
+    @Override
+    public void updateInfo(String userId, String nickname, String avatar, String password) {
+        if (StringUtils.isBlank(userId)) {
+            throw new AppException(ResponseCode.NO_LOGIN);
+        }
+        boolean hasNickname = StringUtils.isNotBlank(nickname);
+        boolean hasAvatar = StringUtils.isNotBlank(avatar);
+        boolean hasPassword = StringUtils.isNotBlank(password);
+        if (!hasNickname && !hasAvatar && !hasPassword) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "请至少提供一项需要修改的信息");
+        }
+
+        UserEntity userEntity = userRepository.queryByUserId(userId);
+        if (userEntity == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "用户不存在");
+        }
+        // 密码仅在本次传入时校验并加密，未传字段不更新
+        userRepository.updateInfo(UserEntity.builder()
+                .userId(userId)
+                .nickname(hasNickname ? nickname : null)
+                .avatar(hasAvatar ? avatar : null)
+                .password(hasPassword ? passwordEncoder.encode(validateUpdatePassword(password)) : null)
+                .build());
+    }
+
     public static void validatePhone(String phone) {
         if (StringUtils.isBlank(phone) || !PHONE_PATTERN.matcher(phone).matches()) {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "手机号格式不正确");
@@ -86,6 +111,13 @@ public class UserProfileService implements IUserProfileService {
         if (StringUtils.isBlank(password) || password.length() < PASSWORD_MIN_LENGTH) {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "密码不能为空且至少" + PASSWORD_MIN_LENGTH + "位");
         }
+    }
+
+    private static String validateUpdatePassword(String password) {
+        if (password.length() < PASSWORD_MIN_LENGTH) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "密码至少" + PASSWORD_MIN_LENGTH + "位");
+        }
+        return password;
     }
 
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
@@ -117,16 +116,14 @@ public class ProductTypeController {
     }
 
     /**
-     * 查询有效的商品分类列表（已启用且未删除）
+     * 查询有效的商品分类列表（已启用且未删除，父子两级树形结构）
      * @return
      */
     @GetMapping("valid-list")
     public Response<List<ProductTypeDetailResponse>> validList(){
         log.info("查询有效商品分类列表开始");
         List<ProductTypeAggregate> productTypes = productTypeService.queryValidProductTypes();
-        List<ProductTypeDetailResponse> responses = productTypes.stream()
-                .map(ProductTypeAssembler::toDetailResponse)
-                .collect(Collectors.toList());
+        List<ProductTypeDetailResponse> responses = ProductTypeAssembler.toTreeResponseList(productTypes);
         log.info("查询有效商品分类列表完成 count:{}", responses.size());
         return Response.<List<ProductTypeDetailResponse>>builder()
                 .code(ResponseCode.SUCCESS.getCode())

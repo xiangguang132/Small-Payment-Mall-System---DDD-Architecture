@@ -3,6 +3,7 @@ package cn.bugstack.api.response.producttype;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProductTypeDetailResponse {
@@ -26,4 +27,6 @@ public class ProductTypeDetailResponse {
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
+
+    private List<ProductTypeDetailResponse> children;
 }

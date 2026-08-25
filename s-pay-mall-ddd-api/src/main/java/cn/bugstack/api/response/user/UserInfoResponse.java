@@ -17,6 +17,9 @@ public class UserInfoResponse {
     // 昵称
     private String nickname;
 
+    // 头像
+    private String avatar;
+
     // 手机号（脱敏）
     private String phoneMasked;
 

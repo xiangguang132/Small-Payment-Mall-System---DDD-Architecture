@@ -7,6 +7,11 @@ import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ProductTypeAssembler {
 
     private ProductTypeAssembler() {
@@ -63,6 +68,29 @@ public class ProductTypeAssembler {
         response.setCreateTime(productType.getCreateTime());
         response.setUpdateTime(productType.getUpdateTime());
         return response;
+    }
+
+    public static List<ProductTypeDetailResponse> toTreeResponseList(List<ProductTypeAggregate> productTypes) {
+        if (productTypes == null || productTypes.isEmpty()) {
+            return new ArrayList<>();
+        }
+        Map<Long, ProductTypeDetailResponse> responseMap = new LinkedHashMap<>();
+        for (ProductTypeAggregate productType : productTypes) {
+            ProductTypeDetailResponse response = toDetailResponse(productType);
+            response.setChildren(new ArrayList<>());
+            responseMap.put(response.getId(), response);
+        }
+        List<ProductTypeDetailResponse> roots = new ArrayList<>();
+        for (ProductTypeDetailResponse response : responseMap.values()) {
+            Long parentId = response.getParentId();
+            ProductTypeDetailResponse parent = parentId == null || parentId == 0L ? null : responseMap.get(parentId);
+            if (parent != null && !parent.getId().equals(response.getId())) {
+                parent.getChildren().add(response);
+            } else {
+                roots.add(response);
+            }
+        }
+        return roots;
     }
 
     private static String trim(String value) {
