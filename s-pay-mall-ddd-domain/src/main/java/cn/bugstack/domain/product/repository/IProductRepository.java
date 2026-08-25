@@ -20,4 +20,8 @@ public interface IProductRepository {
 
     List<ProductAggregate> queryPage(String name, String sku, Long categoryId, Integer status,
                                      Integer offset, Integer limit);
+
+    long countByKeyword(String keyword);
+
+    List<ProductAggregate> queryByKeyword(String keyword, Integer offset, Integer limit);
 }

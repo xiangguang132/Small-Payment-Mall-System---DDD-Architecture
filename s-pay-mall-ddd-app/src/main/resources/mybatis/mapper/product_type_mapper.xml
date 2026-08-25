@@ -72,4 +72,22 @@
         and is_del = 0
     </select>
 
+    <select id="queryValidList" resultType="cn.bugstack.infrastructure.dao.po.product.ProductType">
+        select
+        id,
+        parent_id,
+        name,
+        description,
+        type_code,
+        sort,
+        status,
+        is_del,
+        create_time,
+        update_time
+        from product_type
+        where status = 1
+        and is_del = 0
+        order by sort asc, id asc
+    </select>
+
 </mapper>

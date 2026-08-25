@@ -128,6 +128,19 @@ public class ProductRepository extends AbstractRepository implements IProductRep
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public long countByKeyword(String keyword) {
+        return productDao.countSearch(keyword);
+    }
+
+    @Override
+    public List<ProductAggregate> queryByKeyword(String keyword, Integer offset, Integer limit) {
+        return productDao.querySearch(keyword, offset, limit)
+                .stream()
+                .map(this::toAggregate)
+                .collect(Collectors.toList());
+    }
+
     private ProductAggregate toAggregate(Product product) {
         if (product == null) {
             return null;

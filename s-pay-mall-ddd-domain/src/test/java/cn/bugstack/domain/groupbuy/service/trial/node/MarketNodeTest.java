@@ -142,6 +142,11 @@ public class MarketNodeTest {
             }
 
             @Override
+            public GroupBuyActivityEntity queryGroupBuyActivityByProductId(Long productId) {
+                return null;
+            }
+
+            @Override
             public boolean withinTagCrowdRange(String tagId, String userId) {
                 return true;
             }
@@ -194,6 +199,16 @@ public class MarketNodeTest {
             @Override
             public List<ProductAggregate> queryPage(String name, String sku, Long categoryId, Integer status,
                                                     Integer offset, Integer limit) {
+                return java.util.Collections.emptyList();
+            }
+
+            @Override
+            public long countByKeyword(String keyword) {
+                return 0L;
+            }
+
+            @Override
+            public List<ProductAggregate> queryByKeyword(String keyword, Integer offset, Integer limit) {
                 return java.util.Collections.emptyList();
             }
         };

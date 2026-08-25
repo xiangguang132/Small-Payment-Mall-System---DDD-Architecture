@@ -5,7 +5,6 @@
     <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.payment.OrderLock">
         <id column="id" property="id"/>
         <result column="lock_id" property="lockId"/>
-        <result column="user_id" property="userId"/>
         <result column="product_id" property="productId"/>
         <result column="order_id" property="orderId"/>
         <result column="lock_status" property="lockStatus"/>
@@ -15,16 +14,16 @@
     </resultMap>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.payment.OrderLock">
-        INSERT INTO order_lock(lock_id, user_id, product_id, order_id,
+        INSERT INTO order_lock(lock_id, product_id, order_id,
                                lock_status, lock_time,
                                create_time, update_time)
-        VALUES(#{lockId}, #{userId}, #{productId}, #{orderId},
+        VALUES(#{lockId}, #{productId}, #{orderId},
                #{lockStatus}, #{lockTime},
                NOW(), NOW())
     </insert>
 
     <select id="queryByLockId" parameterType="java.lang.String" resultMap="dataMap">
-        SELECT lock_id, user_id, product_id, order_id, lock_status, lock_time
+        SELECT lock_id, product_id, order_id, lock_status, lock_time
         FROM order_lock
         WHERE lock_id = #{lockId}
     </select>

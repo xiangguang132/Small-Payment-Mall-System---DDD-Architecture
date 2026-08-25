@@ -19,7 +19,6 @@ public class OrderLockEntity {
 
     private Long id;
     private String lockId;
-    private String userId;
     private String productId;
     private String orderId;
     private String lockStatus;  // LOCKED / CONFIRMED / EXPIRED

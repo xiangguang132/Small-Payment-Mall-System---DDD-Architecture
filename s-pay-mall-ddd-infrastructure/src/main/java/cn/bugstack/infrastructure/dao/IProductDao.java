@@ -30,4 +30,10 @@ public interface IProductDao {
                             @Param("status") Integer status,
                             @Param("offset") Integer offset,
                             @Param("limit") Integer limit);
+
+    long countSearch(@Param("keyword") String keyword);
+
+    List<Product> querySearch(@Param("keyword") String keyword,
+                              @Param("offset") Integer offset,
+                              @Param("limit") Integer limit);
 }

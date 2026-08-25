@@ -104,4 +104,43 @@
         limit #{offset}, #{limit}
     </select>
 
+    <sql id="searchWhere">
+        where p.is_del = 0
+        and p.status = 1
+        <if test="keyword != null and keyword != ''">
+            and (p.name like concat('%', #{keyword}, '%')
+            or p.description like concat('%', #{keyword}, '%')
+            or pt.name like concat('%', #{keyword}, '%'))
+        </if>
+    </sql>
+
+    <select id="countSearch" resultType="java.lang.Long">
+        select count(1)
+        from product p
+        left join product_type pt on p.category_id = pt.id
+        <include refid="searchWhere"/>
+    </select>
+
+    <select id="querySearch" resultType="cn.bugstack.infrastructure.dao.po.product.Product">
+        select
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.category_id,
+        pt.name as category_name,
+        pt.description as category_description,
+        pt.type_code as category_code,
+        p.status,
+        p.price,
+        p.is_del,
+        p.create_time,
+        p.update_time
+        from product p
+        left join product_type pt on p.category_id = pt.id
+        <include refid="searchWhere"/>
+        order by p.id desc
+        limit #{offset}, #{limit}
+    </select>
+
 </mapper>

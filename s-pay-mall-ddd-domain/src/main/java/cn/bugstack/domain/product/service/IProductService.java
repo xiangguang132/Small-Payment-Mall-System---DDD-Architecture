@@ -20,4 +20,8 @@ public interface IProductService {
 
     List<ProductAggregate> queryProductPage(String name, String sku, Long categoryId, Integer status,
                                             Integer pageNo, Integer pageSize);
+
+    long countProductSearch(String keyword);
+
+    List<ProductAggregate> queryProductSearch(String keyword, Integer pageNo, Integer pageSize);
 }

@@ -2,6 +2,8 @@ package cn.bugstack.domain.producttype.repository;
 
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 
+import java.util.List;
+
 public interface IProductTypeRepository {
 
     Long save(ProductTypeAggregate productType);
@@ -17,4 +19,6 @@ public interface IProductTypeRepository {
     long countProductByCategoryId(Long categoryId);
 
     long countByParentId(Long parentId);
+
+    List<ProductTypeAggregate> queryValidList();
 }

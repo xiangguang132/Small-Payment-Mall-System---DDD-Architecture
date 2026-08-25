@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ProductTypeService implements IProductTypeService {
@@ -125,6 +126,11 @@ public class ProductTypeService implements IProductTypeService {
 
         productTypeRepository.updateById(updated);
         return updated;
+    }
+
+    @Override
+    public List<ProductTypeAggregate> queryValidProductTypes() {
+        return productTypeRepository.queryValidList();
     }
 
     private void validateStatus(Integer status) {

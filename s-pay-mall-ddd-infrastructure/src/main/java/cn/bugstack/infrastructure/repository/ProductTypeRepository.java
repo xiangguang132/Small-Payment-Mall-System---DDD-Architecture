@@ -11,6 +11,8 @@ import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductTypeRepository extends AbstractRepository implements IProductTypeRepository {
@@ -154,6 +156,24 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "父分类id不能为空");
         }
         return productTypeDao.countByParentId(parentId);
+    }
+
+    @Override
+    public List<ProductTypeAggregate> queryValidList() {
+        return productTypeDao.queryValidList().stream()
+                .map(productType -> ProductTypeAggregate.builder()
+                        .id(productType.getId())
+                        .parentId(productType.getParentId())
+                        .name(productType.getName())
+                        .description(productType.getDescription())
+                        .typeCode(productType.getTypeCode())
+                        .sort(productType.getSort())
+                        .status(productType.getStatus())
+                        .isDel(productType.getIsDel())
+                        .createTime(productType.getCreateTime())
+                        .updateTime(productType.getUpdateTime())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private String cacheKeyById(Long id) {

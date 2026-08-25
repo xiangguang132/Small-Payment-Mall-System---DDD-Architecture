@@ -149,6 +149,11 @@ public class TagNodeTest {
         }
 
         @Override
+        public GroupBuyActivityEntity queryGroupBuyActivityByProductId(Long productId) {
+            return null;
+        }
+
+        @Override
         public boolean withinTagCrowdRange(String tagId, String userId) {
             withinTagCrowdRangeCalls++;
             return within;

@@ -109,6 +109,19 @@ public class ProductService implements IProductService {
         return productRepository.queryPage(name, sku, categoryId, status, offset, safePageSize);
     }
 
+    @Override
+    public long countProductSearch(String keyword) {
+        return productRepository.countByKeyword(keyword);
+    }
+
+    @Override
+    public List<ProductAggregate> queryProductSearch(String keyword, Integer pageNo, Integer pageSize) {
+        int safePageNo = (pageNo == null || pageNo <= 0) ? 1 : pageNo;
+        int safePageSize = (pageSize == null || pageSize <= 0) ? 10 : Math.min(pageSize, 100);
+        int offset = (safePageNo - 1) * safePageSize;
+        return productRepository.queryByKeyword(keyword, offset, safePageSize);
+    }
+
     private void validateCategoryEnabled(Long categoryId) {
         if (categoryId == null) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "商品分类id不能为空");
