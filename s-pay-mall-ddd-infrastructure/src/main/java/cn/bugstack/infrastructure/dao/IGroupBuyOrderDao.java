@@ -24,4 +24,11 @@ public interface IGroupBuyOrderDao {
     List<String> queryTimeOutRefundOrderList();
 
     int updateOrderStatus2Refund(@Param("outTradeNo") String outTradeNo);
+
+    long countByStatusAndUserId(@Param("status") Integer status, @Param("userId") String userId);
+
+    List<GroupBuyOrder> queryPageByStatusAndUserId(@Param("status") Integer status,
+                                                   @Param("userId") String userId,
+                                                   @Param("offset") Integer offset,
+                                                   @Param("limit") Integer limit);
 }

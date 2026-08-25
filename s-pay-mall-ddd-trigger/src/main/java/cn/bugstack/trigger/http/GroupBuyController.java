@@ -1,10 +1,13 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.groupbuy.GroupBuyLockOrderRequest;
+import cn.bugstack.api.request.groupbuy.GroupBuyOrderPageRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyTrialRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.groupbuy.GroupBuyLockOrderResponse;
+import cn.bugstack.api.response.groupbuy.GroupBuyOrderDetailResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyTrialResponse;
+import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
@@ -21,6 +24,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -144,6 +149,66 @@ public class GroupBuyController {
         } catch (Exception e) {
             log.error("拼团锁单失败 userId:{} activityId:{} productId:{}", openid, request.getActivityId(), request.getProductId(), e);
             return Response.<GroupBuyLockOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 分页查询拼团订单列表，支持按 status 和 userId 筛选，默认 status=0
+     */
+    @RequestMapping(value = "queryGroupBuyOrderPage", method = RequestMethod.POST)
+    public Response<PageResponse<GroupBuyOrderDetailResponse>> queryGroupBuyOrderPage(@RequestBody GroupBuyOrderPageRequest request) {
+        log.info("拼团订单分页查询开始 status:{} pageNo:{} pageSize:{}",
+                request.getStatus(), request.getPageNo(), request.getPageSize());
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
+            Integer status = request.getStatus();
+
+            List<GroupBuyOrderEntity> orderList = groupBuyOrderService.queryPageByStatusAndUserId(
+                    status, userId, request.getPageNo(), request.getPageSize());
+            long total = groupBuyOrderService.countByStatusAndUserId(status, userId);
+
+            List<GroupBuyOrderDetailResponse> detailList = orderList.stream()
+                    .map(order -> GroupBuyOrderDetailResponse.builder()
+                            .id(order.getId())
+                            .orderId(order.getOrderId())
+                            .userId(order.getUserId())
+                            .teamId(order.getTeamId())
+                            .activityId(order.getActivityId())
+                            .productId(order.getProductId())
+                            .productName(order.getProductName())
+                            .quantity(order.getQuantity())
+                            .source(order.getSource())
+                            .channel(order.getChannel())
+                            .originalAmount(order.getOriginalAmount())
+                            .deductionAmount(order.getDeductionAmount())
+                            .payAmount(order.getPayAmount())
+                            .status(order.getStatus())
+                            .outTradeNo(order.getOutTradeNo())
+                            .createTime(order.getCreateTime())
+                            .updateTime(order.getUpdateTime())
+                            .build())
+                    .collect(Collectors.toList());
+
+            PageResponse<GroupBuyOrderDetailResponse> pageResponse = PageResponse.<GroupBuyOrderDetailResponse>builder()
+                    .total(total)
+                    .pageNo(request.getPageNo())
+                    .pageSize(request.getPageSize())
+                    .list(detailList)
+                    .build();
+
+            log.info("拼团订单分页查询完成 total:{}", total);
+            return Response.<PageResponse<GroupBuyOrderDetailResponse>>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(pageResponse)
+                    .build();
+        } catch (Exception e) {
+            log.error("拼团订单分页查询失败", e);
+            return Response.<PageResponse<GroupBuyOrderDetailResponse>>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

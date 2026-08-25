@@ -58,5 +58,23 @@ public interface IGroupBuyOrderRepository {
      * @return 更新行数（0=未找到或状态不符，1=成功）
      */
     int updateOrderStatus2Refund(String outTradeNo);
+
+    /**
+     * 分页查询拼团订单
+     * @param status 活动状态（null不过滤）
+     * @param userId  用户ID（null/空不过滤）
+     * @param offset 偏移量
+     * @param limit  每页条数
+     * @return 订单列表
+     */
+    List<GroupBuyOrderEntity> queryPageByStatusAndUserId(Integer status, String userId, Integer offset, Integer limit);
+
+    /**
+     * 统计拼团订单数量
+     * @param status 活动状态（null不过滤）
+     * @param userId  用户ID（null/空不过滤）
+     * @return 总数
+     */
+    long countByStatusAndUserId(Integer status, String userId);
 }
 

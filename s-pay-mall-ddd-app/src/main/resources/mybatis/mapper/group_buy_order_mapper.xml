@@ -83,4 +83,35 @@
         where out_trade_no = #{outTradeNo}
           and status in (0, 1)
     </update>
+
+    <select id="countByStatusAndUserId" resultType="long">
+        select count(id)
+        from group_buy_order
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPageByStatusAndUserId" resultMap="dataMap">
+        select id, order_id, user_id, team_id, activity_id, product_id,
+               product_name, quantity, source, channel, original_amount,
+               deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
+        from group_buy_order
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+        </where>
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
 </mapper>

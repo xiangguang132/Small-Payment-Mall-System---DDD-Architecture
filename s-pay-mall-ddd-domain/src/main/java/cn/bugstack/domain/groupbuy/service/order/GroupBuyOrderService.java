@@ -12,6 +12,7 @@ import cn.bugstack.types.exception.AppException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class GroupBuyOrderService implements IGroupBuyOrderService {
@@ -51,6 +52,19 @@ public class GroupBuyOrderService implements IGroupBuyOrderService {
         }
 
         return groupBuyRepository.lockGroupBuyOrder(aggregate);
+    }
+
+    @Override
+    public List<GroupBuyOrderEntity> queryPageByStatusAndUserId(Integer status, String userId, Integer pageNo, Integer pageSize) {
+        int safePageNo = pageNo == null || pageNo <= 0 ? 1 : pageNo;
+        int safePageSize = pageSize == null || pageSize <= 0 ? 10 : Math.min(pageSize, 100);
+        int offset = (safePageNo - 1) * safePageSize;
+        return groupBuyRepository.queryPageByStatusAndUserId(status, userId, offset, safePageSize);
+    }
+
+    @Override
+    public long countByStatusAndUserId(Integer status, String userId) {
+        return groupBuyRepository.countByStatusAndUserId(status, userId);
     }
 
     // applyRule 开始走规则链

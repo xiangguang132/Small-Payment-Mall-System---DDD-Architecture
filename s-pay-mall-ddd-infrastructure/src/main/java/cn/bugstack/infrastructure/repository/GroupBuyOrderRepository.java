@@ -166,6 +166,19 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
         return groupBuyOrderDao.updateOrderStatus2Refund(outTradeNo);
     }
 
+    @Override
+    public List<GroupBuyOrderEntity> queryPageByStatusAndUserId(Integer status, String userId, Integer offset, Integer limit) {
+        return groupBuyOrderDao.queryPageByStatusAndUserId(status, userId, offset, limit)
+                .stream()
+                .map(this::toOrderEntity)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    @Override
+    public long countByStatusAndUserId(Integer status, String userId) {
+        return groupBuyOrderDao.countByStatusAndUserId(status, userId);
+    }
+
     private GroupBuyOrderEntity toOrderEntity(GroupBuyOrder order) {
         return GroupBuyOrderEntity.builder()
                 .id(order.getId())
