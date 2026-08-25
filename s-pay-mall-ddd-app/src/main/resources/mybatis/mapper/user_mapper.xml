@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IUserDao">
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.user.User">
+        insert into user(user_id, password, nickname, avatar, phone, status, create_time, update_time)
+        values (#{userId}, #{password}, #{nickname}, #{avatar}, #{phone},
+                <choose>
+                    <when test="status != null">#{status}</when>
+                    <otherwise>1</otherwise>
+                </choose>,
+                now(), now())
+    </insert>
+
+    <select id="queryByUserId" parameterType="string" resultType="cn.bugstack.infrastructure.dao.po.user.User">
+        select id, user_id, password, nickname, avatar, phone, status, create_time, update_time
+        from user
+        where user_id = #{userId}
+        limit 1
+    </select>
+
+</mapper>

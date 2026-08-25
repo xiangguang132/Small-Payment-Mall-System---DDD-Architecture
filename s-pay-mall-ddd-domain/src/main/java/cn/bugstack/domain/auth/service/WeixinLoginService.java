@@ -2,6 +2,8 @@ package cn.bugstack.domain.auth.service;
 
 import cn.bugstack.domain.auth.adapter.port.IJwtPort;
 import cn.bugstack.domain.auth.adapter.port.ILoginPort;
+import cn.bugstack.domain.auth.adapter.repository.IUserRepository;
+import cn.bugstack.domain.auth.model.entity.UserEntity;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.google.common.cache.Cache;
@@ -20,6 +22,8 @@ public class WeixinLoginService implements ILoginService {
     private ILoginPort loginPort;
     @Resource
     private IJwtPort jwtPort;
+    @Resource
+    private IUserRepository userRepository;
     @Resource
     private Cache<String, String> openidToken;
 
@@ -48,6 +52,13 @@ public class WeixinLoginService implements ILoginService {
     @Override
     public void saveLoginState(String ticket, String openid) throws IOException {
         openidToken.put(ticket, openid);
+        // 首次扫码自动建立用户档案
+        if (userRepository.queryByUserId(openid) == null) {
+            userRepository.save(UserEntity.builder()
+                    .userId(openid)
+                    .nickname("微信用户")
+                    .build());
+        }
         loginPort.sendLoginTempleteMessage(openid);
     }
 

@@ -20,7 +20,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/api/v1/login/**",
                         "/api/v1/weixin/portal/**",
-                        "/api/v1/groupbuy/**",
                         "/api/v1/product/**"
                 );
     }
