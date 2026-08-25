@@ -11,4 +11,10 @@ public interface IUserDao {
 
     User queryByUserId(@Param("userId") String userId);
 
+    /** 按 账号(user_id) 或 手机号 查询 */
+    User queryByAccount(@Param("account") String account);
+
+    /** 完善资料：绑定手机号、设置密码、更新昵称 */
+    int updateProfile(User user);
+
 }

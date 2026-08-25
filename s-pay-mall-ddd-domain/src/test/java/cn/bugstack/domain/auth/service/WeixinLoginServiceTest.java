@@ -2,6 +2,8 @@ package cn.bugstack.domain.auth.service;
 
 import cn.bugstack.domain.auth.adapter.port.IJwtPort;
 import cn.bugstack.domain.auth.adapter.port.ILoginPort;
+import cn.bugstack.domain.auth.adapter.repository.IUserRepository;
+import cn.bugstack.domain.auth.model.entity.UserEntity;
 import com.google.common.cache.Cache;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +25,9 @@ public class WeixinLoginServiceTest {
 
     @Mock
     private IJwtPort jwtPort;
+
+    @Mock
+    private IUserRepository userRepository;
 
     @Mock
     private Cache<String, String> openidToken;
@@ -57,9 +64,23 @@ public class WeixinLoginServiceTest {
     }
 
     @Test
-    public void shouldSaveLoginStateAndNotifyUser() throws Exception {
+    public void shouldSaveLoginStateAndCreateProfileForNewUser() throws Exception {
+        when(userRepository.queryByUserId("openid-1")).thenReturn(null);
+
         loginService.saveLoginState("ticket-1", "openid-1");
 
+        verify(userRepository).save(any(UserEntity.class));
+        verify(openidToken).put("ticket-1", "openid-1");
+        verify(loginPort).sendLoginTempleteMessage("openid-1");
+    }
+
+    @Test
+    public void shouldSkipProfileCreationForExistingUser() throws Exception {
+        when(userRepository.queryByUserId("openid-1")).thenReturn(UserEntity.builder().userId("openid-1").build());
+
+        loginService.saveLoginState("ticket-1", "openid-1");
+
+        verify(userRepository, never()).save(any(UserEntity.class));
         verify(openidToken).put("ticket-1", "openid-1");
         verify(loginPort).sendLoginTempleteMessage("openid-1");
     }

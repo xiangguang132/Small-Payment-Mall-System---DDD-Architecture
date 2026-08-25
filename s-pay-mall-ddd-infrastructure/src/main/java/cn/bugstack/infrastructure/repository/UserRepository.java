@@ -34,6 +34,29 @@ public class UserRepository implements IUserRepository {
     @Override
     public UserEntity queryByUserId(String userId) {
         User user = userDao.queryByUserId(userId);
+        return toEntity(user);
+    }
+
+    @Override
+    public UserEntity queryByAccount(String account) {
+        return toEntity(userDao.queryByAccount(account));
+    }
+
+    @Override
+    public void updateProfile(UserEntity userEntity) {
+        try {
+            userDao.updateProfile(User.builder()
+                    .userId(userEntity.getUserId())
+                    .phone(userEntity.getPhone())
+                    .password(userEntity.getPassword())
+                    .nickname(userEntity.getNickname())
+                    .build());
+        } catch (Exception e) {
+            throw new AppException(ResponseCode.CONFLICT, "完善资料失败（手机号可能已被绑定）", e);
+        }
+    }
+
+    private UserEntity toEntity(User user) {
         if (user == null) {
             return null;
         }

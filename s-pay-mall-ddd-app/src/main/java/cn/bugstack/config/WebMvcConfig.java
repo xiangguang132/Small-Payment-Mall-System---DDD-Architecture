@@ -20,7 +20,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/api/v1/login/**",
                         "/api/v1/weixin/portal/**",
-                        "/api/v1/product/**"
+                        "/api/v1/product/**",
+                        // 只读展示接口放行：游客可浏览首页/商品详情的拼团价与分类导航
+                        "/api/v1/groupbuy/queryGroupBuyTrial",
+                        "/api/v1/product-type/valid-list"
                 );
     }
 }

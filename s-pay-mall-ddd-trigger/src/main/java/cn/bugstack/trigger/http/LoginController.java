@@ -89,7 +89,7 @@ public class LoginController {
     public Response<Boolean> register(@RequestBody AccountRegisterRequest request) {
         try {
             log.info("账号密码注册开始 userId:{}", request.getUserId());
-            accountLoginService.register(request.getUserId(), request.getPassword());
+            accountLoginService.register(request.getUserId(), request.getPassword(), request.getNickname());
             log.info("账号密码注册完成 userId:{}", request.getUserId());
             return Response.<Boolean>builder()
                     .code(Constants.ResponseCode.SUCCESS.getCode())

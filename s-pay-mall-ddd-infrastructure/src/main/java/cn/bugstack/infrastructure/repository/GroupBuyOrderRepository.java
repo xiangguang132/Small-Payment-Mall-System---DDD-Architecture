@@ -65,7 +65,7 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                     .status(0)
                     .validStartTime(now)
                     .validEndTime(now.plusMinutes(validTime))
-                    .notifyUrl(aggregate.getNotifyUrl())
+                    .notifyUrl(StringUtils.defaultIfBlank(aggregate.getNotifyUrl(), ""))
                     .build());
         } else {
             int updated = groupBuyTeamDao.updateAddLockCount(teamId);
@@ -195,11 +195,13 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .deductionAmount(order.getDeductionAmount())
                 .payAmount(order.getPayAmount())
                 .status(order.getStatus())
-                .outTradeNo(order.getOutTradeNo())
-                .createTime(order.getCreateTime())
-                .updateTime(order.getUpdateTime())
-                .build();
-    }
+              .outTradeNo(order.getOutTradeNo())
+              .validStartTime(order.getValidStartTime())
+              .validEndTime(order.getValidEndTime())
+              .createTime(order.getCreateTime())
+              .updateTime(order.getUpdateTime())
+              .build();
+  }
 
     private GroupBuyOrder toOrderPo(GroupBuyOrderEntity entity) {
         return GroupBuyOrder.builder()

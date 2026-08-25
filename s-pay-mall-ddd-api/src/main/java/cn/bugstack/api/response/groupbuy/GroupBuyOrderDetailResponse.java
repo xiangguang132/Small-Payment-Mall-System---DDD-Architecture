@@ -45,6 +45,12 @@ public class GroupBuyOrderDetailResponse {
 
     private String outTradeNo;
 
+    /** 拼团有效期开始（来自 group_buy_team） */
+    private LocalDateTime validStartTime;
+
+    /** 拼团有效期结束（来自 group_buy_team），拼团中订单用于前端倒计时 */
+    private LocalDateTime validEndTime;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

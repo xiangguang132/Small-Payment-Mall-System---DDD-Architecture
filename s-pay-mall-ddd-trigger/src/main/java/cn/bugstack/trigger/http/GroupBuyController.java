@@ -13,11 +13,13 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.service.order.IGroupBuyOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
+import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -39,6 +41,8 @@ public class GroupBuyController {
     private IGroupBuyOrderService groupBuyOrderService;
     @Resource
     private IOrderService orderService;
+    @Resource
+    private IUserProfileService userProfileService;
 
     /**
      * 拼团试算：查询活动、商品与折扣，试算出折后价
@@ -101,7 +105,24 @@ public class GroupBuyController {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String userId = (String) httpRequest.getAttribute("openid");
             openid = userId;
-            if (userId == null) userId = request.getUserId();
+
+            // 身份必须来自 JWT（AuthInterceptor 注入），禁止回退到请求体透传，防止越权
+            if (StringUtils.isBlank(userId)) {
+                log.warn("拼团锁单缺少登录态，拒绝处理");
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+
+            // 硬限制：账号资料未完善（未绑定手机号）不允许锁单
+            if (!userProfileService.isProfileCompleted(userId)) {
+                log.info("拼团锁单拦截：账号资料未完善 userId:{}", userId);
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.E0201.getCode())
+                        .info(ResponseCode.E0201.getInfo())
+                        .build();
+            }
 
             // 1. 内部试算，取 payPrice/targetCount/validTime
             GroupBuyTrialResult trialResult = groupBuyTrialService.queryGroupBuyTrial(
@@ -165,6 +186,16 @@ public class GroupBuyController {
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String userId = (String) httpRequest.getAttribute("openid");
+
+            // 身份必须来自 JWT；为空时直接拒绝，避免 mapper 丢失 user_id 过滤导致越权查询
+            if (StringUtils.isBlank(userId)) {
+                log.warn("拼团订单分页查询缺少登录态，拒绝处理");
+                return Response.<PageResponse<GroupBuyOrderDetailResponse>>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+
             Integer status = request.getStatus();
 
             List<GroupBuyOrderEntity> orderList = groupBuyOrderService.queryPageByStatusAndUserId(
@@ -188,6 +219,8 @@ public class GroupBuyController {
                             .payAmount(order.getPayAmount())
                             .status(order.getStatus())
                             .outTradeNo(order.getOutTradeNo())
+                            .validStartTime(order.getValidStartTime())
+                            .validEndTime(order.getValidEndTime())
                             .createTime(order.getCreateTime())
                             .updateTime(order.getUpdateTime())
                             .build())

@@ -44,6 +44,12 @@ public class GroupBuyOrderEntity {
 
     private String outTradeNo;
 
+    /** 拼团有效期开始（联表 group_buy_team） */
+    private LocalDateTime validStartTime;
+
+    /** 拼团有效期结束（联表 group_buy_team） */
+    private LocalDateTime validEndTime;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

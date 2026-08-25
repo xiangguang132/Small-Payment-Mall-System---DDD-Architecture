@@ -19,6 +19,8 @@
         <result column="pay_amount" property="payAmount"/>
         <result column="status" property="status"/>
         <result column="out_trade_no" property="outTradeNo"/>
+        <result column="valid_start_time" property="validStartTime"/>
+        <result column="valid_end_time" property="validEndTime"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
@@ -98,19 +100,22 @@
     </select>
 
     <select id="queryPageByStatusAndUserId" resultMap="dataMap">
-        select id, order_id, user_id, team_id, activity_id, product_id,
-               product_name, quantity, source, channel, original_amount,
-               deduction_amount, pay_amount, status, out_trade_no, create_time, update_time
-        from group_buy_order
+        select o.id, o.order_id, o.user_id, o.team_id, o.activity_id, o.product_id,
+               o.product_name, o.quantity, o.source, o.channel, o.original_amount,
+               o.deduction_amount, o.pay_amount, o.status, o.out_trade_no,
+               t.valid_start_time, t.valid_end_time,
+               o.create_time, o.update_time
+        from group_buy_order o
+        left join group_buy_team t on o.team_id = t.team_id
         <where>
             <if test="status != null">
-                and status = #{status}
+                and o.status = #{status}
             </if>
             <if test="userId != null and userId != ''">
-                and user_id = #{userId}
+                and o.user_id = #{userId}
             </if>
         </where>
-        order by create_time desc
+        order by o.create_time desc
         limit #{offset}, #{limit}
     </select>
 

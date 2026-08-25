@@ -25,31 +25,40 @@ public class AccountLoginService implements IAccountLoginService {
     private IJwtPort jwtPort;
 
     @Override
-    public void register(String userId, String password) {
+    public void register(String userId, String password, String nickname) {
         if (StringUtils.isBlank(userId) || StringUtils.isBlank(password)) {
-            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "用户ID或密码为空");
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "账号或密码为空");
         }
-        if (userRepository.queryByUserId(userId) != null) {
-            throw new AppException(ResponseCode.CONFLICT, "用户已存在");
+        // 账号统一使用手机号
+        UserProfileService.validatePhone(userId);
+        UserProfileService.validatePassword(password);
+        if (userRepository.queryByAccount(userId) != null) {
+            throw new AppException(ResponseCode.CONFLICT, "该手机号已注册");
         }
         userRepository.save(UserEntity.builder()
                 .userId(userId)
                 .password(passwordEncoder.encode(password))
-                .nickname(userId)
+                .nickname(StringUtils.defaultIfBlank(nickname, maskPhone(userId)))
+                .phone(userId)
                 .build());
     }
 
     @Override
     public String login(String userId, String password) {
         if (StringUtils.isBlank(userId) || StringUtils.isBlank(password)) {
-            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "用户ID或密码为空");
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "账号或密码为空");
         }
-        UserEntity userEntity = userRepository.queryByUserId(userId);
+        // 支持手机号或 user_id 登录
+        UserEntity userEntity = userRepository.queryByAccount(userId);
         if (userEntity == null || StringUtils.isBlank(userEntity.getPassword())
                 || !passwordEncoder.matches(password, userEntity.getPassword())) {
             throw new AppException(ResponseCode.NO_LOGIN, "账号或密码错误");
         }
         return jwtPort.createToken(userEntity.getUserId());
+    }
+
+    private String maskPhone(String phone) {
+        return phone.length() == 11 ? phone.substring(0, 3) + "****" + phone.substring(7) : phone;
     }
 
 }

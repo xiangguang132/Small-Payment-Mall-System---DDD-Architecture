@@ -19,4 +19,20 @@
         limit 1
     </select>
 
+    <select id="queryByAccount" parameterType="string" resultType="cn.bugstack.infrastructure.dao.po.user.User">
+        select id, user_id, password, nickname, avatar, phone, status, create_time, update_time
+        from user
+        where user_id = #{account} or phone = #{account}
+        limit 1
+    </select>
+
+    <update id="updateProfile" parameterType="cn.bugstack.infrastructure.dao.po.user.User">
+        update user
+        set phone = #{phone},
+            password = #{password},
+            nickname = #{nickname},
+            update_time = now()
+        where user_id = #{userId}
+    </update>
+
 </mapper>
