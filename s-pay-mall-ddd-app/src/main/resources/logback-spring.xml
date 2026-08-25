@@ -102,6 +102,9 @@
         <logger name="com.nmys.view" level="debug"/>
     </springProfile>
 
+    <!-- 支付宝SDK内部错误场景日志（ErrorScene 大段报文），业务失败已在代码中处理，关闭避免刷屏 -->
+    <logger name="err" level="OFF"/>
+
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <!-- 异步日志-INFO -->

@@ -26,7 +26,7 @@ public class NoPayNotifyOrderJob {
     @Resource
     private AlipayClient alipayClient;
 
-    @Scheduled(cron = "0/3 * * * * ?")
+    @Scheduled(cron = "0/30 * * * * ?")
     public void exec() {
         try {
             List<String> outTradeNos = orderService.queryNoPayNotifyOrderList();
@@ -45,6 +45,9 @@ public class NoPayNotifyOrderJob {
                 // 支付宝查询成功且明确已支付，才更新本地订单状态
                 if ("10000".equals(code) && "TRADE_SUCCESS".equals(tradeStatus)) {
                     orderService.changeOrderPaySuccess(outTradeNo, alipayTradeQueryResponse.getSendPayDate());
+                } else if ("ACQ.TRADE_NOT_EXIST".equals(alipayTradeQueryResponse.getSubCode())) {
+                    // 用户尚未提交支付表单，支付宝侧还没有这笔交易，属正常情况，等超时关单即可，降为 debug 避免刷屏
+                    log.debug("检测支付回调通知，支付宝交易不存在（用户未支付），等待超时关单 outTradeNo:{}", outTradeNo);
                 } else {
                     log.info("检测未接收到或未正确处理的支付回调通知，订单未支付成功 outTradeNo:{} code:{} tradeStatus:{}", outTradeNo, code, tradeStatus);
                 }

@@ -5,6 +5,7 @@ import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.*;
+import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.alipay.api.AlipayApiException;
@@ -46,7 +47,21 @@ public abstract class AbstractOrderService implements IOrderService {
             throw new AppException(ResponseCode.NOT_FOUND, "商品不存在");
         }
 
-        // 3. 基于商品信息构建订单
+        // 3. 幂等复用：同用户同商品已有待支付订单时，直接复用旧支付单，避免重复创单
+        OrderEntity unpaidOrder = orderRepository.queryUnPayOrder(
+                ShopCartEntity.builder().userId(userId).productId(productId).build());
+        if (unpaidOrder != null && unpaidOrder.getOrderStatus() == OrderStatusVO.PAY_WAIT) {
+            PayOrderEntity existPayOrder = orderRepository.queryPayOrderByOutTradeNo(unpaidOrder.getOutTradeNo());
+            if (existPayOrder != null && existPayOrder.getPayUrl() != null && !existPayOrder.getPayUrl().isEmpty()) {
+                // 当前锁单未被消费，置为过期防止悬挂
+                orderLockRepository.updateLockStatus(lockId, "EXPIRED");
+                log.info("幂等复用未支付订单 userId:{} productId:{} outTradeNo:{} lockId:{}",
+                        userId, productId, unpaidOrder.getOutTradeNo(), lockId);
+                return existPayOrder;
+            }
+        }
+
+        // 4. 基于商品信息构建订单
         OrderEntity orderEntity = CreateOrderAggregate.buildOrderEntity(
                 productId, productEntity.getProductName()
         );
@@ -56,10 +71,10 @@ public abstract class AbstractOrderService implements IOrderService {
                 .orderEntity(orderEntity)
                 .build();
 
-        // 4. 保存订单
+        // 5. 保存订单
         orderRepository.doSaveOrder(orderAggregate);
 
-        // 5. 创建支付单
+        // 6. 创建支付单
         PayOrderEntity payOrderEntity = this.doPrepayOrder(
                 userId,
                 productId,
@@ -68,7 +83,7 @@ public abstract class AbstractOrderService implements IOrderService {
                 productEntity.getPrice()
         );
 
-        // 6. 确认锁单：回写 orderId
+        // 7. 确认锁单：回写 orderId
         orderLockRepository.updateOrderId(lockId, orderEntity.getOutTradeNo());
 
         return payOrderEntity;
