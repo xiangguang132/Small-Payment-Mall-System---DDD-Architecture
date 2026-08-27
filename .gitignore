@@ -38,3 +38,7 @@ build/
 ### 内网穿透 ###
 .ini
 
+### Runtime logs & crash dumps ###
+*.log
+hs_err_pid*
+
