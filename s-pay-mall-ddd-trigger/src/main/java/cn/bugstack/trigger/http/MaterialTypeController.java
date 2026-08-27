@@ -7,7 +7,9 @@ import cn.bugstack.api.response.materialtype.MaterialTypeDetailResponse;
 import cn.bugstack.domain.materialtype.model.aggregate.MaterialTypeAggregate;
 import cn.bugstack.domain.materialtype.service.IMaterialTypeService;
 import cn.bugstack.trigger.assembler.MaterialTypeAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/material-type")
+@RequireRole({RoleEnum.ADMIN, RoleEnum.INVENTORY_MANAGER})
 @Slf4j
 public class MaterialTypeController {
 

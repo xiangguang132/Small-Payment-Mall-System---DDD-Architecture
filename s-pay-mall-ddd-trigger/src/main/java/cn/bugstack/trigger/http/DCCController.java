@@ -2,8 +2,10 @@ package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.IDCCService;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.common.Constants;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RTopic;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/gbm/dcc")
+@RequireRole({RoleEnum.ADMIN})
 public class DCCController implements IDCCService {
 
     @Resource

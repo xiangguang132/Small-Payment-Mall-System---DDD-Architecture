@@ -8,7 +8,9 @@ import cn.bugstack.domain.materialstockallocation.model.aggregate.MaterialStockA
 import cn.bugstack.domain.materialstockallocation.service.IMaterialStockAllocationService;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.trigger.assembler.MaterialStockAllocationAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/material-stock-allocation")
+@RequireRole({RoleEnum.ADMIN, RoleEnum.INVENTORY_MANAGER})
 @Slf4j
 public class MaterialStockAllocationController {
 

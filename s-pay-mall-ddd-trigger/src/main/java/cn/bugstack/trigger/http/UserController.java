@@ -7,6 +7,7 @@ import cn.bugstack.api.response.user.UserInfoResponse;
 import cn.bugstack.domain.auth.model.entity.UserEntity;
 import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.types.common.Constants;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,8 @@ public class UserController {
                             .userId(userEntity.getUserId())
                             .nickname(userEntity.getNickname())
                             .phoneMasked(maskPhone(userEntity.getPhone()))
+                            .role(userEntity.getRole())
+                            .roleName(RoleEnum.of(userEntity.getRole()).getInfo())
                             .profileCompleted(completed)
                             .build())
                     .build();
@@ -110,6 +113,8 @@ public class UserController {
                             .nickname(userEntity.getNickname())
                             .avatar(userEntity.getAvatar())
                             .phoneMasked(maskPhone(userEntity.getPhone()))
+                            .role(userEntity.getRole())
+                            .roleName(RoleEnum.of(userEntity.getRole()).getInfo())
                             .profileCompleted(completed)
                             .build())
                     .build();

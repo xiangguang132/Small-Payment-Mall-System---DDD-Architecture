@@ -18,7 +18,10 @@ import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.service.IProductTypeService;
 import cn.bugstack.trigger.assembler.ProductAssembler;
 import cn.bugstack.trigger.assembler.ProductTypeAssembler;
+import cn.bugstack.trigger.interceptor.PublicEndpoint;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -51,6 +54,7 @@ public class ProductController {
      * @param request
      * @return
      */
+    @PublicEndpoint
     @GetMapping("page")
     public Response<PageResponse<ProductDetailResponse>> page(@Valid ProductPageRequest request) {
         log.info("分页查询商品列表开始 request:{}", request);
@@ -88,6 +92,7 @@ public class ProductController {
      * @param request
      * @return
      */
+    @PublicEndpoint
     @GetMapping("search")
     public Response<PageResponse<ProductDetailResponse>> search(@Valid ProductSearchRequest request) {
         String keyword = request.getKeyword() == null ? null : request.getKeyword().trim();
@@ -147,6 +152,7 @@ public class ProductController {
      * @param request
      * @return
      */
+    @RequireRole({RoleEnum.ADMIN})
     @PostMapping("add")
     public Response<Long> add(@Valid @RequestBody ProductAddRequest request) {
         log.info("新增商品开始 request:{}", request);
@@ -165,6 +171,7 @@ public class ProductController {
      * @param id
      * @return
      */
+    @PublicEndpoint
     @GetMapping("{id}")
     public Response<ProductDetailResponse> detail(@PathVariable Long id) {
         log.info("查询商品详情开始 id:{}", id);
@@ -189,6 +196,7 @@ public class ProductController {
     /**
      * 依据id删除单个商品
      */
+    @RequireRole({RoleEnum.ADMIN})
     @DeleteMapping("{id}")
     public Response<Boolean> delete(@PathVariable Long id) {
         log.info("删除商品开始 id:{}", id);
@@ -207,6 +215,7 @@ public class ProductController {
     /**
      * 依据id更新单个商品
      */
+    @RequireRole({RoleEnum.ADMIN})
     @PutMapping("{id}")
     public Response<ProductDetailResponse> update(@PathVariable Long id, @RequestBody ProductAddRequest request) {
         log.info("更新商品开始 id:{} request:{}", id, request);
@@ -241,6 +250,7 @@ public class ProductController {
     /**
      * 商品上下架
      */
+    @RequireRole({RoleEnum.ADMIN})
     @PutMapping("status/{id}")
     public Response<ProductDetailResponse> onSale(@PathVariable Long id) {
         log.info("修改商品状态开始 id:{}", id);

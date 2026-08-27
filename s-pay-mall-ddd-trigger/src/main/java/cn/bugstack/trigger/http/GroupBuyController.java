@@ -23,6 +23,7 @@ import cn.bugstack.domain.groupbuy.service.refund.IGroupBuyRefundOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderService;
+import cn.bugstack.trigger.interceptor.PublicEndpoint;
 import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -56,6 +57,7 @@ public class GroupBuyController {
     /**
      * 拼团试算：查询活动、商品与折扣，试算出折后价
      */
+    @PublicEndpoint
     @RequestMapping(value = "queryGroupBuyTrial", method = RequestMethod.POST)
     public Response<GroupBuyTrialResponse> queryGroupBuyTrial(@RequestBody GroupBuyTrialRequest request) {
         log.info("拼团试算开始 request:{}", request);

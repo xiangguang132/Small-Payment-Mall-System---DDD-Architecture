@@ -6,7 +6,9 @@ import cn.bugstack.api.response.warehousestock.StockDetailResponse;
 import cn.bugstack.domain.warehousestock.model.aggregate.StockAggregate;
 import cn.bugstack.domain.warehousestock.service.IStockService;
 import cn.bugstack.trigger.assembler.StockAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/warehouse-stock")
+@RequireRole({RoleEnum.ADMIN, RoleEnum.INVENTORY_MANAGER})
 @Slf4j
 public class StockController {
 

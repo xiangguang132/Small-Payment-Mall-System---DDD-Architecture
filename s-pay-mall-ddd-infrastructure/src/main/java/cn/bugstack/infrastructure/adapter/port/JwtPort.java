@@ -22,7 +22,7 @@ public class JwtPort implements IJwtPort {
     private Long expireSeconds;
 
     @Override
-    public String createToken(String userId) {
+    public String createToken(String userId, Integer role) {
         Date now = new Date();
         Date expAt = new Date(System.currentTimeMillis() + expireSeconds * 1000L);
 
@@ -31,6 +31,7 @@ public class JwtPort implements IJwtPort {
                 .withIssuedAt(now)
                 .withExpiresAt(expAt)
                 .withClaim("userId", userId)
+                .withClaim("role", role != null ? role : 0)
                 .sign(Algorithm.HMAC256(secret));
     }
 
@@ -41,6 +42,15 @@ public class JwtPort implements IJwtPort {
                 .build()
                 .verify(token);
         return decodedJWT.getClaim("userId").asString();
+    }
+
+    @Override
+    public Integer parseRole(String token) {
+        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC256(secret))
+                .withIssuer(issuer)
+                .build()
+                .verify(token);
+        return decodedJWT.getClaim("role").asInt();
     }
 
     @Override

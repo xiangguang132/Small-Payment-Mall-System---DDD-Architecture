@@ -54,7 +54,7 @@ public class AccountLoginService implements IAccountLoginService {
                 || !passwordEncoder.matches(password, userEntity.getPassword())) {
             throw new AppException(ResponseCode.NO_LOGIN, "账号或密码错误");
         }
-        return jwtPort.createToken(userEntity.getUserId());
+        return jwtPort.createToken(userEntity.getUserId(), userEntity.getRole());
     }
 
     private String maskPhone(String phone) {

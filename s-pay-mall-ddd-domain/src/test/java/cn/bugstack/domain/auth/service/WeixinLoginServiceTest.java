@@ -57,7 +57,8 @@ public class WeixinLoginServiceTest {
     @Test
     public void shouldCreateTokenAndInvalidateTicketAfterLogin() {
         when(openidToken.getIfPresent("ticket-1")).thenReturn("openid-1");
-        when(jwtPort.createToken("openid-1")).thenReturn("jwt-token");
+        when(userRepository.queryByUserId("openid-1")).thenReturn(UserEntity.builder().userId("openid-1").role(0).build());
+        when(jwtPort.createToken("openid-1", 0)).thenReturn("jwt-token");
 
         assertEquals("jwt-token", loginService.checkLogin("ticket-1"));
         verify(openidToken).invalidate("ticket-1");

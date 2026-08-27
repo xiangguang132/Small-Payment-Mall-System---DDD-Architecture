@@ -23,6 +23,12 @@ public class UserInfoResponse {
     // 手机号（脱敏）
     private String phoneMasked;
 
+    // 角色：0顾客 1管理员 2原料库存管理人员
+    private Integer role;
+
+    // 角色名称
+    private String roleName;
+
     // 账号资料是否已完善
     private Boolean profileCompleted;
 

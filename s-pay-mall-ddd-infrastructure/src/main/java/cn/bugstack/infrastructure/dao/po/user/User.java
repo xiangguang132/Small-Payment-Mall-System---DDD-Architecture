@@ -20,6 +20,7 @@ public class User {
     private String avatar;
     private String phone;
     private Integer status;      // 0禁用 1正常
+    private Integer role;        // 0顾客 1管理员 2原料库存管理人员
     private Date createTime;
     private Date updateTime;
 

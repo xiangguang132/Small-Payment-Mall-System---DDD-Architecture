@@ -6,7 +6,9 @@ import cn.bugstack.api.response.warehouse.WarehouseDetailResponse;
 import cn.bugstack.domain.warehouse.model.aggregate.WarehouseAggregate;
 import cn.bugstack.domain.warehouse.service.IWarehouseService;
 import cn.bugstack.trigger.assembler.WarehouseAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/warehouse")
+@RequireRole({RoleEnum.ADMIN, RoleEnum.INVENTORY_MANAGER})
 @Slf4j
 public class WarehouseController {
 

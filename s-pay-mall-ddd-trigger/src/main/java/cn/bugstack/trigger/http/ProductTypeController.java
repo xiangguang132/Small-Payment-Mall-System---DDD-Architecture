@@ -7,7 +7,10 @@ import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
 import cn.bugstack.domain.producttype.service.IProductTypeService;
 import cn.bugstack.trigger.assembler.ProductTypeAssembler;
+import cn.bugstack.trigger.interceptor.PublicEndpoint;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,7 @@ import java.util.List;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/product-type")
+@RequireRole({RoleEnum.ADMIN})
 @Slf4j
 public class ProductTypeController {
 
@@ -86,6 +90,7 @@ public class ProductTypeController {
      * @param id
      * @return
      */
+    @PublicEndpoint
     @GetMapping("{id}")
     public Response<ProductTypeDetailResponse> detail(@PathVariable Long id){
         log.info("查询商品分类详情开始 id:{}", id);

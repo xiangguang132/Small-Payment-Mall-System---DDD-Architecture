@@ -16,5 +16,6 @@ public class UserEntity {
     private String nickname;
     private String avatar;
     private String phone;
+    private Integer role;        // 0顾客 1管理员 2原料库存管理人员
 
 }

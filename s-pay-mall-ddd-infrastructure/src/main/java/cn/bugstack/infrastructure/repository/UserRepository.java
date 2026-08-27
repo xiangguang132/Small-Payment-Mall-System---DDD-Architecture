@@ -25,6 +25,7 @@ public class UserRepository implements IUserRepository {
                     .nickname(userEntity.getNickname())
                     .avatar(userEntity.getAvatar())
                     .phone(userEntity.getPhone())
+                    .role(userEntity.getRole())
                     .build());
         } catch (Exception e) {
             throw new AppException(ResponseCode.UN_ERROR, "保存用户失败", e);
@@ -80,7 +81,20 @@ public class UserRepository implements IUserRepository {
                 .nickname(user.getNickname())
                 .avatar(user.getAvatar())
                 .phone(user.getPhone())
+                .role(user.getRole())
                 .build();
+    }
+
+    @Override
+    public void updateRole(String userId, Integer role) {
+        try {
+            userDao.updateRole(User.builder()
+                    .userId(userId)
+                    .role(role)
+                    .build());
+        } catch (Exception e) {
+            throw new AppException(ResponseCode.UN_ERROR, "修改用户角色失败", e);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import cn.bugstack.types.enums.ResponseCode;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
@@ -38,6 +39,20 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        // 检查方法上的 @PublicEndpoint 注解，标记后跳过认证
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            if (handlerMethod.hasMethodAnnotation(PublicEndpoint.class)) {
+                // 公开接口：尝试解析 token 设置 userId/role（可选），不强制
+                String token = resolveToken(request);
+                if (StringUtils.isNotBlank(token) && jwtPort.verifyToken(token)) {
+                    request.setAttribute("userId", jwtPort.parseUserId(token));
+                    request.setAttribute("role", jwtPort.parseRole(token));
+                }
+                return true;
+            }
+        }
+
         String token = resolveToken(request);
         if (StringUtils.isBlank(token)) {
             writeNoLogin(response);
@@ -48,6 +63,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
         request.setAttribute("userId", jwtPort.parseUserId(token));
+        request.setAttribute("role", jwtPort.parseRole(token));
         return true;
     }
 

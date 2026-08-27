@@ -20,4 +20,7 @@ public interface IUserDao {
     /** 修改用户信息：仅更新非空字段，手机号不可修改 */
     int updateInfo(User user);
 
+    /** 修改用户角色 */
+    int updateRole(User user);
+
 }

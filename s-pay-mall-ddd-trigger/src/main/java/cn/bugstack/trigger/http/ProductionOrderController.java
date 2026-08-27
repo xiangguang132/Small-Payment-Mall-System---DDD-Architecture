@@ -9,7 +9,9 @@ import cn.bugstack.domain.production.model.aggregate.ProductionOrderAggregate;
 import cn.bugstack.domain.production.model.vo.ProductionOrderMaterialVO;
 import cn.bugstack.domain.production.service.IProductionOrderService;
 import cn.bugstack.trigger.assembler.ProductionOrderAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/production-order")
+@RequireRole({RoleEnum.ADMIN, RoleEnum.INVENTORY_MANAGER})
 @Slf4j
 public class ProductionOrderController {
 

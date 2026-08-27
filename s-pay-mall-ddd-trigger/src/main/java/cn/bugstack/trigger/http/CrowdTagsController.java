@@ -9,7 +9,9 @@ import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.crowdtags.model.aggregate.CrowdTagsAggregate;
 import cn.bugstack.domain.crowdtags.service.tag.ICrowdTagsService;
 import cn.bugstack.trigger.assembler.CrowdTagsAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @Validated
 @RequestMapping("/api/v1/crowd-tags")
+@RequireRole({RoleEnum.ADMIN})
 @Slf4j
 public class CrowdTagsController {
 

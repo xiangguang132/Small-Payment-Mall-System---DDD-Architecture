@@ -9,7 +9,9 @@ import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.crowdtags.model.entity.CrowdTagsJobEntity;
 import cn.bugstack.domain.crowdtags.service.job.ICrowdTagsJobService;
 import cn.bugstack.trigger.assembler.CrowdTagsJobAssembler;
+import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/crowd-tags-jobs/")
+@RequireRole({RoleEnum.ADMIN})
 public class CrowdTagsJobController {
 
     @Resource

@@ -17,4 +17,7 @@ public interface IUserRepository {
     /** 修改用户信息：仅更新实体中非空的字段，手机号不可修改 */
     void updateInfo(UserEntity userEntity);
 
+    /** 修改用户角色 */
+    void updateRole(String userId, Integer role);
+
 }

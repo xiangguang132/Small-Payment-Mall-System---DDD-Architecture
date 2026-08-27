@@ -44,7 +44,10 @@ public class WeixinLoginService implements ILoginService {
         if (openid == null) {
             return null;
         }
-        String token = jwtPort.createToken(openid);
+        // 查询用户角色
+        UserEntity userEntity = userRepository.queryByUserId(openid);
+        Integer role = (userEntity != null) ? userEntity.getRole() : 0;
+        String token = jwtPort.createToken(openid, role);
         openidToken.invalidate(ticket);
         return token;
     }
