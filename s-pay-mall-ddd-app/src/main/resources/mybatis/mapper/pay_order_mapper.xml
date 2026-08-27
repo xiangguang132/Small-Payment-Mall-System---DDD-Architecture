@@ -84,4 +84,32 @@
         LIMIT 50
     </select>
 
+    <!-- 分页查询公共条件 -->
+    <sql id="pageWhere">
+        <where>
+            o.user_id = #{userId}
+            <choose>
+                <when test="status != null">
+                    AND o.status = #{status}
+                </when>
+            </choose>
+        </where>
+    </sql>
+
+    <select id="queryPageByStatusAndUserId" resultMap="dataMap">
+        SELECT o.id, o.user_id, o.product_id, o.product_name, o.out_trade_no, o.order_time,
+        o.total_amount, o.order_type, o.status, o.pay_url, o.pay_time, o.out_trade_time,
+        o.create_time, o.update_time
+        FROM pay_order o
+        <include refid="pageWhere"/>
+        ORDER BY o.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByStatusAndUserId" resultType="long">
+        SELECT COUNT(*)
+        FROM pay_order o
+        <include refid="pageWhere"/>
+    </select>
+
 </mapper>

@@ -94,6 +94,24 @@ public interface IOrderRepository {
      * @return 是否更新成功
      */
     boolean changeOrderRefundResult(String outTradeNo, String fromStatus, String toStatus);
+
+    /**
+     * 分页查询用户支付订单（支持按状态筛选）
+     * @param status 订单状态（null=不筛选）
+     * @param userId 用户ID
+     * @param offset 偏移量
+     * @param limit 每页条数
+     * @return 订单列表
+     */
+    List<PayOrderEntity> queryPageByStatusAndUserId(String status, String userId, Integer offset, Integer limit);
+
+    /**
+     * 统计用户支付订单数量（支持按状态筛选）
+     * @param status 订单状态（null=不筛选）
+     * @param userId 用户ID
+     * @return 数量
+     */
+    long countByStatusAndUserId(String status, String userId);
 }
 
 

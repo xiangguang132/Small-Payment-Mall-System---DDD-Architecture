@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PayOrderEntity {
 
+    private Long id;
     private String userId;
     private String productId;
     private String productName;
@@ -27,4 +28,6 @@ public class PayOrderEntity {
     private String payUrl;
     private LocalDateTime payTime;
     private LocalDateTime outTradeTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }

@@ -91,10 +91,18 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public PayOrderEntity queryPayOrderByOutTradeNo(String outTradeNo) {
         PayOrder order = orderDao.queryPayOrderByOutTradeNo(outTradeNo);
+        return toPayOrderEntity(order);
+    }
+
+    /**
+     * PO → Domain Entity 统一转换
+     */
+    private PayOrderEntity toPayOrderEntity(PayOrder order) {
         if (order == null) {
             return null;
         }
         return PayOrderEntity.builder()
+                .id(order.getId())
                 .userId(order.getUserId())
                 .productId(order.getProductId())
                 .productName(order.getProductName())
@@ -106,6 +114,8 @@ public class OrderRepository implements IOrderRepository {
                 .payUrl(order.getPayUrl())
                 .payTime(toLocalDateTime(order.getPayTime()))
                 .outTradeTime(toLocalDateTime(order.getOutTradeTime()))
+                .createTime(toLocalDateTime(order.getCreateTime()))
+                .updateTime(toLocalDateTime(order.getUpdateTime()))
                 .build();
     }
 
@@ -184,6 +194,24 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public boolean changeOrderRefundResult(String outTradeNo, String fromStatus, String toStatus) {
         return orderDao.changeOrderRefundResult(outTradeNo, fromStatus, toStatus);
+    }
+
+    @Override
+    public List<PayOrderEntity> queryPageByStatusAndUserId(String status, String userId, Integer offset, Integer limit) {
+        List<PayOrder> orderList = orderDao.queryPageByStatusAndUserId(status, userId, offset, limit);
+        if (orderList == null || orderList.isEmpty()) {
+            return java.util.Collections.emptyList();
+        }
+        List<PayOrderEntity> result = new java.util.ArrayList<>(orderList.size());
+        for (PayOrder order : orderList) {
+            result.add(toPayOrderEntity(order));
+        }
+        return result;
+    }
+
+    @Override
+    public long countByStatusAndUserId(String status, String userId) {
+        return orderDao.countByStatusAndUserId(status, userId);
     }
 }
 

@@ -26,6 +26,10 @@ logging:
   config: classpath:logback-spring.xml
 
 spring:
+  # Spring Boot 2.6+ 需要设置为 ant_path_matcher 兼容 Springfox
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     username: root
     password: mysql

@@ -255,6 +255,85 @@ public class OrderService extends AbstractOrderService{
         return orderRepository.changeOrderPayClose(outTradeNo);
     }
 
+    @Override
+    public List<PayOrderEntity> queryPageByStatusAndUserId(String status, String userId, Integer pageNo, Integer pageSize) {
+        // 参数校验：pageNo 最小 1，pageSize 默认 10 上限 100
+        int safePageNo = (pageNo == null || pageNo <= 0) ? 1 : pageNo;
+        int safePageSize = (pageSize == null || pageSize <= 0) ? 10 : Math.min(pageSize, 100);
+        int offset = (safePageNo - 1) * safePageSize;
+        return orderRepository.queryPageByStatusAndUserId(status, userId, offset, safePageSize);
+    }
+
+    @Override
+    public long countByStatusAndUserId(String status, String userId) {
+        return orderRepository.countByStatusAndUserId(status, userId);
+    }
+
+    @Override
+    public PayOrderEntity queryByUserIdAndOutTradeNo(String userId, String outTradeNo) {
+        PayOrderEntity entity = orderRepository.queryPayOrderByOutTradeNo(outTradeNo);
+        if (entity == null || !userId.equals(entity.getUserId())) {
+            return null;
+        }
+        return entity;
+    }
+
+    @Override
+    public boolean closeOrder(String userId, String outTradeNo) {
+        PayOrderEntity entity = queryByUserIdAndOutTradeNo(userId, outTradeNo);
+        if (entity == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "订单不存在");
+        }
+        // 仅 CREATE / PAY_WAIT 可关单
+        if (!OrderStatusVO.CREATE.equals(entity.getOrderStatus())
+                && !OrderStatusVO.PAY_WAIT.equals(entity.getOrderStatus())) {
+            throw new AppException(ResponseCode.UN_ERROR, "当前订单状态不可关闭");
+        }
+        return orderRepository.changeOrderPayClose(outTradeNo);
+    }
+
+    @Override
+    public PayOrderEntity repayOrder(String userId, String outTradeNo) throws AlipayApiException {
+        PayOrderEntity entity = queryByUserIdAndOutTradeNo(userId, outTradeNo);
+        if (entity == null) {
+            throw new AppException(ResponseCode.NOT_FOUND, "订单不存在");
+        }
+        // 仅 CREATE / PAY_WAIT 可再次支付
+        if (!OrderStatusVO.CREATE.equals(entity.getOrderStatus())
+                && !OrderStatusVO.PAY_WAIT.equals(entity.getOrderStatus())) {
+            throw new AppException(ResponseCode.UN_ERROR, "订单状态已变化，请刷新后重试");
+        }
+
+        // 幂等重生成支付宝支付表单，复用 doPrepayOrder 的核心逻辑
+        AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
+        request.setReturnUrl(returnUrl);
+        request.setNotifyUrl(notifyUrl);
+
+        JSONObject bizContent = new JSONObject();
+        bizContent.put("out_trade_no", outTradeNo);
+        bizContent.put("total_amount", formatAmount(entity.getTotalAmount()));
+        bizContent.put("subject", entity.getProductName());
+        bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
+        request.setBizContent(bizContent.toString());
+
+        String form = alipayClient.pageExecute(request).getBody();
+
+        PayOrderEntity payOrderEntity = PayOrderEntity.builder()
+                .userId(userId)
+                .productId(entity.getProductId())
+                .productName(entity.getProductName())
+                .outTradeNo(outTradeNo)
+                .orderTime(entity.getOrderTime())
+                .totalAmount(entity.getTotalAmount())
+                .orderType(entity.getOrderType())
+                .orderStatus(OrderStatusVO.PAY_WAIT)
+                .payUrl(form)
+                .build();
+
+        orderRepository.updateOrderPayInfo(payOrderEntity);
+
+        return payOrderEntity;
+    }
 }
 
 

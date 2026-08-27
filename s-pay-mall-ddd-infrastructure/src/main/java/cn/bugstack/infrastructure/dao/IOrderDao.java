@@ -38,4 +38,26 @@ public interface IOrderDao {
     boolean changeOrderRefundResult(@Param("outTradeNo") String outTradeNo,
                                     @Param("fromStatus") String fromStatus,
                                     @Param("toStatus") String toStatus);
+
+    /**
+     * 分页查询用户支付订单（支持按状态筛选）
+     * @param status 订单状态（null=不筛选）
+     * @param userId 用户ID
+     * @param offset 偏移量
+     * @param limit 每页条数
+     * @return 订单列表
+     */
+    List<PayOrder> queryPageByStatusAndUserId(@Param("status") String status,
+                                              @Param("userId") String userId,
+                                              @Param("offset") Integer offset,
+                                              @Param("limit") Integer limit);
+
+    /**
+     * 统计用户支付订单数量（支持按状态筛选）
+     * @param status 订单状态（null=不筛选）
+     * @param userId 用户ID
+     * @return 数量
+     */
+    long countByStatusAndUserId(@Param("status") String status,
+                                @Param("userId") String userId);
 }
