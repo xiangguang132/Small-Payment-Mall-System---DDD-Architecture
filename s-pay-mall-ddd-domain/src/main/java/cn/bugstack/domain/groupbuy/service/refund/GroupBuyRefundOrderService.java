@@ -4,12 +4,14 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntit
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundRestoreEntity;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyTeamRepository;
 import cn.bugstack.domain.groupbuy.service.refund.business.IGroupBuyRefundOrderStrategy;
 import cn.bugstack.domain.groupbuy.service.refund.factory.GroupBuyRefundOrderRuleFilterFactory;
 import cn.bugstack.types.design.framework.link.multilink.chain.BusinessLinkedList;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +26,9 @@ public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
 
     @Resource
     private Map<String, IGroupBuyRefundOrderStrategy> refundGroupBuyOrderStrategyMap;
+
+    @Resource
+    private IGroupBuyTeamRepository groupBuyTeamRepository;
 
     /**
      * 拼团退单
@@ -81,8 +86,27 @@ public class GroupBuyRefundOrderService implements IGroupBuyRefundOrderService {
                 .payAmount(behaviorEntity.getPayAmount())
                 .build();
         strategy.refundGroupBuyOrder(refundOrderEntity);
+        closeTeamIfEmpty(behaviorEntity.getTeamId());
         behaviorEntity.setStrategyName(null);
         return behaviorEntity;
+    }
+
+    /**
+     * 团空即关：退单成功后，若团内已无有效订单（锁定/已支付），原子关闭队伍。
+     * 覆盖用户主动退出、超时退款等所有退单路径；失败仅记日志，不影响退单结果。
+     */
+    private void closeTeamIfEmpty(String teamId) {
+        if (StringUtils.isBlank(teamId)) {
+            return;
+        }
+        try {
+            int closed = groupBuyTeamRepository.updateStatus2CloseIfEmpty(teamId);
+            if (closed == 1) {
+                log.info("拼团队伍内已无有效成员，队伍关闭 teamId:{}", teamId);
+            }
+        } catch (Exception e) {
+            log.error("拼团队伍关闭检查失败 teamId:{}", teamId, e);
+        }
     }
 
     @Override

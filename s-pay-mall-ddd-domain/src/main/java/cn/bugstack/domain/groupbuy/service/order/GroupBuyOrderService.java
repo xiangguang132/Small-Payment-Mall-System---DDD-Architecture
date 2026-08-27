@@ -76,6 +76,11 @@ public class GroupBuyOrderService implements IGroupBuyOrderService {
         return groupBuyRepository.countByStatusAndUserId(status, userId);
     }
 
+    @Override
+    public GroupBuyOrderEntity queryByUserIdAndOutTradeNo(String userId, String outTradeNo) {
+        return groupBuyRepository.queryGroupBuyOrderByOutTradeNo(userId, outTradeNo);
+    }
+
     // applyRule 开始走规则链
     private GroupBuyRuleFilterFeedBackEntity applyRule(GroupBuyRuleCommandEntity command) {
         try {

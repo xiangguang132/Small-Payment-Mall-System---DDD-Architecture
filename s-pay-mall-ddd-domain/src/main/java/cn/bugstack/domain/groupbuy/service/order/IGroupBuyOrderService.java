@@ -26,4 +26,12 @@ public interface IGroupBuyOrderService {
      * @return 总数
      */
     long countByStatusAndUserId(Integer status, String userId);
+
+    /**
+     * 按外部交易单号查询本人拼团订单（用于再次拉起支付前的归属与状态校验）
+     * @param userId     用户ID（登录态注入，防越权）
+     * @param outTradeNo 外部交易单号
+     * @return 订单；不存在返回 null
+     */
+    GroupBuyOrderEntity queryByUserIdAndOutTradeNo(String userId, String outTradeNo);
 }

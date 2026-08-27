@@ -48,6 +48,7 @@ public class GroupBuyRefundOrderServiceTest {
                 .orderId("O1")
                 .teamId("T1")
                 .activityId(100L)
+                .outTradeNo("B1")
                 .strategyName("paidRefundStrategy")
                 .message("已支付未成团，进入退款策略")
                 .success(true)

@@ -31,10 +31,12 @@
         )
     </insert>
 
+    <!-- 参团加锁：仅拼团中(status=0)的队伍可加入，已关闭(2)/已成团(1)队伍拒绝 -->
     <update id="updateAddLockCount" parameterType="java.lang.String">
         update group_buy_team
         set lock_count = lock_count + 1, update_time = now()
         where team_id = #{teamId}
+          and status = 0
           and lock_count &lt; target_count
     </update>
 
@@ -70,6 +72,20 @@
             update_time = now()
         where team_id = #{teamId}
           and lock_count &gt; 0
+    </update>
+
+    <!-- 团空即关：团内已无有效订单(0锁定/1已支付)时关闭队伍(status=2)；单条原子UPDATE，天然防并发漏判 -->
+    <update id="updateStatus2CloseIfEmpty" parameterType="java.lang.String">
+        update group_buy_team t
+        set t.status = 2,
+            t.update_time = now()
+        where t.team_id = #{teamId}
+          and t.status != 2
+          and not exists (
+              select 1 from group_buy_order o
+              where o.team_id = t.team_id
+                and o.status in (0, 1)
+          )
     </update>
 
 </mapper>

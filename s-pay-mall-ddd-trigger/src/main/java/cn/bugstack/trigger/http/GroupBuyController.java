@@ -1,20 +1,26 @@
 package cn.bugstack.trigger.http;
 
+import cn.bugstack.api.request.groupbuy.GroupBuyExitRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyLockOrderRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyOrderPageRequest;
+import cn.bugstack.api.request.groupbuy.GroupBuyRepayRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyTrialRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.groupbuy.GroupBuyLockOrderResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyOrderDetailResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyTrialResponse;
 import cn.bugstack.api.response.page.PageResponse;
+import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderDisplayStatusVO;
+import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderStatusEnumVO;
 import cn.bugstack.domain.groupbuy.service.order.IGroupBuyOrderService;
+import cn.bugstack.domain.groupbuy.service.refund.IGroupBuyRefundOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
-import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.types.enums.ResponseCode;
@@ -40,6 +46,8 @@ public class GroupBuyController {
     private IGroupBuyTrialService groupBuyTrialService;
     @Resource
     private IGroupBuyOrderService groupBuyOrderService;
+    @Resource
+    private IGroupBuyRefundOrderService groupBuyRefundOrderService;
     @Resource
     private IOrderService orderService;
     @Resource
@@ -175,6 +183,142 @@ public class GroupBuyController {
         } catch (Exception e) {
             log.error("拼团锁单失败 userId:{} activityId:{} productId:{}", openid, request.getActivityId(), request.getProductId(), e);
             return Response.<GroupBuyLockOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 待付款拼团订单再次拉起支付：校验本人订单仍为 LOCKED(0) 后，
+     * 复用 createGroupBuyPayOrder 幂等重生成支付宝表单（金额取订单原 payAmount），返回结构与锁单一致
+     */
+    @RequestMapping(value = "repayGroupBuyOrder", method = RequestMethod.POST)
+    public Response<GroupBuyLockOrderResponse> repayGroupBuyOrder(@RequestBody GroupBuyRepayRequest request) {
+        log.info("拼团再次支付开始 outTradeNo:{}", request.getOutTradeNo());
+        String openid = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
+            openid = userId;
+
+            if (StringUtils.isBlank(userId)) {
+                log.warn("拼团再次支付缺少登录态，拒绝处理");
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+
+            if (StringUtils.isBlank(request.getOutTradeNo())) {
+                log.warn("拼团再次支付缺少外部交易单号 userId:{}", userId);
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                        .info(ResponseCode.ILLEGAL_PARAMETER.getInfo())
+                        .build();
+            }
+
+            // 归属与状态校验：仅本人的待付款(LOCKED)订单可再次拉起支付
+            GroupBuyOrderEntity order = groupBuyOrderService.queryByUserIdAndOutTradeNo(
+                    userId, request.getOutTradeNo().trim());
+            if (order == null) {
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.NOT_FOUND.getCode())
+                        .info("订单不存在")
+                        .build();
+            }
+            if (!GroupBuyOrderStatusEnumVO.LOCKED.getCode().equals(order.getStatus())) {
+                log.info("拼团再次支付拦截：订单状态非待付款 userId:{} outTradeNo:{} status:{}",
+                        userId, order.getOutTradeNo(), order.getStatus());
+                return Response.<GroupBuyLockOrderResponse>builder()
+                        .code(ResponseCode.UN_ERROR.getCode())
+                        .info("订单状态已变化，请刷新后重试")
+                        .build();
+            }
+
+            // 幂等重生成支付表单：已存在支付单仅回写 payUrl 并保持 PAY_WAIT；金额/商品以订单为准
+            PayOrderEntity payOrderEntity = orderService.createGroupBuyPayOrder(
+                    userId,
+                    String.valueOf(order.getProductId()),
+                    order.getProductName(),
+                    order.getOutTradeNo(),
+                    order.getPayAmount()
+            );
+
+            log.info("拼团再次支付完成 userId:{} teamId:{} outTradeNo:{}", openid, order.getTeamId(), order.getOutTradeNo());
+            return Response.<GroupBuyLockOrderResponse>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(GroupBuyLockOrderResponse.builder()
+                            .teamId(order.getTeamId())
+                            .outTradeNo(payOrderEntity.getOutTradeNo())
+                            .payUrl(payOrderEntity.getPayUrl())
+                            .build())
+                    .build();
+        } catch (Exception e) {
+            log.error("拼团再次支付异常 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
+            return Response.<GroupBuyLockOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 退出拼团：按 outTradeNo 取消本人拼团订单（未支付仅取消；已支付走真实支付宝退款），
+     * 复用退单链（幂等防重/状态路由/回调）；若为团内最后一人，原子关闭队伍
+     */
+    @RequestMapping(value = "exitGroupBuyOrder", method = RequestMethod.POST)
+    public Response<String> exitGroupBuyOrder(@RequestBody GroupBuyExitRequest request) {
+        log.info("退出拼团开始 outTradeNo:{}", request.getOutTradeNo());
+        String openid = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            String userId = (String) httpRequest.getAttribute("openid");
+            openid = userId;
+
+            if (StringUtils.isBlank(userId)) {
+                log.warn("退出拼团缺少登录态，拒绝处理");
+                return Response.<String>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+
+            if (StringUtils.isBlank(request.getOutTradeNo())) {
+                log.warn("退出拼团缺少外部交易单号 userId:{}", userId);
+                return Response.<String>builder()
+                        .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                        .info(ResponseCode.ILLEGAL_PARAMETER.getInfo())
+                        .build();
+            }
+
+            GroupBuyRefundOrderCommandEntity command = GroupBuyRefundOrderCommandEntity.builder()
+                    .userId(userId)
+                    .outTradeNo(request.getOutTradeNo().trim())
+                    .refundType("userExitTeam")
+                    .build();
+            GroupBuyRefundOrderBehaviorEntity behaviorEntity = groupBuyRefundOrderService.refundGroupBuyOrder(command);
+
+            if (behaviorEntity == null || !behaviorEntity.isSuccess()) {
+                String message = behaviorEntity == null ? "退出拼团失败" : behaviorEntity.getMessage();
+                log.warn("退出拼团失败 userId:{} outTradeNo:{} message:{}", userId, request.getOutTradeNo(), message);
+                return Response.<String>builder()
+                        .code(ResponseCode.UN_ERROR.getCode())
+                        .info(message)
+                        .build();
+            }
+
+            log.info("退出拼团完成 userId:{} teamId:{} message:{}",
+                    userId, behaviorEntity.getTeamId(), behaviorEntity.getMessage());
+            return Response.<String>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(behaviorEntity.getMessage())
+                    .build();
+        } catch (Exception e) {
+            log.error("退出拼团异常 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
+            return Response.<String>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

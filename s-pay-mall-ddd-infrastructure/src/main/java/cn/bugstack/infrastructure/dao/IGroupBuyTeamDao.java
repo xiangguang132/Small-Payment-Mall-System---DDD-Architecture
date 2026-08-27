@@ -19,4 +19,11 @@ public interface IGroupBuyTeamDao {
     GroupBuyTeamEntity queryGroupBuyTeamByTeamId(@Param("teamId") String teamId);
 
     int updateSubtractLockCount(@Param("teamId") String teamId);
+
+    /**
+     * 团空即关：团内无有效订单时关闭队伍（status=2）
+     * @param teamId 团队ID
+     * @return 更新行数（1=已关闭，0=团内仍有有效成员或已关闭）
+     */
+    int updateStatus2CloseIfEmpty(@Param("teamId") String teamId);
 }

@@ -22,8 +22,8 @@ public class UniqueRefundNodeFilter implements ILogicHandler<GroupBuyRefundOrder
         // 订单、拼团配置和拼团活动
         GroupBuyOrderEntity groupBuyOrderEntity = dynamicContext.getGroupBuyOrderEntity();
         GroupBuyOrderStatusEnumVO statusEnumVO = GroupBuyOrderStatusEnumVO.valueOf(groupBuyOrderEntity.getStatus());
-        // 幂等-如果单子已经是已取消/退单态，直接返回这个实体
-        if (GroupBuyOrderStatusEnumVO.CANCELED.equals(statusEnumVO)) {
+        // 幂等-订单已是退款终态(2)，重复退单直接返回成功
+        if (GroupBuyOrderStatusEnumVO.REFUNDED.equals(statusEnumVO)) {
             log.info("逆向流程-退单操作，重复退单命中 userId:{} outTradeNo:{} status:{}", requestParameter.getUserId(), requestParameter.getOutTradeNo(), groupBuyOrderEntity.getStatus());
             return GroupBuyRefundOrderBehaviorEntity.builder()
                     .userId(groupBuyOrderEntity.getUserId())
