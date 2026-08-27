@@ -2,6 +2,8 @@ package cn.bugstack.api.request.groupbuy;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class GroupBuyTrialRequest {
 
@@ -13,5 +15,11 @@ public class GroupBuyTrialRequest {
 
     // 商品ID
     private Long productId;
+
+    // 选择的优惠券ID列表
+    private List<String> couponIds;
+
+    // 是否使用积分
+    private Boolean usePoints;
 
 }

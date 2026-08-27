@@ -4,6 +4,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyDiscountEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
+import cn.bugstack.domain.groupbuy.model.entity.TrialRuleResult;
 import cn.bugstack.domain.groupbuy.service.trial.node.RootNode;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.types.design.framework.tree.StrategyHandler;
@@ -14,6 +15,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 一切决策的开始，从这里进入 RootNode ，然后开始走 规则树
@@ -65,5 +68,8 @@ public class DefaultActivityStrategyFactory {
         private boolean visible;
         // 是否配置可参与
         private boolean enable;
+        // 规则链明细
+        @Builder.Default
+        private List<TrialRuleResult> appliedRuleResults = new ArrayList<>();
     }
 }

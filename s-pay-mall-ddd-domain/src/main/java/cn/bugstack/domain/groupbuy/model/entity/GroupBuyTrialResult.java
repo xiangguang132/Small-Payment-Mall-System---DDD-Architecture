@@ -1,5 +1,6 @@
 package cn.bugstack.domain.groupbuy.model.entity;
 
+import cn.bugstack.domain.groupbuy.model.valobj.TrialRuleTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -47,5 +49,8 @@ public class GroupBuyTrialResult {
     private BigDecimal payPrice;
     private Boolean visible;
     private Boolean enable;
+
+    /** 规则链试算明细 */
+    private List<TrialRuleResult> ruleDetails;
 
 }

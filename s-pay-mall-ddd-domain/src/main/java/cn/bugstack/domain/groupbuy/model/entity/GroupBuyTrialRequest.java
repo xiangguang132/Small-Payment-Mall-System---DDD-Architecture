@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,5 +21,11 @@ public class GroupBuyTrialRequest {
 
     /** 商品ID，用于和活动配置中的商品做一致性校验 */
     private Long productId;
+
+    /** 选择的优惠券ID列表 */
+    private List<String> couponIds;
+
+    /** 是否使用积分 */
+    private Boolean usePoints;
 
 }

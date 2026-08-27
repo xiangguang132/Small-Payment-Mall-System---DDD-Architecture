@@ -4,6 +4,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyDiscountEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
+import cn.bugstack.domain.groupbuy.model.entity.TrialRuleResult;
 import cn.bugstack.domain.groupbuy.service.trial.AbstractGroupBuyMarketSupport;
 import cn.bugstack.domain.groupbuy.service.trial.factory.DefaultActivityStrategyFactory;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
@@ -28,11 +29,9 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
     protected GroupBuyTrialResult doApply(GroupBuyTrialRequest requestParameter, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         log.info("拼团商品查询试算服务-EndNode userId:{} requestParameter:{}", requestParameter.getUserId(), JSON.toJSONString(requestParameter));
 
-        // 获取活动、折扣信息 与 商品信息
         GroupBuyActivityEntity activity = dynamicContext.getActivity();
         GroupBuyDiscountEntity discount = dynamicContext.getDiscount();
         ProductAggregate productAggregate = dynamicContext.getProduct();
-        // 判空兜底
         if (activity == null || productAggregate == null || discount == null) {
             log.error("EndNode 上下文数据为空, userId:{}, activity:{}, product:{}, discount:{}",
                     requestParameter.getUserId(),
@@ -42,6 +41,7 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
             return GroupBuyTrialResult.builder()
                     .visible(false)
                     .enable(false)
+                    .ruleDetails(dynamicContext.getAppliedRuleResults())
                     .build();
         }
 
@@ -91,6 +91,7 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
                 .payPrice(payPrice)
                 .visible(dynamicContext.isVisible())
                 .enable(dynamicContext.isEnable())
+                .ruleDetails(dynamicContext.getAppliedRuleResults())
                 .build();
     }
 

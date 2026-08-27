@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Builder
@@ -33,5 +34,8 @@ public class GroupBuyTrialResponse {
     private Boolean visible;
     /** 是否可参与 */
     private Boolean enable;
+
+    /** 每层规则的试算明细 */
+    private List<GroupBuyTrialRuleDetailResponse> ruleDetails;
 
 }
