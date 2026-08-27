@@ -57,10 +57,10 @@ public class AliPayController implements IPayService {
     @RequestMapping(value = "lock_order", method = RequestMethod.POST)
     public Response<LockOrderResponse> lockOrder(@RequestBody LockOrderRequest request) {
         log.info("锁单开始 request:{}", request);
-        String openid = null;
+        String userId = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            openid = (String) httpRequest.getAttribute("openid");
+            userId = (String) httpRequest.getAttribute("userId");
 
             OrderLockEntity lockEntity = orderLockService.lockOrder();
 
@@ -73,7 +73,7 @@ public class AliPayController implements IPayService {
                             .build())
                     .build();
         } catch (Exception e) {
-            log.error("锁单失败 userId:{} productId:{}", openid, request.getProductId(), e);
+            log.error("锁单失败 userId:{} productId:{}", userId, request.getProductId(), e);
             return Response.<LockOrderResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
@@ -83,14 +83,14 @@ public class AliPayController implements IPayService {
 
     /**
      * 确认下单：携带 lockId + productId → 创建订单 → 返回 payUrl
-     * 订单归属用户取自登录态 openid（兼容请求体 userId 兜底）
+     * 订单归属用户取自登录态 userId（兼容请求体 userId 兜底）
      */
     @RequestMapping(value = "confirm_order", method = RequestMethod.POST)
     public Response<ConfirmOrderResponse> confirmOrder(@RequestBody ConfirmOrderRequest request) {
         log.info("确认下单开始 request:{}", request);
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
+            String userId = (String) httpRequest.getAttribute("userId");
             if (userId == null) userId = request.getUserId();
             if (userId == null || userId.trim().isEmpty()) {
                 throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "无法识别用户身份，请重新登录");
@@ -129,11 +129,10 @@ public class AliPayController implements IPayService {
     @RequestMapping(value = "refund_order", method = RequestMethod.POST)
     public Response<String> refundOrder(@RequestBody RefundOrderRequest request) {
         log.info("退单接口开始 request:{}", request);
-        String openid = null;
+        String userId = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
+            userId = (String) httpRequest.getAttribute("userId");
             if (userId == null) {
                 userId = request.getUserId();
             }
@@ -152,7 +151,7 @@ public class AliPayController implements IPayService {
             // 归属校验失败(403)、订单不存在(404)等业务异常交由全局异常处理器返回对应语义
             throw e;
         } catch (Exception e) {
-            log.error("退单失败 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
+            log.error("退单失败 userId:{} outTradeNo:{}", userId, request.getOutTradeNo(), e);
             return Response.<String>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())

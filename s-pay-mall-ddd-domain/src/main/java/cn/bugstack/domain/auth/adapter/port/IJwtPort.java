@@ -2,9 +2,9 @@ package cn.bugstack.domain.auth.adapter.port;
 
 public interface IJwtPort {
 
-    String createToken(String openid);
+    String createToken(String userId);
 
-    String parseOpenid(String token);
+    String parseUserId(String token);
 
     boolean verifyToken(String token);
 

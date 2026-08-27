@@ -59,11 +59,9 @@ public class GroupBuyController {
     @RequestMapping(value = "queryGroupBuyTrial", method = RequestMethod.POST)
     public Response<GroupBuyTrialResponse> queryGroupBuyTrial(@RequestBody GroupBuyTrialRequest request) {
         log.info("拼团试算开始 request:{}", request);
-        String openid = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
+            String userId = (String) httpRequest.getAttribute("userId");
             if (userId == null) userId = request.getUserId();
 
             GroupBuyTrialResult trialResult = groupBuyTrialService.queryGroupBuyTrial(
@@ -88,14 +86,14 @@ public class GroupBuyController {
                     .enable(trialResult.getEnable())
                     .build();
 
-            log.info("拼团试算完成 userId:{} activityId:{} payPrice:{}", openid, request.getActivityId(), data.getPayPrice());
+            log.info("拼团试算完成 userId:{} activityId:{} payPrice:{}", userId, request.getActivityId(), data.getPayPrice());
             return Response.<GroupBuyTrialResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
                     .data(data)
                     .build();
         } catch (Exception e) {
-            log.error("拼团试算失败 userId:{} activityId:{} productId:{}", openid, request.getActivityId(), request.getProductId(), e);
+            log.error("拼团试算失败 userId:{} activityId:{} productId:{}", request.getUserId(), request.getActivityId(), request.getProductId(), e);
             return Response.<GroupBuyTrialResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
@@ -109,11 +107,9 @@ public class GroupBuyController {
     @RequestMapping(value = "lockGroupBuyOrder", method = RequestMethod.POST)
     public Response<GroupBuyLockOrderResponse> lockGroupBuyOrder(@RequestBody GroupBuyLockOrderRequest request) {
         log.info("拼团锁单开始 request:{}", request);
-        String openid = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
+            String userId = (String) httpRequest.getAttribute("userId");
 
             // 身份必须来自 JWT（AuthInterceptor 注入），禁止回退到请求体透传，防止越权
             if (StringUtils.isBlank(userId)) {
@@ -169,7 +165,7 @@ public class GroupBuyController {
             );
             outTradeNo = groupBuyOrderEntity.getOutTradeNo();
 
-            log.info("拼团锁单完成 userId:{} teamId:{} outTradeNo:{} payAmount:{}", openid,
+            log.info("拼团锁单完成 userId:{} teamId:{} outTradeNo:{} payAmount:{}", userId,
                     groupBuyOrderEntity.getTeamId(), outTradeNo, groupBuyOrderEntity.getPayAmount());
             return Response.<GroupBuyLockOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())
@@ -181,7 +177,7 @@ public class GroupBuyController {
                             .build())
                     .build();
         } catch (Exception e) {
-            log.error("拼团锁单失败 userId:{} activityId:{} productId:{}", openid, request.getActivityId(), request.getProductId(), e);
+            log.error("拼团锁单失败 userId:{} activityId:{} productId:{}", request.getUserId(), request.getActivityId(), request.getProductId(), e);
             return Response.<GroupBuyLockOrderResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
@@ -196,11 +192,10 @@ public class GroupBuyController {
     @RequestMapping(value = "repayGroupBuyOrder", method = RequestMethod.POST)
     public Response<GroupBuyLockOrderResponse> repayGroupBuyOrder(@RequestBody GroupBuyRepayRequest request) {
         log.info("拼团再次支付开始 outTradeNo:{}", request.getOutTradeNo());
-        String openid = null;
+        String userId = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
+            userId = (String) httpRequest.getAttribute("userId");
 
             if (StringUtils.isBlank(userId)) {
                 log.warn("拼团再次支付缺少登录态，拒绝处理");
@@ -245,7 +240,7 @@ public class GroupBuyController {
                     order.getPayAmount()
             );
 
-            log.info("拼团再次支付完成 userId:{} teamId:{} outTradeNo:{}", openid, order.getTeamId(), order.getOutTradeNo());
+            log.info("拼团再次支付跳转完成 userId:{} teamId:{} outTradeNo:{}", userId, order.getTeamId(), order.getOutTradeNo());
             return Response.<GroupBuyLockOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
@@ -256,7 +251,7 @@ public class GroupBuyController {
                             .build())
                     .build();
         } catch (Exception e) {
-            log.error("拼团再次支付异常 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
+            log.error("拼团再次支付异常 userId:{} outTradeNo:{}", userId, request.getOutTradeNo(), e);
             return Response.<GroupBuyLockOrderResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
@@ -271,11 +266,10 @@ public class GroupBuyController {
     @RequestMapping(value = "exitGroupBuyOrder", method = RequestMethod.POST)
     public Response<String> exitGroupBuyOrder(@RequestBody GroupBuyExitRequest request) {
         log.info("退出拼团开始 outTradeNo:{}", request.getOutTradeNo());
-        String openid = null;
+        String userId = null;
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
-            openid = userId;
+            userId = (String) httpRequest.getAttribute("userId");
 
             if (StringUtils.isBlank(userId)) {
                 log.warn("退出拼团缺少登录态，拒绝处理");
@@ -309,7 +303,7 @@ public class GroupBuyController {
                         .build();
             }
 
-            log.info("退出拼团完成 userId:{} teamId:{} message:{}",
+            log.info("退出拼团跳转页面完成 userId:{} teamId:{} message:{}",
                     userId, behaviorEntity.getTeamId(), behaviorEntity.getMessage());
             return Response.<String>builder()
                     .code(ResponseCode.SUCCESS.getCode())
@@ -317,7 +311,7 @@ public class GroupBuyController {
                     .data(behaviorEntity.getMessage())
                     .build();
         } catch (Exception e) {
-            log.error("退出拼团异常 userId:{} outTradeNo:{}", openid, request.getOutTradeNo(), e);
+            log.error("退出拼团异常 userId:{} outTradeNo:{}", userId, request.getOutTradeNo(), e);
             return Response.<String>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
@@ -334,7 +328,7 @@ public class GroupBuyController {
                 request.getStatus(), request.getPageNo(), request.getPageSize());
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-            String userId = (String) httpRequest.getAttribute("openid");
+            String userId = (String) httpRequest.getAttribute("userId");
 
             // 身份必须来自 JWT；为空时直接拒绝，避免 mapper 丢失 user_id 过滤导致越权查询
             if (StringUtils.isBlank(userId)) {

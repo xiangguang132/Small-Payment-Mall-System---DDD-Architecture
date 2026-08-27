@@ -12,7 +12,7 @@ public class PaidRefundStrategy extends AbstractGroupBuyRefundOrderStrategy {
 
     @Override
     public void refundGroupBuyOrder(GroupBuyRefundOrderEntity e) {
-        log.info("退单：已支付未成团 userId:{} teamId:{} outTradeNo:{}", e.getUserId(), e.getTeamId(), e.getOutTradeNo());
+        log.info("退单：已支付未成团，即将调用支付宝退款 payAmount:{} userId:{} teamId:{} outTradeNo:{}", e.getPayAmount(), e.getUserId(), e.getTeamId(), e.getOutTradeNo());
         sendRefundNotifyMessage(e, "paidRefundStrategy", true, "已支付未成团退单成功", e.getPayAmount());
     }
     @Override

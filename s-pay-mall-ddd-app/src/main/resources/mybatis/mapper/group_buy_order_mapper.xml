@@ -114,10 +114,16 @@
     </select>
 
     <select id="queryTimeOutRefundOrderList" parameterType="java.lang.String" resultType="java.lang.String">
-        select out_trade_no
-        from group_buy_order
-        where status = 0
-          and create_time <![CDATA[<]]> date_sub(now(), interval 15 minute)
+        select o.out_trade_no
+        from group_buy_order o
+        left join group_buy_team t on o.team_id = t.team_id
+        where (
+            <!-- 场景1：未支付超过15分钟，直接超时 -->
+            (o.status = 0 and o.create_time <![CDATA[<]]> date_sub(now(), interval 15 minute))
+            or
+            <!-- 场景2：已支付但拼团有效期已过且未成团(status=0)，需退款关团 -->
+            (o.status = 1 and t.status = 0 and t.valid_end_time <![CDATA[<]]> now())
+        )
     </select>
 
     <update id="updateOrderStatus2Refund">

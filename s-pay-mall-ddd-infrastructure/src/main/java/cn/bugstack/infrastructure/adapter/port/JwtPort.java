@@ -22,7 +22,7 @@ public class JwtPort implements IJwtPort {
     private Long expireSeconds;
 
     @Override
-    public String createToken(String openid) {
+    public String createToken(String userId) {
         Date now = new Date();
         Date expAt = new Date(System.currentTimeMillis() + expireSeconds * 1000L);
 
@@ -30,17 +30,17 @@ public class JwtPort implements IJwtPort {
                 .withIssuer(issuer)
                 .withIssuedAt(now)
                 .withExpiresAt(expAt)
-                .withClaim("openid", openid)
+                .withClaim("userId", userId)
                 .sign(Algorithm.HMAC256(secret));
     }
 
     @Override
-    public String parseOpenid(String token) {
+    public String parseUserId(String token) {
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC256(secret))
                 .withIssuer(issuer)
                 .build()
                 .verify(token);
-        return decodedJWT.getClaim("openid").asString();
+        return decodedJWT.getClaim("userId").asString();
     }
 
     @Override

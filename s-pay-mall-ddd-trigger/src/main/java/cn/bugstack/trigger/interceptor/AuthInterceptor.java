@@ -47,7 +47,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             writeNoLogin(response);
             return false;
         }
-        request.setAttribute("openid", jwtPort.parseOpenid(token));
+        request.setAttribute("userId", jwtPort.parseUserId(token));
         return true;
     }
 

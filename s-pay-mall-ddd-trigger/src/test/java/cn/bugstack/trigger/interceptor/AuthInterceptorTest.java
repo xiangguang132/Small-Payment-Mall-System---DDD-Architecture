@@ -65,9 +65,9 @@ public class AuthInterceptorTest {
         when(request.getServletPath()).thenReturn("/api/v1/orders");
         when(request.getHeader("Authorization")).thenReturn("Bearer token-1");
         when(jwtPort.verifyToken("token-1")).thenReturn(true);
-        when(jwtPort.parseOpenid("token-1")).thenReturn("openid-1");
+        when(jwtPort.parseUserId("token-1")).thenReturn("user-1");
 
         assertTrue(interceptor.preHandle(request, response, null));
-        verify(request).setAttribute("openid", "openid-1");
+        verify(request).setAttribute("userId", "user-1");
     }
 }

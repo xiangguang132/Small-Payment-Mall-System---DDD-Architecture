@@ -12,7 +12,7 @@ public class UnpaidNotTeamRefundStrategy extends AbstractGroupBuyRefundOrderStra
 
     @Override
     public void refundGroupBuyOrder(GroupBuyRefundOrderEntity e) {
-        log.info("退单：未支付未成团 userId:{} teamId:{} outTradeNo:{}", e.getUserId(), e.getTeamId(), e.getOutTradeNo());
+        log.info("退单：未支付未成团，无需调用支付宝退款（无实付款） userId:{} teamId:{} outTradeNo:{}", e.getUserId(), e.getTeamId(), e.getOutTradeNo());
         sendRefundNotifyMessage(e, "unpaidNotTeamRefundStrategy", true, "未支付退单成功");   // payAmount 不传
     }
     @Override

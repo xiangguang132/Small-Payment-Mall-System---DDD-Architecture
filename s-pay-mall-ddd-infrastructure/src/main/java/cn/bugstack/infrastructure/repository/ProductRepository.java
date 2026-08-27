@@ -76,7 +76,8 @@ public class ProductRepository extends AbstractRepository implements IProductRep
                             .createTime(product.getCreateTime())
                             .updateTime(product.getUpdateTime())
                             .build();
-                }
+                },
+                30 * 60 * 1000L  // 30分钟过期
         );
     }
 

@@ -34,7 +34,7 @@ public class UserController {
     @RequestMapping(value = "me", method = RequestMethod.GET)
     public Response<UserInfoResponse> me(HttpServletRequest request) {
         try {
-            String userId = (String) request.getAttribute("openid");
+            String userId = (String) request.getAttribute("userId");
             UserEntity userEntity = userProfileService.queryMe(userId);
             boolean completed = StringUtils.isNotBlank(userEntity.getPhone());
             return Response.<UserInfoResponse>builder()
@@ -68,7 +68,7 @@ public class UserController {
     @RequestMapping(value = "profile/complete", method = RequestMethod.POST)
     public Response<Boolean> completeProfile(@RequestBody CompleteProfileRequest request, HttpServletRequest httpRequest) {
         try {
-            String userId = (String) httpRequest.getAttribute("openid");
+            String userId = (String) httpRequest.getAttribute("userId");
             log.info("完善账号资料开始 userId:{} phone:{}", userId, request.getPhone());
             userProfileService.completeProfile(userId, request.getPhone(), request.getPassword(), request.getNickname());
             return Response.<Boolean>builder()
@@ -98,7 +98,7 @@ public class UserController {
     @RequestMapping(value = "info", method = RequestMethod.GET)
     public Response<UserInfoResponse> info(HttpServletRequest request) {
         try {
-            String userId = (String) request.getAttribute("openid");
+            String userId = (String) request.getAttribute("userId");
             UserEntity userEntity = userProfileService.queryMe(userId);
             boolean completed = StringUtils.isNotBlank(userEntity.getPhone())
                     && StringUtils.isNotBlank(userEntity.getPassword());
@@ -139,7 +139,7 @@ public class UserController {
                     && !StringUtils.equals(request.getPassword(), request.getConfirmPassword())) {
                 throw new AppException(Constants.ResponseCode.ILLEGAL_PARAMETER.getCode(), "两次输入的密码不一致");
             }
-            String userId = (String) httpRequest.getAttribute("openid");
+            String userId = (String) httpRequest.getAttribute("userId");
             log.info("修改用户信息开始 userId:{} nickname:{} avatar:{} 修改密码:{}",
                     userId, request.getNickname(), request.getAvatar(), StringUtils.isNotBlank(request.getPassword()));
             userProfileService.updateInfo(userId, request.getNickname(), request.getAvatar(), request.getPassword());
