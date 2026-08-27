@@ -8,7 +8,10 @@ import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
+import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
@@ -38,6 +41,8 @@ public class ProductController {
     private IProductService productService;
     @Resource
     private IGroupBuyActivityRepository groupBuyActivityRepository;
+    @Resource
+    private IGroupBuyTrialService groupBuyTrialService;
     @Resource
     private IProductTypeService productTypeService;
 
@@ -112,13 +117,25 @@ public class ProductController {
     }
 
     private List<ProductDetailResponse> toDetailListWithActivity(List<ProductAggregate> products) {
-        // 为每个商品查询关联的拼团活动，填充 activityId
         List<ProductDetailResponse> detailList = new java.util.ArrayList<>();
         for (ProductAggregate product : products) {
             ProductDetailResponse resp = ProductAssembler.toDetailResponse(product);
             GroupBuyActivityEntity activity = groupBuyActivityRepository.queryGroupBuyActivityByProductId(product.getId());
             if (activity != null) {
                 resp.setActivityId(activity.getActivityId());
+                // 进行拼团试算，填充折后价和成团人数
+                try {
+                    GroupBuyTrialResult trial = groupBuyTrialService.queryGroupBuyTrial(
+                            GroupBuyTrialRequest.builder()
+                                    .activityId(activity.getActivityId())
+                                    .productId(product.getId())
+                                    .build()
+                    );
+                    resp.setTrialPayPrice(trial.getPayPrice());
+                    resp.setTargetCount(trial.getTargetCount());
+                } catch (Exception e) {
+                    log.warn("拼团试算失败 productId:{} activityId:{} error:{}", product.getId(), activity.getActivityId(), e.getMessage());
+                }
             }
             detailList.add(resp);
         }

@@ -33,6 +33,13 @@ public interface IOrderService {
     // 查询超出15分钟未支付的订单
     List<String> queryTimeOutCloseOrderList();
 
+    /**
+     * 超时处理订单：未支付直接关单，已支付退单退款
+     * @param outTradeNo 商户订单号
+     * @return 是否处理成功
+     */
+    boolean timeoutCloseOrder(String outTradeNo);
+
     // 修改订单状态为关单
     boolean changeOrderPayClose(String outTradeNo);
 

@@ -13,6 +13,7 @@ import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
 import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.OrderTypeEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -134,6 +135,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
+    @Transactional
     public void saveGroupBuyPayOrder(PayOrderEntity payOrderEntity) {
         PayOrder order = new PayOrder();
         order.setUserId(payOrderEntity.getUserId());

@@ -159,6 +159,102 @@ public class AliPayController implements IPayService {
         }
     }
 
+    /**
+     * 关闭待支付订单：校验归属+状态后关闭（CREATE / PAY_WAIT 可关）
+     */
+    @RequestMapping(value = "close_order", method = RequestMethod.POST)
+    public Response<String> closeOrder(@RequestBody RefundOrderRequest request) {
+        log.info("关单开始 request:{}", request);
+        String userId = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            userId = (String) httpRequest.getAttribute("userId");
+            if (userId == null) {
+                userId = request.getUserId();
+            }
+            if (userId == null || userId.trim().isEmpty()) {
+                return Response.<String>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+            String outTradeNo = request.getOutTradeNo();
+            if (outTradeNo == null || outTradeNo.trim().isEmpty()) {
+                return Response.<String>builder()
+                        .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                        .info(ResponseCode.ILLEGAL_PARAMETER.getInfo())
+                        .build();
+            }
+
+            orderService.closeOrder(userId, outTradeNo.trim());
+
+            log.info("关单完成 userId:{} outTradeNo:{}", userId, outTradeNo);
+            return Response.<String>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data("订单已关闭")
+                    .build();
+        } catch (AppException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("关单失败 userId:{} outTradeNo:{}", userId, request.getOutTradeNo(), e);
+            return Response.<String>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 待支付订单再次拉起支付：校验归属+状态后，幂等重生成支付宝表单，返回 payUrl 跳转
+     */
+    @RequestMapping(value = "repay_order", method = RequestMethod.POST)
+    public Response<Map<String, String>> repayOrder(@RequestBody RefundOrderRequest request) {
+        log.info("再次支付开始 request:{}", request);
+        String userId = null;
+        try {
+            HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+            userId = (String) httpRequest.getAttribute("userId");
+            if (userId == null) {
+                userId = request.getUserId();
+            }
+            if (userId == null || userId.trim().isEmpty()) {
+                return Response.<Map<String, String>>builder()
+                        .code(ResponseCode.NO_LOGIN.getCode())
+                        .info(ResponseCode.NO_LOGIN.getInfo())
+                        .build();
+            }
+            String outTradeNo = request.getOutTradeNo();
+            if (outTradeNo == null || outTradeNo.trim().isEmpty()) {
+                return Response.<Map<String, String>>builder()
+                        .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                        .info(ResponseCode.ILLEGAL_PARAMETER.getInfo())
+                        .build();
+            }
+
+            PayOrderEntity payOrderEntity = orderService.repayOrder(userId, outTradeNo.trim());
+
+            Map<String, String> data = new HashMap<>();
+            data.put("outTradeNo", payOrderEntity.getOutTradeNo());
+            data.put("payUrl", payOrderEntity.getPayUrl());
+
+            log.info("再次支付跳转完成 userId:{} outTradeNo:{}", userId, outTradeNo);
+            return Response.<Map<String, String>>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(data)
+                    .build();
+        } catch (AppException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("再次支付失败 userId:{} outTradeNo:{}", userId, request.getOutTradeNo(), e);
+            return Response.<Map<String, String>>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
     @RequestMapping(value = "pay_notify", method = RequestMethod.POST)
     public String payNotify(HttpServletRequest request) {
         // 验签操作

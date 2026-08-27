@@ -72,7 +72,7 @@ public interface IOrderRepository {
     List<String> queryNoPayNotifyOrderList();
 
     /**
-     * 查询超时 15 分钟需要关单的订单列表
+     * 查询超时 15 分钟需要处理的订单列表（含未支付和已支付未关单）
      * @return
      */
     List<String> queryTimeOutCloseOrderList();

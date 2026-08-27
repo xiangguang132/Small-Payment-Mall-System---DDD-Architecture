@@ -21,4 +21,8 @@ public class ProductDetailResponse {
     private String categoryName;
     private String categoryDescription;
     private Long activityId;
+
+    // 拼团试算结果（有拼团活动时填充）
+    private BigDecimal trialPayPrice;
+    private Integer targetCount;
 }

@@ -18,6 +18,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -170,6 +171,77 @@ public class OrderService extends AbstractOrderService{
     @Override
     public boolean changeOrderPayClose(String outTradeNo) {
         return orderRepository.changeOrderPayClose(outTradeNo);
+    }
+
+    /**
+     * 超时处理订单：未支付直接关单，已支付调用支付宝退款
+     * 不抛异常（供定时任务调用），失败返回 false
+     */
+    @Transactional
+    @Override
+    public boolean timeoutCloseOrder(String outTradeNo) {
+        PayOrderEntity payOrderEntity = orderRepository.queryPayOrderByOutTradeNo(outTradeNo);
+        if (payOrderEntity == null || payOrderEntity.getOutTradeNo() == null) {
+            log.warn("超时处理：订单不存在 outTradeNo={}", outTradeNo);
+            return false;
+        }
+
+        String status = payOrderEntity.getOrderStatus().getCode();
+
+        // 未支付（CREATE / PAY_WAIT）：直接关单
+        if (OrderStatusVO.CREATE.getCode().equals(status)
+                || OrderStatusVO.PAY_WAIT.getCode().equals(status)) {
+            return doTimeoutCloseOrder(outTradeNo);
+        }
+
+        // 已支付（PAY_SUCCESS / DEAL_DONE）：调用支付宝退款
+        if (OrderStatusVO.PAY_SUCCESS.getCode().equals(status)
+                || OrderStatusVO.DEAL_DONE.getCode().equals(status)) {
+            return doTimeoutRefundPaidOrder(outTradeNo, payOrderEntity);
+        }
+
+        log.info("超时处理：订单状态无需处理 outTradeNo={} status={}", outTradeNo, status);
+        return false;
+    }
+
+    /**
+     * 超时关单（未支付）
+     */
+    private boolean doTimeoutCloseOrder(String outTradeNo) {
+        boolean closed = orderRepository.changeOrderPayClose(outTradeNo);
+        if (closed) {
+            log.info("超时关单成功 outTradeNo={}", outTradeNo);
+        } else {
+            log.warn("超时关单失败（状态已变化） outTradeNo={}", outTradeNo);
+        }
+        return closed;
+    }
+
+    /**
+     * 超时退款（已支付）：乐观锁占位 → 支付宝退款 → 更新状态
+     */
+    private boolean doTimeoutRefundPaidOrder(String outTradeNo, PayOrderEntity payOrderEntity) {
+        // 乐观锁：PAY_SUCCESS/DEAL_DONE → REFUNDING
+        if (!orderRepository.changeOrderRefunding(outTradeNo)) {
+            log.info("超时退款：已有退款在处理中，跳过 outTradeNo={}", outTradeNo);
+            return false;
+        }
+        String fromStatus = payOrderEntity.getOrderStatus().getCode();
+        try {
+            boolean refundSuccess = alipayRefundPort.refund(outTradeNo, null, payOrderEntity.getTotalAmount());
+            if (!refundSuccess) {
+                orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), fromStatus);
+                log.error("超时退款：支付宝退款失败 outTradeNo={}", outTradeNo);
+                return false;
+            }
+            orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), OrderStatusVO.REFUND.getCode());
+            log.info("超时退款成功 outTradeNo={}", outTradeNo);
+            return true;
+        } catch (Exception e) {
+            orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), fromStatus);
+            log.error("超时退款异常 outTradeNo={}", outTradeNo, e);
+            return false;
+        }
     }
 
     /**
