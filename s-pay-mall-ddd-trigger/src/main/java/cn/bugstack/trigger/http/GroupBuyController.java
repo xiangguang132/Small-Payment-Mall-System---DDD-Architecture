@@ -8,6 +8,7 @@ import cn.bugstack.api.request.groupbuy.GroupBuyTrialRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.groupbuy.GroupBuyLockOrderResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyOrderDetailResponse;
+import cn.bugstack.api.response.groupbuy.GroupBuyTrialRuleDetailResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyTrialResponse;
 import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.auth.service.IUserProfileService;
@@ -71,6 +72,8 @@ public class GroupBuyController {
                             .userId(userId)
                             .activityId(request.getActivityId())
                             .productId(request.getProductId())
+                            .couponIds(request.getCouponIds())
+                            .usePoints(request.getUsePoints())
                             .build()
             );
 
@@ -86,6 +89,20 @@ public class GroupBuyController {
                     .payPrice(trialResult.getPayPrice())
                     .visible(trialResult.getVisible())
                     .enable(trialResult.getEnable())
+                    .ruleDetails(trialResult.getRuleDetails() == null ? null : trialResult.getRuleDetails().stream()
+                            .map(rule -> GroupBuyTrialRuleDetailResponse.builder()
+                                    .ruleType(rule.getRuleType() == null ? null : rule.getRuleType().name())
+                                    .ruleCode(rule.getRuleCode())
+                                    .ruleName(rule.getRuleName())
+                                    .originalPrice(rule.getOriginalPrice())
+                                    .currentPrice(rule.getCurrentPrice())
+                                    .deductionPrice(rule.getDeductionPrice())
+                                    .payPrice(rule.getPayPrice())
+                                    .stackable(rule.getStackable())
+                                    .matched(rule.getMatched())
+                                    .message(rule.getMessage())
+                                    .build())
+                            .collect(Collectors.toList()))
                     .build();
 
             log.info("拼团试算完成 userId:{} activityId:{} payPrice:{}", userId, request.getActivityId(), data.getPayPrice());
