@@ -3,13 +3,16 @@ package cn.bugstack.domain.groupbuy.service.trial.rule.impl;
 import cn.bugstack.domain.groupbuy.model.entity.CouponEntity;
 import cn.bugstack.domain.groupbuy.model.entity.TrialRuleResult;
 import cn.bugstack.domain.groupbuy.model.valobj.TrialRuleTypeEnum;
+import cn.bugstack.domain.groupbuy.service.trial.rule.coupon.ICouponCalculateService;
 import cn.bugstack.domain.groupbuy.service.trial.rule.ITrialRule;
 import cn.bugstack.domain.groupbuy.service.trial.rule.TrialRuleContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 规则链
@@ -18,6 +21,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class CouponTrialRule implements ITrialRule {
+
+    @Resource
+    private Map<String, ICouponCalculateService> couponCalculateServiceMap;
 
     @Override
     public TrialRuleTypeEnum getRuleType() {
@@ -37,6 +43,7 @@ public class CouponTrialRule implements ITrialRule {
         List<CouponEntity> couponList = context.getSelectedCoupons();
         BigDecimal currentPrice = context.getCurrentPrice();
         if (couponList == null || couponList.isEmpty() || currentPrice == null) {
+            log.info("【价格流转-优惠券】未选择优惠券，跳过");
             return TrialRuleResult.builder()
                     .ruleType(getRuleType())
                     .matched(false)
@@ -44,6 +51,8 @@ public class CouponTrialRule implements ITrialRule {
                     .message("未选择优惠券")
                     .build();
         }
+
+        log.info("【价格流转-优惠券】开始计算 当前价格:{} 候选券数:{}", currentPrice, couponList.size());
 
         CouponEntity bestCoupon = null;
         BigDecimal bestPayPrice = currentPrice;
@@ -54,6 +63,7 @@ public class CouponTrialRule implements ITrialRule {
             }
 
             BigDecimal payPrice = calculatePayPrice(currentPrice, coupon);
+            log.info("【价格流转-优惠券】券[{}] 类型:{} 试算结果:{}", coupon.getCouponName(), coupon.getCouponType(), payPrice);
             if (payPrice == null) {
                 continue;
             }
@@ -65,6 +75,7 @@ public class CouponTrialRule implements ITrialRule {
         }
 
         if (bestCoupon == null || bestPayPrice.compareTo(currentPrice) >= 0) {
+            log.info("【价格流转-优惠券】无适用优惠券，保持当前价格:{}", currentPrice);
             return TrialRuleResult.builder()
                     .ruleType(getRuleType())
                     .matched(false)
@@ -82,6 +93,9 @@ public class CouponTrialRule implements ITrialRule {
             deductionPrice = BigDecimal.ZERO;
         }
 
+        log.info("【价格流转-优惠券】命中最优券[{}] 原价:{} 实付价:{} 抵扣:{}",
+                bestCoupon.getCouponName(), currentPrice, bestPayPrice, deductionPrice);
+
         return TrialRuleResult.builder()
                 .ruleType(getRuleType())
                 .ruleCode(bestCoupon.getCouponId())
@@ -97,49 +111,17 @@ public class CouponTrialRule implements ITrialRule {
     }
 
     private BigDecimal calculatePayPrice(BigDecimal currentPrice, CouponEntity coupon) {
-        if (coupon.getStatus() != null && coupon.getStatus() != 1) {
-            return null;
-        }
-        if (coupon.getStartTime() != null && coupon.getEndTime() != null) {
-            // 时间范围校验后续如果要严格控制，可以由 MarketNode 提前过滤，这里先只做数据存在性校验
-        }
-
-        BigDecimal thresholdAmount = coupon.getThresholdAmount();
-        if (thresholdAmount != null && currentPrice.compareTo(thresholdAmount) < 0) {
-            return null;
-        }
-
-        BigDecimal discountValue = coupon.getDiscountValue();
-        if (discountValue == null) {
-            return null;
-        }
-
-        Integer couponType = coupon.getCouponType();
+        String couponType = coupon.getCouponType() != null ? coupon.getCouponType().trim() : null;
         if (couponType == null) {
             return null;
         }
 
-        BigDecimal payPrice;
-        switch (couponType) {
-            case 0:
-                // 直减
-                payPrice = currentPrice.subtract(discountValue);
-                break;
-            case 1:
-                // 折扣
-                payPrice = currentPrice.multiply(discountValue);
-                break;
-            case 2:
-                // 满减
-                payPrice = currentPrice.subtract(discountValue);
-                break;
-            default:
-                return null;
+        ICouponCalculateService calculateService = couponCalculateServiceMap.get(couponType);
+        if (calculateService == null) {
+            log.warn("未找到优惠券计算实现, couponType={}", couponType);
+            return null;
         }
 
-        if (payPrice.compareTo(BigDecimal.ZERO) <= 0) {
-            return new BigDecimal("0.01");
-        }
-        return payPrice;
+        return calculateService.calculate(currentPrice, coupon);
     }
 }

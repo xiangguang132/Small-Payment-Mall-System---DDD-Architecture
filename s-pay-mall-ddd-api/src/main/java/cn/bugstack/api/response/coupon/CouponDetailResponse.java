@@ -1,4 +1,4 @@
-package cn.bugstack.domain.groupbuy.model.entity;
+package cn.bugstack.api.response.coupon;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,23 +9,22 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 优惠券实体 - 对齐 group_buy_coupon 表
+ * 领券中心-优惠券详情响应
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CouponEntity {
+public class CouponDetailResponse {
 
-    private Long id;
     private String couponId;
     private String couponName;
     /** 优惠券类型：FULL_REDUCTION / DISCOUNT / FIXED */
     private String couponType;
     private BigDecimal thresholdAmount;
-    /** 优惠金额（FIXED/FULL_REDUCTION 使用） */
+    /** 优惠金额 */
     private BigDecimal discountAmount;
-    /** 折扣率，例如 0.9000（DISCOUNT 使用） */
+    /** 折扣率 */
     private BigDecimal discountRate;
     /** 状态：0停用 1启用 */
     private Integer status;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.ICouponDao">
+
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.promotion.Coupon">
+        <id column="id" property="id"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="coupon_name" property="couponName"/>
+        <result column="coupon_type" property="couponType"/>
+        <result column="threshold_amount" property="thresholdAmount"/>
+        <result column="discount_amount" property="discountAmount"/>
+        <result column="discount_rate" property="discountRate"/>
+        <result column="status" property="status"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="queryCouponByCouponId" resultMap="dataMap">
+        select id, coupon_id, coupon_name, coupon_type, threshold_amount, discount_amount,
+               discount_rate, status, start_time, end_time, create_time, update_time
+        from group_buy_coupon
+        where coupon_id = #{couponId}
+        limit 1
+    </select>
+
+    <!-- 领券中心-分页查询 -->
+    <sql id="pageWhere">
+        <where>
+            <choose>
+                <when test="status != null">
+                    AND status = #{status}
+                </when>
+                <otherwise>
+                    AND status = 1
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <select id="queryCouponPage" resultMap="dataMap">
+        select id, coupon_id, coupon_name, coupon_type, threshold_amount, discount_amount,
+               discount_rate, status, start_time, end_time, create_time, update_time
+        from group_buy_coupon
+        <include refid="pageWhere"/>
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="countCouponPage" resultType="long">
+        select count(*)
+        from group_buy_coupon
+        <include refid="pageWhere"/>
+    </select>
+
+</mapper>

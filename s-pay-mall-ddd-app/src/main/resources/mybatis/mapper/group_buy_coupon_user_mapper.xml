@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IUserCouponDao">
+
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.promotion.UserCoupon">
+        <id column="id" property="id"/>
+        <result column="coupon_user_id" property="couponUserId"/>
+        <result column="user_id" property="userId"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="source_order_no" property="sourceOrderNo"/>
+        <result column="status" property="status"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="used_time" property="usedTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="queryUserCouponByUserIdAndCouponId" resultMap="dataMap">
+        select id, coupon_user_id, user_id, coupon_id, source_order_no,
+               status, expire_time, used_time, create_time, update_time
+        from group_buy_coupon_user
+        where user_id = #{userId} and coupon_id = #{couponId}
+        limit 1
+    </select>
+
+    <select id="queryUserCouponListByUserId" resultMap="dataMap">
+        select id, coupon_user_id, user_id, coupon_id, source_order_no,
+               status, expire_time, used_time, create_time, update_time
+        from group_buy_coupon_user
+        where user_id = #{userId}
+        order by create_time desc
+    </select>
+
+    <insert id="insertUserCoupon" useGeneratedKeys="true" keyProperty="id">
+        insert into group_buy_coupon_user (coupon_user_id, user_id, coupon_id, source_order_no, status, expire_time, used_time)
+        values (#{couponUserId}, #{userId}, #{couponId}, #{sourceOrderNo}, #{status}, #{expireTime}, #{usedTime})
+    </insert>
+
+    <!-- 领券中心-用户已领券分页查询 -->
+    <sql id="userPageWhere">
+        <where>
+            user_id = #{userId}
+            <choose>
+                <when test="status != null">
+                    AND status = #{status}
+                </when>
+            </choose>
+        </where>
+    </sql>
+
+    <select id="queryUserCouponPage" resultMap="dataMap">
+        select id, coupon_user_id, user_id, coupon_id, source_order_no,
+               status, expire_time, used_time, create_time, update_time
+        from group_buy_coupon_user
+        <include refid="userPageWhere"/>
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="countUserCouponPage" resultType="long">
+        select count(*)
+        from group_buy_coupon_user
+        <include refid="userPageWhere"/>
+    </select>
+
+    <!-- 核销优惠券：批量标记为已使用，写入来源单号和使用时间 -->
+    <update id="batchUpdateUserCouponUsed">
+        update group_buy_coupon_user
+        set status = 1,
+            source_order_no = #{sourceOrderNo},
+            used_time = #{usedTime}
+        where user_id = #{userId}
+          and coupon_id in
+          <foreach collection="couponIds" item="cid" open="(" separator="," close=")">
+              #{cid}
+          </foreach>
+          and status = 0
+    </update>
+
+</mapper>
