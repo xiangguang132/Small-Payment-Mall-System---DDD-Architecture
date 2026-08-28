@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -167,6 +168,16 @@ public class TagNodeTest {
         @Override
         public boolean cutRange(String userId) {
             return true;
+        }
+
+        @Override
+        public List<GroupBuyActivityEntity> queryActivityPageByMarketPlan(String marketPlan, int offset, int limit) {
+            return java.util.Collections.emptyList();
+        }
+
+        @Override
+        public long countActivityPageByMarketPlan(String marketPlan) {
+            return 0;
         }
     }
 }

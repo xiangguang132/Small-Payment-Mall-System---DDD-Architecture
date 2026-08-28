@@ -160,6 +160,16 @@ public class MarketNodeTest {
             public boolean cutRange(String userId) {
                 return true;
             }
+
+            @Override
+            public java.util.List<GroupBuyActivityEntity> queryActivityPageByMarketPlan(String marketPlan, int offset, int limit) {
+                return java.util.Collections.emptyList();
+            }
+
+            @Override
+            public long countActivityPageByMarketPlan(String marketPlan) {
+                return 0;
+            }
         });
         setField(marketNode, "discountRepository", (IGroupBuyDiscountRepository) discountId -> discount);
         setField(marketNode, "productRepository", productRepository(product));

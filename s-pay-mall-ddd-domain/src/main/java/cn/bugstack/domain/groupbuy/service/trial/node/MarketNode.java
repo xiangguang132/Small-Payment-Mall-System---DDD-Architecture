@@ -118,6 +118,10 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
 
         TrialRuleContext resultContext = trialRuleChain.execute(trialContext);
 
+        log.info("【价格流转】试算完成 userId:{} productId:{} 原价:{} 优惠减免:{} 实付价:{}",
+                requestParameter.getUserId(), requestParameter.getProductId(),
+                originalPrice, originalPrice.subtract(resultContext.getCurrentPrice()), resultContext.getCurrentPrice());
+
         dynamicContext.setActivity(activity);
         dynamicContext.setDiscount(discount);
         dynamicContext.setProduct(product);
