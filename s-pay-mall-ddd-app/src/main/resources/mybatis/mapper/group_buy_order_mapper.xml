@@ -124,6 +124,8 @@
             <!-- 场景2：已支付但拼团有效期已过且未成团(status=0)，需退款关团 -->
             (o.status = 1 and t.status = 0 and t.valid_end_time <![CDATA[<]]> now())
         )
+        order by o.create_time asc
+        limit 50
     </select>
 
     <update id="updateOrderStatus2Refund">

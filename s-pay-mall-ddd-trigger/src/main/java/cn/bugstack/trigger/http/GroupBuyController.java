@@ -1,11 +1,13 @@
 package cn.bugstack.trigger.http;
 
+import cn.bugstack.api.request.groupbuy.GroupBuyActivityMarketPlanRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyExitRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyLockOrderRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyOrderPageRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyRepayRequest;
 import cn.bugstack.api.request.groupbuy.GroupBuyTrialRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.groupbuy.GroupBuyActivityMarketPlanResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyLockOrderResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyOrderDetailResponse;
 import cn.bugstack.api.response.groupbuy.GroupBuyTrialRuleDetailResponse;
@@ -13,12 +15,14 @@ import cn.bugstack.api.response.groupbuy.GroupBuyTrialResponse;
 import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.domain.groupbuy.model.aggregate.GroupBuyOrderAggregate;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderCommandEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderDisplayStatusVO;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderStatusEnumVO;
+import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
 import cn.bugstack.domain.groupbuy.service.order.IGroupBuyOrderService;
 import cn.bugstack.domain.groupbuy.service.refund.IGroupBuyRefundOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
@@ -29,6 +33,7 @@ import cn.bugstack.types.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -54,6 +59,8 @@ public class GroupBuyController {
     private IOrderService orderService;
     @Resource
     private IUserProfileService userProfileService;
+    @Resource
+    private IGroupBuyActivityRepository groupBuyActivityRepository;
 
     /**
      * 拼团试算：查询活动、商品与折扣，试算出折后价
@@ -154,8 +161,13 @@ public class GroupBuyController {
                             .userId(userId)
                             .activityId(request.getActivityId())
                             .productId(request.getProductId())
+                            .couponIds(request.getCouponIds())
                             .build()
             );
+
+            log.info("【价格流转】锁单试算结果 userId:{} 原价:{} 优惠减免:{} 实付价:{} 使用优惠券:{}",
+                    userId, trialResult.getOriginalPrice(), trialResult.getDeductionPrice(),
+                    trialResult.getPayPrice(), request.getCouponIds());
 
             // 2. 组装锁单聚合；outTradeNo 与支付单共用（回调结算按此反查拼团订单）
             // 幂等号：优先使用前端透传的 outTradeNo（重试传同一值），为空则服务端生成
@@ -169,6 +181,7 @@ public class GroupBuyController {
                     .source(request.getSource())
                     .channel(request.getChannel())
                     .outTradeNo(outTradeNo)
+                    .couponIds(request.getCouponIds())
                     .build();
 
             // 3. 幂等锁单，返回拼团订单（含 teamId/payAmount）；复用已有订单时 outTradeNo 以订单为准
@@ -407,6 +420,58 @@ public class GroupBuyController {
         } catch (Exception e) {
             log.error("拼团订单分页查询失败", e);
             return Response.<PageResponse<GroupBuyOrderDetailResponse>>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 分页查询拼团活动（按 marketPlan 过滤，联表 group_buy_discount）
+     */
+    @PublicEndpoint
+    @RequestMapping(value = "queryGroupBuyActivityPageByMarketPlan", method = RequestMethod.POST)
+    public Response<PageResponse<GroupBuyActivityMarketPlanResponse>> queryGroupBuyActivityPageByMarketPlan(
+            @RequestBody GroupBuyActivityMarketPlanRequest request) {
+        log.info("拼团活动分页查询开始 marketPlan:{} pageNo:{} pageSize:{}",
+                request.getMarketPlan(), request.getPageNo(), request.getPageSize());
+        try {
+            int offset = request.offset();
+            int limit = request.limit();
+
+            List<GroupBuyActivityEntity> activityList = groupBuyActivityRepository.queryActivityPageByMarketPlan(
+                    request.getMarketPlan(), offset, limit);
+            long total = groupBuyActivityRepository.countActivityPageByMarketPlan(request.getMarketPlan());
+
+            List<GroupBuyActivityMarketPlanResponse> responseList = activityList.stream()
+                    .map(activity -> GroupBuyActivityMarketPlanResponse.builder()
+                            .activityId(activity.getActivityId())
+                            .activityName(activity.getActivityName())
+                            .productId(activity.getProductId())
+                            .discountId(activity.getDiscountId())
+                            .discountName(activity.getDiscountName())
+                            .marketPlan(activity.getMarketPlan())
+                            .startTime(activity.getStartTime())
+                            .endTime(activity.getEndTime())
+                            .build())
+                    .collect(Collectors.toList());
+
+            PageResponse<GroupBuyActivityMarketPlanResponse> pageResponse = PageResponse.<GroupBuyActivityMarketPlanResponse>builder()
+                    .total(total)
+                    .pageNo(request.getPageNo())
+                    .pageSize(request.getPageSize())
+                    .list(responseList)
+                    .build();
+
+            log.info("拼团活动分页查询完成 marketPlan:{} total:{}", request.getMarketPlan(), total);
+            return Response.<PageResponse<GroupBuyActivityMarketPlanResponse>>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(pageResponse)
+                    .build();
+        } catch (Exception e) {
+            log.error("拼团活动分页查询失败 marketPlan:{}", request.getMarketPlan(), e);
+            return Response.<PageResponse<GroupBuyActivityMarketPlanResponse>>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

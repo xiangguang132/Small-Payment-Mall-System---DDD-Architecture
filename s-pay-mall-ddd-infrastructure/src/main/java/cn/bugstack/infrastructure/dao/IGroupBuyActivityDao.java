@@ -15,4 +15,10 @@ public interface IGroupBuyActivityDao {
     List<GroupBuyActivity> queryGroupBuyActivityList();
 
     long countByTagId(@Param("tagId") String tagId);
+
+    List<GroupBuyActivity> queryActivityPageByMarketPlan(@Param("marketPlan") String marketPlan,
+                                                         @Param("offset") int offset,
+                                                         @Param("limit") int limit);
+
+    long countActivityPageByMarketPlan(@Param("marketPlan") String marketPlan);
 }

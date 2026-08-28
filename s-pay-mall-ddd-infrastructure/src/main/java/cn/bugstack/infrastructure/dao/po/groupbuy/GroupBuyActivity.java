@@ -60,4 +60,12 @@ public class GroupBuyActivity {
 
     /** 更新时间 */
     private LocalDateTime updateTime;
+
+    // ---- 联表查询扩展字段（非活动表自身列） ----
+
+    /** 折扣名称，来自 group_buy_discount.discount_name */
+    private String discountName;
+
+    /** 营销计划，来自 group_buy_discount.market_plan */
+    private String marketPlan;
 }

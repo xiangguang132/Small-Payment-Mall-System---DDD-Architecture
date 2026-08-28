@@ -11,6 +11,8 @@ import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
@@ -75,6 +77,38 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
                 .createTime(activity.getCreateTime())
                 .updateTime(activity.getUpdateTime())
                 .build();
+    }
+
+    @Override
+    public List<GroupBuyActivityEntity> queryActivityPageByMarketPlan(String marketPlan, int offset, int limit) {
+        return groupBuyActivityDao.queryActivityPageByMarketPlan(marketPlan, offset, limit)
+                .stream()
+                .map(activity -> GroupBuyActivityEntity.builder()
+                        .id(activity.getId())
+                        .activityId(activity.getActivityId())
+                        .activityName(activity.getActivityName())
+                        .productId(activity.getProductId())
+                        .discountId(activity.getDiscountId())
+                        .groupType(activity.getGroupType())
+                        .takeLimitCount(activity.getTakeLimitCount())
+                        .targetCount(activity.getTargetCount())
+                        .validTime(activity.getValidTime())
+                        .status(activity.getStatus())
+                        .startTime(activity.getStartTime())
+                        .endTime(activity.getEndTime())
+                        .tagId(activity.getTagId())
+                        .tagScope(activity.getTagScope())
+                        .createTime(activity.getCreateTime())
+                        .updateTime(activity.getUpdateTime())
+                        .discountName(activity.getDiscountName())
+                        .marketPlan(activity.getMarketPlan())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public long countActivityPageByMarketPlan(String marketPlan) {
+        return groupBuyActivityDao.countActivityPageByMarketPlan(marketPlan);
     }
 
     @Override

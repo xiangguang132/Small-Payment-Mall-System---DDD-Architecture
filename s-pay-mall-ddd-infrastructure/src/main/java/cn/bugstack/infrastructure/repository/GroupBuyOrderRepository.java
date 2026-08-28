@@ -13,6 +13,7 @@ import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyTeam;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
 
@@ -32,6 +34,8 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
     private IGroupBuyOrderDao groupBuyOrderDao;
     @Resource
     private IGroupBuyNotifyTaskDao groupBuyNotifyTaskDao;
+    @Resource
+    private cn.bugstack.infrastructure.dao.IUserCouponDao userCouponDao;
 
     @Override
     public GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo) {
@@ -99,6 +103,21 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .build();
 
         groupBuyOrderDao.insert(toOrderPo(orderEntity));
+
+        log.info("【价格流转】锁单持久化 orderId:{} 原价:{} 优惠减免:{} 实付价:{} outTradeNo:{}",
+                orderId, orderEntity.getOriginalAmount(), orderEntity.getDeductionAmount(),
+                orderEntity.getPayAmount(), aggregate.getOutTradeNo());
+
+        // 核销优惠券：在同一事务内将用户优惠券标记为已使用
+        List<String> couponIds = aggregate.getCouponIds();
+        if (couponIds != null && !couponIds.isEmpty()) {
+            int updated = userCouponDao.batchUpdateUserCouponUsed(
+                    aggregate.getUserId(), couponIds, aggregate.getOutTradeNo(), LocalDateTime.now()
+            );
+            log.info("【价格流转】优惠券核销 userId:{} couponIds:{} 核销数量:{}",
+                    aggregate.getUserId(), couponIds, updated);
+        }
+
         return orderEntity;
     }
 

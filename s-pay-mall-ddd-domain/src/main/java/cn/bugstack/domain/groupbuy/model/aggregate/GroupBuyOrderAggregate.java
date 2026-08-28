@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,5 +21,7 @@ public class GroupBuyOrderAggregate {
     private String channel;
     private String outTradeNo;
     private String notifyUrl;
+    /** 锁单时使用的优惠券ID列表（用于核销） */
+    private List<String> couponIds;
 
 }

@@ -44,4 +44,12 @@ public class GroupBuyActivityEntity {
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
+
+    // ---- 联表查询扩展字段（来自 group_buy_discount） ----
+
+    /** 折扣名称 */
+    private String discountName;
+
+    /** 营销计划（ZJ/MJ/ZK/N） */
+    private String marketPlan;
 }

@@ -23,6 +23,13 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <!-- 联表查询扩展 resultMap：继承 activityMap，追加折扣表字段 -->
+    <resultMap id="activityWithDiscountMap" type="cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyActivity"
+               extends="activityMap">
+        <result column="discount_name" property="discountName"/>
+        <result column="market_plan" property="marketPlan"/>
+    </resultMap>
+
     <select id="queryGroupBuyActivityByActivityId" parameterType="java.lang.Long"
             resultMap="activityMap">
         select id, activity_id, activity_name, product_id, discount_id,
@@ -56,6 +63,35 @@
         select count(1)
         from group_buy_activity
         where tag_id = #{tagId}
+    </select>
+
+    <sql id="queryActivityPageByMarketPlan_condition">
+        <where>
+            <if test="marketPlan != null and marketPlan != ''">
+                and d.market_plan = #{marketPlan}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryActivityPageByMarketPlan" resultMap="activityWithDiscountMap">
+        select
+            a.id, a.activity_id, a.activity_name, a.product_id,
+            a.discount_id, a.group_type, a.take_limit_count, a.target_count,
+            a.valid_time, a.status, a.start_time, a.end_time,
+            a.tag_id, a.tag_scope, a.create_time, a.update_time,
+            d.discount_name, d.market_plan
+        from group_buy_activity a
+        inner join group_buy_discount d on d.discount_id = a.discount_id
+        <include refid="queryActivityPageByMarketPlan_condition"/>
+        order by a.create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="countActivityPageByMarketPlan" resultType="long">
+        select count(1)
+        from group_buy_activity a
+        inner join group_buy_discount d on d.discount_id = a.discount_id
+        <include refid="queryActivityPageByMarketPlan_condition"/>
     </select>
 
 </mapper>
