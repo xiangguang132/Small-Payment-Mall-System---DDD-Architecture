@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -26,6 +27,15 @@ public class CreateOrderAggregate {
     private ProductEntity  productEntity;
 
     private OrderEntity orderEntity;
+
+    /** 券后实付价（为 null 时取 productEntity.price） */
+    private BigDecimal payAmount;
+
+    /** 商品原价（券抵扣前，为 null 时取 productEntity.price） */
+    private BigDecimal originalAmount;
+
+    /** 使用的优惠券ID列表(JSON数组) */
+    private String couponIds;
 
     public static OrderEntity buildOrderEntity(String productId, String productName) {
         return OrderEntity.builder()

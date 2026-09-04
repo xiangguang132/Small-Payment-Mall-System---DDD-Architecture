@@ -52,15 +52,15 @@ public class OrderRepository implements IOrderRepository {
         order.setProductName(productEntity.getProductName());
         order.setOutTradeNo(orderEntity.getOutTradeNo());
         order.setOrderTime(orderEntity.getOrderTime());
-        order.setTotalAmount(productEntity.getPrice());
+        // 优先使用券后价，无券时取商品原价
+        order.setTotalAmount(orderAggregate.getPayAmount() != null
+                ? orderAggregate.getPayAmount() : productEntity.getPrice());
+        order.setOriginalAmount(orderAggregate.getOriginalAmount());
         order.setOrderType(OrderTypeEnum.DIRECT.getCode());
+        order.setCouponIds(orderAggregate.getCouponIds());
         order.setStatus(orderEntity.getOrderStatus().getCode());
 
         orderDao.insert(order);
-
-        // todo 存入缓存；缓存key聚合到对象中提供
-//        redisService.setValue(PayOrder.cacheKey(userId, orderEntity.getOutTradeNo()), order);
-
     }
 
     @Override

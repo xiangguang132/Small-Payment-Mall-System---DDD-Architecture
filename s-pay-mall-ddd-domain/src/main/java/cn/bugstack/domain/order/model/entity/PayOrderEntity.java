@@ -23,7 +23,11 @@ public class PayOrderEntity {
     private String outTradeNo;
     private LocalDateTime orderTime;
     private BigDecimal totalAmount;
+    /** 商品原价（券抵扣前） */
+    private BigDecimal originalAmount;
     private OrderTypeEnum orderType;
+    /** 使用的优惠券ID列表(JSON数组) */
+    private String couponIds;
     private OrderStatusVO orderStatus;
     private String payUrl;
     private LocalDateTime payTime;

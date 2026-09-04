@@ -6,6 +6,8 @@ import cn.bugstack.domain.order.model.entity.OrderLockEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class OrderLockService implements IOrderLockService {
@@ -17,15 +19,15 @@ public class OrderLockService implements IOrderLockService {
     }
 
     @Override
-    public OrderLockEntity lockOrder() {
-        // 构建锁单聚合体（锁单只生成锁单号与状态，不涉及商品与用户）
-        LockOrderAggregate aggregate = LockOrderAggregate.build();
+    public OrderLockEntity lockOrder(List<String> couponIds) {
+        // 构建锁单聚合体（锁单只生成锁单号与状态，couponIds 随锁单持久化）
+        LockOrderAggregate aggregate = LockOrderAggregate.build(couponIds);
         OrderLockEntity lockEntity = aggregate.getOrderLockEntity();
 
         // 持久化
         orderLockRepository.saveLock(lockEntity);
 
-        log.info("锁单成功 lockId:{}", lockEntity.getLockId());
+        log.info("锁单成功 lockId:{} couponIds:{}", lockEntity.getLockId(), lockEntity.getCouponIds());
         return lockEntity;
     }
 

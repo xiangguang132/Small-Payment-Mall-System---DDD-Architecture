@@ -62,7 +62,7 @@ public class AliPayController implements IPayService {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             userId = (String) httpRequest.getAttribute("userId");
 
-            OrderLockEntity lockEntity = orderLockService.lockOrder();
+            OrderLockEntity lockEntity = orderLockService.lockOrder(request.getCouponIds());
 
             return Response.<LockOrderResponse>builder()
                     .code(ResponseCode.SUCCESS.getCode())

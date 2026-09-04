@@ -10,7 +10,9 @@
         <result column="out_trade_no" property="outTradeNo"/>
         <result column="order_time" property="orderTime"/>
         <result column="total_amount" property="totalAmount"/>
+        <result column="original_amount" property="originalAmount"/>
         <result column="order_type" property="orderType"/>
+        <result column="coupon_ids" property="couponIds"/>
         <result column="status" property="status"/>
         <result column="pay_url" property="payUrl"/>
         <result column="pay_time" property="payTime"/>
@@ -21,9 +23,9 @@
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder">
         insert into pay_order(user_id, product_id, product_name, out_trade_no, order_time,
-        total_amount, order_type, status, out_trade_time, create_time, update_time)
+        total_amount, original_amount, order_type, coupon_ids, status, out_trade_time, create_time, update_time)
         values(#{userId}, #{productId}, #{productName}, #{outTradeNo}, #{orderTime},
-        #{totalAmount}, #{orderType}, #{status}, #{outTradeTime, jdbcType=TIMESTAMP}, now(), now())
+        #{totalAmount}, #{originalAmount}, #{orderType}, #{couponIds}, #{status}, #{outTradeTime, jdbcType=TIMESTAMP}, now(), now())
     </insert>
 
     <update id="updateOrderPayInfo" parameterType="cn.bugstack.infrastructure.dao.po.payment.PayOrder">

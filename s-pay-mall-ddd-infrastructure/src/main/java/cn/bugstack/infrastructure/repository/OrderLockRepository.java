@@ -24,6 +24,7 @@ public class OrderLockRepository implements IOrderLockRepository {
                 .orderId(lockEntity.getOrderId())
                 .lockStatus(lockEntity.getLockStatus())
                 .lockTime(toDate(lockEntity.getLockTime()))
+                .couponIds(lockEntity.getCouponIds())
                 .build();
         orderLockDao.insert(orderLock);
     }
@@ -53,6 +54,7 @@ public class OrderLockRepository implements IOrderLockRepository {
                 .orderId(orderLock.getOrderId())
                 .lockStatus(orderLock.getLockStatus())
                 .lockTime(toLocalDateTime(orderLock.getLockTime()))
+                .couponIds(orderLock.getCouponIds())
                 .build();
     }
 

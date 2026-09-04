@@ -21,6 +21,8 @@ public class OrderLock {
     private String orderId;
     private String lockStatus;
     private Date lockTime;
+    /** 使用的优惠券ID列表(JSON数组) */
+    private String couponIds;
     private Date createTime;
     private Date updateTime;
 

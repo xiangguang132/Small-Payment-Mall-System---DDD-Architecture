@@ -48,9 +48,17 @@ public class PayOrder {
      */
     private BigDecimal totalAmount;
     /**
+     * 商品原价（券抵扣前）
+     */
+    private BigDecimal originalAmount;
+    /**
      * 订单类型；DIRECT普通购买、GROUP_BUY拼团
      */
     private String orderType;
+    /**
+     * 使用的优惠券ID列表(JSON数组)
+     */
+    private String couponIds;
     /**
      * 订单状态；create-创建完成、pay_wait-等待支付、pay_success-支付成功、deal_done-交易完成、close-订单关单
      */

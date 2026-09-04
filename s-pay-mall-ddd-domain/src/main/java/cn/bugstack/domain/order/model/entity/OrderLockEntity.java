@@ -22,6 +22,8 @@ public class OrderLockEntity {
     private String orderId;
     private String lockStatus;  // LOCKED / CONFIRMED / EXPIRED
     private LocalDateTime lockTime;
+    /** 使用的优惠券ID列表(JSON数组) */
+    private String couponIds;
 
     /**
      * 判断是否过期（默认15分钟）

@@ -2,11 +2,13 @@ package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.adapter.port.IProductPort;
 import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
+import cn.bugstack.domain.groupbuy.repository.ICouponRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
+import cn.bugstack.domain.groupbuy.service.trial.rule.coupon.ICouponCalculateService;
 import cn.bugstack.domain.payment.adapter.port.IAlipayPort;
 import cn.bugstack.domain.payment.adapter.port.IAlipayRefundPort;
 import cn.bugstack.types.enums.OrderTypeEnum;
@@ -18,6 +20,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -52,9 +56,22 @@ public class OrderService extends AbstractOrderService{
     private IAlipayPort alipayPort;
 
     private final IGroupBuyOrderRepository groupBuyOrderRepository;
+    private final ICouponRepository couponRepository;
+    private final Map<String, ICouponCalculateService> couponCalculateServices;
 
-    public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository, IProductPort productPort, IGroupBuyOrderRepository groupBuyOrderRepository) {        super(orderRepository, orderLockRepository, productPort);
+    public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository,
+                        IProductPort productPort, IGroupBuyOrderRepository groupBuyOrderRepository,
+                        ICouponRepository couponRepository,
+                        Map<String, ICouponCalculateService> couponCalculateServices) {
+        super(orderRepository, orderLockRepository, productPort, couponRepository);
         this.groupBuyOrderRepository = groupBuyOrderRepository;
+        this.couponRepository = couponRepository;
+        this.couponCalculateServices = couponCalculateServices;
+    }
+
+    @Override
+    protected ICouponCalculateService getCouponCalculateService(String couponType) {
+        return couponCalculateServices.get(couponType);
     }
 
     /**
@@ -77,7 +94,9 @@ public class OrderService extends AbstractOrderService{
      * @throws AlipayApiException
      */
     @Override
-    protected PayOrderEntity doPrepayOrder(String userId, String productId, String productName, String outTradeNo, BigDecimal totalAmount) throws AlipayApiException {
+    protected PayOrderEntity doPrepayOrder(String userId, String productId, String productName,
+                                            String outTradeNo, BigDecimal totalAmount,
+                                            BigDecimal originalAmount, String couponIds) throws AlipayApiException {
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setReturnUrl(returnUrl);
         request.setNotifyUrl(notifyUrl);
@@ -98,8 +117,10 @@ public class OrderService extends AbstractOrderService{
         payOrderEntity.setOutTradeNo(outTradeNo);
         payOrderEntity.setOrderTime(LocalDateTime.now());
         payOrderEntity.setTotalAmount(totalAmount);
+        payOrderEntity.setOriginalAmount(originalAmount);
         payOrderEntity.setOrderType(OrderTypeEnum.DIRECT);
         payOrderEntity.setOrderStatus(OrderStatusVO.PAY_WAIT);
+        payOrderEntity.setCouponIds(couponIds);
         payOrderEntity.setPayUrl(form);
 
         orderRepository.updateOrderPayInfo(payOrderEntity);
