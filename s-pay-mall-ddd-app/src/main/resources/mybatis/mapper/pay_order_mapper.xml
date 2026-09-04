@@ -79,7 +79,11 @@
 
     <select id="queryTimeoutCloseOrderList" resultType="java.lang.String">
         SELECT out_trade_no as outTradeNo FROM pay_order
-        WHERE status IN ('PAY_WAIT', 'PAY_SUCCESS') AND order_time &lt;= DATE_SUB(NOW(), INTERVAL 15 MINUTE)
+        WHERE (
+            (status = 'PAY_WAIT' AND order_time &lt;= DATE_SUB(NOW(), INTERVAL 15 MINUTE))
+            OR
+            (status = 'PAY_SUCCESS' AND pay_time IS NOT NULL AND pay_time &lt;= DATE_SUB(NOW(), INTERVAL 15 MINUTE))
+        )
         ORDER BY order_time ASC
         LIMIT 50
     </select>

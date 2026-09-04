@@ -18,11 +18,14 @@
     </select>
 
     <select id="queryByUserId" resultType="cn.bugstack.infrastructure.dao.po.cart.Cart">
-        select id, user_id, product_id, quantity, checked, status, create_time, update_time
-        from cart
-        where user_id = #{userId}
-          and status = 1
-        order by create_time desc
+        select c.id, c.user_id, c.product_id, c.quantity, c.checked, c.status,
+               c.create_time, c.update_time,
+               p.name as product_name, p.price as product_price, p.sku as product_image
+        from cart c
+        left join product p on c.product_id = p.id
+        where c.user_id = #{userId}
+          and c.status = 1
+        order by c.create_time desc
     </select>
 
     <update id="updateQuantity">

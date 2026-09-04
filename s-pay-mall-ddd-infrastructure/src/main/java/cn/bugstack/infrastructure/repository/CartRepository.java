@@ -1,6 +1,6 @@
 package cn.bugstack.infrastructure.repository;
 
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.model.entity.CartEntity;
 import cn.bugstack.domain.order.repository.ICartRepository;
 import cn.bugstack.infrastructure.dao.ICartDao;
 import cn.bugstack.infrastructure.dao.po.cart.Cart;
@@ -17,7 +17,7 @@ public class CartRepository implements ICartRepository {
     private ICartDao cartDao;
 
     @Override
-    public void save(ShopCartEntity entity) {
+    public void save(CartEntity entity) {
         Cart cart = Cart.builder()
                 .userId(entity.getUserId())
                 .productId(entity.getProductId())
@@ -29,13 +29,13 @@ public class CartRepository implements ICartRepository {
     }
 
     @Override
-    public ShopCartEntity queryByUserAndProduct(String userId, Long productId) {
+    public CartEntity queryByUserAndProduct(String userId, Long productId) {
         Cart cart = cartDao.queryByUserAndProduct(userId, productId);
         return toEntity(cart);
     }
 
     @Override
-    public List<ShopCartEntity> queryByUserId(String userId) {
+    public List<CartEntity> queryByUserId(String userId) {
         return cartDao.queryByUserId(userId).stream()
                 .map(this::toEntity)
                 .collect(Collectors.toList());
@@ -66,9 +66,9 @@ public class CartRepository implements ICartRepository {
         cartDao.clearByUserId(userId);
     }
 
-    private ShopCartEntity toEntity(Cart cart) {
+    private CartEntity toEntity(Cart cart) {
         if (cart == null) return null;
-        return ShopCartEntity.builder()
+        return CartEntity.builder()
                 .id(cart.getId())
                 .userId(cart.getUserId())
                 .productId(cart.getProductId())
@@ -77,6 +77,9 @@ public class CartRepository implements ICartRepository {
                 .status(cart.getStatus())
                 .createTime(cart.getCreateTime())
                 .updateTime(cart.getUpdateTime())
+                .productName(cart.getProductName())
+                .price(cart.getProductPrice())
+                .productImage(cart.getProductImage())
                 .build();
     }
 

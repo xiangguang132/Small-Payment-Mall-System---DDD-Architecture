@@ -34,8 +34,6 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
     private IGroupBuyOrderDao groupBuyOrderDao;
     @Resource
     private IGroupBuyNotifyTaskDao groupBuyNotifyTaskDao;
-    @Resource
-    private cn.bugstack.infrastructure.dao.IUserCouponDao userCouponDao;
 
     @Override
     public GroupBuyOrderEntity queryGroupBuyOrderByOutTradeNo(String userId, String outTradeNo) {
@@ -100,6 +98,7 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .payAmount(trialResult.getPayPrice())
                 .status(0)
                 .outTradeNo(aggregate.getOutTradeNo())
+                .couponIds(aggregate.getCouponIds() != null ? JSON.toJSONString(aggregate.getCouponIds()) : null)
                 .build();
 
         groupBuyOrderDao.insert(toOrderPo(orderEntity));
@@ -107,16 +106,6 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
         log.info("【价格流转】锁单持久化 orderId:{} 原价:{} 优惠减免:{} 实付价:{} outTradeNo:{}",
                 orderId, orderEntity.getOriginalAmount(), orderEntity.getDeductionAmount(),
                 orderEntity.getPayAmount(), aggregate.getOutTradeNo());
-
-        // 核销优惠券：在同一事务内将用户优惠券标记为已使用
-        List<String> couponIds = aggregate.getCouponIds();
-        if (couponIds != null && !couponIds.isEmpty()) {
-            int updated = userCouponDao.batchUpdateUserCouponUsed(
-                    aggregate.getUserId(), couponIds, aggregate.getOutTradeNo(), LocalDateTime.now()
-            );
-            log.info("【价格流转】优惠券核销 userId:{} couponIds:{} 核销数量:{}",
-                    aggregate.getUserId(), couponIds, updated);
-        }
 
         return orderEntity;
     }
@@ -221,6 +210,7 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .payAmount(order.getPayAmount())
                 .status(order.getStatus())
               .outTradeNo(order.getOutTradeNo())
+              .couponIds(order.getCouponIds())
               .validStartTime(order.getValidStartTime())
               .validEndTime(order.getValidEndTime())
               .teamStatus(order.getTeamStatus())
@@ -245,6 +235,7 @@ public class GroupBuyOrderRepository implements IGroupBuyOrderRepository {
                 .payAmount(entity.getPayAmount())
                 .status(entity.getStatus())
                 .outTradeNo(entity.getOutTradeNo())
+                .couponIds(entity.getCouponIds())
                 .createTime(entity.getCreateTime())
                 .updateTime(entity.getUpdateTime())
                 .build();

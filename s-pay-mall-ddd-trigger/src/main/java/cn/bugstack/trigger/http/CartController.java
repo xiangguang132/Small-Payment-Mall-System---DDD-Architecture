@@ -1,12 +1,11 @@
 package cn.bugstack.trigger.http;
 
-import cn.bugstack.api.ICartService;
-import cn.bugstack.api.request.cart.AddToCartRequest;
 import cn.bugstack.api.request.cart.BatchRemoveCartRequest;
 import cn.bugstack.api.request.cart.ToggleCheckRequest;
 import cn.bugstack.api.request.cart.UpdateCartQuantityRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.cart.CartDetailResponse;
+import cn.bugstack.domain.order.service.ICartService;
 import cn.bugstack.trigger.assembler.CartAssembler;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
@@ -30,7 +29,7 @@ public class CartController {
 
     /** 添加到购物车 */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public Response<Void> addToCart(@RequestBody AddToCartRequest request) {
+    public Response<Void> addToCart(@RequestBody cn.bugstack.api.request.cart.AddToCartRequest request) {
         String userId = getUserId();
         log.info("添加购物车 userId:{} productId:{}", userId, request.getProductId());
         cartService.addToCart(userId, request.getProductId(),
@@ -45,11 +44,10 @@ public class CartController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public Response<List<CartDetailResponse>> listCart() {
         String userId = getUserId();
-        List<cn.bugstack.domain.order.model.entity.ShopCartEntity> entities = cartService.listCart(userId);
         return Response.<List<CartDetailResponse>>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
-                .data(CartAssembler.toDetailResponse(entities))
+                .data(CartAssembler.toDetailResponse(cartService.listCart(userId)))
                 .build();
     }
 

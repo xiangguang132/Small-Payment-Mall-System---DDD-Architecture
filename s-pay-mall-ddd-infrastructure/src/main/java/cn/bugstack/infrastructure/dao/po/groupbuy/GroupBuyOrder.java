@@ -44,6 +44,9 @@ public class GroupBuyOrder {
 
     private String outTradeNo;
 
+    /** 使用的优惠券ID列表(JSON数组) */
+    private String couponIds;
+
     /** 拼团有效期开始（来自 group_buy_team 联表） */
     private LocalDateTime validStartTime;
 

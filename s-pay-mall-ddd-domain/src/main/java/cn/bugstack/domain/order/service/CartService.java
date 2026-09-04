@@ -1,6 +1,6 @@
 package cn.bugstack.domain.order.service;
 
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.model.entity.CartEntity;
 import cn.bugstack.domain.order.repository.ICartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,13 +18,13 @@ public class CartService implements ICartService {
     @Override
     public void addToCart(String userId, Long productId, Integer quantity) {
         // 已存在则数量+1
-        ShopCartEntity existing = cartRepository.queryByUserAndProduct(userId, productId);
+        CartEntity existing = cartRepository.queryByUserAndProduct(userId, productId);
         if (existing != null) {
             cartRepository.updateQuantity(existing.getId(), existing.getQuantity() + quantity);
             return;
         }
         // 不存在则新增
-        ShopCartEntity entity = ShopCartEntity.builder()
+        CartEntity entity = CartEntity.builder()
                 .userId(userId)
                 .productId(productId)
                 .quantity(quantity)
@@ -35,7 +35,7 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public List<ShopCartEntity> listCart(String userId) {
+    public List<CartEntity> listCart(String userId) {
         return cartRepository.queryByUserId(userId);
     }
 

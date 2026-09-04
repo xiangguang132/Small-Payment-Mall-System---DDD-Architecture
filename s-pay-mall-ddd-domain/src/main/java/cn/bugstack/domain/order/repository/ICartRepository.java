@@ -1,19 +1,19 @@
 package cn.bugstack.domain.order.repository;
 
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.model.entity.CartEntity;
 
 import java.util.List;
 
 public interface ICartRepository {
 
     /** 新增购物车项 */
-    void save(ShopCartEntity entity);
+    void save(CartEntity entity);
 
     /** 根据用户+商品查询（用于判断是否已存在） */
-    ShopCartEntity queryByUserAndProduct(String userId, Long productId);
+    CartEntity queryByUserAndProduct(String userId, Long productId);
 
     /** 查询用户购物车列表 */
-    List<ShopCartEntity> queryByUserId(String userId);
+    List<CartEntity> queryByUserId(String userId);
 
     /** 更新数量 */
     void updateQuantity(Long id, Integer quantity);

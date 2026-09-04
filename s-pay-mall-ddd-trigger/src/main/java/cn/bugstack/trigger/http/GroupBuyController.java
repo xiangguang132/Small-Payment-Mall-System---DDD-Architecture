@@ -30,6 +30,7 @@ import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.trigger.interceptor.PublicEndpoint;
 import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -207,6 +208,13 @@ public class GroupBuyController {
                             .outTradeNo(payOrderEntity.getOutTradeNo())
                             .payUrl(payOrderEntity.getPayUrl())
                             .build())
+                    .build();
+        } catch (AppException e) {
+            log.warn("拼团锁单业务异常 userId:{} activityId:{} code:{} info:{}",
+                    request.getUserId(), request.getActivityId(), e.getCode(), e.getInfo());
+            return Response.<GroupBuyLockOrderResponse>builder()
+                    .code(e.getCode())
+                    .info(e.getInfo())
                     .build();
         } catch (Exception e) {
             log.error("拼团锁单失败 userId:{} activityId:{} productId:{}", request.getUserId(), request.getActivityId(), request.getProductId(), e);

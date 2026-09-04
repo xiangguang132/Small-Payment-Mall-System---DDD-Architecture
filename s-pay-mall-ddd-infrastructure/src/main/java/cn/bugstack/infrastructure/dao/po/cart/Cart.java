@@ -30,4 +30,12 @@ public class Cart {
 
     private LocalDateTime updateTime;
 
+    // ─── 联表 product 字段 ───
+
+    private String productName;
+
+    private BigDecimal productPrice;
+
+    private String productImage;
+
 }

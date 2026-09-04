@@ -1,6 +1,6 @@
 package cn.bugstack.domain.order.service;
 
-import cn.bugstack.domain.order.model.entity.ShopCartEntity;
+import cn.bugstack.domain.order.model.entity.CartEntity;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface ICartService {
     void addToCart(String userId, Long productId, Integer quantity);
 
     /** 查询购物车列表 */
-    List<ShopCartEntity> listCart(String userId);
+    List<CartEntity> listCart(String userId);
 
     /** 更新数量 */
     void updateQuantity(String userId, Long cartId, Integer quantity);
