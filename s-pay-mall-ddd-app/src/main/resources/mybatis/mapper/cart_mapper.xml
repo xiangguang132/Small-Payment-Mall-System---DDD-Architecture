@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bugstack.infrastructure.dao.ICartDao">
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.cart.Cart"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into cart (user_id, product_id, quantity, checked, status, create_time, update_time)
+        values (#{userId}, #{productId}, #{quantity}, #{checked}, #{status}, now(), now())
+    </insert>
+
+    <select id="queryByUserAndProduct" resultType="cn.bugstack.infrastructure.dao.po.cart.Cart">
+        select id, user_id, product_id, quantity, checked, status, create_time, update_time
+        from cart
+        where user_id = #{userId}
+          and product_id = #{productId}
+          and status = 1
+    </select>
+
+    <select id="queryByUserId" resultType="cn.bugstack.infrastructure.dao.po.cart.Cart">
+        select id, user_id, product_id, quantity, checked, status, create_time, update_time
+        from cart
+        where user_id = #{userId}
+          and status = 1
+        order by create_time desc
+    </select>
+
+    <update id="updateQuantity">
+        update cart
+        set quantity = #{quantity},
+            update_time = now()
+        where id = #{id}
+    </update>
+
+    <update id="updateChecked">
+        update cart
+        set checked = #{checked},
+            update_time = now()
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update cart
+        set status = 0,
+            update_time = now()
+        where id = #{id}
+          and user_id = #{userId}
+    </update>
+
+    <update id="deleteByIds">
+        update cart
+        set status = 0,
+            update_time = now()
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+          and user_id = #{userId}
+    </update>
+
+    <update id="clearByUserId">
+        update cart
+        set status = 0,
+            update_time = now()
+        where user_id = #{userId}
+          and status = 1
+    </update>
+
+</mapper>
