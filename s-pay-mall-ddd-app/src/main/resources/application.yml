@@ -9,6 +9,16 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  # 上传文件大小限制（需 >= UploadController 的 5MB 单文件上限）
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# 本地上传文件配置（file.access-prefix 需与 WebMvcConfig 中 /files/** 资源映射一致）
+file:
+  upload-dir: ./upload
+  access-prefix: /files
 
 # Knife4j API文档配置
 springdoc:

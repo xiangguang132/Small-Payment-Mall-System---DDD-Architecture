@@ -1,5 +1,6 @@
 package cn.bugstack.trigger.http;
 
+import cn.bugstack.api.request.coupon.CouponAvailablePageRequest;
 import cn.bugstack.api.request.coupon.CouponClaimRequest;
 import cn.bugstack.api.request.coupon.CouponPageRequest;
 import cn.bugstack.api.response.Response;
@@ -115,24 +116,27 @@ public class CouponCenterController {
     }
 
     /**
-     * 查询当前用户可用优惠券（需要登录，返回 status=0 且未过期的券）
+     * 分页查询当前用户可用优惠券（需要登录，返回 status=0、启用且未过期的券）
      */
     @RequestMapping(value = "queryMyAvailableCoupons", method = RequestMethod.POST)
-    public Response<List<CouponDetailResponse>> queryMyAvailableCoupons() {
-        log.info("领券中心-查询用户可用券");
+    public Response<PageResponse<CouponDetailResponse>> queryMyAvailableCoupons(@RequestBody CouponAvailablePageRequest request) {
+        log.info("领券中心-查询用户可用券 pageNo:{} pageSize:{}", request.getPageNo(), request.getPageSize());
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String userId = (String) httpRequest.getAttribute("userId");
 
             if (StringUtils.isBlank(userId)) {
                 log.warn("领券中心-查询可用券缺少登录态，拒绝处理");
-                return Response.<List<CouponDetailResponse>>builder()
+                return Response.<PageResponse<CouponDetailResponse>>builder()
                         .code(ResponseCode.NO_LOGIN.getCode())
                         .info(ResponseCode.NO_LOGIN.getInfo())
                         .build();
             }
 
-            List<CouponEntity> couponList = couponCenterService.queryMyAvailableCoupons(userId);
+            int pageNo = request.getSafePageNo();
+            int pageSize = request.getSafePageSize();
+            List<CouponEntity> couponList = couponCenterService.queryMyAvailableCoupons(userId, pageNo, pageSize);
+            long total = couponCenterService.countMyAvailableCoupons(userId);
 
             List<CouponDetailResponse> detailList = couponList.stream()
                     .map(coupon -> CouponDetailResponse.builder()
@@ -148,15 +152,22 @@ public class CouponCenterController {
                             .build())
                     .collect(Collectors.toList());
 
-            log.info("领券中心-查询用户可用券完成 count:{}", detailList.size());
-            return Response.<List<CouponDetailResponse>>builder()
+            PageResponse<CouponDetailResponse> pageResponse = PageResponse.<CouponDetailResponse>builder()
+                    .total(total)
+                    .pageNo(pageNo)
+                    .pageSize(pageSize)
+                    .list(detailList)
+                    .build();
+
+            log.info("领券中心-查询用户可用券完成 total:{} 本页:{}", total, detailList.size());
+            return Response.<PageResponse<CouponDetailResponse>>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
-                    .data(detailList)
+                    .data(pageResponse)
                     .build();
         } catch (Exception e) {
             log.error("领券中心-查询用户可用券失败", e);
-            return Response.<List<CouponDetailResponse>>builder()
+            return Response.<PageResponse<CouponDetailResponse>>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

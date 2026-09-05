@@ -40,6 +40,12 @@ public class Product {
     /** 商品价格 (对应 decimal 18,2) */
     private BigDecimal price;
 
+    /** 封面图URL (对应 varchar 512) */
+    private String coveringImg;
+
+    /** 商品图片列表，多个URL (对应 text) */
+    private String imgs;
+
     /** 是否删除 0否 1是 (对应 tinyint) */
     private Integer isDel;
 

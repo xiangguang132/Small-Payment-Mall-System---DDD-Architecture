@@ -109,7 +109,9 @@ public class ProductionFlowE2ETest {
                 "SKU-E2E-" + suffix,
                 productTypeId,
                 1,
-                new BigDecimal("19.90")
+                new BigDecimal("19.90"),
+                null,
+                null
         ));
         Long warehouseId = warehouseService.addWarehouse(WarehouseAggregate.create(
                 "WH-E2E-" + suffix,

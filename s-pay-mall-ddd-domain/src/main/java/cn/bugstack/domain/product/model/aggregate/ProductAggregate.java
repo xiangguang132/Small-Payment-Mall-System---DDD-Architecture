@@ -23,13 +23,16 @@ public class ProductAggregate {
     private String categoryDescription;
     private Integer status;
     private BigDecimal price;
+    private String coveringImg;
+    private String imgs;
     @Builder.Default
     private Integer isDel = 0;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 
     public static ProductAggregate create(String name, String description, String sku,
-                                          Long categoryId, Integer status, BigDecimal price) {
+                                          Long categoryId, Integer status, BigDecimal price,
+                                          String coveringImg, String imgs) {
         LocalDateTime now = LocalDateTime.now();
         return ProductAggregate.builder()
                 .name(name)
@@ -38,6 +41,8 @@ public class ProductAggregate {
                 .categoryId(categoryId)
                 .status(status)
                 .price(price)
+                .coveringImg(coveringImg)
+                .imgs(imgs)
                 .isDel(0)
                 .createTime(now)
                 .updateTime(now)

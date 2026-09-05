@@ -6,9 +6,9 @@
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.product.Product"
             useGeneratedKeys="true" keyProperty="id">
         insert into product
-        (name, description, sku, category_id, status, price, is_del, create_time, update_time)
+        (name, description, sku, category_id, status, price, covering_img, imgs, is_del, create_time, update_time)
         values
-        (#{name}, #{description}, #{sku}, #{categoryId}, #{status}, #{price}, #{isDel}, now(), now())
+        (#{name}, #{description}, #{sku}, #{categoryId}, #{status}, #{price}, #{coveringImg}, #{imgs}, #{isDel}, now(), now())
     </insert>
 
     <update id="deleteById" parameterType="java.lang.Long">
@@ -31,6 +31,8 @@
         pt.type_code as category_code,
         p.status,
         p.price,
+        p.covering_img,
+        p.imgs,
         p.is_del,
         p.create_time,
         p.update_time
@@ -48,6 +50,8 @@
         category_id = #{categoryId},
         status = #{status},
         price = #{price},
+        covering_img = #{coveringImg},
+        imgs = #{imgs},
         update_time = now()
         where id = #{id}
         and is_del = 0
@@ -94,6 +98,7 @@
         pt.type_code as category_code,
         p.status,
         p.price,
+        p.covering_img,
         p.is_del,
         p.create_time,
         p.update_time
@@ -133,6 +138,7 @@
         pt.type_code as category_code,
         p.status,
         p.price,
+        p.covering_img,
         p.is_del,
         p.create_time,
         p.update_time

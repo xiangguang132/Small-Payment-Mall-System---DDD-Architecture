@@ -28,4 +28,13 @@
         where order_id = #{orderId}
     </select>
 
+    <select id="queryByOrderIds" resultMap="dataMap">
+        select id, order_id, product_id, product_name, quantity, price, total_amount, create_time, update_time
+        from pay_order_item
+        where order_id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </select>
+
 </mapper>

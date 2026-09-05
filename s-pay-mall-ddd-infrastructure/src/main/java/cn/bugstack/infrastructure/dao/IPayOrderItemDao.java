@@ -15,4 +15,7 @@ public interface IPayOrderItemDao {
     /** 按订单号查询明细 */
     List<PayOrderItem> queryByOrderId(@Param("orderId") String orderId);
 
+    /** 按订单号批量查询明细（分页订单列表聚合明细用） */
+    List<PayOrderItem> queryByOrderIds(@Param("orderIds") List<String> orderIds);
+
 }

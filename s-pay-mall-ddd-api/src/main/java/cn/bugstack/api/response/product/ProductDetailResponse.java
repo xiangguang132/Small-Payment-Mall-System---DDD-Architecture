@@ -18,6 +18,12 @@ public class ProductDetailResponse {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 
+    /** 封面图URL */
+    private String coveringImg;
+
+    /** 商品图片列表，多个URL */
+    private String imgs;
+
     private String categoryName;
     private String categoryDescription;
     private Long activityId;

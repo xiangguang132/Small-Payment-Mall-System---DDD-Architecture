@@ -38,6 +38,8 @@ public class ProductAssemblerTest {
                 .categoryId(1L)
                 .status(1)
                 .price(new BigDecimal("9.90"))
+                .coveringImg("https://example.com/cover.jpg")
+                .imgs("[\"https://example.com/1.jpg\",\"https://example.com/2.jpg\"]")
                 .build();
 
         ProductDetailResponse response = ProductAssembler.toDetailResponse(aggregate);
@@ -45,5 +47,7 @@ public class ProductAssemblerTest {
         assertEquals("demo", response.getName());
         assertEquals("SKU001", response.getSku());
         assertEquals(new BigDecimal("9.90"), response.getPrice());
+        assertEquals("https://example.com/cover.jpg", response.getCoveringImg());
+        assertEquals("[\"https://example.com/1.jpg\",\"https://example.com/2.jpg\"]", response.getImgs());
     }
 }

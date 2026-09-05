@@ -30,16 +30,16 @@ public class CouponCenterService implements ICouponCenterService {
     private IUserCouponRepository userCouponRepository;
 
     @Override
-    public List<CouponEntity> queryCouponPage(Integer status, Integer pageNo, Integer pageSize) {
+    public List<CouponEntity> queryCouponPage(Integer status, String couponType, Integer pageNo, Integer pageSize) {
         int safePageNo = (pageNo == null || pageNo <= 0) ? 1 : pageNo;
         int safePageSize = (pageSize == null || pageSize <= 0) ? 10 : Math.min(pageSize, 100);
         int offset = (safePageNo - 1) * safePageSize;
-        return couponRepository.queryCouponPage(status, offset, safePageSize);
+        return couponRepository.queryCouponPage(status, couponType, offset, safePageSize);
     }
 
     @Override
-    public long countCouponPage(Integer status) {
-        return couponRepository.countCouponPage(status);
+    public long countCouponPage(Integer status, String couponType) {
+        return couponRepository.countCouponPage(status, couponType);
     }
 
     @Override
@@ -91,18 +91,37 @@ public class CouponCenterService implements ICouponCenterService {
     }
 
     @Override
-    public List<CouponEntity> queryMyAvailableCoupons(String userId) {
-        // 查询用户未使用的券（status=0），不做分页限制（领券数量有限）
-        List<UserCouponEntity> userCoupons = userCouponRepository.queryUserCouponPage(userId, 0, 0, 100);
+    public List<CouponEntity> queryMyAvailableCoupons(String userId, String couponType, int pageNo, int pageSize) {
+        List<CouponEntity> all = queryAllAvailableCoupons(userId, couponType);
+        if (all.isEmpty()) {
+            return Collections.emptyList();
+        }
+        int safePageNo = Math.max(pageNo, 1);
+        int safePageSize = Math.min(Math.max(pageSize, 1), 20);
+        int from = Math.min((safePageNo - 1) * safePageSize, all.size());
+        int to = Math.min(from + safePageSize, all.size());
+        return all.subList(from, to);
+    }
+
+    @Override
+    public long countMyAvailableCoupons(String userId, String couponType) {
+        return queryAllAvailableCoupons(userId, couponType).size();
+    }
+
+    /** 全量加载用户可用券（未使用 + 启用 + 未过期 + 类型筛选），供分页切片与计数共用 */
+    private List<CouponEntity> queryAllAvailableCoupons(String userId, String couponType) {
+        // 查询用户未使用的券（status=0），放宽上限以支持分页（领券数量有限）
+        List<UserCouponEntity> userCoupons = userCouponRepository.queryUserCouponPage(userId, 0, 0, 1000);
         if (userCoupons == null || userCoupons.isEmpty()) {
             return Collections.emptyList();
         }
-        // 批量加载券详情，过滤掉已过期的券
+        // 批量加载券详情，过滤掉已停用/已过期/类型不匹配的券
         LocalDateTime now = LocalDateTime.now();
         return userCoupons.stream()
                 .map(uc -> couponRepository.queryCouponByCouponId(uc.getCouponId()))
                 .filter(c -> c != null && c.getStatus() != null && c.getStatus() == 1)
                 .filter(c -> c.getEndTime() == null || now.isBefore(c.getEndTime()))
+                .filter(c -> StringUtils.isBlank(couponType) || couponType.equals(c.getCouponType()))
                 .collect(java.util.stream.Collectors.toList());
     }
 

@@ -265,10 +265,11 @@ public class OrderService extends AbstractOrderService{
             return doTimeoutCloseOrder(outTradeNo);
         }
 
-        // 已支付（PAY_SUCCESS / DEAL_DONE）：调用支付宝退款
+        // 已支付/已完成：定时任务绝不自动退款，退款只允许用户主动发起（refundOrder）
         if (OrderStatusVO.PAY_SUCCESS.getCode().equals(status)
                 || OrderStatusVO.DEAL_DONE.getCode().equals(status)) {
-            return doTimeoutRefundPaidOrder(outTradeNo, payOrderEntity);
+            log.info("超时任务：已支付订单不做自动退款，跳过 outTradeNo={} status={}", outTradeNo, status);
+            return false;
         }
 
         log.info("超时处理：订单状态无需处理 outTradeNo={} status={}", outTradeNo, status);
@@ -286,33 +287,6 @@ public class OrderService extends AbstractOrderService{
             log.warn("超时关单失败（状态已变化） outTradeNo={}", outTradeNo);
         }
         return closed;
-    }
-
-    /**
-     * 超时退款（已支付）：乐观锁占位 → 支付宝退款 → 更新状态
-     */
-    private boolean doTimeoutRefundPaidOrder(String outTradeNo, PayOrderEntity payOrderEntity) {
-        // 乐观锁：PAY_SUCCESS/DEAL_DONE → REFUNDING
-        if (!orderRepository.changeOrderRefunding(outTradeNo)) {
-            log.info("超时退款：已有退款在处理中，跳过 outTradeNo={}", outTradeNo);
-            return false;
-        }
-        String fromStatus = payOrderEntity.getOrderStatus().getCode();
-        try {
-            boolean refundSuccess = alipayRefundPort.refund(outTradeNo, null, payOrderEntity.getTotalAmount());
-            if (!refundSuccess) {
-                orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), fromStatus);
-                log.error("超时退款：支付宝退款失败 outTradeNo={}", outTradeNo);
-                return false;
-            }
-            orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), OrderStatusVO.REFUND.getCode());
-            log.info("超时退款成功 outTradeNo={}", outTradeNo);
-            return true;
-        } catch (Exception e) {
-            orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), fromStatus);
-            log.error("超时退款异常 outTradeNo={}", outTradeNo, e);
-            return false;
-        }
     }
 
     /**

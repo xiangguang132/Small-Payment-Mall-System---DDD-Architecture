@@ -3,6 +3,7 @@ package cn.bugstack.trigger.http;
 import cn.bugstack.api.request.order.PayOrderPageRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.order.PayOrderDetailResponse;
+import cn.bugstack.api.response.order.PayOrderItemResponse;
 import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderService;
@@ -69,6 +70,15 @@ public class PayOrderController {
                             .outTradeTime(order.getOutTradeTime())
                             .createTime(order.getCreateTime())
                             .updateTime(order.getUpdateTime())
+                            .items(order.getItems() == null ? null : order.getItems().stream()
+                                    .map(item -> PayOrderItemResponse.builder()
+                                            .productId(item.getProductId())
+                                            .productName(item.getProductName())
+                                            .quantity(item.getQuantity())
+                                            .price(item.getPrice())
+                                            .totalAmount(item.getTotalAmount())
+                                            .build())
+                                    .collect(Collectors.toList()))
                             .build())
                     .collect(Collectors.toList());
 

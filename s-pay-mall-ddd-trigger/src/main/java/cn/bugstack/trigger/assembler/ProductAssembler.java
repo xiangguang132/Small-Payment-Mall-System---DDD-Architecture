@@ -25,7 +25,9 @@ public class ProductAssembler {
                 trim(request.getSku()),
                 request.getCategoryId(),
                 request.getStatus(),
-                request.getPrice()
+                request.getPrice(),
+                request.getCoveringImg(),
+                request.getImgs()
         );
     }
 
@@ -47,6 +49,8 @@ public class ProductAssembler {
         response.setCategoryDescription(product.getCategoryDescription());
         response.setStatus(product.getStatus());
         response.setPrice(product.getPrice());
+        response.setCoveringImg(product.getCoveringImg());
+        response.setImgs(product.getImgs());
         response.setCreateTime(product.getCreateTime());
         response.setUpdateTime(product.getUpdateTime());
         return response;

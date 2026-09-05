@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,4 +35,6 @@ public class PayOrderEntity {
     private LocalDateTime outTradeTime;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    /** 订单明细（购物车结算 CART 订单才有，单商品订单为空） */
+    private List<PayOrderItemEntity> items;
 }

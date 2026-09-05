@@ -231,6 +231,8 @@ public class ProductController {
                 .categoryId(request.getCategoryId() != null ? request.getCategoryId() : current.getCategoryId())
                 .status(request.getStatus() != null ? request.getStatus() : current.getStatus())
                 .price(request.getPrice() != null ? request.getPrice() : current.getPrice())
+                .coveringImg(request.getCoveringImg() != null ? request.getCoveringImg() : current.getCoveringImg())
+                .imgs(request.getImgs() != null ? request.getImgs() : current.getImgs())
                 .isDel(current.getIsDel())
                 .createTime(current.getCreateTime())
                 .updateTime(LocalDateTime.now())

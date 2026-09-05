@@ -86,6 +86,8 @@ public class ProductService implements IProductService {
                 .categoryDescription(current.getCategoryDescription())
                 .status(nextStatus)
                 .price(current.getPrice())
+                .coveringImg(current.getCoveringImg())
+                .imgs(current.getImgs())
                 .isDel(current.getIsDel())
                 .createTime(current.getCreateTime())
                 .updateTime(LocalDateTime.now())

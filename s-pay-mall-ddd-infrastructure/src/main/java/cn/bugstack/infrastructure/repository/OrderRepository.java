@@ -6,6 +6,7 @@ import cn.bugstack.domain.order.model.aggregate.CreateCartOrderAggregate;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
+import cn.bugstack.domain.order.model.entity.PayOrderItemEntity;
 import cn.bugstack.domain.order.model.entity.ProductEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
@@ -25,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -214,7 +216,39 @@ public class OrderRepository implements IOrderRepository {
         for (PayOrder order : orderList) {
             result.add(toPayOrderEntity(order));
         }
+        // 批量装载订单明细：购物车结算订单（CART）头表无商品字段，明细从 pay_order_item 聚合返回
+        fillOrderItems(result);
         return result;
+    }
+
+    /**
+     * 按 out_trade_no 批量查询明细并分组填充到支付单实体
+     * 单商品订单（DIRECT/GROUP_BUY）不下明细，items 保持为空，前端可回退展示头表 productName
+     */
+    private void fillOrderItems(List<PayOrderEntity> orders) {
+        if (orders == null || orders.isEmpty()) {
+            return;
+        }
+        List<String> orderIds = orders.stream()
+                .map(PayOrderEntity::getOutTradeNo)
+                .collect(Collectors.toList());
+        List<PayOrderItem> items = payOrderItemDao.queryByOrderIds(orderIds);
+        if (items == null || items.isEmpty()) {
+            return;
+        }
+        Map<String, List<PayOrderItemEntity>> groupByOrderId = items.stream()
+                .map(item -> PayOrderItemEntity.builder()
+                        .orderId(item.getOrderId())
+                        .productId(item.getProductId())
+                        .productName(item.getProductName())
+                        .quantity(item.getQuantity())
+                        .price(item.getPrice())
+                        .totalAmount(item.getTotalAmount())
+                        .build())
+                .collect(Collectors.groupingBy(PayOrderItemEntity::getOrderId));
+        for (PayOrderEntity order : orders) {
+            order.setItems(groupByOrderId.get(order.getOutTradeNo()));
+        }
     }
 
     @Override

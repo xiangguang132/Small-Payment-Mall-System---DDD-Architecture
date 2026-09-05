@@ -31,4 +31,10 @@ public class ProductAddRequest {
     @NotNull(message = "商品价格不能为空")
     @DecimalMin(value = "0.00", inclusive = true, message = "商品价格不能小于0")
     private BigDecimal price;
+
+    /** 封面图URL */
+    private String coveringImg;
+
+    /** 商品图片列表，多个URL */
+    private String imgs;
 }
