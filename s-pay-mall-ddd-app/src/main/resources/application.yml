@@ -19,6 +19,7 @@ spring:
 file:
   upload-dir: ./upload
   access-prefix: /files
+  base-url: ${FILE_BASE_URL:http://localhost:8080}
 
 # Knife4j API文档配置
 springdoc:

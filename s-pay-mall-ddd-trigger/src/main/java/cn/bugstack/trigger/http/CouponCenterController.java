@@ -37,11 +37,11 @@ public class CouponCenterController {
      */
     @RequestMapping(value = "queryCouponPage", method = RequestMethod.POST)
     public Response<PageResponse<CouponDetailResponse>> queryCouponPage(@RequestBody CouponPageRequest request) {
-        log.info("领券中心-分页查询开始 pageNo:{} pageSize:{}", request.getPageNo(), request.getPageSize());
+        log.info("领券中心-分页查询开始 pageNo:{} pageSize:{} couponType:{}", request.getPageNo(), request.getPageSize(), request.getCouponType());
         try {
             List<CouponEntity> couponList = couponCenterService.queryCouponPage(
-                    request.getStatus(), request.getPageNo(), request.getPageSize());
-            long total = couponCenterService.countCouponPage(request.getStatus());
+                    request.getStatus(), request.getCouponType(), request.getPageNo(), request.getPageSize());
+            long total = couponCenterService.countCouponPage(request.getStatus(), request.getCouponType());
 
             List<CouponDetailResponse> detailList = couponList.stream()
                     .map(coupon -> CouponDetailResponse.builder()
@@ -120,7 +120,7 @@ public class CouponCenterController {
      */
     @RequestMapping(value = "queryMyAvailableCoupons", method = RequestMethod.POST)
     public Response<PageResponse<CouponDetailResponse>> queryMyAvailableCoupons(@RequestBody CouponAvailablePageRequest request) {
-        log.info("领券中心-查询用户可用券 pageNo:{} pageSize:{}", request.getPageNo(), request.getPageSize());
+        log.info("领券中心-查询用户可用券 pageNo:{} pageSize:{} couponType:{}", request.getPageNo(), request.getPageSize(), request.getCouponType());
         try {
             HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String userId = (String) httpRequest.getAttribute("userId");
@@ -135,8 +135,8 @@ public class CouponCenterController {
 
             int pageNo = request.getSafePageNo();
             int pageSize = request.getSafePageSize();
-            List<CouponEntity> couponList = couponCenterService.queryMyAvailableCoupons(userId, pageNo, pageSize);
-            long total = couponCenterService.countMyAvailableCoupons(userId);
+            List<CouponEntity> couponList = couponCenterService.queryMyAvailableCoupons(userId, request.getCouponType(), pageNo, pageSize);
+            long total = couponCenterService.countMyAvailableCoupons(userId, request.getCouponType());
 
             List<CouponDetailResponse> detailList = couponList.stream()
                     .map(coupon -> CouponDetailResponse.builder()

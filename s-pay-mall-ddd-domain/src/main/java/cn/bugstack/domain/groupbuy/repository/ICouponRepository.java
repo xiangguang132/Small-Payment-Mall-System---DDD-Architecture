@@ -8,8 +8,8 @@ public interface ICouponRepository {
 
     CouponEntity queryCouponByCouponId(String couponId);
 
-    List<CouponEntity> queryCouponPage(Integer status, Integer offset, Integer limit);
+    List<CouponEntity> queryCouponPage(Integer status, String couponType, Integer offset, Integer limit);
 
-    long countCouponPage(Integer status);
+    long countCouponPage(Integer status, String couponType);
 
 }

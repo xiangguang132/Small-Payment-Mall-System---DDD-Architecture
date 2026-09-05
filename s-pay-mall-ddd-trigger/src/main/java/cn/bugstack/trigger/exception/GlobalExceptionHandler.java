@@ -15,6 +15,8 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MultipartException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.validation.ConstraintViolationException;
 
@@ -140,6 +142,26 @@ public class GlobalExceptionHandler {
                 .info(message)
                 .build();
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Response<Object>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
+        log.warn("文件上传大小超出限制", ex);
+        Response<Object> response = Response.<Object>builder()
+                .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                .info("上传文件大小超出限制")
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(MultipartException.class)
+    public ResponseEntity<Response<Object>> handleMultipartException(MultipartException ex) {
+        log.warn("请求格式错误，需要 multipart/form-data", ex);
+        Response<Object> response = Response.<Object>builder()
+                .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                .info("请使用 multipart/form-data 格式上传文件")
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(Exception.class)

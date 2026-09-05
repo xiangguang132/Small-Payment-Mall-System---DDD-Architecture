@@ -59,6 +59,21 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
         if (activity == null) {
             return null;
         }
+        return toEntity(activity);
+    }
+
+    @Override
+    public List<GroupBuyActivityEntity> queryGroupBuyActivityByProductIds(List<Long> productIds) {
+        if (productIds == null || productIds.isEmpty()) {
+            return java.util.Collections.emptyList();
+        }
+        return groupBuyActivityDao.queryByProductIds(productIds)
+                .stream()
+                .map(this::toEntity)
+                .collect(Collectors.toList());
+    }
+
+    private GroupBuyActivityEntity toEntity(GroupBuyActivity activity) {
         return GroupBuyActivityEntity.builder()
                 .id(activity.getId())
                 .activityId(activity.getActivityId())

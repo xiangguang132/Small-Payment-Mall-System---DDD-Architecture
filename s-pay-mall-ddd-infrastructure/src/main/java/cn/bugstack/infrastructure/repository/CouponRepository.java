@@ -24,8 +24,8 @@ public class CouponRepository implements ICouponRepository {
     }
 
     @Override
-    public List<CouponEntity> queryCouponPage(Integer status, Integer offset, Integer limit) {
-        List<Coupon> list = couponDao.queryCouponPage(status, offset, limit);
+    public List<CouponEntity> queryCouponPage(Integer status, String couponType, Integer offset, Integer limit) {
+        List<Coupon> list = couponDao.queryCouponPage(status, couponType, offset, limit);
         if (list == null || list.isEmpty()) {
             return Collections.emptyList();
         }
@@ -33,8 +33,8 @@ public class CouponRepository implements ICouponRepository {
     }
 
     @Override
-    public long countCouponPage(Integer status) {
-        return couponDao.countCouponPage(status);
+    public long countCouponPage(Integer status, String couponType) {
+        return couponDao.countCouponPage(status, couponType);
     }
 
     private CouponEntity toEntity(Coupon coupon) {

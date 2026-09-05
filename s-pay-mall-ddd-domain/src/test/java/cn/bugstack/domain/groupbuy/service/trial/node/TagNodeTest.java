@@ -155,6 +155,11 @@ public class TagNodeTest {
         }
 
         @Override
+        public java.util.List<GroupBuyActivityEntity> queryGroupBuyActivityByProductIds(java.util.List<Long> productIds) {
+            return java.util.Collections.emptyList();
+        }
+
+        @Override
         public boolean withinTagCrowdRange(String tagId, String userId) {
             withinTagCrowdRangeCalls++;
             return within;

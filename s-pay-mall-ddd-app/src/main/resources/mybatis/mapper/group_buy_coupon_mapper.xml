@@ -36,6 +36,9 @@
                     AND status = 1
                 </otherwise>
             </choose>
+            <if test="couponType != null and couponType != ''">
+                AND coupon_type = #{couponType}
+            </if>
         </where>
     </sql>
 

@@ -6,12 +6,9 @@ import cn.bugstack.api.request.product.ProductSearchRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.product.ProductDetailResponse;
-import cn.bugstack.api.response.producttype.ProductTypeDetailResponse;
+import cn.bugstack.api.response.product.ProductListItemResponse;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
-import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
-import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
@@ -23,7 +20,9 @@ import cn.bugstack.trigger.interceptor.RequireRole;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
+import cn.bugstack.types.common.ImageUrlUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +30,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,9 +46,11 @@ public class ProductController {
     @Resource
     private IGroupBuyActivityRepository groupBuyActivityRepository;
     @Resource
-    private IGroupBuyTrialService groupBuyTrialService;
-    @Resource
     private IProductTypeService productTypeService;
+
+    /** 图片访问域名前缀，用于将相对路径拼接为完整 URL */
+    @Value("${file.base-url:http://localhost:8080}")
+    private String fileBaseUrl;
 
     /**
      * 分页查询商品列表
@@ -56,7 +59,7 @@ public class ProductController {
      */
     @PublicEndpoint
     @GetMapping("page")
-    public Response<PageResponse<ProductDetailResponse>> page(@Valid ProductPageRequest request) {
+    public Response<PageResponse<ProductListItemResponse>> page(@Valid ProductPageRequest request) {
         log.info("分页查询商品列表开始 request:{}", request);
         List<ProductAggregate> products = productService.queryProductPage(
                 request.getName(),
@@ -72,15 +75,15 @@ public class ProductController {
                 request.getCategoryId(),
                 request.getStatus()
         );
-        List<ProductDetailResponse> detailList = toDetailListWithActivity(products);
-        PageResponse<ProductDetailResponse> pageResponse = PageResponse.<ProductDetailResponse>builder()
+        List<ProductListItemResponse> itemList = toItemListWithActivity(products);
+        PageResponse<ProductListItemResponse> pageResponse = PageResponse.<ProductListItemResponse>builder()
                 .total(total)
                 .pageNo(request.getPageNo())
                 .pageSize(request.getPageSize())
-                .list(detailList)
+                .list(itemList)
                 .build();
         log.info("分页查询商品列表完成 total:{}", total);
-        return Response.<PageResponse<ProductDetailResponse>>builder()
+        return Response.<PageResponse<ProductListItemResponse>>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(pageResponse)
@@ -94,7 +97,7 @@ public class ProductController {
      */
     @PublicEndpoint
     @GetMapping("search")
-    public Response<PageResponse<ProductDetailResponse>> search(@Valid ProductSearchRequest request) {
+    public Response<PageResponse<ProductListItemResponse>> search(@Valid ProductSearchRequest request) {
         String keyword = request.getKeyword() == null ? null : request.getKeyword().trim();
         if (keyword == null || keyword.isEmpty()) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "搜索关键词不能为空");
@@ -106,45 +109,55 @@ public class ProductController {
                 request.getPageSize()
         );
         Long total = productService.countProductSearch(keyword);
-        List<ProductDetailResponse> detailList = toDetailListWithActivity(products);
-        PageResponse<ProductDetailResponse> pageResponse = PageResponse.<ProductDetailResponse>builder()
+        List<ProductListItemResponse> itemList = toItemListWithActivity(products);
+        PageResponse<ProductListItemResponse> pageResponse = PageResponse.<ProductListItemResponse>builder()
                 .total(total)
                 .pageNo(request.getPageNo())
                 .pageSize(request.getPageSize())
-                .list(detailList)
+                .list(itemList)
                 .build();
         log.info("商品全局搜索完成 keyword:{} total:{}", keyword, total);
-        return Response.<PageResponse<ProductDetailResponse>>builder()
+        return Response.<PageResponse<ProductListItemResponse>>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(pageResponse)
                 .build();
     }
 
-    private List<ProductDetailResponse> toDetailListWithActivity(List<ProductAggregate> products) {
-        List<ProductDetailResponse> detailList = new java.util.ArrayList<>();
+    private List<ProductListItemResponse> toItemListWithActivity(List<ProductAggregate> products) {
+        // 批量查询所有商品的拼团活动，避免 N+1
+        List<Long> productIds = products.stream()
+                .map(ProductAggregate::getId)
+                .collect(Collectors.toList());
+        Map<Long, GroupBuyActivityEntity> activityMap = groupBuyActivityRepository
+                .queryGroupBuyActivityByProductIds(productIds)
+                .stream()
+                .collect(Collectors.toMap(GroupBuyActivityEntity::getProductId, Function.identity(), (a, b) -> a));
+
+        List<ProductListItemResponse> itemList = new java.util.ArrayList<>();
         for (ProductAggregate product : products) {
-            ProductDetailResponse resp = ProductAssembler.toDetailResponse(product);
-            GroupBuyActivityEntity activity = groupBuyActivityRepository.queryGroupBuyActivityByProductId(product.getId());
+            ProductListItemResponse item = new ProductListItemResponse();
+            item.setId(product.getId());
+            item.setName(product.getName());
+            item.setPrice(product.getPrice());
+            item.setCoveringImg(ImageUrlUtils.buildFullUrl(fileBaseUrl, product.getCoveringImg()));
+            GroupBuyActivityEntity activity = activityMap.get(product.getId());
             if (activity != null) {
-                resp.setActivityId(activity.getActivityId());
-                // 进行拼团试算，填充折后价和成团人数
-                try {
-                    GroupBuyTrialResult trial = groupBuyTrialService.queryGroupBuyTrial(
-                            GroupBuyTrialRequest.builder()
-                                    .activityId(activity.getActivityId())
-                                    .productId(product.getId())
-                                    .build()
-                    );
-                    resp.setTrialPayPrice(trial.getPayPrice());
-                    resp.setTargetCount(trial.getTargetCount());
-                } catch (Exception e) {
-                    log.warn("拼团试算失败 productId:{} activityId:{} error:{}", product.getId(), activity.getActivityId(), e.getMessage());
-                }
+                item.setActivityId(activity.getActivityId());
+                item.setTargetCount(activity.getTargetCount());
             }
-            detailList.add(resp);
+            itemList.add(item);
         }
-        return detailList;
+        return itemList;
+    }
+
+    /** 将商品图片相对路径拼接为完整 URL */
+    private void fillImageUrl(ProductDetailResponse resp) {
+        if (resp == null) {
+            return;
+        }
+        resp.setCoveringImg(ImageUrlUtils.buildFullUrl(fileBaseUrl, resp.getCoveringImg()));
+        resp.setImgs(ImageUrlUtils.buildFullUrl(fileBaseUrl, resp.getImgs()));
     }
 
     /**
@@ -180,6 +193,7 @@ public class ProductController {
         }
         ProductAggregate product = productService.queryProductById(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(product);
+        fillImageUrl(response);
         // 查询关联的拼团活动，填充 activityId
         GroupBuyActivityEntity activity = groupBuyActivityRepository.queryGroupBuyActivityByProductId(id);
         if (activity != null) {
@@ -241,6 +255,7 @@ public class ProductController {
 
         ProductAggregate refreshed = productService.queryProductById(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(refreshed);
+        fillImageUrl(response);
         log.info("更新商品完成 id:{}", id);
         return Response.<ProductDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())
@@ -258,6 +273,7 @@ public class ProductController {
         log.info("修改商品状态开始 id:{}", id);
         ProductAggregate updated = productService.onSale(id);
         ProductDetailResponse response = ProductAssembler.toDetailResponse(updated);
+        fillImageUrl(response);
         log.info("修改商品状态完成 id:{}", id);
         return Response.<ProductDetailResponse>builder()
                 .code(ResponseCode.SUCCESS.getCode())

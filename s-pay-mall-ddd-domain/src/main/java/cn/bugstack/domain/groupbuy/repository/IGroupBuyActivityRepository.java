@@ -10,6 +10,8 @@ public interface IGroupBuyActivityRepository {
 
     GroupBuyActivityEntity queryGroupBuyActivityByProductId(Long productId);
 
+    List<GroupBuyActivityEntity> queryGroupBuyActivityByProductIds(List<Long> productIds);
+
     List<GroupBuyActivityEntity> queryActivityPageByMarketPlan(String marketPlan, int offset, int limit);
 
     long countActivityPageByMarketPlan(String marketPlan);

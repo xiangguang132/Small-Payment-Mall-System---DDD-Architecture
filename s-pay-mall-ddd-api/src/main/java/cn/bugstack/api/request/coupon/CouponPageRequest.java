@@ -14,4 +14,7 @@ public class CouponPageRequest extends PageRequest {
     /** 优惠券状态筛选：null=全部启用，1=启用，0=停用 */
     private Integer status;
 
+    /** 优惠券类型筛选：FULL_REDUCTION / DISCOUNT / FIXED，null=全部 */
+    private String couponType;
+
 }

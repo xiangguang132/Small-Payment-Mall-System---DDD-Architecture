@@ -12,6 +12,9 @@ public interface IGroupBuyActivityDao {
     GroupBuyActivity queryGroupBuyActivityByActivityId(@Param("activityId") Long
                                                                activityId);
     GroupBuyActivity queryByProductId(@Param("productId") Long productId);
+
+    List<GroupBuyActivity> queryByProductIds(@Param("productIds") List<Long> productIds);
+
     List<GroupBuyActivity> queryGroupBuyActivityList();
 
     long countByTagId(@Param("tagId") String tagId);

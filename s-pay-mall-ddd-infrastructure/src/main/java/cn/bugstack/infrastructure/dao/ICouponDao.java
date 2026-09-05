@@ -12,9 +12,11 @@ public interface ICouponDao {
     Coupon queryCouponByCouponId(@Param("couponId") String couponId);
 
     List<Coupon> queryCouponPage(@Param("status") Integer status,
+                                 @Param("couponType") String couponType,
                                  @Param("offset") Integer offset,
                                  @Param("limit") Integer limit);
 
-    long countCouponPage(@Param("status") Integer status);
+    long countCouponPage(@Param("status") Integer status,
+                         @Param("couponType") String couponType);
 
 }

@@ -5908,3 +5908,374 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 	at java.base/java.lang.Thread.run(Thread.java:829)
 26-09-05.16:34:30.713 [AMQP Connection 192.144.234.86:5672] WARN  ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
+26-09-05.16:53:13.600 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:13.933 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:14.221 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:14.372 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:14.749 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:15.141 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:17.419 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:17.685 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:18.104 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:18.583 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:27.872 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:28.134 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:28.266 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:28.346 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:28.511 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:28.711 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:31.877 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:32.071 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:32.411 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:53:32.788 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:01.584 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:01.808 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:01.986 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:02.102 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:02.260 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:02.531 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:03.850 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:04.029 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:04.369 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:04.728 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:12.967 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:13.204 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:13.464 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:13.530 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:13.810 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:14.028 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:23.312 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:23.531 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:23.681 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:23.776 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:24.011 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:24.193 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:25.634 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:25.843 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:26.147 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:54:26.508 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:57.768 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:57.966 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:58.144 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:58.237 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:58.403 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:56:58.612 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.165 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.369 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.514 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.598 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.754 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:05.968 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:06.847 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.101 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.347 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.526 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.603 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.768 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:08.976 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:38.624 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:38.870 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:39.084 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:39.172 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:39.346 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:39.582 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:44.994 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:45.171 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:45.351 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:45.447 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:45.685 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:45.924 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.16:57:49.506 [http-nio-8080-exec-1] ERROR GlobalExceptionHandler - 系统异常
+org.springframework.web.multipart.MultipartException: Current request is not a multipart request
+	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValueInternal(RequestParamMethodArgumentResolver.java:210)
+	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:193)
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:114)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:179)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:146)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-05.17:01:00.900 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:01.076 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:01.220 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:01.294 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:01.464 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:01.633 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:07.907 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:08.079 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:08.251 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:08.332 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:08.483 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:08.762 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:09.130 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:09.353 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:09.527 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:09.611 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:09.804 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:10.021 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:21.935 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:22.122 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:22.266 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:22.350 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:22.500 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:22.765 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:31.049 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:31.363 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:31.680 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:31.766 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:31.949 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:01:32.139 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:12.678 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:12.836 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:13.084 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:13.230 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:13.427 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:04:13.601 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:26.285 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:26.490 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:26.720 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:26.821 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:26.989 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:05:27.219 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:47.746 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:47.945 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:48.099 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:48.189 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:48.341 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:48.518 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:49.205 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:49.445 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:49.594 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:49.719 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:49.885 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:50.151 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:52.687 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:52.989 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:53.519 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:53.961 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:56.923 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:57.162 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:57.315 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:57.398 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:57.563 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:08:57.829 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:19.106 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:19.463 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:19.766 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:19.862 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:20.014 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:15:20.194 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:14.000 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:15.358 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:15.525 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:15.676 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:15.747 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:15.914 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:17:16.090 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:18:12.468 [http-nio-8080-exec-2] WARN  GlobalExceptionHandler - 请求格式错误，需要 multipart/form-data
+org.springframework.web.multipart.MultipartException: Current request is not a multipart request
+	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValueInternal(RequestParamMethodArgumentResolver.java:210)
+	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:193)
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:114)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:179)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:146)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-05.17:19:12.657 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:12.921 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:13.128 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:13.227 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:13.436 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:13.630 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:32.814 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:33.112 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:33.340 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:33.464 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:33.654 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:33.850 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.177 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.364 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.518 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.612 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.747 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:51.963 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.117 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.293 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.462 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.534 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.696 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:53.896 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:54.461 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:54.670 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:54.851 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:54.934 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:55.094 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:19:55.290 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:06.849 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:07.076 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:07.278 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:07.357 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:07.565 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:07.816 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:09.231 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:09.393 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:09.689 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:09.963 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:25.970 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:26.124 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:26.272 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:26.340 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:26.536 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:26.769 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:34.186 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:34.449 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:34.759 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:35.058 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.065 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.252 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.409 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.494 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.641 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:38.817 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:40.648 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:40.816 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:41.159 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:21:41.490 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:23.191 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:23.441 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:23.651 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:23.771 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:24.010 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:24.257 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:26.208 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:26.451 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:26.906 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:27.370 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.134 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.309 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.471 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.540 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.711 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:23:36.906 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:24:54.148 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:24:54.279 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:24:54.586 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:24:54.902 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:25:54.653 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:25:54.847 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:25:55.000 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:25:55.099 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:25:55.408 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:26:10.771 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:26:10.992 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:26:11.148 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:26:11.219 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:26:11.369 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-05.17:51:00.199 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:00.358 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:08.327 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:08.569 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:46.203 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:46.440 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:51:59.989 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:00.253 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:06.184 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:15.288 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:15.522 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:20.725 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:52:20.951 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:53:02.321 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-05.17:53:02.386 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
