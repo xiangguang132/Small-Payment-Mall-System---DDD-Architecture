@@ -1,6 +1,7 @@
 package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
+import cn.bugstack.domain.order.model.entity.PayOrderItemEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import com.alipay.api.AlipayApiException;
 
@@ -23,6 +24,17 @@ public interface IOrderService {
     PayOrderEntity createGroupBuyPayOrder(String userId, String productId,
                                           String productName, String outTradeNo,
                                           BigDecimal totalAmount) throws AlipayApiException;
+
+    /**
+     * 创建购物车结算订单（CART 类型）：多商品聚合为一笔 pay_order + 明细，券在聚合金额上择优抵扣
+     * @param userId 用户ID
+     * @param items 结算明细（商品+数量，单价为结算时实时价）
+     * @param originalAmount 聚合原价（券抵扣前，每项 price × quantity 之和）
+     * @param couponIds 用户选择的优惠券ID列表（可空）
+     * @return 支付单（含支付宝支付表单 payUrl）
+     */
+    PayOrderEntity createCartOrder(String userId, List<PayOrderItemEntity> items,
+                                   BigDecimal originalAmount, List<String> couponIds) throws Exception;
 
     // 依据 out_trade_no 修改订单状态为支付成功，并回写外部交易时间
     void changeOrderPaySuccess(String outTradeNo, Date outTradeTime);

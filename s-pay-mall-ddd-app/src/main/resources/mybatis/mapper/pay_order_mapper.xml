@@ -72,6 +72,17 @@
         limit 1
     </select>
 
+    <select id="queryUnpaidCartOrder" resultMap="dataMap">
+        select id, user_id, product_id, product_name, out_trade_no, order_time,
+        total_amount, original_amount, order_type, coupon_ids, status, pay_url, pay_time, out_trade_time
+        from pay_order
+        where user_id = #{userId}
+          and order_type = 'CART'
+          and status in ('CREATE', 'PAY_WAIT')
+        order by id desc
+        limit 1
+    </select>
+
     <select id="queryNoPayNotifyOrder" resultType="java.lang.String">
         SELECT out_trade_no as outTradeNo FROM pay_order
         WHERE status = 'PAY_WAIT' AND order_time &lt;= DATE_SUB(NOW(), INTERVAL 1 MINUTE)

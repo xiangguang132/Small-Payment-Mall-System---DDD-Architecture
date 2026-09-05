@@ -9,6 +9,7 @@ public enum OrderTypeEnum {
 
     DIRECT("DIRECT", "Direct purchase"),
     GROUP_BUY("GROUP_BUY", "Group buy"),
+    CART("CART", "Cart checkout"),
     ;
 
     private final String code;

@@ -112,9 +112,9 @@ public abstract class AbstractOrderService implements IOrderService {
     }
 
     /**
-     * 计算优惠券折扣：取所有券中实付价最低的
+     * 计算优惠券折扣：取所有券中实付价最低的（对单商品原价与购物车聚合金额同样适用）
      */
-    private BigDecimal calculateCouponDiscount(BigDecimal originalPrice, List<String> couponIds) {
+    protected BigDecimal calculateCouponDiscount(BigDecimal originalPrice, List<String> couponIds) {
         BigDecimal bestPrice = originalPrice;
         for (String couponId : couponIds) {
             CouponEntity coupon = couponRepository.queryCouponByCouponId(couponId);

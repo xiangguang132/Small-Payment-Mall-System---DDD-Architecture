@@ -1,5 +1,6 @@
 package cn.bugstack.domain.order.adapter.repository;
 
+import cn.bugstack.domain.order.model.aggregate.CreateCartOrderAggregate;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
@@ -112,6 +113,19 @@ public interface IOrderRepository {
      * @return 数量
      */
     long countByStatusAndUserId(String status, String userId);
+
+    /**
+     * 保存购物车结算订单（pay_order 头表 + pay_order_item 明细，单事务）
+     * @param aggregate 购物车结算聚合
+     */
+    void saveCartOrder(CreateCartOrderAggregate aggregate);
+
+    /**
+     * 查询用户未支付的购物车订单（结算幂等守卫）
+     * @param userId 用户ID
+     * @return 最近的 CART 型未支付订单；无则返回 null
+     */
+    PayOrderEntity queryUnpaidCartOrder(String userId);
 }
 
 

@@ -69,4 +69,28 @@
           and status = 1
     </update>
 
+    <select id="queryByIds" resultType="cn.bugstack.infrastructure.dao.po.cart.Cart">
+        select c.id, c.user_id, c.product_id, c.quantity, c.checked, c.status,
+               c.create_time, c.update_time,
+               p.name as product_name, p.price as product_price, p.sku as product_image
+        from cart c
+        left join product p on c.product_id = p.id
+        where c.user_id = #{userId}
+          and c.status = 1
+          and c.id in
+          <foreach collection="ids" item="id" open="(" separator="," close=")">
+              #{id}
+          </foreach>
+    </select>
+
+    <delete id="deleteByUserIdAndProductIds">
+        delete from cart
+        where user_id = #{userId}
+          and product_id in
+          <foreach collection="productIds" item="productId" open="(" separator="," close=")">
+              #{productId}
+          </foreach>
+          and status = 1
+    </delete>
+
 </mapper>

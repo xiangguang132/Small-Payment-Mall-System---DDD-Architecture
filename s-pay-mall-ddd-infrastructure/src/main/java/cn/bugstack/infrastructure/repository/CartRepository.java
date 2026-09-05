@@ -66,6 +66,13 @@ public class CartRepository implements ICartRepository {
         cartDao.clearByUserId(userId);
     }
 
+    @Override
+    public List<CartEntity> queryByIds(List<Long> ids, String userId) {
+        return cartDao.queryByIds(ids, userId).stream()
+                .map(this::toEntity)
+                .collect(Collectors.toList());
+    }
+
     private CartEntity toEntity(Cart cart) {
         if (cart == null) return null;
         return CartEntity.builder()

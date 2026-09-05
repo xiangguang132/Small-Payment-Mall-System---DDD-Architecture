@@ -1,8 +1,12 @@
 package cn.bugstack.trigger.listener;
 
+import cn.bugstack.infrastructure.dao.ICartDao;
 import cn.bugstack.infrastructure.dao.IUserCouponDao;
 import cn.bugstack.infrastructure.dao.IOrderDao;
+import cn.bugstack.infrastructure.dao.IPayOrderItemDao;
 import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
+import cn.bugstack.infrastructure.dao.po.payment.PayOrderItem;
+import cn.bugstack.types.enums.OrderTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 支付成功回调消息 —— 统一核销优惠券（直购 + 拼团）
@@ -26,6 +31,10 @@ public class OrderPaySuccessListener {
     private IOrderDao orderDao;
     @Resource
     private IUserCouponDao userCouponDao;
+    @Resource
+    private IPayOrderItemDao payOrderItemDao;
+    @Resource
+    private ICartDao cartDao;
 
     @RabbitListener(
             bindings = @QueueBinding(
@@ -38,12 +47,13 @@ public class OrderPaySuccessListener {
         String outTradeNo = message;
         log.info("收到支付成功消息 outTradeNo:{}", outTradeNo);
 
-        // 核销优惠券：从 pay_order 读取 couponIds，标记为已使用
+        PayOrder payOrder = orderDao.queryPayOrderByOutTradeNo(outTradeNo);
+        if (payOrder == null) {
+            return;
+        }
+
+        // 1. 核销优惠券：从 pay_order 读取 couponIds，标记为已使用（直购 + 拼团 + 购物车统一）
         try {
-            PayOrder payOrder = orderDao.queryPayOrderByOutTradeNo(outTradeNo);
-            if (payOrder == null) {
-                return;
-            }
             String couponIdsJson = payOrder.getCouponIds();
             if (couponIdsJson == null || couponIdsJson.isEmpty() || "[]".equals(couponIdsJson)) {
                 return;
@@ -63,6 +73,22 @@ public class OrderPaySuccessListener {
                     payOrder.getUserId(), couponIds, updated, payOrder.getOrderType());
         } catch (Exception e) {
             log.error("支付成功-优惠券核销异常 outTradeNo:{}", outTradeNo, e);
+        }
+
+        // 2. 清理已结算购物车（仅 CART 类型，按明细反查 productIds）
+        if (OrderTypeEnum.CART.getCode().equals(payOrder.getOrderType())) {
+            try {
+                List<PayOrderItem> items = payOrderItemDao.queryByOrderId(outTradeNo);
+                if (items != null && !items.isEmpty()) {
+                    List<Long> productIds = items.stream()
+                            .map(PayOrderItem::getProductId)
+                            .collect(Collectors.toList());
+                    cartDao.deleteByUserIdAndProductIds(payOrder.getUserId(), productIds);
+                    log.info("支付成功-清理购物车 userId:{} productIds:{}", payOrder.getUserId(), productIds);
+                }
+            } catch (Exception e) {
+                log.error("支付成功-清理购物车异常 outTradeNo:{}", outTradeNo, e);
+            }
         }
     }
 

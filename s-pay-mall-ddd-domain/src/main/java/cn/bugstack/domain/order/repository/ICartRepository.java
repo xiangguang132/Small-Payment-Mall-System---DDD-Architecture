@@ -30,4 +30,7 @@ public interface ICartRepository {
     /** 清空用户购物车 */
     void clearByUserId(String userId);
 
+    /** 根据ID列表+用户ID查询购物车（结算校验用，仅返回 status=1 的记录） */
+    List<CartEntity> queryByIds(List<Long> ids, String userId);
+
 }

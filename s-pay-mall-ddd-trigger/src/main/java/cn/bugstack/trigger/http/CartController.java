@@ -1,10 +1,13 @@
 package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.request.cart.BatchRemoveCartRequest;
+import cn.bugstack.api.request.cart.CartCheckoutRequest;
 import cn.bugstack.api.request.cart.ToggleCheckRequest;
 import cn.bugstack.api.request.cart.UpdateCartQuantityRequest;
 import cn.bugstack.api.response.Response;
+import cn.bugstack.api.response.cart.CartCheckoutResponse;
 import cn.bugstack.api.response.cart.CartDetailResponse;
+import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.ICartService;
 import cn.bugstack.trigger.assembler.CartAssembler;
 import cn.bugstack.types.enums.ResponseCode;
@@ -109,6 +112,25 @@ public class CartController {
         return Response.<Void>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
+                .build();
+    }
+
+    /** 购物车结算：勾选的多件商品聚合成一笔订单，统一拉起支付宝支付 */
+    @RequestMapping(value = "checkout", method = RequestMethod.POST)
+    public Response<CartCheckoutResponse> checkout(@RequestBody CartCheckoutRequest request) {
+        String userId = getUserId();
+        if (request.getCartIds() == null || request.getCartIds().isEmpty()) {
+            throw new AppException(ResponseCode.ILLEGAL_PARAMETER, "购物车项不能为空");
+        }
+        log.info("购物车结算开始 userId:{} cartIds:{} couponIds:{}",
+                userId, request.getCartIds(), request.getCouponIds());
+
+        PayOrderEntity payOrder = cartService.checkout(userId, request.getCartIds(), request.getCouponIds());
+
+        return Response.<CartCheckoutResponse>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(CartAssembler.toCheckoutResponse(payOrder))
                 .build();
     }
 

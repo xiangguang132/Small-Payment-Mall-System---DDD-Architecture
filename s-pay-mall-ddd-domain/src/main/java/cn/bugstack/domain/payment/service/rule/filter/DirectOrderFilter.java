@@ -39,7 +39,7 @@ public class DirectOrderFilter implements ILogicHandler<
 
         PayOrderEntity payOrder = dynamicContext.getPayOrder();
 
-        if (OrderTypeEnum.DIRECT.equals(payOrder.getOrderType())) {
+        if (OrderTypeEnum.DIRECT.equals(payOrder.getOrderType()) || OrderTypeEnum.CART.equals(payOrder.getOrderType())) {
             LocalDateTime payTime = dynamicContext.getParams() == null
                     ? null
                     : parseAlipayTime(dynamicContext.getParams().getString("gmt_payment"));
@@ -49,7 +49,7 @@ public class DirectOrderFilter implements ILogicHandler<
 
             orderService.changeOrderPaySuccess(command.getOutTradeNo(), outTradeTime);
             alipayNotifyTaskRepository.updatedAlipayNotifyTaskSuccess(command.getOutTradeNo());
-            log.info("支付宝通知任务-普通订单处理完成 outTradeNo:{}", command.getOutTradeNo());
+            log.info("支付宝通知任务-普通/购物车订单处理完成 outTradeNo:{}", command.getOutTradeNo());
 
             return AlipayNotifyProcessFeedBackEntity.builder()
                     .outTradeNo(command.getOutTradeNo())

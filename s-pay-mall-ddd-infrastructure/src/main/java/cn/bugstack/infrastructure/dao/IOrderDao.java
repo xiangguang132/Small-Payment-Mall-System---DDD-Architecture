@@ -60,4 +60,11 @@ public interface IOrderDao {
      */
     long countByStatusAndUserId(@Param("status") String status,
                                 @Param("userId") String userId);
+
+    /**
+     * 查询用户未支付的购物车订单（结算幂等守卫）
+     * @param userId 用户ID
+     * @return 最近的 CART 型未支付订单；无则返回 null
+     */
+    PayOrder queryUnpaidCartOrder(@Param("userId") String userId);
 }

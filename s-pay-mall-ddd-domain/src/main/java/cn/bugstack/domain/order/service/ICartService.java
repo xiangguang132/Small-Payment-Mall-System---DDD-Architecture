@@ -1,6 +1,7 @@
 package cn.bugstack.domain.order.service;
 
 import cn.bugstack.domain.order.model.entity.CartEntity;
+import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 
 import java.util.List;
 
@@ -26,5 +27,14 @@ public interface ICartService {
 
     /** 清空购物车 */
     void clearCart(String userId);
+
+    /**
+     * 购物车结算：校验勾选记录 → 按实时价聚合 → 聚合成一笔 CART 订单 → 拉起支付宝
+     * @param userId 用户ID
+     * @param cartIds 勾选的购物车项ID列表
+     * @param couponIds 用户选择的优惠券ID列表（可空）
+     * @return 支付单（含 outTradeNo + payUrl）
+     */
+    PayOrderEntity checkout(String userId, List<Long> cartIds, List<String> couponIds);
 
 }

@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.event.PaySuccessMessageEvent;
+import cn.bugstack.domain.order.model.aggregate.CreateCartOrderAggregate;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
@@ -9,7 +10,9 @@ import cn.bugstack.domain.order.model.entity.ProductEntity;
 import cn.bugstack.domain.order.model.entity.ShopCartEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.infrastructure.dao.IOrderDao;
+import cn.bugstack.infrastructure.dao.IPayOrderItemDao;
 import cn.bugstack.infrastructure.dao.po.payment.PayOrder;
+import cn.bugstack.infrastructure.dao.po.payment.PayOrderItem;
 import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.types.enums.OrderTypeEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 该部分着重于实现业务，但是不调用数据库
@@ -35,6 +39,8 @@ public class OrderRepository implements IOrderRepository {
 
     @Resource
     private IOrderDao orderDao;
+    @Resource
+    private IPayOrderItemDao payOrderItemDao;
     @Resource
     private EventPublisher eventPublisher;
     @Value("${spring.rabbitmq.config.producer.topic_order_pay_success.routing_key}")
@@ -214,6 +220,48 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public long countByStatusAndUserId(String status, String userId) {
         return orderDao.countByStatusAndUserId(status, userId);
+    }
+
+    @Override
+    @Transactional
+    public void saveCartOrder(CreateCartOrderAggregate aggregate) {
+        OrderEntity orderEntity = aggregate.getOrderEntity();
+
+        // 1. 插入 pay_order 头表（productId/productName 为空，orderType=CART）
+        PayOrder order = new PayOrder();
+        order.setUserId(aggregate.getUserId());
+        order.setProductId(null);
+        order.setProductName(null);
+        order.setOutTradeNo(orderEntity.getOutTradeNo());
+        order.setOrderTime(orderEntity.getOrderTime());
+        order.setTotalAmount(aggregate.getPayAmount());
+        order.setOriginalAmount(aggregate.getOriginalAmount());
+        order.setOrderType(OrderTypeEnum.CART.getCode());
+        order.setCouponIds(aggregate.getCouponIds());
+        order.setStatus(orderEntity.getOrderStatus().getCode());
+        orderDao.insert(order);
+
+        // 2. 批量插入明细
+        List<PayOrderItem> items = aggregate.getItems().stream()
+                .map(item -> PayOrderItem.builder()
+                        .orderId(orderEntity.getOutTradeNo())
+                        .productId(item.getProductId())
+                        .productName(item.getProductName())
+                        .quantity(item.getQuantity())
+                        .price(item.getPrice())
+                        .totalAmount(item.getTotalAmount())
+                        .build())
+                .collect(Collectors.toList());
+        payOrderItemDao.batchInsert(items);
+
+        log.info("购物车订单保存完成 userId:{} outTradeNo:{} 明细条数:{}",
+                aggregate.getUserId(), orderEntity.getOutTradeNo(), items.size());
+    }
+
+    @Override
+    public PayOrderEntity queryUnpaidCartOrder(String userId) {
+        PayOrder order = orderDao.queryUnpaidCartOrder(userId);
+        return toPayOrderEntity(order);
     }
 }
 

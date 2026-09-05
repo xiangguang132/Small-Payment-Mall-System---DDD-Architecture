@@ -5,8 +5,11 @@ import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.groupbuy.repository.ICouponRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
+import cn.bugstack.domain.order.model.aggregate.CreateCartOrderAggregate;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
+import cn.bugstack.domain.order.model.entity.OrderEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
+import cn.bugstack.domain.order.model.entity.PayOrderItemEntity;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.domain.groupbuy.service.trial.rule.coupon.ICouponCalculateService;
 import cn.bugstack.domain.payment.adapter.port.IAlipayPort;
@@ -14,6 +17,7 @@ import cn.bugstack.domain.payment.adapter.port.IAlipayRefundPort;
 import cn.bugstack.types.enums.OrderTypeEnum;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -172,6 +176,52 @@ public class OrderService extends AbstractOrderService{
         orderRepository.updateOrderPayInfo(payOrderEntity);
 
         return payOrderEntity;
+    }
+
+    /**
+     * 创建购物车结算订单（CART 类型）
+     * 聚合金额 → 券择优抵扣 → 写 pay_order 头表 + pay_order_item 明细 → 拉起支付宝
+     */
+    @Override
+    public PayOrderEntity createCartOrder(String userId, List<PayOrderItemEntity> items,
+                                          BigDecimal originalAmount, List<String> couponIds) throws Exception {
+        // 1. 幂等守卫：该用户已有未支付的购物车订单，直接复用其支付表单，避免重复创单
+        PayOrderEntity unpaidCartOrder = orderRepository.queryUnpaidCartOrder(userId);
+        if (unpaidCartOrder != null && unpaidCartOrder.getPayUrl() != null
+                && !unpaidCartOrder.getPayUrl().isEmpty()) {
+            log.info("购物车结算幂等复用 userId:{} outTradeNo:{}", userId, unpaidCartOrder.getOutTradeNo());
+            return unpaidCartOrder;
+        }
+
+        // 2. 券计算：在聚合金额上取最优券
+        BigDecimal payAmount = calculateCouponDiscount(originalAmount, couponIds);
+        String couponIdsJson = couponIds == null || couponIds.isEmpty() ? null : JSON.toJSONString(couponIds);
+
+        // 3. 构建聚合并保存（头表+明细单事务）
+        OrderEntity orderEntity = CreateCartOrderAggregate.buildOrderEntity();
+        CreateCartOrderAggregate aggregate = CreateCartOrderAggregate.builder()
+                .userId(userId)
+                .orderEntity(orderEntity)
+                .items(items)
+                .payAmount(payAmount)
+                .originalAmount(originalAmount)
+                .couponIds(couponIdsJson)
+                .build();
+        orderRepository.saveCartOrder(aggregate);
+
+        // 4. 拉起支付宝预支付（productId 传 null，subject 用"首个商品等N件"占位）
+        String subject = buildCartSubject(items);
+        return doPrepayOrder(userId, null, subject, orderEntity.getOutTradeNo(),
+                payAmount, originalAmount, couponIdsJson);
+    }
+
+    /** 组装购物车结算的支付宝 subject，如 "iPhone 等2件商品" */
+    private String buildCartSubject(List<PayOrderItemEntity> items) {
+        if (items == null || items.isEmpty()) {
+            return "购物车结算";
+        }
+        int totalQty = items.stream().mapToInt(i -> i.getQuantity() == null ? 0 : i.getQuantity()).sum();
+        return items.get(0).getProductName() + "等" + totalQty + "件商品";
     }
 
     /**

@@ -34,4 +34,13 @@ public interface ICartDao {
     /** 清空用户购物车 */
     void clearByUserId(@Param("userId") String userId);
 
+    /** 根据ID列表+用户ID查询（结算校验用，仅返回 status=1） */
+    List<cn.bugstack.infrastructure.dao.po.cart.Cart> queryByIds(
+            @Param("ids") List<Long> ids,
+            @Param("userId") String userId);
+
+    /** 支付成功后按 userId + productIds 硬删除已结算的购物车记录 */
+    void deleteByUserIdAndProductIds(@Param("userId") String userId,
+                                     @Param("productIds") List<Long> productIds);
+
 }
