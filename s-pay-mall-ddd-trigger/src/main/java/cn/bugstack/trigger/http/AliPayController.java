@@ -2,17 +2,21 @@ package cn.bugstack.trigger.http;
 
 import cn.bugstack.api.IPayService;
 import cn.bugstack.api.request.trade.ConfirmOrderRequest;
+import cn.bugstack.api.request.trade.DirectOrderTrialRequest;
 import cn.bugstack.api.request.trade.LockOrderRequest;
 import cn.bugstack.api.request.trade.RefundOrderRequest;
 import cn.bugstack.api.response.Response;
 import cn.bugstack.api.response.trade.ConfirmOrderResponse;
+import cn.bugstack.api.response.trade.DirectOrderTrialResponse;
 import cn.bugstack.api.response.trade.LockOrderResponse;
 import cn.bugstack.domain.order.model.entity.OrderLockEntity;
 import cn.bugstack.domain.order.model.entity.PayOrderEntity;
 import cn.bugstack.domain.order.service.IOrderLockService;
 import cn.bugstack.domain.order.service.IOrderService;
 import cn.bugstack.domain.payment.service.IAlipayNotifyTaskService;
+import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.infrastructure.event.EventPublisher;
+import cn.bugstack.trigger.interceptor.PublicEndpoint;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -24,6 +28,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -49,6 +54,8 @@ public class AliPayController implements IPayService {
     private IAlipayNotifyTaskService alipayNotifyTaskService;
     @Resource
     private EventPublisher eventPublisher;
+    @Resource
+    private IProductService productService;
 
     /**
      * 锁单接口：构建聚合体 → 创建锁记录 → 返回 lockId
@@ -75,6 +82,60 @@ public class AliPayController implements IPayService {
         } catch (Exception e) {
             log.error("锁单失败 userId:{} productId:{}", userId, request.getProductId(), e);
             return Response.<LockOrderResponse>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    /**
+     * 确认下单：携带 lockId + productId → 创建订单 → 返回 payUrl
+     * 订单归属用户取自登录态 userId（兼容请求体 userId 兜底）
+     */
+    @PublicEndpoint
+    @RequestMapping(value = "trial_direct_order", method = RequestMethod.POST)
+    public Response<DirectOrderTrialResponse> trialDirectOrder(@RequestBody DirectOrderTrialRequest request) {
+        log.info("直购试算开始 productId:{} couponIds:{}", request.getProductId(), request.getCouponIds());
+        try {
+            if (request.getProductId() == null) {
+                return Response.<DirectOrderTrialResponse>builder()
+                        .code(ResponseCode.ILLEGAL_PARAMETER.getCode())
+                        .info("商品ID不能为空")
+                        .build();
+            }
+
+            // 查询商品原价
+            cn.bugstack.domain.product.model.aggregate.ProductAggregate product =
+                    productService.queryProductById(request.getProductId());
+            if (product == null) {
+                return Response.<DirectOrderTrialResponse>builder()
+                        .code(ResponseCode.NOT_FOUND.getCode())
+                        .info("商品不存在")
+                        .build();
+            }
+            BigDecimal originalPrice = product.getPrice();
+
+            // 计算券后实付价
+            BigDecimal payPrice = orderService.previewOrderDiscount(originalPrice, request.getCouponIds());
+            BigDecimal deductionPrice = originalPrice.subtract(payPrice);
+
+            DirectOrderTrialResponse data = DirectOrderTrialResponse.builder()
+                    .productId(request.getProductId())
+                    .originalPrice(originalPrice)
+                    .deductionPrice(deductionPrice.compareTo(BigDecimal.ZERO) > 0 ? deductionPrice : BigDecimal.ZERO)
+                    .payPrice(payPrice)
+                    .build();
+
+            log.info("直购试算完成 productId:{} 原价:{} 优惠:{} 实付:{}", request.getProductId(),
+                    originalPrice, data.getDeductionPrice(), payPrice);
+            return Response.<DirectOrderTrialResponse>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(data)
+                    .build();
+        } catch (Exception e) {
+            log.error("直购试算失败 productId:{}", request.getProductId(), e);
+            return Response.<DirectOrderTrialResponse>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

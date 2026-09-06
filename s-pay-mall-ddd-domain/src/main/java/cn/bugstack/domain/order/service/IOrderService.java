@@ -98,4 +98,12 @@ public interface IOrderService {
      * @return 数量
      */
     long countByStatusAndUserId(String status, String userId);
+
+    /**
+     * 直购试算：根据商品原价和用户选择的优惠券，预览折后实付价
+     * @param originalPrice 商品原价
+     * @param couponIds 用户选择的优惠券ID列表（可空）
+     * @return 实付价（取最优券后的最低价）
+     */
+    BigDecimal previewOrderDiscount(BigDecimal originalPrice, List<String> couponIds);
 }

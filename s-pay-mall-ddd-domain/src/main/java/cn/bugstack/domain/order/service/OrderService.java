@@ -451,6 +451,17 @@ public class OrderService extends AbstractOrderService{
 
         return payOrderEntity;
     }
+
+    /**
+     * 直购试算：复用 calculateCouponDiscount 在原价上择优取券，返回实付价
+     */
+    @Override
+    public BigDecimal previewOrderDiscount(BigDecimal originalPrice, List<String> couponIds) {
+        if (couponIds == null || couponIds.isEmpty()) {
+            return originalPrice;
+        }
+        return calculateCouponDiscount(originalPrice, couponIds);
+    }
 }
 
 

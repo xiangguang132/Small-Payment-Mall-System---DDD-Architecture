@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
         background-color: #f7f7f7;
-        text-align: center; /* 添加居中对齐 */
+        text-align: center;
     }
     .container {
         max-width: 600px;
@@ -21,41 +21,125 @@
     }
     .product-info {
         margin-bottom: 20px;
-        border: 1px solid #ddd; /* 添加边框 */
-        padding: 10px; /* 添加内边距 */
-        text-align: center; /* 添加居中对齐 */
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
     }
     .product-info h2 {
         margin: 0;
         margin-bottom: 5px;
     }
-    .product-info p {
-        font-size: 36px; /* 加大字体 */
-        font-weight: bold; /* 加粗字体 */
-        color: red; /* 字体颜色改为红色 */
-        margin: 0; /* 移除默认的margin */
-        margin-top: 20px;
+    .product-info .price-original {
+        font-size: 22px;
+        font-weight: bold;
+        color: #999;
+        margin: 12px 0 0;
+        text-decoration: line-through;
+    }
+    .product-info .price-current {
+        font-size: 36px;
+        font-weight: bold;
+        color: red;
+        margin: 6px 0 0;
+    }
+    .product-info .price-deduction {
+        font-size: 13px;
+        color: #ff6600;
+        margin: 4px 0 0;
+    }
+    .coupon-section {
+        margin: 16px 0;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: left;
+    }
+    .coupon-section-title {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
+    }
+    .coupon-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .coupon-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #e8e8e8;
+        border-radius: 6px;
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+        background: #fff;
+    }
+    .coupon-item:hover {
+        border-color: #ff6600;
+    }
+    .coupon-item.selected {
+        border-color: #ff6600;
+        background: #fff8f0;
+    }
+    .coupon-item input[type="radio"] {
+        margin-right: 10px;
+    }
+    .coupon-left {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    .coupon-right {
+        text-align: right;
+        min-width: 120px;
+    }
+    .coupon-name {
+        font-size: 14px;
+        color: #333;
+    }
+    .coupon-desc {
+        font-size: 12px;
+        color: #999;
+        margin-top: 2px;
+    }
+    .coupon-amount {
+        font-size: 16px;
+        font-weight: bold;
+        color: #ff3300;
+    }
+    .coupon-no-data {
+        font-size: 13px;
+        color: #999;
+        text-align: center;
+        padding: 10px 0;
     }
     .order-button {
         display: block;
-        width: calc(100% - 40px); /* 减去padding的宽度 */
+        width: calc(100% - 40px);
         padding: 10px;
-        margin: 10px auto; /* 添加自动外边距实现居中 */
+        margin: 10px auto;
         font-size: 16px;
         color: #fff;
         background-color: #007bff;
         border: none;
         cursor: pointer;
-        border-radius: 20px; /* 添加圆角 */
+        border-radius: 20px;
     }
     .order-button:hover {
         background-color: #0056b3;
     }
+    .order-button:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+    }
     .account-info {
-        font-size: 12px; /* 设置字体大小为9号 */
-        text-align: center; /* 居中对齐 */
-        display: block; /* 使span表现得像块级元素 */
-        margin: 10px 0; /* 添加上下外边距 */
+        font-size: 12px;
+        text-align: center;
+        display: block;
+        margin: 10px 0;
     }
     .auth-bar {
         display: flex;
@@ -87,15 +171,22 @@
 <body>
 <div class="container">
     <div class="product-info">
-        <h2>美女程序员 - 同款机械键盘</h2>
-
-        <img width="350" src="images/sku-keyboard-001.png"/>
-        <p>价格：¥1.68</p>
+        <h2 id="productName">加载中...</h2>
+        <img id="productImg" width="350" src="images/sku-keyboard-001.png"/>
+        <p class="price-current" id="priceCurrent">--</p>
+        <p class="price-original" id="priceOriginal" style="display:none;"></p>
+        <p class="price-deduction" id="priceDeduction" style="display:none;"></p>
     </div>
+
+    <div class="coupon-section" id="couponSection" style="display:none;">
+        <div class="coupon-section-title">🎫 选择优惠券（已登录可用）</div>
+        <div class="coupon-list" id="couponList"></div>
+    </div>
+
     <div class="auth-bar">
         <button id="logoutButton" class="secondary-button">退出登录</button>
     </div>
-    <button id="orderButton" class="order-button">立即下单「沙箱支付」</button>
+    <button id="orderButton" class="order-button" disabled>立即下单「沙箱支付」</button>
     <p id="authStatus" class="status-line"></p>
     <span class="account-info">测试账号：kvhmoj3832@sandbox.com 密码：111111 支付：111111</span>
 </div>
@@ -104,97 +195,220 @@
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+    document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + date.toUTCString() + ";path=/";
 }
-
 function removeCookie(name) {
     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
 }
-
 function getLoginToken() {
-    const localToken = localStorage.getItem("loginToken") || "";
-    if (localToken) {
-        return localToken;
-    }
-
-    const cookieToken = getCookie("loginToken");
-    return cookieToken || "";
+    return localStorage.getItem("loginToken") || getCookie("loginToken") || "";
 }
-
 function getCookie(name) {
     let cookieArr = document.cookie.split(";");
     for (let i = 0; i < cookieArr.length; i++) {
-        let cookiePair = cookieArr[i].split("=");
-        if (name === cookiePair[0].trim()) {
-            return decodeURIComponent(cookiePair[1] || "");
-        }
+        let pair = cookieArr[i].split("=");
+        if (name === pair[0].trim()) return decodeURIComponent(pair[1] || "");
     }
     return "";
 }
-
 function renderAuthStatus() {
-    const statusEl = document.getElementById('authStatus');
+    const el = document.getElementById('authStatus');
     const token = getLoginToken();
-    console.log('index token:', token);
-    statusEl.textContent = token ? '当前状态：已登录，可以直接下单测试 JWT 鉴权。' : '当前状态：未登录，点击下单会直接触发后端 401。';
+    el.textContent = token ? '当前状态：已登录，可以直接下单测试 JWT 鉴权。' : '当前状态：未登录，点击下单会直接触发后端 401。';
+}
+function buildHeaders() {
+    const token = getLoginToken();
+    const h = { 'Content-Type': 'application/json' };
+    if (token) h['Authorization'] = 'Bearer ' + token;
+    return h;
 }
 
-document.getElementById('logoutButton').addEventListener('click', function() {
-    localStorage.removeItem('loginToken');
-    removeCookie('loginToken');
-    renderAuthStatus();
-    console.info('logout success');
-});
+// ========== 常量 ==========
+var PRODUCT_ID = "100010090091";
 
-document.getElementById('orderButton').addEventListener('click', function() {
-    var loginToken = getLoginToken();
-    console.log("loginToken ready:", loginToken);
+// ========== 状态 ==========
+var currentPrice = 0;           // 商品原价（从后端获取）
+var selectedCouponIds = [];     // 当前选中的优惠券ID列表
+var coupons = [];               // 可用优惠券列表
 
-    var productId = "100010090091";
-    var headers = {
-        'Content-Type': 'application/json'
-    };
-    if (loginToken) {
-        headers['Authorization'] = 'Bearer ' + loginToken;
+// ========== 渲染价格 ==========
+function renderPrice(payPrice, originalPrice, deductionPrice) {
+    var elCurrent  = document.getElementById('priceCurrent');
+    var elOriginal = document.getElementById('priceOriginal');
+    var elDeduction= document.getElementById('priceDeduction');
+    var discountActive = deductionPrice && parseFloat(deductionPrice) > 0;
+
+    elCurrent.textContent = '价格：¥' + Number(payPrice).toFixed(2);
+
+    if (discountActive) {
+        elOriginal.textContent = '原价：¥' + Number(originalPrice).toFixed(2);
+        elOriginal.style.display = '';
+        elDeduction.textContent = '已优惠 ¥' + Number(deductionPrice).toFixed(2);
+        elDeduction.style.display = '';
+    } else {
+        elOriginal.style.display = 'none';
+        elDeduction.style.display = 'none';
+    }
+}
+
+// ========== 调用试算 API ==========
+function callTrialApi(couponIds) {
+    fetch('/api/v1/alipay/trial_direct_order', {
+        method: 'POST',
+        headers: buildHeaders(),
+        body: JSON.stringify({ productId: PRODUCT_ID, couponIds: couponIds || [] })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+        if (Number(json.code) === 200 && json.data) {
+            renderPrice(json.data.payPrice, json.data.originalPrice, json.data.deductionPrice);
+        }
+    })
+    .catch(function(err) { console.error('试算失败:', err); });
+}
+
+// ========== 优惠券渲染 ==========
+function renderCoupons(list) {
+    var el = document.getElementById('couponList');
+    if (!list || list.length === 0) {
+        el.innerHTML = '<div class="coupon-no-data">暂无可用优惠券</div>';
+        return;
+    }
+    el.innerHTML = list.map(function(c, i) {
+        var desc = '';
+        if (c.couponType === 'FULL_REDUCTION')  desc = '满' + c.thresholdAmount + '减' + c.discountAmount;
+        else if (c.couponType === 'DISCOUNT')    desc = c.discountRate * 10 + '折';
+        else if (c.couponType === 'FIXED')       desc = '立减' + c.discountAmount + '元';
+        var amountText = '';
+        if (c.discountAmount) amountText = '-¥' + c.discountAmount;
+        else if (c.discountRate) amountText = (c.discountRate * 10) + '折';
+
+        return '<div class="coupon-item" data-idx="' + i + '" onclick="toggleCoupon(' + i + ')">'
+             + '<div class="coupon-left">'
+             + '<input type="radio" name="coupon" id="coupon_' + i + '">'
+             + '<div><div class="coupon-name">' + (c.couponName || '优惠券') + '</div>'
+             + '<div class="coupon-desc">' + desc + '</div></div>'
+             + '</div>'
+             + '<div class="coupon-right"><div class="coupon-amount">' + amountText + '</div></div>'
+             + '</div>';
+    }).join('');
+}
+
+function toggleCoupon(idx) {
+    var el = document.querySelector('.coupon-item[data-idx="' + idx + '"]');
+    var radio = document.getElementById('coupon_' + idx);
+    var wasSelected = el.classList.contains('selected');
+
+    // 先清除所有选中
+    document.querySelectorAll('.coupon-item').forEach(function(item) {
+        item.classList.remove('selected');
+        item.querySelector('input[type="radio"]').checked = false;
+    });
+
+    if (!wasSelected) {
+        el.classList.add('selected');
+        radio.checked = true;
+        selectedCouponIds = [coupons[idx].couponId];
+    } else {
+        selectedCouponIds = [];
     }
 
-    // 阶段1：锁单 → 获取 lockId
+    callTrialApi(selectedCouponIds);
+}
+
+// ========== 加载商品信息 ==========
+function loadProduct() {
+    fetch('/api/v1/product/' + PRODUCT_ID, { headers: buildHeaders() })
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+        if (Number(json.code) === 200 && json.data) {
+            var p = json.data;
+            document.getElementById('productName').textContent = p.name || '商品';
+            if (p.coveringImg) document.getElementById('productImg').src = p.coveringImg;
+            currentPrice = parseFloat(p.price) || 0;
+            renderPrice(currentPrice, currentPrice, 0);
+            document.getElementById('orderButton').disabled = false;
+        }
+    })
+    .catch(function(err) { console.error('加载商品失败:', err); });
+}
+
+// ========== 加载可用优惠券 ==========
+function loadCoupons() {
+    var token = getLoginToken();
+    if (!token) return; // 未登录不加载券
+
+    fetch('/api/v1/coupon/queryMyAvailableCoupons', {
+        method: 'POST',
+        headers: buildHeaders(),
+        body: JSON.stringify({ pageNo: 1, pageSize: 20 })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+        if (Number(json.code) === 200 && json.data && json.data.list) {
+            coupons = json.data.list;
+            document.getElementById('couponSection').style.display = '';
+            renderCoupons(coupons);
+        }
+    })
+    .catch(function(err) { console.error('加载优惠券失败:', err); });
+}
+
+// ========== 下单 ==========
+document.getElementById('orderButton').addEventListener('click', function() {
+    var loginToken = getLoginToken();
+    if (!loginToken) { alert('请先登录'); return; }
+
+    var lockBody = { productId: PRODUCT_ID };
+    if (selectedCouponIds.length > 0) {
+        lockBody.couponIds = selectedCouponIds;
+    }
+
+    // 阶段1：锁单
     fetch('/api/v1/alipay/lock_order', {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify({ productId: productId })
+        headers: buildHeaders(),
+        body: JSON.stringify(lockBody)
     })
-    .then(response => response.json())
-    .then(json => {
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
         if (Number(json.code) === 200) {
             var lockId = json.data.lockId;
-            console.log("锁单成功 lockId:", lockId);
-
-            // 阶段2：确认下单 → 获取 payUrl 并提交
+            // 阶段2：确认下单
             return fetch('/api/v1/alipay/confirm_order', {
                 method: 'POST',
-                headers: headers,
+                headers: buildHeaders(),
                 body: JSON.stringify({ lockId: lockId })
             });
         } else {
             throw new Error(json.info || '锁单失败');
         }
     })
-    .then(response => response.json())
-    .then(json => {
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
         if (Number(json.code) === 200) {
-            var formHtml = json.data.payUrl;
-            document.body.innerHTML += formHtml;
+            document.body.innerHTML += json.data.payUrl;
             document.forms[0].submit();
         } else {
-            console.error('确认下单失败:', json.info, json);
+            alert('下单失败：' + (json.info || '未知错误'));
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(function(err) { alert('Error: ' + err.message); });
+});
+
+// ========== 初始化 ==========
+document.getElementById('logoutButton').addEventListener('click', function() {
+    localStorage.removeItem('loginToken');
+    removeCookie('loginToken');
+    coupons = [];
+    selectedCouponIds = [];
+    document.getElementById('couponSection').style.display = 'none';
+    renderAuthStatus();
 });
 
 renderAuthStatus();
+loadProduct();
+loadCoupons();
 </script>
 </body>
 </html>
