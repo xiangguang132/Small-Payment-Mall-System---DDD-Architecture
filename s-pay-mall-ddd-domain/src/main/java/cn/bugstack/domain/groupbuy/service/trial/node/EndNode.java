@@ -32,7 +32,7 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
         GroupBuyActivityEntity activity = dynamicContext.getActivity();
         GroupBuyDiscountEntity discount = dynamicContext.getDiscount();
         ProductAggregate productAggregate = dynamicContext.getProduct();
-        if (activity == null || productAggregate == null || discount == null) {
+        if (activity == null || productAggregate == null) {
             log.error("EndNode 上下文数据为空, userId:{}, activity:{}, product:{}, discount:{}",
                     requestParameter.getUserId(),
                     activity != null,
@@ -81,12 +81,12 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
                 .productId(productAggregate.getId())
                 .productName(productAggregate.getName())
                 .originalPrice(originalPrice)
-                .discountId(discount.getDiscountId())
-                .discountName(discount.getDiscountName())
-                .discountDesc(discount.getDiscountDesc())
-                .discountType(discount.getDiscountType())
-                .marketPlan(discount.getMarketPlan())
-                .marketExpr(discount.getMarketExpr())
+                .discountId(discount != null ? discount.getDiscountId() : null)
+                .discountName(discount != null ? discount.getDiscountName() : null)
+                .discountDesc(discount != null ? discount.getDiscountDesc() : null)
+                .discountType(discount != null ? discount.getDiscountType() : null)
+                .marketPlan(discount != null ? discount.getMarketPlan() : null)
+                .marketExpr(discount != null ? discount.getMarketExpr() : null)
                 .deductionPrice(deductionPrice)
                 .payPrice(payPrice)
                 .visible(dynamicContext.isVisible())

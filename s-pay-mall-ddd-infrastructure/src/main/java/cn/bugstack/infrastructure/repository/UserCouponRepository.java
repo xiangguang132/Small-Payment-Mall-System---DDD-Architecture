@@ -69,6 +69,30 @@ public class UserCouponRepository implements IUserCouponRepository {
         return userCouponDao.batchUpdateUserCouponUsed(userId, couponIds, sourceOrderNo, usedTime);
     }
 
+    @Override
+    public int freezeUserCoupons(String userId, List<String> couponIds, String sourceOrderNo, LocalDateTime frozenTime) {
+        if (couponIds == null || couponIds.isEmpty()) {
+            return 0;
+        }
+        return userCouponDao.batchUpdateUserCouponFrozen(userId, couponIds, sourceOrderNo, frozenTime);
+    }
+
+    @Override
+    public int releaseUserCoupons(String userId, List<String> couponIds) {
+        if (couponIds == null || couponIds.isEmpty()) {
+            return 0;
+        }
+        return userCouponDao.batchUpdateUserCouponRelease(userId, couponIds);
+    }
+
+    @Override
+    public int refundReleaseUserCoupons(String userId, List<String> couponIds) {
+        if (couponIds == null || couponIds.isEmpty()) {
+            return 0;
+        }
+        return userCouponDao.batchUpdateUserCouponRefundRelease(userId, couponIds);
+    }
+
     private UserCouponEntity toEntity(UserCoupon userCoupon) {
         if (userCoupon == null) {
             return null;

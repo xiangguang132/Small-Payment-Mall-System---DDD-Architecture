@@ -9,10 +9,12 @@ import cn.bugstack.domain.auth.model.entity.UserEntity;
 import cn.bugstack.domain.auth.service.IUserProfileService;
 import cn.bugstack.infrastructure.adapter.port.IFileStorageService;
 import cn.bugstack.types.common.Constants;
+import cn.bugstack.types.common.ImageUrlUtils;
 import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +39,9 @@ public class UserController {
     /** 单文件大小上限（字节，5MB），与 UploadController 保持一致 */
     private static final long MAX_FILE_SIZE = 5 * 1024 * 1024L;
 
+    @Value("${file.base-url:http://localhost:8080}")
+    private String baseUrl;
+
     /**
      * 当前登录用户信息
      * <a href="http://localhost:8080/api/v1/user/me">/api/v1/user/me</a>
@@ -53,6 +58,7 @@ public class UserController {
                     .data(UserInfoResponse.builder()
                             .userId(userEntity.getUserId())
                             .nickname(userEntity.getNickname())
+                            .avatar(ImageUrlUtils.buildFullUrl(baseUrl, userEntity.getAvatar()))
                             .phoneMasked(maskPhone(userEntity.getPhone()))
                             .role(userEntity.getRole())
                             .roleName(RoleEnum.of(userEntity.getRole()).getInfo())
@@ -120,7 +126,7 @@ public class UserController {
                     .data(UserInfoResponse.builder()
                             .userId(userEntity.getUserId())
                             .nickname(userEntity.getNickname())
-                            .avatar(userEntity.getAvatar())
+                            .avatar(ImageUrlUtils.buildFullUrl(baseUrl, userEntity.getAvatar()))
                             .phoneMasked(maskPhone(userEntity.getPhone()))
                             .role(userEntity.getRole())
                             .roleName(RoleEnum.of(userEntity.getRole()).getInfo())

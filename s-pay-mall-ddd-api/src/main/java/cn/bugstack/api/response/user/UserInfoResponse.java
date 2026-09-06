@@ -17,7 +17,7 @@ public class UserInfoResponse {
     // 昵称
     private String nickname;
 
-    // 头像
+    // 头像（完整 URL，如 http://localhost:8080/files/2026/09/06/uuid.png）
     private String avatar;
 
     // 手机号（脱敏）

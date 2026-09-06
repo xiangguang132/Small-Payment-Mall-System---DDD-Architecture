@@ -4,6 +4,7 @@ import cn.bugstack.domain.order.adapter.port.IProductPort;
 import cn.bugstack.domain.order.adapter.repository.IOrderLockRepository;
 import cn.bugstack.domain.groupbuy.repository.ICouponRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
+import cn.bugstack.domain.groupbuy.repository.IUserCouponRepository;
 import cn.bugstack.domain.order.adapter.repository.IOrderRepository;
 import cn.bugstack.domain.order.model.aggregate.CreateCartOrderAggregate;
 import cn.bugstack.domain.order.model.aggregate.CreateOrderAggregate;
@@ -61,15 +62,18 @@ public class OrderService extends AbstractOrderService{
 
     private final IGroupBuyOrderRepository groupBuyOrderRepository;
     private final ICouponRepository couponRepository;
+    private final IUserCouponRepository userCouponRepository;
     private final Map<String, ICouponCalculateService> couponCalculateServices;
 
     public OrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository,
                         IProductPort productPort, IGroupBuyOrderRepository groupBuyOrderRepository,
                         ICouponRepository couponRepository,
+                        IUserCouponRepository userCouponRepository,
                         Map<String, ICouponCalculateService> couponCalculateServices) {
-        super(orderRepository, orderLockRepository, productPort, couponRepository);
+        super(orderRepository, orderLockRepository, productPort, couponRepository, userCouponRepository);
         this.groupBuyOrderRepository = groupBuyOrderRepository;
         this.couponRepository = couponRepository;
+        this.userCouponRepository = userCouponRepository;
         this.couponCalculateServices = couponCalculateServices;
     }
 
@@ -209,7 +213,13 @@ public class OrderService extends AbstractOrderService{
                 .build();
         orderRepository.saveCartOrder(aggregate);
 
-        // 4. 拉起支付宝预支付（productId 传 null，subject 用"首个商品等N件"占位）
+        // 4. 冻结优惠券：status 0→4，防止同一张券被多个未支付订单占用
+        if (couponIds != null && !couponIds.isEmpty()) {
+            int frozen = userCouponRepository.freezeUserCoupons(userId, couponIds, orderEntity.getOutTradeNo(), LocalDateTime.now());
+            log.info("购物车冻结优惠券 userId:{} couponIds:{} 冻结数量:{} outTradeNo:{}", userId, couponIds, frozen, orderEntity.getOutTradeNo());
+        }
+
+        // 5. 拉起支付宝预支付（productId 传 null，subject 用"首个商品等N件"占位）
         String subject = buildCartSubject(items);
         return doPrepayOrder(userId, null, subject, orderEntity.getOutTradeNo(),
                 payAmount, originalAmount, couponIdsJson);
@@ -245,7 +255,7 @@ public class OrderService extends AbstractOrderService{
     }
 
     /**
-     * 超时处理订单：未支付直接关单，已支付调用支付宝退款
+     * 超时处理订单：未支付直接关单并释放冻结券，已支付调用支付宝退款
      * 不抛异常（供定时任务调用），失败返回 false
      */
     @Transactional
@@ -259,10 +269,14 @@ public class OrderService extends AbstractOrderService{
 
         String status = payOrderEntity.getOrderStatus().getCode();
 
-        // 未支付（CREATE / PAY_WAIT）：直接关单
+        // 未支付（CREATE / PAY_WAIT）：直接关单 + 释放冻结券
         if (OrderStatusVO.CREATE.getCode().equals(status)
                 || OrderStatusVO.PAY_WAIT.getCode().equals(status)) {
-            return doTimeoutCloseOrder(outTradeNo);
+            boolean closed = doTimeoutCloseOrder(outTradeNo);
+            if (closed) {
+                releaseFrozenCoupons(payOrderEntity);
+            }
+            return closed;
         }
 
         // 已支付/已完成：定时任务绝不自动退款，退款只允许用户主动发起（refundOrder）
@@ -330,8 +344,12 @@ public class OrderService extends AbstractOrderService{
             return doRefundPaidOrder(outTradeNo, payOrderEntity);
         } else if (OrderStatusVO.PAY_WAIT.equals(payOrderEntity.getOrderStatus())
                 || OrderStatusVO.CREATE.equals(payOrderEntity.getOrderStatus())) {
-            // ---- 未支付退单：直接关单，不用退钱 ----
-            return doCloseUnpaidOrder(outTradeNo);
+            // ---- 未支付退单：直接关单 + 释放冻结券 ----
+            boolean closed = doCloseUnpaidOrder(outTradeNo);
+            if (closed) {
+                releaseFrozenCoupons(payOrderEntity);
+            }
+            return closed;
         }
         throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "当前订单状态不可退单");
     }
@@ -362,6 +380,8 @@ public class OrderService extends AbstractOrderService{
             }
             // 成功：REFUNDING -> REFUND
             orderRepository.changeOrderRefundResult(outTradeNo, OrderStatusVO.REFUNDING.getCode(), OrderStatusVO.REFUND.getCode());
+            // 退款成功后释放已使用优惠券：status 1→0
+            refundReleaseCoupons(payOrderEntity);
             return true;
         } finally {
             alipayPort.unlock(outTradeNo);
@@ -406,7 +426,11 @@ public class OrderService extends AbstractOrderService{
                 && !OrderStatusVO.PAY_WAIT.equals(entity.getOrderStatus())) {
             throw new AppException(ResponseCode.UN_ERROR, "当前订单状态不可关闭");
         }
-        return orderRepository.changeOrderPayClose(outTradeNo);
+        boolean closed = orderRepository.changeOrderPayClose(outTradeNo);
+        if (closed) {
+            releaseFrozenCoupons(entity);
+        }
+        return closed;
     }
 
     @Override
@@ -462,7 +486,50 @@ public class OrderService extends AbstractOrderService{
         }
         return calculateCouponDiscount(originalPrice, couponIds);
     }
+
+    /**
+     * 释放冻结优惠券（关单/超时场景）：从 pay_order 读取 couponIds，status 4→0
+     */
+    private void releaseFrozenCoupons(PayOrderEntity payOrderEntity) {
+        try {
+            String couponIdsJson = payOrderEntity.getCouponIds();
+            if (couponIdsJson == null || couponIdsJson.isEmpty() || "[]".equals(couponIdsJson)) {
+                return;
+            }
+            List<String> couponIds = com.alibaba.fastjson.JSON.parseArray(couponIdsJson, String.class);
+            if (couponIds == null || couponIds.isEmpty()) {
+                return;
+            }
+            int released = userCouponRepository.releaseUserCoupons(payOrderEntity.getUserId(), couponIds);
+            log.info("关单释放冻结优惠券 userId:{} couponIds:{} 释放数量:{} outTradeNo:{}",
+                    payOrderEntity.getUserId(), couponIds, released, payOrderEntity.getOutTradeNo());
+        } catch (Exception e) {
+            log.error("关单释放冻结优惠券异常 outTradeNo:{}", payOrderEntity.getOutTradeNo(), e);
+        }
+    }
+
+    /**
+     * 退款释放已使用优惠券（已支付退单场景）：status 1→0
+     */
+    private void refundReleaseCoupons(PayOrderEntity payOrderEntity) {
+        try {
+            String couponIdsJson = payOrderEntity.getCouponIds();
+            if (couponIdsJson == null || couponIdsJson.isEmpty() || "[]".equals(couponIdsJson)) {
+                return;
+            }
+            List<String> couponIds = com.alibaba.fastjson.JSON.parseArray(couponIdsJson, String.class);
+            if (couponIds == null || couponIds.isEmpty()) {
+                return;
+            }
+            int released = userCouponRepository.refundReleaseUserCoupons(payOrderEntity.getUserId(), couponIds);
+            log.info("退款释放已使用优惠券 userId:{} couponIds:{} 释放数量:{} outTradeNo:{}",
+                    payOrderEntity.getUserId(), couponIds, released, payOrderEntity.getOutTradeNo());
+        } catch (Exception e) {
+            log.error("退款释放已使用优惠券异常 outTradeNo:{}", payOrderEntity.getOutTradeNo(), e);
+        }
+    }
 }
+
 
 
 

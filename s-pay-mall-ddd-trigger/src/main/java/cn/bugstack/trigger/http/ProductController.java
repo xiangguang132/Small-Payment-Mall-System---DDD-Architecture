@@ -65,6 +65,9 @@ public class ProductController {
     @PublicEndpoint
     @GetMapping("page")
     public Response<PageResponse<ProductListItemResponse>> page(@Valid ProductPageRequest request) {
+        // 兜底：前端未传 pageNo / pageSize 时使用默认值
+        if (request.getPageNo() == null) request.setPageNo(1);
+        if (request.getPageSize() == null) request.setPageSize(10);
         log.info("分页查询商品列表开始 request:{}", request);
         List<ProductAggregate> products = productService.queryProductPage(
                 request.getName(),
@@ -103,6 +106,8 @@ public class ProductController {
     @PublicEndpoint
     @GetMapping("search")
     public Response<PageResponse<ProductListItemResponse>> search(@Valid ProductSearchRequest request) {
+        if (request.getPageNo() == null) request.setPageNo(1);
+        if (request.getPageSize() == null) request.setPageSize(10);
         String keyword = request.getKeyword() == null ? null : request.getKeyword().trim();
         if (keyword == null || keyword.isEmpty()) {
             throw new AppException(ResponseCode.UNPROCESSABLE_ENTITY, "搜索关键词不能为空");

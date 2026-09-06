@@ -7995,3 +7995,990 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'sort_order' in 'fie
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
 	... 85 common frames omitted
+26-09-06.14:45:53.231 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:45:53.530 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:45:53.597 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:45:53.856 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:45:56.443 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:45:56.703 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:45:56.788 [http-nio-8080-exec-1] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:45:57.057 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:48:58.198 [http-nio-8080-exec-2] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:48:58.567 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:48:58.615 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:48:58.902 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:49:15.771 [http-nio-8080-exec-10] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:49:16.074 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:49:16.141 [http-nio-8080-exec-7] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:49:16.438 [http-nio-8080-exec-9] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:49:21.296 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:49:23.545 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:52:46.218 [http-nio-8080-exec-6] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:52:46.672 [http-nio-8080-exec-4] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:52:46.726 [http-nio-8080-exec-3] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.14:52:47.127 [http-nio-8080-exec-5] ERROR EndNode                - EndNode 上下文数据为空, userId:oxf0n3aZpX_OA8c_g8Wag2qsyf1U, activity:true, product:true, discount:false
+26-09-06.14:52:56.697 [http-nio-8080-exec-8] ERROR EndNode                - EndNode 上下文数据为空, userId:null, activity:true, product:true, discount:false
+26-09-06.15:57:47.587 [http-nio-8080-exec-1] WARN  ProductController      - 商品详情拼团试算失败 productId:1 activityId:10024 error:Character - is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+26-09-06.15:57:47.861 [http-nio-8080-exec-7] ERROR GroupBuyController     - 拼团试算失败 userId:null activityId:10024 productId:1
+java.lang.NumberFormatException: Character - is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:522)
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:405)
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:838)
+	at cn.bugstack.domain.groupbuy.service.discount.impl.MJCalculateService.doCalculate(MJCalculateService.java:28)
+	at cn.bugstack.domain.groupbuy.service.discount.AbstractGroupBuyDiscountService.calculate(AbstractGroupBuyDiscountService.java:31)
+	at cn.bugstack.domain.groupbuy.service.trial.rule.impl.GroupBuyTrialRule.calculate(GroupBuyTrialRule.java:69)
+	at cn.bugstack.domain.groupbuy.service.trial.rule.TrialRuleChain.execute(TrialRuleChain.java:60)
+	at cn.bugstack.domain.groupbuy.service.trial.node.MarketNode.doApply(MarketNode.java:119)
+	at cn.bugstack.domain.groupbuy.service.trial.node.MarketNode.doApply(MarketNode.java:33)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.router(AbstractMultiThreadStrategyRouter.java:26)
+	at cn.bugstack.domain.groupbuy.service.trial.node.SwitchNode.doApply(SwitchNode.java:43)
+	at cn.bugstack.domain.groupbuy.service.trial.node.SwitchNode.doApply(SwitchNode.java:17)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.router(AbstractMultiThreadStrategyRouter.java:26)
+	at cn.bugstack.domain.groupbuy.service.trial.node.RootNode.doApply(RootNode.java:31)
+	at cn.bugstack.domain.groupbuy.service.trial.node.RootNode.doApply(RootNode.java:17)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.domain.groupbuy.service.trial.GroupBuyTrialService.queryGroupBuyTrial(GroupBuyTrialService.java:25)
+	at cn.bugstack.trigger.http.GroupBuyController.queryGroupBuyTrial(GroupBuyController.java:82)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.15:57:47.931 [http-nio-8080-exec-3] WARN  ProductController      - 商品详情拼团试算失败 productId:1 activityId:10024 error:Character - is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+26-09-06.15:57:48.166 [http-nio-8080-exec-5] ERROR GroupBuyController     - 拼团试算失败 userId:null activityId:10024 productId:1
+java.lang.NumberFormatException: Character - is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:522)
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:405)
+	at java.base/java.math.BigDecimal.<init>(BigDecimal.java:838)
+	at cn.bugstack.domain.groupbuy.service.discount.impl.MJCalculateService.doCalculate(MJCalculateService.java:28)
+	at cn.bugstack.domain.groupbuy.service.discount.AbstractGroupBuyDiscountService.calculate(AbstractGroupBuyDiscountService.java:31)
+	at cn.bugstack.domain.groupbuy.service.trial.rule.impl.GroupBuyTrialRule.calculate(GroupBuyTrialRule.java:69)
+	at cn.bugstack.domain.groupbuy.service.trial.rule.TrialRuleChain.execute(TrialRuleChain.java:60)
+	at cn.bugstack.domain.groupbuy.service.trial.node.MarketNode.doApply(MarketNode.java:119)
+	at cn.bugstack.domain.groupbuy.service.trial.node.MarketNode.doApply(MarketNode.java:33)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.router(AbstractMultiThreadStrategyRouter.java:26)
+	at cn.bugstack.domain.groupbuy.service.trial.node.SwitchNode.doApply(SwitchNode.java:43)
+	at cn.bugstack.domain.groupbuy.service.trial.node.SwitchNode.doApply(SwitchNode.java:17)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.router(AbstractMultiThreadStrategyRouter.java:26)
+	at cn.bugstack.domain.groupbuy.service.trial.node.RootNode.doApply(RootNode.java:31)
+	at cn.bugstack.domain.groupbuy.service.trial.node.RootNode.doApply(RootNode.java:17)
+	at cn.bugstack.types.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:42)
+	at cn.bugstack.domain.groupbuy.service.trial.GroupBuyTrialService.queryGroupBuyTrial(GroupBuyTrialService.java:25)
+	at cn.bugstack.trigger.http.GroupBuyController.queryGroupBuyTrial(GroupBuyController.java:82)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:18.961 [redisson-netty-1-2] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xccb92034, L:/10.184.90.240:50068 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:19.053 [redisson-netty-1-5] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x91be9c2d, L:/10.184.90.240:58616 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:19.131 [redisson-netty-1-8] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x13c30daa, L:/10.184.90.240:58618 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:19.506 [redisson-netty-1-12] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x42ae8333, L:/10.184.90.240:58620 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:19.615 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x04a4c1b8, L:/10.184.90.240:58621 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:19.940 [redisson-netty-1-16] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x1071af18, L:/10.184.90.240:58624 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.048 [redisson-netty-1-18] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xf063c08b, L:/10.184.90.240:58625 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.174 [redisson-netty-1-20] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xa10cca8d, L:/10.184.90.240:58626 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.437 [redisson-netty-1-24] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xaf8b1682, L:/10.184.90.240:58628 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.529 [redisson-netty-1-26] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x8b6f86f0, L:/10.184.90.240:58629 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.732 [redisson-netty-1-28] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x4be307bc, L:/10.184.90.240:58630 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:20.934 [redisson-netty-1-30] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xedcb065e, L:/10.184.90.240:58633 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.182 [redisson-netty-1-1] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xec4764cf, L:/10.184.90.240:58634 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.260 [redisson-netty-1-2] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x3a6bc246, L:/10.184.90.240:58635 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.307 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xab0cd0b6, L:/10.184.90.240:58619 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.478 [redisson-netty-1-4] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x6a8674c9, L:/10.184.90.240:58636 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.570 [redisson-netty-1-6] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xc01b6662, L:/10.184.90.240:58637 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.631 [redisson-netty-1-8] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x75b703ac, L:/10.184.90.240:58638 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.852 [redisson-netty-1-10] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x0ddd5d8d, L:/10.184.90.240:58641 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.944 [redisson-netty-1-14] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xd3d22fc5, L:/10.184.90.240:58643 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:21.946 [redisson-netty-1-12] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x048566ad, L:/10.184.90.240:58642 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:22.038 [redisson-netty-1-16] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x769480a1, L:/10.184.90.240:58644 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:22.130 [redisson-netty-1-22] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x88046ad7, L:/10.184.90.240:58627 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:22.239 [redisson-netty-1-18] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0xfa1ffef1, L:/10.184.90.240:58645 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:02:23.804 [AMQP Connection 192.144.234.86:5672] WARN  ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
+26-09-06.16:02:23.892 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createBareChannel(CachingConnectionFactory.java:676)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getCachedChannelProxy(CachingConnectionFactory.java:650)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getChannel(CachingConnectionFactory.java:540)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.access$1600(CachingConnectionFactory.java:100)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$ChannelCachingConnectionProxy.createChannel(CachingConnectionFactory.java:1418)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2216)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 16 common frames omitted
+26-09-06.16:02:24.011 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+26-09-06.16:02:24.394 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+26-09-06.16:02:24.613 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpIOException: java.net.NoRouteToHostException: No route to host: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+26-09-06.16:02:28.984 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-3] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:29.103 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:29.467 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-3] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:29.698 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-3] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:34.082 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-4] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:34.221 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:34.548 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-4] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:34.795 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-4] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:39.170 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-5] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:39.312 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:39.633 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-5] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:39.884 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-5] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:44.266 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-6] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:44.407 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:44.716 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-6] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:44.980 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:49.321 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-7] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:49.476 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:49.788 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-7] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:50.053 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-7] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:54.394 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-8] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:54.548 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:54.872 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-8] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:55.136 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-8] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:59.444 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-9] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:59.616 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:02:59.928 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-9] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:00.209 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-9] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:04.543 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-10] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:04.727 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:05.025 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-10] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:05.317 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-10] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:09.628 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-11] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:09.800 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:10.154 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-11] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:10.404 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-11] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:14.749 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-12] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:14.904 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:15.247 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-12] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:15.485 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-12] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:19.860 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-13] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:19.986 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:20.345 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-13] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:20.580 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-13] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:24.983 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-14] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:25.076 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:25.420 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-14] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:25.669 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-14] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:30.065 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-15] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:30.158 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:30.529 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-15] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:30.748 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-15] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:35.153 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-16] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:35.246 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:35.591 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-16] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:35.850 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-16] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:40.234 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-17] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:40.313 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:40.670 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-17] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:40.921 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-17] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:45.358 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-18] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:45.422 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:45.765 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-18] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:46.059 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-18] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:50.459 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-19] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:50.491 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:50.865 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-19] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:51.147 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-19] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:55.529 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-20] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:55.560 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:55.947 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-20] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:03:56.245 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-20] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:00.605 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-21] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:00.636 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:01.023 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-21] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:01.332 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-21] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:05.704 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-22] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:05.739 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:06.096 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-22] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:06.434 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-22] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:10.803 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-23] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:10.848 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:11.204 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-23] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:11.563 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-23] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:15.920 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-24] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:15.935 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:16.275 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-24] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:16.635 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-24] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:21.004 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:21.005 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-25] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:21.331 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-25] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:21.704 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-25] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:26.082 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-26] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:26.082 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:26.422 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-26] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:26.780 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-26] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:31.159 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-27] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:31.187 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:31.513 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-27] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:31.871 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-27] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:36.299 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:36.315 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-28] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:36.610 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-28] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:36.922 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-28] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:41.386 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:41.387 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-29] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:41.666 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-29] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:42.003 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-29] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:46.453 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:46.471 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-30] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:46.749 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-30] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:47.092 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-30] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:51.542 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-31] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:51.559 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-31] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:51.821 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-31] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:52.163 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-31] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:56.622 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-32] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:56.638 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-32] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:56.906 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-32] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:04:57.232 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-32] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:01.680 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-33] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:01.706 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-33] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:01.989 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-33] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:02.302 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-33] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:06.766 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-34] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:06.795 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-34] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:07.077 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-34] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:07.390 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-34] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:11.863 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-35] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:11.879 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-35] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:12.142 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-35] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:12.488 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-35] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:16.951 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-36] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:16.964 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-36] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:17.260 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-36] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:17.560 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-36] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:22.042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-37] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:22.042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-37] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:22.325 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-37] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:22.650 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-37] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:27.113 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-38] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:27.113 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-38] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:27.436 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-38] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:27.717 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-38] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:32.198 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-39] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:32.214 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-39] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:32.511 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-39] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:32.797 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-39] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:37.303 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-40] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:37.303 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-40] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:37.612 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-40] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:37.895 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-40] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:42.382 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-41] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:42.397 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-41] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:42.693 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-41] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:43.002 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-41] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:47.439 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-42] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:47.516 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-42] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:47.766 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-42] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:48.091 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-42] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:52.521 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-43] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:52.567 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-43] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:52.845 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-43] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:53.171 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-43] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:57.594 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-44] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:57.640 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-44] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:57.923 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-44] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:05:58.233 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-44] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:02.687 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-45] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:02.717 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-45] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:02.997 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-45] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:03.308 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-45] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:07.766 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-46] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:07.811 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-46] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:08.062 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-46] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:06:08.400 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-46] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:08:03.577 [redisson-netty-1-3] ERROR ErrorsLoggingHandler   - Exception occured. Channel: [id: 0x96f7996d, L:/10.184.90.240:50070 - R:192.144.234.86/192.144.234.86:6379]
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at java.base/sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:276)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:233)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:223)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:356)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:256)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+26-09-06.16:08:03.732 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-47] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:08:03.732 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-47] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:08:03.734 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-47] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:08:03.735 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-47] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+26-09-06.16:08:07.211 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m21s519ms711µs700ns).

@@ -23,6 +23,7 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderDisplayStatusVO;
 import cn.bugstack.domain.groupbuy.model.valobj.GroupBuyOrderStatusEnumVO;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
+import cn.bugstack.domain.groupbuy.repository.IUserCouponRepository;
 import cn.bugstack.domain.groupbuy.service.order.IGroupBuyOrderService;
 import cn.bugstack.domain.groupbuy.service.refund.IGroupBuyRefundOrderService;
 import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
@@ -41,6 +42,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +64,8 @@ public class GroupBuyController {
     private IUserProfileService userProfileService;
     @Resource
     private IGroupBuyActivityRepository groupBuyActivityRepository;
+    @Resource
+    private IUserCouponRepository userCouponRepository;
 
     /**
      * 拼团试算：查询活动、商品与折扣，试算出折后价
@@ -187,6 +191,13 @@ public class GroupBuyController {
 
             // 3. 幂等锁单，返回拼团订单（含 teamId/payAmount）；复用已有订单时 outTradeNo 以订单为准
             GroupBuyOrderEntity groupBuyOrderEntity = groupBuyOrderService.lockGroupBuyOrder(aggregate);
+
+            // 3.1 冻结优惠券：status 0→4，防止同一张券被多个未支付订单占用（幂等：WHERE status=0 已冻结的不受影响）
+            if (request.getCouponIds() != null && !request.getCouponIds().isEmpty()) {
+                userCouponRepository.freezeUserCoupons(userId, request.getCouponIds(),
+                        groupBuyOrderEntity.getOutTradeNo(), LocalDateTime.now());
+                log.info("拼团冻结优惠券 userId:{} couponIds:{} outTradeNo:{}", userId, request.getCouponIds(), groupBuyOrderEntity.getOutTradeNo());
+            }
 
             // 4. 创建 GROUP_BUY 支付单，金额为拼团实付价；outTradeNo 必须与拼团订单一致，否则回调无法反查结算
             PayOrderEntity payOrderEntity = orderService.createGroupBuyPayOrder(

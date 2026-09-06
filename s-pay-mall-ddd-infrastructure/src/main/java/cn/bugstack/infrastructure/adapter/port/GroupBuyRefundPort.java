@@ -5,14 +5,17 @@ import cn.bugstack.domain.groupbuy.model.entity.GroupBuyNotifyTaskEntity;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyRefundOrderBehaviorEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyNotifyTaskRepository;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyOrderRepository;
+import cn.bugstack.domain.groupbuy.repository.IUserCouponRepository;
 import cn.bugstack.domain.groupbuy.service.task.IGroupBuyNotifyTaskService;
 import cn.bugstack.domain.payment.adapter.port.IAlipayRefundPort;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 拼团退单回调端口
@@ -30,6 +33,8 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
     private IGroupBuyNotifyTaskRepository groupBuyNotifyTaskRepository;
     @Resource
     private IGroupBuyNotifyTaskService groupBuyNotifyTaskService;
+    @Resource
+    private IUserCouponRepository userCouponRepository;
 
     @Override
     public void groupBuyRefundNotify(GroupBuyRefundOrderBehaviorEntity behaviorEntity) throws Exception {
@@ -61,7 +66,29 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
             log.warn("拼团退单更新订单状态失败（可能已处理） outTradeNo:{}", outTradeNo);
         }
 
-        // 3. 落库本地消息表（notifyStatus=0，等待发 MQ；兜底由 GroupBuyNotifyJob 扫）
+        // 3. 释放优惠券：从 group_buy_order 读取 couponIds，已支付→status 1→0，未支付→status 4→0
+        try {
+            cn.bugstack.domain.groupbuy.model.entity.GroupBuyOrderEntity gbOrder =
+                    groupBuyOrderRepository.queryGroupBuyOrderByOutTradeNo(behaviorEntity.getUserId(), outTradeNo);
+            if (gbOrder != null && StringUtils.isNotBlank(gbOrder.getCouponIds())) {
+                List<String> couponIds = JSON.parseArray(gbOrder.getCouponIds(), String.class);
+                if (couponIds != null && !couponIds.isEmpty()) {
+                    if (behaviorEntity.getPayAmount() != null) {
+                        // 已支付退款：释放已使用券 status 1→0
+                        userCouponRepository.refundReleaseUserCoupons(behaviorEntity.getUserId(), couponIds);
+                        log.info("拼团退款释放已使用优惠券 userId:{} couponIds:{}", behaviorEntity.getUserId(), couponIds);
+                    } else {
+                        // 未支付退出：释放冻结券 status 4→0
+                        userCouponRepository.releaseUserCoupons(behaviorEntity.getUserId(), couponIds);
+                        log.info("拼团退出释放冻结优惠券 userId:{} couponIds:{}", behaviorEntity.getUserId(), couponIds);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("拼团退单释放优惠券异常 outTradeNo:{}", outTradeNo, e);
+        }
+
+        // 5. 落库本地消息表（notifyStatus=0，等待发 MQ；兜底由 GroupBuyNotifyJob 扫）
         String parameterJson = JSON.toJSONString(new HashMap<String, Object>() {{
             put("refundType", behaviorEntity.getRefundType());
             put("userId", behaviorEntity.getUserId());
@@ -85,7 +112,7 @@ public class GroupBuyRefundPort implements IGroupBuyRefundPort {
             return;
         }
 
-        // 4. 立即发 MQ（失败也由 GroupBuyNotifyJob 兜底重发 status=0）
+        // 6. 立即发 MQ（失败也由 GroupBuyNotifyJob 兜底重发 status=0）
         groupBuyNotifyTaskService.execNotifyJob(task);
     }
 

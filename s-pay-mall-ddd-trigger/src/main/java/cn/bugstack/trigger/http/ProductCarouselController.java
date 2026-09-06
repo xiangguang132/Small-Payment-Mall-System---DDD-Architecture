@@ -14,7 +14,9 @@ import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.enums.RoleEnum;
 import cn.bugstack.types.enums.CarouselTargetTypeEnum;
 import cn.bugstack.types.exception.AppException;
+import cn.bugstack.types.common.ImageUrlUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +34,9 @@ public class ProductCarouselController {
 
     @Resource
     private IProductCarouselRepository productCarouselRepository;
+
+    @Value("${file.base-url:http://localhost:8080}")
+    private String fileBaseUrl;
 
     /**
      * 新增轮播项（管理员）
@@ -100,6 +105,7 @@ public class ProductCarouselController {
         long total = productCarouselRepository.countPage();
         List<CarouselItemResponse> itemList = list.stream()
                 .map(ProductCarouselAssembler::toResponse)
+                .peek(item -> item.setCoverImg(ImageUrlUtils.buildFullUrl(fileBaseUrl, item.getCoverImg())))
                 .collect(Collectors.toList());
         PageResponse<CarouselItemResponse> pageResponse = PageResponse.<CarouselItemResponse>builder()
                 .total(total)
@@ -124,6 +130,7 @@ public class ProductCarouselController {
         List<ProductCarouselEntity> list = productCarouselRepository.queryActiveList();
         List<CarouselItemResponse> response = list.stream()
                 .map(ProductCarouselAssembler::toResponse)
+                .peek(item -> item.setCoverImg(ImageUrlUtils.buildFullUrl(fileBaseUrl, item.getCoverImg())))
                 .collect(Collectors.toList());
         return Response.<List<CarouselItemResponse>>builder()
                 .code(ResponseCode.SUCCESS.getCode())

@@ -74,7 +74,49 @@
           <foreach collection="couponIds" item="cid" open="(" separator="," close=")">
               #{cid}
           </foreach>
+          and status IN (0, 4)
+    </update>
+
+    <!-- 冻结优惠券：锁单时占用，status 0→4，写入来源单号 -->
+    <update id="batchUpdateUserCouponFrozen">
+        update group_buy_coupon_user
+        set status = 4,
+            source_order_no = #{sourceOrderNo},
+            used_time = #{frozenTime}
+        where user_id = #{userId}
+          and coupon_id in
+          <foreach collection="couponIds" item="cid" open="(" separator="," close=")">
+              #{cid}
+          </foreach>
           and status = 0
+    </update>
+
+    <!-- 释放冻结优惠券：关单/超时，status 4→0 -->
+    <update id="batchUpdateUserCouponRelease">
+        update group_buy_coupon_user
+        set status = 0,
+            source_order_no = null,
+            used_time = null
+        where user_id = #{userId}
+          and coupon_id in
+          <foreach collection="couponIds" item="cid" open="(" separator="," close=")">
+              #{cid}
+          </foreach>
+          and status = 4
+    </update>
+
+    <!-- 退款释放优惠券：已使用→未使用，status 1→0 -->
+    <update id="batchUpdateUserCouponRefundRelease">
+        update group_buy_coupon_user
+        set status = 0,
+            source_order_no = null,
+            used_time = null
+        where user_id = #{userId}
+          and coupon_id in
+          <foreach collection="couponIds" item="cid" open="(" separator="," close=")">
+              #{cid}
+          </foreach>
+          and status = 1
     </update>
 
 </mapper>

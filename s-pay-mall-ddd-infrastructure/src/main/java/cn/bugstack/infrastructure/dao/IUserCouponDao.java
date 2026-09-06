@@ -26,11 +26,31 @@ public interface IUserCouponDao {
                              @Param("status") Integer status);
 
     /**
-     * 批量核销用户优惠券：status 0→1，写入 sourceOrderNo 和 usedTime
+     * 批量核销用户优惠券：status 0/4→1，写入 sourceOrderNo 和 usedTime
      */
     int batchUpdateUserCouponUsed(@Param("userId") String userId,
                                   @Param("couponIds") List<String> couponIds,
                                   @Param("sourceOrderNo") String sourceOrderNo,
                                   @Param("usedTime") LocalDateTime usedTime);
+
+    /**
+     * 批量冻结用户优惠券：锁单时占用，status 0→4，写入 sourceOrderNo
+     */
+    int batchUpdateUserCouponFrozen(@Param("userId") String userId,
+                                    @Param("couponIds") List<String> couponIds,
+                                    @Param("sourceOrderNo") String sourceOrderNo,
+                                    @Param("frozenTime") LocalDateTime frozenTime);
+
+    /**
+     * 批量释放冻结优惠券：关单/超时，status 4→0
+     */
+    int batchUpdateUserCouponRelease(@Param("userId") String userId,
+                                     @Param("couponIds") List<String> couponIds);
+
+    /**
+     * 退款释放已使用优惠券：status 1→0
+     */
+    int batchUpdateUserCouponRefundRelease(@Param("userId") String userId,
+                                           @Param("couponIds") List<String> couponIds);
 
 }

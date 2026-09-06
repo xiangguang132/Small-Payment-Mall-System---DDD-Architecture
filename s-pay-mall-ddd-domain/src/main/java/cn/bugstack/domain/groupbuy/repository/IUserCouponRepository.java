@@ -28,4 +28,19 @@ public interface IUserCouponRepository {
      */
     int writeOffUserCoupons(String userId, List<String> couponIds, String sourceOrderNo, LocalDateTime usedTime);
 
+    /**
+     * 冻结优惠券：锁单时占用，status 0→4
+     */
+    int freezeUserCoupons(String userId, List<String> couponIds, String sourceOrderNo, LocalDateTime frozenTime);
+
+    /**
+     * 释放冻结优惠券：关单/超时，status 4→0
+     */
+    int releaseUserCoupons(String userId, List<String> couponIds);
+
+    /**
+     * 退款释放已使用优惠券：status 1→0
+     */
+    int refundReleaseUserCoupons(String userId, List<String> couponIds);
+
 }

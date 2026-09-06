@@ -8,6 +8,7 @@ import cn.bugstack.domain.order.model.entity.*;
 import cn.bugstack.domain.order.model.valobj.OrderStatusVO;
 import cn.bugstack.domain.groupbuy.model.entity.CouponEntity;
 import cn.bugstack.domain.groupbuy.repository.ICouponRepository;
+import cn.bugstack.domain.groupbuy.repository.IUserCouponRepository;
 import cn.bugstack.domain.groupbuy.service.trial.rule.coupon.ICouponCalculateService;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
@@ -16,6 +17,7 @@ import com.alipay.api.AlipayApiException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -25,13 +27,16 @@ public abstract class AbstractOrderService implements IOrderService {
     protected final IOrderLockRepository orderLockRepository;
     protected final IProductPort productPort;
     protected final ICouponRepository couponRepository;
+    protected final IUserCouponRepository userCouponRepository;
 
     public AbstractOrderService(IOrderRepository orderRepository, IOrderLockRepository orderLockRepository,
-                                IProductPort productPort, ICouponRepository couponRepository) {
+                                IProductPort productPort, ICouponRepository couponRepository,
+                                IUserCouponRepository userCouponRepository) {
         this.orderRepository = orderRepository;
         this.orderLockRepository = orderLockRepository;
         this.productPort = productPort;
         this.couponRepository = couponRepository;
+        this.userCouponRepository = userCouponRepository;
     }
 
     @Override
@@ -99,13 +104,22 @@ public abstract class AbstractOrderService implements IOrderService {
 
         orderRepository.doSaveOrder(orderAggregate);
 
-        // 7. 创建支付单（折扣后金额）
+        // 7. 冻结优惠券：status 0→4，防止同一张券被多个未支付订单占用
+        if (couponIdsJson != null && !couponIdsJson.isEmpty() && !"[]".equals(couponIdsJson)) {
+            List<String> couponIds = JSON.parseArray(couponIdsJson, String.class);
+            if (couponIds != null && !couponIds.isEmpty()) {
+                int frozen = userCouponRepository.freezeUserCoupons(userId, couponIds, orderEntity.getOutTradeNo(), LocalDateTime.now());
+                log.info("直购冻结优惠券 userId:{} couponIds:{} 冻结数量:{} outTradeNo:{}", userId, couponIds, frozen, orderEntity.getOutTradeNo());
+            }
+        }
+
+        // 8. 创建支付单（折扣后金额）
         PayOrderEntity payOrderEntity = this.doPrepayOrder(
                 userId, productId, productEntity.getProductName(),
                 orderEntity.getOutTradeNo(), payAmount, originalPrice, couponIdsJson
         );
 
-        // 8. 确认锁单：回写 orderId
+        // 9. 确认锁单：回写 orderId
         orderLockRepository.updateOrderId(lockId, orderEntity.getOutTradeNo());
 
         return payOrderEntity;
