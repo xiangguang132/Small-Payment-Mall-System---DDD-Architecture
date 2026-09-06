@@ -8,7 +8,10 @@ import cn.bugstack.api.response.page.PageResponse;
 import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.api.response.product.ProductListItemResponse;
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialRequest;
+import cn.bugstack.domain.groupbuy.model.entity.GroupBuyTrialResult;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
+import cn.bugstack.domain.groupbuy.service.trial.IGroupBuyTrialService;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.domain.product.service.IProductService;
 import cn.bugstack.domain.producttype.model.aggregate.ProductTypeAggregate;
@@ -45,6 +48,8 @@ public class ProductController {
     private IProductService productService;
     @Resource
     private IGroupBuyActivityRepository groupBuyActivityRepository;
+    @Resource
+    private IGroupBuyTrialService groupBuyTrialService;
     @Resource
     private IProductTypeService productTypeService;
 
@@ -157,7 +162,7 @@ public class ProductController {
             return;
         }
         resp.setCoveringImg(ImageUrlUtils.buildFullUrl(fileBaseUrl, resp.getCoveringImg()));
-        resp.setImgs(ImageUrlUtils.buildFullUrl(fileBaseUrl, resp.getImgs()));
+        resp.setImgs(ImageUrlUtils.buildFullUrls(fileBaseUrl, resp.getImgs()));
     }
 
     /**
@@ -198,6 +203,24 @@ public class ProductController {
         GroupBuyActivityEntity activity = groupBuyActivityRepository.queryGroupBuyActivityByProductId(id);
         if (activity != null) {
             response.setActivityId(activity.getActivityId());
+            response.setTargetCount(activity.getTargetCount());
+            try {
+                GroupBuyTrialResult trial = groupBuyTrialService.queryGroupBuyTrial(
+                        GroupBuyTrialRequest.builder()
+                                .activityId(activity.getActivityId())
+                                .productId(id)
+                                .build()
+                );
+                if (trial != null) {
+                    response.setTrialPayPrice(trial.getPayPrice());
+                    if (trial.getTargetCount() != null) {
+                        response.setTargetCount(trial.getTargetCount());
+                    }
+                }
+            } catch (Exception e) {
+                log.warn("商品详情拼团试算失败 productId:{} activityId:{} error:{}",
+                        id, activity.getActivityId(), e.getMessage());
+            }
         }
         log.info("查询商品详情完成 id:{}", id);
         return Response.<ProductDetailResponse>builder()

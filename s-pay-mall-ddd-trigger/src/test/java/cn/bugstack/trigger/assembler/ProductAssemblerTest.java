@@ -6,6 +6,8 @@ import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,6 +50,7 @@ public class ProductAssemblerTest {
         assertEquals("SKU001", response.getSku());
         assertEquals(new BigDecimal("9.90"), response.getPrice());
         assertEquals("https://example.com/cover.jpg", response.getCoveringImg());
-        assertEquals("[\"https://example.com/1.jpg\",\"https://example.com/2.jpg\"]", response.getImgs());
+        List<String> expectedImgs = Arrays.asList("https://example.com/1.jpg", "https://example.com/2.jpg");
+        assertEquals(expectedImgs, response.getImgs());
     }
 }

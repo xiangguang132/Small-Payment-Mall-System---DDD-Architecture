@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProductDetailResponse {
@@ -22,7 +23,7 @@ public class ProductDetailResponse {
     private String coveringImg;
 
     /** 商品图片列表，多个URL */
-    private String imgs;
+    private List<String> imgs;
 
     private String categoryName;
     private String categoryDescription;

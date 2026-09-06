@@ -6,11 +6,16 @@ import cn.bugstack.api.response.product.ProductDetailResponse;
 import cn.bugstack.domain.product.model.aggregate.ProductAggregate;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductAssembler {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private ProductAssembler() {
     }
@@ -35,6 +40,17 @@ public class ProductAssembler {
         return value == null ? null : value.trim();
     }
 
+    private static List<String> parseJsonArray(String json) {
+        if (json == null || json.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        try {
+            return MAPPER.readValue(json, new TypeReference<List<String>>() {});
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
+    }
+
     public static ProductDetailResponse toDetailResponse(ProductAggregate product) {
         if (product == null) {
             throw new AppException(ResponseCode.NOT_FOUND, "暂无相关商品详情");
@@ -50,7 +66,7 @@ public class ProductAssembler {
         response.setStatus(product.getStatus());
         response.setPrice(product.getPrice());
         response.setCoveringImg(product.getCoveringImg());
-        response.setImgs(product.getImgs());
+        response.setImgs(parseJsonArray(product.getImgs()));
         response.setCreateTime(product.getCreateTime());
         response.setUpdateTime(product.getUpdateTime());
         return response;
