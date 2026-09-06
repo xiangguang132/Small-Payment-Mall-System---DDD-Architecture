@@ -2,10 +2,9 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.groupbuy.model.entity.GroupBuyActivityEntity;
 import cn.bugstack.domain.groupbuy.repository.IGroupBuyActivityRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.IGroupBuyActivityDao;
 import cn.bugstack.infrastructure.dao.po.groupbuy.GroupBuyActivity;
-import cn.bugstack.infrastructure.dcc.DCCService;
-import cn.bugstack.infrastructure.redis.IRedisService;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Repository;
@@ -15,51 +14,56 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
+public class GroupBuyActivityRepository extends AbstractRepository implements IGroupBuyActivityRepository {
 
     @Resource
     private IGroupBuyActivityDao groupBuyActivityDao;
-    @Resource
-    private IRedisService redisService;
-    @Resource
-    private DCCService dccService;
 
     @Override
-    public GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long
-                                                                            activityId) {
-        GroupBuyActivity activity =
-                groupBuyActivityDao.queryGroupBuyActivityByActivityId(activityId);
-        if (activity == null) {
-            return null;
-        }
-
-        return GroupBuyActivityEntity.builder()
-                .id(activity.getId())
-                .activityId(activity.getActivityId())
-                .activityName(activity.getActivityName())
-                .productId(activity.getProductId())
-                .discountId(activity.getDiscountId())
-                .groupType(activity.getGroupType())
-                .takeLimitCount(activity.getTakeLimitCount())
-                .targetCount(activity.getTargetCount())
-                .validTime(activity.getValidTime())
-                .status(activity.getStatus())
-                .startTime(activity.getStartTime())
-                .endTime(activity.getEndTime())
-                .tagId(activity.getTagId())
-                .tagScope(activity.getTagScope())
-                .createTime(activity.getCreateTime())
-                .updateTime(activity.getUpdateTime())
-                .build();
+    public GroupBuyActivityEntity queryGroupBuyActivityByActivityId(Long activityId) {
+        return getFromCacheOrDb(
+                cacheKeyByActivityId(activityId),
+                () -> {
+                    GroupBuyActivity activity = groupBuyActivityDao.queryGroupBuyActivityByActivityId(activityId);
+                    if (activity == null) {
+                        return null;
+                    }
+                    return GroupBuyActivityEntity.builder()
+                            .id(activity.getId())
+                            .activityId(activity.getActivityId())
+                            .activityName(activity.getActivityName())
+                            .productId(activity.getProductId())
+                            .discountId(activity.getDiscountId())
+                            .groupType(activity.getGroupType())
+                            .takeLimitCount(activity.getTakeLimitCount())
+                            .targetCount(activity.getTargetCount())
+                            .validTime(activity.getValidTime())
+                            .status(activity.getStatus())
+                            .startTime(activity.getStartTime())
+                            .endTime(activity.getEndTime())
+                            .tagId(activity.getTagId())
+                            .tagScope(activity.getTagScope())
+                            .createTime(activity.getCreateTime())
+                            .updateTime(activity.getUpdateTime())
+                            .build();
+                },
+                30 * 60 * 1000L
+        );
     }
 
     @Override
     public GroupBuyActivityEntity queryGroupBuyActivityByProductId(Long productId) {
-        GroupBuyActivity activity = groupBuyActivityDao.queryByProductId(productId);
-        if (activity == null) {
-            return null;
-        }
-        return toEntity(activity);
+        return getFromCacheOrDb(
+                cacheKeyByProductId(productId),
+                () -> {
+                    GroupBuyActivity activity = groupBuyActivityDao.queryByProductId(productId);
+                    if (activity == null) {
+                        return null;
+                    }
+                    return toEntity(activity);
+                },
+                30 * 60 * 1000L
+        );
     }
 
     @Override
@@ -67,10 +71,21 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
         if (productIds == null || productIds.isEmpty()) {
             return java.util.Collections.emptyList();
         }
-        return groupBuyActivityDao.queryByProductIds(productIds)
-                .stream()
-                .map(this::toEntity)
-                .collect(Collectors.toList());
+        return getFromCacheOrDb(
+                cacheKeyByProductIds(productIds),
+                () -> {
+                    List<GroupBuyActivityEntity> list = groupBuyActivityDao.queryByProductIds(productIds)
+                            .stream()
+                            .map(this::toEntity)
+                            .collect(Collectors.toList());
+                    // 将每条结果也写入单条缓存，供 queryByProductId 复用
+                    for (GroupBuyActivityEntity entity : list) {
+                        redisService.setValue(cacheKeyByProductId(entity.getProductId()), entity, 30 * 60 * 1000L);
+                    }
+                    return list;
+                },
+                30 * 60 * 1000L
+        );
     }
 
     private GroupBuyActivityEntity toEntity(GroupBuyActivity activity) {
@@ -146,5 +161,20 @@ public class GroupBuyActivityRepository implements IGroupBuyActivityRepository {
     @Override
     public boolean cutRange(String userId) {
         return dccService.isCutRange(userId);
+    }
+
+    private String cacheKeyByActivityId(Long activityId) {
+        return "s-pay-mall:groupbuy:activity:aid:" + activityId;
+    }
+
+    private String cacheKeyByProductId(Long productId) {
+        return "s-pay-mall:groupbuy:activity:pid:" + productId;
+    }
+
+    private String cacheKeyByProductIds(List<Long> productIds) {
+        return "s-pay-mall:groupbuy:activity:pids:" + productIds.stream()
+                .sorted()
+                .map(String::valueOf)
+                .collect(java.util.stream.Collectors.joining(","));
     }
 }

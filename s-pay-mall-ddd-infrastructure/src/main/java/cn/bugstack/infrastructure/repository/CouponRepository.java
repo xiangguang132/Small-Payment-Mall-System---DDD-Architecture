@@ -2,6 +2,7 @@ package cn.bugstack.infrastructure.repository;
 
 import cn.bugstack.domain.groupbuy.model.entity.CouponEntity;
 import cn.bugstack.domain.groupbuy.repository.ICouponRepository;
+import cn.bugstack.infrastructure.adapter.repository.AbstractRepository;
 import cn.bugstack.infrastructure.dao.ICouponDao;
 import cn.bugstack.infrastructure.dao.po.promotion.Coupon;
 import org.springframework.stereotype.Repository;
@@ -12,24 +13,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class CouponRepository implements ICouponRepository {
+public class CouponRepository extends AbstractRepository implements ICouponRepository {
 
     @Resource
     private ICouponDao couponDao;
 
     @Override
     public CouponEntity queryCouponByCouponId(String couponId) {
-        Coupon coupon = couponDao.queryCouponByCouponId(couponId);
-        return toEntity(coupon);
+        return getFromCacheOrDb(
+                cacheKeyByCouponId(couponId),
+                () -> {
+                    Coupon coupon = couponDao.queryCouponByCouponId(couponId);
+                    return toEntity(coupon);
+                },
+                30 * 60 * 1000L
+        );
     }
 
     @Override
     public List<CouponEntity> queryCouponPage(Integer status, String couponType, Integer offset, Integer limit) {
-        List<Coupon> list = couponDao.queryCouponPage(status, couponType, offset, limit);
-        if (list == null || list.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return list.stream().map(this::toEntity).collect(Collectors.toList());
+        return getFromCacheOrDb(
+                cacheKeyCouponPage(status, couponType, offset, limit),
+                () -> {
+                    List<Coupon> list = couponDao.queryCouponPage(status, couponType, offset, limit);
+                    if (list == null || list.isEmpty()) {
+                        return Collections.emptyList();
+                    }
+                    return list.stream().map(this::toEntity).collect(Collectors.toList());
+                },
+                10 * 60 * 1000L
+        );
     }
 
     @Override
@@ -53,5 +66,13 @@ public class CouponRepository implements ICouponRepository {
                 .startTime(coupon.getStartTime())
                 .endTime(coupon.getEndTime())
                 .build();
+    }
+
+    private String cacheKeyByCouponId(String couponId) {
+        return "s-pay-mall:coupon:id:" + couponId;
+    }
+
+    private String cacheKeyCouponPage(Integer status, String couponType, Integer offset, Integer limit) {
+        return "s-pay-mall:coupon:page:" + status + ":" + couponType + ":" + offset + ":" + limit;
     }
 }

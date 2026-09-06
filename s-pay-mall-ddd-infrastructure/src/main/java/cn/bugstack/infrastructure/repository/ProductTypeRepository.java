@@ -17,6 +17,13 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductTypeRepository extends AbstractRepository implements IProductTypeRepository {
 
+    private static final String CACHE_KEY_VALID_LIST = "s-pay-mall:product-type:valid-list";
+
+    /** 本地缓存：分类列表，避免每次读取都走 Redis 网络开销 */
+    private static final long LOCAL_TTL_MS = 5 * 60 * 1000L;
+    private volatile List<ProductTypeAggregate> localValidList;
+    private volatile long localValidListExpireAt;
+
     @Resource
     private IProductRepository productRepository;
 
@@ -41,6 +48,8 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
                 .build();
 
         productTypeDao.insert(productType);
+        redisService.remove(CACHE_KEY_VALID_LIST);
+        clearLocalValidListCache();
         return productType.getId();
     }
 
@@ -52,6 +61,8 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
         ProductTypeAggregate current = queryById(id);
         productTypeDao.deleteById(id);
         redisService.remove(cacheKeyById(id));
+        redisService.remove(CACHE_KEY_VALID_LIST);
+        clearLocalValidListCache();
         if (current != null) {
             redisService.remove(cacheKeyByTypeCode(current.getTypeCode()));
         }
@@ -134,6 +145,8 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
 
         productTypeDao.update(productType);
         redisService.remove(cacheKeyById(productTypeAggregate.getId()));
+        redisService.remove(CACHE_KEY_VALID_LIST);
+        clearLocalValidListCache();
         if (current != null) {
             redisService.remove(cacheKeyByTypeCode(current.getTypeCode()));
         }
@@ -160,20 +173,40 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
 
     @Override
     public List<ProductTypeAggregate> queryValidList() {
-        return productTypeDao.queryValidList().stream()
-                .map(productType -> ProductTypeAggregate.builder()
-                        .id(productType.getId())
-                        .parentId(productType.getParentId())
-                        .name(productType.getName())
-                        .description(productType.getDescription())
-                        .typeCode(productType.getTypeCode())
-                        .sort(productType.getSort())
-                        .status(productType.getStatus())
-                        .isDel(productType.getIsDel())
-                        .createTime(productType.getCreateTime())
-                        .updateTime(productType.getUpdateTime())
-                        .build())
-                .collect(Collectors.toList());
+        // L1：本地内存缓存，零网络开销
+        if (localValidList != null && System.currentTimeMillis() < localValidListExpireAt) {
+            return localValidList;
+        }
+        // L2：Redis 缓存 → DB
+        List<ProductTypeAggregate> result = getFromCacheOrDb(
+                CACHE_KEY_VALID_LIST,
+                () -> productTypeDao.queryValidList().stream()
+                        .map(this::toAggregate)
+                        .collect(Collectors.toList()),
+                30 * 60 * 1000L
+        );
+        // 回填本地缓存
+        localValidList = result;
+        localValidListExpireAt = System.currentTimeMillis() + LOCAL_TTL_MS;
+        return result;
+    }
+
+    private ProductTypeAggregate toAggregate(ProductType productType) {
+        if (productType == null) {
+            return null;
+        }
+        return ProductTypeAggregate.builder()
+                .id(productType.getId())
+                .parentId(productType.getParentId())
+                .name(productType.getName())
+                .description(productType.getDescription())
+                .typeCode(productType.getTypeCode())
+                .sort(productType.getSort())
+                .status(productType.getStatus())
+                .isDel(productType.getIsDel())
+                .createTime(productType.getCreateTime())
+                .updateTime(productType.getUpdateTime())
+                .build();
     }
 
     private String cacheKeyById(Long id) {
@@ -185,5 +218,10 @@ public class ProductTypeRepository extends AbstractRepository implements IProduc
             return null;
         }
         return "s-pay-mall:product-type:code:" + typeCode;
+    }
+
+    private void clearLocalValidListCache() {
+        localValidList = null;
+        localValidListExpireAt = 0;
     }
 }
